@@ -201,7 +201,15 @@ public struct Vector2Int : IEquatable<Vector2Int>
 {
     public override bool Equals(object? obj)
     {
-        return obj is Vector2Int other && Equals(other);
+        // return obj is Vector2Int other && Equals(other);
+        if (obj is Vector2Int)
+        {
+            var other = (Vector2Int)obj;
+            if (this.x == other.x && this.y == other.y) return true;
+
+        }
+
+        return false;
     }
 
     public override int GetHashCode()
@@ -220,7 +228,8 @@ public struct Vector2Int : IEquatable<Vector2Int>
 
     public bool Equals(Vector2Int other)
     {
-        return other is Vector2Int other1 && this.Equals(other1);
+        if (this.x == other.x && this.y == other.y) return true;
+        return false;
     }
     
     public static Vector2Int operator -(Vector2Int v) => new Vector2Int(-v.x, -v.y);

@@ -21,28 +21,6 @@ public class GameService : IGameService
         _userMatchingService = userMatchingService;
         _hubContext = hubContext;
         _gameSessionModels = new Dictionary<string, GameSessionModel>();
-        _gameSessionModels.Add("admin-test",new GameSessionModel(
-            "admin-test",
-            ModeGame.Arena,
-            new PlayerModel("1",new List<string>()
-            {
-                "02dc58b9-11b2-4094-aac7-a8f21b114790",
-                "acb777a0-4abc-45a9-90c7-15ea01ed3c7b",
-                "2b770545-adaf-4cc6-b5dc-60ada0a3c49c",
-                "38842417-c8ae-47d7-afdf-af5afd820677",
-                "01ab28d7-8362-4747-82db-df118b3bcd47",
-                "d4102b9f-4ccc-4754-8303-b78453bbf166",
-                "2bf570ee-a62d-4d59-9db4-1e97d519e7ce"
-            }),new PlayerModel("2",new List<string>()
-            {
-                "02dc58b9-11b2-4094-aac7-a8f21b114790",
-                "acb777a0-4abc-45a9-90c7-15ea01ed3c7b",
-                "2b770545-adaf-4cc6-b5dc-60ada0a3c49c",
-                "38842417-c8ae-47d7-afdf-af5afd820677",
-                "01ab28d7-8362-4747-82db-df118b3bcd47",
-                "d4102b9f-4ccc-4754-8303-b78453bbf166",
-                "2bf570ee-a62d-4d59-9db4-1e97d519e7ce"
-            }),_hubContext));
         _inGameKey = new object();
     }
 

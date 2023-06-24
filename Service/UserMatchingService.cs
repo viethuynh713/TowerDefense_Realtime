@@ -55,6 +55,8 @@ public class UserMatchingService : IUserMatchingService
             {
                 _userMatchingModels.Remove(model);
                 _hubContext.Clients.Clients(contextId).CancelSuccess();
+                Console.WriteLine($"\nRemove player {model.contextId} in waiting queue");
+
             }
             else
             {

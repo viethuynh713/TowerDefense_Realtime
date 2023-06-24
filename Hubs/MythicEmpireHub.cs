@@ -57,7 +57,6 @@ namespace Game_Realtime.Hubs
         public async Task OnCancelMatchMakingRequest()
         {
             await _userMatchingService.CancelWaitingQueue(Context.ConnectionId);
-            Console.WriteLine($"\nUser {Context.ConnectionId} cancel successfully ");
         }
         public async Task OnListeningData(byte[] packageData)
         {
@@ -112,7 +111,7 @@ namespace Game_Realtime.Hubs
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
             Console.WriteLine($"\nPlayer {Context.ConnectionId} disconnect");
-            await _userMatchingService.RemovePlayerInWaitingQueue(Context.ConnectionId);
+            await _userMatchingService.CancelWaitingQueue(Context.ConnectionId);
             
         }
     }
