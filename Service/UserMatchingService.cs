@@ -9,12 +9,23 @@ public class UserMatchingService : IUserMatchingService
     private List<UserMatchingModel> _userMatchingModels;
     private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;
     private readonly object _userMatchingKey;
-
+    private Timer _countTimer;
     public UserMatchingService(IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
     {
+        _countTimer = new Timer(UpdateTime, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         _userMatchingModels = new List<UserMatchingModel>();
         _userMatchingKey = new object();
         _hubContext = hubContext;
+    }
+
+    private void UpdateTime(object? state)
+    {
+        foreach (var model in _userMatchingModels)
+        {
+            model.timeWaiting++;
+            _hubContext.Clients.Client(model.contextId).OnReceiveMatchMakingSuccess(model.timeWaiting);
+
+        }
     }
 
     public async Task<UserMatchingModel?> FindRivalPlayer(UserMatchingModel playerInfo)
@@ -23,10 +34,9 @@ public class UserMatchingService : IUserMatchingService
         {
             return x.gameMode == playerInfo.gameMode;
         });
-        return null;
     }
 
-    public async Task CreatWaitingQueue(UserMatchingModel playerInfo)
+    public async Task AddPlayerToWaitingQueue(UserMatchingModel playerInfo)
     {
         lock (_userMatchingKey)
         {
@@ -53,11 +63,21 @@ public class UserMatchingService : IUserMatchingService
         }
     }
 
-    public async Task RemoveWaitingQueue(UserMatchingModel model)
+    public async Task RemovePlayerInWaitingQueue(UserMatchingModel model)
     {
         lock (_userMatchingKey)
         {
             _userMatchingModels.Remove(model);
+        }
+    }public async Task RemovePlayerInWaitingQueue(string contextId)
+    {
+        var model = _userMatchingModels.Find(user => user.contextId == contextId);
+        if (model == null) return;
+        lock (_userMatchingKey)
+        {
+            _userMatchingModels.Remove(model);
+            Console.WriteLine($"\nRemove player {model.contextId} in waiting queue");
+
         }
     }
 }
@@ -65,7 +85,8 @@ public class UserMatchingService : IUserMatchingService
 public interface IUserMatchingService
 {
     Task<UserMatchingModel?> FindRivalPlayer(UserMatchingModel playerInfo);
-    Task CreatWaitingQueue(UserMatchingModel playerInfo);
+    Task AddPlayerToWaitingQueue(UserMatchingModel playerInfo);
     Task CancelWaitingQueue(string contextId);
-    Task RemoveWaitingQueue(UserMatchingModel model);
+    Task RemovePlayerInWaitingQueue(UserMatchingModel model);
+    Task RemovePlayerInWaitingQueue(string contextId);
 }

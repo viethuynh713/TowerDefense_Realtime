@@ -4,8 +4,14 @@ public interface IMythicEmpireHub
 {
     public Task OnReceiveMatchMakingSuccess(int timeWaiting);
     public Task CancelSuccess();
-    public Task OnStartGame(byte[] gameData);
-
+    public Task OnStartGame(byte[] gameId);
+    public Task OnEndGame(byte[] gameData);
+    public Task PlaceCard(byte[] cardData);
+    public Task UpdateEnergy(byte[] newEnergy);
+    public Task UpdateCastleHp(byte[] newCastleHp);
+    public Task UpdateWaveTime(byte[] time);
     public Task ReceiveMessage(string user, string message);
+    public Task OnGetMap(byte[] map);
+    public Task OnGetCards(byte[] cards);
 
 }

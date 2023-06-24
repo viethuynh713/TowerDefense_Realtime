@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Unity\\Game-Realtime\\Game-Realtime.csproj": {}
+    "E:\\Unity\\Game-Realtime\\TowerDefense_realtime\\Game-Realtime.csproj": {}
   },
   "projects": {
-    "E:\\Unity\\Game-Realtime\\Game-Realtime.csproj": {
+    "E:\\Unity\\Game-Realtime\\TowerDefense_realtime\\Game-Realtime.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Unity\\Game-Realtime\\Game-Realtime.csproj",
+        "projectUniqueName": "E:\\Unity\\Game-Realtime\\TowerDefense_realtime\\Game-Realtime.csproj",
         "projectName": "Game-Realtime",
-        "projectPath": "E:\\Unity\\Game-Realtime\\Game-Realtime.csproj",
+        "projectPath": "E:\\Unity\\Game-Realtime\\TowerDefense_realtime\\Game-Realtime.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "E:\\Unity\\Game-Realtime\\obj\\",
+        "outputPath": "E:\\Unity\\Game-Realtime\\TowerDefense_realtime\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

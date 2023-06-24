@@ -4,7 +4,10 @@
     {
         None,
         PlaceCard,
-        CastleHpLost,
+        CastleTakeDamage,
+        MonsterTakeDamage,
+        GetMyCard,
+        GetMap,
     }
 
     public enum CardType
@@ -13,5 +16,15 @@
         TowerCard,
         MonsterCard,
         SpellCard
+    }
+    public enum TypePlayer
+    {
+        Player,
+        Opponent
+    }
+    public enum ModeGame
+    {
+        Adventure,
+        Arena
     }
 }

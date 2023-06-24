@@ -1,6 +1,6 @@
 ﻿namespace Game_Realtime.Model.Data;
 
-public class CastleHPLostData
+public class CastleTakeDamageData
 {
     public int HpLose;
 }

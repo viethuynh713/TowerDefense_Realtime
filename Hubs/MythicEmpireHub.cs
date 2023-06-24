@@ -14,14 +14,13 @@ namespace Game_Realtime.Hubs
     {
         private readonly IUserMatchingService _userMatchingService;
         private readonly IGameService _gameService;
-
+        
         public MythicEmpireHub(IUserMatchingService userMatchingService, IGameService gameService)
         {
             this._userMatchingService = userMatchingService;
             this._gameService = gameService;
             Console.WriteLine("\n-----------------------IngameHub Init----------------------");
         }
-        
         public override Task OnConnectedAsync()
         {
             Console.WriteLine($"\nUser {Context.ConnectionId} connected");
@@ -43,13 +42,13 @@ namespace Game_Realtime.Hubs
             if (rivalPlayer.Result == null)
             {
                 // Not found suitable UserMatchingModel and create new UserMatchingModel then add this to _userMatchingModels
-                await _userMatchingService.CreatWaitingQueue(newUserMatchingModel);
+                await _userMatchingService.AddPlayerToWaitingQueue(newUserMatchingModel);
                 Console.WriteLine($"\nWaiting: {JsonConvert.SerializeObject(newUserMatchingModel)}");
             }
             else
             {
                 Console.WriteLine($"\nFind successfully: {JsonConvert.SerializeObject(rivalPlayer.Result)}");
-                await _userMatchingService.RemoveWaitingQueue(rivalPlayer.Result);
+                await _userMatchingService.RemovePlayerInWaitingQueue(rivalPlayer.Result);
                 var newGameSession = await _gameService.CreateNewGameSession(newUserMatchingModel, rivalPlayer.Result);
                 Console.WriteLine($"\nCreate new game success: {JsonConvert.SerializeObject(newGameSession)}");
             }
@@ -64,31 +63,48 @@ namespace Game_Realtime.Hubs
         {
             string jsonString = Encoding.UTF8.GetString(packageData);
 
-            JToken jTokenData = JToken.Parse(jsonString);
+            JObject  jObjData = JObject.Parse(jsonString);
 
-            ActionId actionId = (ActionId) (int)(jTokenData["actionId"] ?? throw new InvalidOperationException()); 
-
+            ActionId actionId = (ActionId) (int)(jObjData["actionId"] ?? throw new InvalidOperationException());
+            
+            string gameId = (jObjData["gameId"]?.ToString() ?? throw new InvalidOperationException());
+            
+            string senderId = (jObjData["senderId"]?.ToString() ?? throw new InvalidOperationException());
+            
+            var data = jObjData["data"]?.ToString() ?? throw new InvalidOperationException();
             switch(actionId)
             {
-                case ActionId.CastleHpLost:
-                    // Calculate hp lose in data
-                    var jsonCastleHpLoseData = jTokenData["data"];
-                    if (jsonCastleHpLoseData != null)
-                    {
-                        CastleHPLostData data = JsonConvert.DeserializeObject<CastleHPLostData>(jsonCastleHpLoseData.ToString())!;
-                        // await CastleHpLost(jTokenData["gameId"]?.ToString(), jTokenData["senderId"]?.ToString(), data);
-                    }
+                case ActionId.CastleTakeDamage:
+                    CastleTakeDamageData castleTakeDamageData = JsonConvert.DeserializeObject<CastleTakeDamageData>(data)!;
+                    
+                    await _gameService.CastleTakeDamage(gameId, senderId, castleTakeDamageData);
+
                     break;
                 
                 case ActionId.PlaceCard:
-                    var jsonPlaceCardData = jTokenData["data"];
                     
-                    if (jsonPlaceCardData != null)
-                    {
-                        PlaceCardData data = JsonConvert.DeserializeObject<PlaceCardData>(jsonPlaceCardData.ToString())!;
-                        // await PlaceCard(jTokenData["gameId"]?.ToString(), jTokenData["senderId"]?.ToString(), data);
-                    }
+                    PlaceCardData placeCardData = JsonConvert.DeserializeObject<PlaceCardData>(data)!;
+                    
+                    await _gameService.PlaceCard(gameId, senderId, placeCardData);
+                    
+                    break;
+                
+                case ActionId.MonsterTakeDamage:
+                    MonsterTakeDamageData monsterTakeDamageData = JsonConvert.DeserializeObject<MonsterTakeDamageData>(data)!;
+                    
+                    await _gameService.MonsterTakeDamage(gameId, senderId, monsterTakeDamageData);
+                    
+                    break;
+                    
+                case ActionId.GetMap:
 
+                    await _gameService.GetMap(gameId);
+                    
+                    break;
+                case ActionId.GetMyCard:
+
+                    await _gameService.GetCardInGame(gameId, senderId);
+                    
                     break;
             }
         }
@@ -96,6 +112,8 @@ namespace Game_Realtime.Hubs
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
             Console.WriteLine($"\nPlayer {Context.ConnectionId} disconnect");
+            await _userMatchingService.RemovePlayerInWaitingQueue(Context.ConnectionId);
+            
         }
     }
 }

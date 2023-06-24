@@ -1,39 +1,72 @@
-﻿using Game_Realtime.Model.Map;
+﻿using Game_Realtime.Hubs;
+using Game_Realtime.Model.Data;
+using Game_Realtime.Model.InGame;
+using Game_Realtime.Model.Map;
+using Game_Realtime.Service;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Game_Realtime.Model
 {
     public class GameSessionModel
     {
-        public string gameId;
+        private string _gameId;
 
-        public DateTime startTime;
+        private DateTime _startTime;
 
-        public ModeGame modeGame;
+        private ModeGame _modeGame;
 
-        public Dictionary<string, BasePlayer> players;
-
-        public Tile[][]? logicMap;
-
+        private readonly Dictionary<string, BasePlayer> _players;
         
+        private MapService _mapService;
+        private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;
+
         public GameSessionModel(string gameId, 
-            ModeGame modeGame, BasePlayer playerA, BasePlayer playerB)
+            ModeGame modeGame, BasePlayer playerA, BasePlayer playerB, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
         {
-            this.gameId = gameId;
-            this.modeGame = modeGame;
-            this.startTime = DateTime.Now;
-            this.players = new Dictionary<string, BasePlayer>
+            _gameId = gameId;
+            _modeGame = modeGame;
+            _hubContext = hubContext;
+            _startTime = DateTime.Now;
+            _players = new Dictionary<string, BasePlayer>
             {
                 { playerA.userId, playerA }, 
                 {playerB.userId, playerB}
             };
 
+            _mapService = new MapService(11, 21);
+
         }
 
+        public bool HasPlayer(string userId)
+        {
+            if (_players.ContainsKey(userId)) return true;
+            return false;
+        }
+
+        public int CastleTakeDamage(string senderId, int dataHpLose)
+        {
+            return _players[senderId].CastleTakeDamage(dataHpLose);
+        }
+
+        public void EndGame()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<MonsterModel> CreateMonster(string playerId, PlaceCardData data)
+        {
+           return await ((PlayerModel)_players[playerId]).CreateMonster(data);
+        }
+
+        public LogicTile[][] GetMap()
+        {
+            return _mapService.LogicMap;
+        }
+
+        public List<string> GetCard(string senderId)
+        {
+            return ((PlayerModel)_players[senderId]).cards;
+        }
     }
-    public enum ModeGame
-    {
-        Adventure,
-        Arena
-    }
+
 }

@@ -5,7 +5,7 @@ namespace Game_Realtime.Model
 {
     public class PlayerModel : BasePlayer
     {
-        public List<string>? cards;
+        public List<string> cards;
 
         public List<MonsterModel> monsters;
 
@@ -16,9 +16,10 @@ namespace Game_Realtime.Model
             this.monsters = new List<MonsterModel>();
         }
 
-        public MonsterModel PlaceMonster(PlaceCardData data)
+        public async Task<MonsterModel> CreateMonster(PlaceCardData data)
         {
-            var monster = new MonsterModel(data.cardId, data.monsterHp, new Vector2(data.positionX, data.positionY));
+            var stats = (MonsterStats)(data.stats);
+            var monster = new MonsterModel(data.cardId, stats.Hp, new Vector2(data.Xposition, data.Yposition));
             
             monsters.Add(monster);
 
@@ -58,9 +59,11 @@ namespace Game_Realtime.Model
             return this.castleHp;
         }
 
-        public void UseEnergy(int energy)
+        public void UpdateEnergy(int energy)
         {
             this.energy -= energy;
         }
+
+
     }
 }
