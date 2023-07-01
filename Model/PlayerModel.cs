@@ -8,14 +8,15 @@ namespace Game_Realtime.Model
         public List<string> cards;
 
         private List<MonsterModel> monsters;
-        
-        
 
-        public PlayerModel(string id,List<string> cards) : base(id)
+        public string ContextId;
+        public PlayerModel(string id,List<string> cards, string contextId) : base(id)
         {
             this.cards = cards;
 
             this.monsters = new List<MonsterModel>();
+
+            this.ContextId = contextId;
         }
 
         public async Task<MonsterModel?> CreateMonster(CreateMonsterData data)
@@ -36,7 +37,7 @@ namespace Game_Realtime.Model
         public async Task<TowerModel?> BuildTower(BuildTowerData data)
         {
             var stats = data.stats;
-            // Console.WriteLine($"Current Energy: {energy} || towerEnergy: {data.stats.Energy}");
+            
             if (stats.Energy > energy) return null;
             
             var tower = new TowerModel(data.cardId, data.Xposition, data.Yposition,this.userId);
@@ -98,9 +99,14 @@ namespace Game_Realtime.Model
             return this.castleHp;
         }
 
-        public void UpdateEnergy(int energy)
+        public int AddEnergy(int addedEnergy)
         {
-            this.energy -= energy;
+            this.energy += addedEnergy;
+            if (this.energy >= 100)
+            {
+                this.energy = 100;
+            }
+            return this.energy;
         }
 
 

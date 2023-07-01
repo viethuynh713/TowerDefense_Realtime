@@ -1,4 +1,5 @@
-﻿using Game_Realtime.Hubs;
+﻿using System.Text;
+using Game_Realtime.Hubs;
 using Game_Realtime.Model.Data;
 using Game_Realtime.Model.InGame;
 using Game_Realtime.Model.Map;
@@ -20,9 +21,11 @@ namespace Game_Realtime.Model
         private MapService _mapService;
         private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;
 
+        private Timer _timerUpdateEnergy;
         public GameSessionModel(string gameId, 
             ModeGame modeGame, BasePlayer playerA, BasePlayer playerB, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
         {
+            _timerUpdateEnergy = new Timer(UpdateEnergy, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
             _gameId = gameId;
             _modeGame = modeGame;
             _hubContext = hubContext;
@@ -35,7 +38,17 @@ namespace Game_Realtime.Model
 
             _mapService = new MapService(11, 21,playerA.userId,playerB.userId);
         }
+        private void UpdateEnergy(object? state)
+        {
 
+            foreach (var player in _players)
+            {
+                int energy = player.Value.AddEnergy(1);
+                var playerId = GetPlayer(player.Key).ContextId;
+                _hubContext.Clients.Clients(playerId).UpdateEnergy(Encoding.UTF8.GetBytes(energy.ToString()));
+            }
+            
+        }
         public bool HasPlayer(string userId)
         {
             if (_players.ContainsKey(userId)) return true;
@@ -82,6 +95,15 @@ namespace Game_Realtime.Model
         public bool IsValidPosition(int dataXposition, int dataYposition, string playerId)
         {
             return _mapService.IsValidPosition(new Vector2Int(dataXposition, dataYposition), playerId);
+        }
+
+        public PlayerModel GetPlayer(string senderId)
+        {
+            return (PlayerModel)_players[senderId];
+        }
+        public Dictionary<string, BasePlayer> GetPlayer()
+        {
+            return _players;
         }
     }
 

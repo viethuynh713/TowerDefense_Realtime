@@ -15,20 +15,20 @@ public class GameService : IGameService
     private readonly Dictionary<string, GameSessionModel> _gameSessionModels;
     private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;
     private readonly object _inGameKey;
-
+    
     public GameService(IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext, IUserMatchingService userMatchingService)
     {
-        // _userMatchingService = userMatchingService;
         _hubContext = hubContext;
         _gameSessionModels = new Dictionary<string, GameSessionModel>();
         _inGameKey = new object();
-    }
 
+    }
+    
     public async Task<GameSessionModel> CreateNewGameSession(UserMatchingModel playerA, UserMatchingModel playerB)
     {
-        PlayerModel playerModelA = new PlayerModel(playerA.userId, playerA.cards);
+        PlayerModel playerModelA = new PlayerModel(playerA.userId, playerA.cards, playerA.contextId);
 
-        PlayerModel playerModelB = new PlayerModel(playerB.userId, playerB.cards);
+        PlayerModel playerModelB = new PlayerModel(playerB.userId, playerB.cards, playerB.contextId);
  
 
         string gameId = Guid.NewGuid().ToString();
@@ -96,7 +96,7 @@ public class GameService : IGameService
         List<string> cards = _gameSessionModels[gameId].GetCard(senderId);
         byte[] cardByte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(cards));
 
-        await _hubContext.Clients.Client(contextId).OnGetCards(cardByte);
+        await _hubContext.Clients.Clients(contextId).OnGetCards(cardByte);
         
     }
 
@@ -104,14 +104,15 @@ public class GameService : IGameService
     {
         if (!_gameSessionModels.ContainsKey(gameId)) return;
         if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
-        // Console.WriteLine("Valid condition");
         var towerModel = await _gameSessionModels[gameId].BuildTower(senderId,data);
         if (towerModel != null)
         {
 
             var jsonTowerModel = JsonConvert.SerializeObject(towerModel);
             await _hubContext.Clients.Groups(gameId).BuildTower(Encoding.UTF8.GetBytes(jsonTowerModel));
-            // await _hubContext.Clients.Groups(gameId).UpdateEnergy()
+            var player = _gameSessionModels[gameId].GetPlayer(senderId);
+            Console.WriteLine($"New energy of player {player.ContextId} : {player.energy}");
+            await _hubContext.Clients.Clients(player.ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
 
         }
         else
@@ -132,7 +133,9 @@ public class GameService : IGameService
         {
             var jsonSpellModel = JsonConvert.SerializeObject(spellModel);
             await _hubContext.Clients.Groups(gameId).PlaceSpell(Encoding.UTF8.GetBytes(jsonSpellModel));
-            // await _hubContext.Clients.Groups(gameId).UpdateEnergy()
+            var player = _gameSessionModels[gameId].GetPlayer(senderId);
+            
+            await _hubContext.Clients.Clients(player.ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
 
         }
     }
@@ -146,7 +149,9 @@ public class GameService : IGameService
         {
             var jsonMonsterModel = JsonConvert.SerializeObject(monsterModel);
             await _hubContext.Clients.Groups(gameId).CreateMonster(Encoding.UTF8.GetBytes(jsonMonsterModel));
-            // await _hubContext.Clients.Groups(gameId).UpdateEnergy()
+            var player = _gameSessionModels[gameId].GetPlayer(senderId);
+            
+            await _hubContext.Clients.Client(player.ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
 
         }
     }
