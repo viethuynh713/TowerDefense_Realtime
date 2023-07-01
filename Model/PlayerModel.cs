@@ -62,6 +62,12 @@ namespace Game_Realtime.Model
     public class AiModel: BasePlayer
     {
         public AiModel() : base() { }
+
+        public async Task<List<string>> ChoseListCard(List<string> rivalCards)
+        {
+            return null;
+        }
+        
     }
 
     public class BasePlayer
