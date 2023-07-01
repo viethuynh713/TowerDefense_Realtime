@@ -29,4 +29,13 @@
         Adventure,
         Arena
     }
+    public enum RarityCard
+    {
+        None,
+        Common,
+        Rare,
+        Mythic,
+        Legend
+
+    }
 }

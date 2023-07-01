@@ -13,13 +13,12 @@ namespace Game_Realtime.Service;
 public class GameService : IGameService
 {
     private readonly Dictionary<string, GameSessionModel> _gameSessionModels;
-    private readonly IUserMatchingService _userMatchingService;
     private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;
     private readonly object _inGameKey;
 
     public GameService(IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext, IUserMatchingService userMatchingService)
     {
-        _userMatchingService = userMatchingService;
+        // _userMatchingService = userMatchingService;
         _hubContext = hubContext;
         _gameSessionModels = new Dictionary<string, GameSessionModel>();
         _inGameKey = new object();
