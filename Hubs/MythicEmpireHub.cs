@@ -21,6 +21,7 @@ namespace Game_Realtime.Hubs
             this._gameService = gameService;
             Console.WriteLine("\n-----------------------IngameHub Init----------------------");
         }
+        
         public override Task OnConnectedAsync()
         {
             Console.WriteLine($"\nUser {Context.ConnectionId} connected");
@@ -49,8 +50,8 @@ namespace Game_Realtime.Hubs
             {
                 Console.WriteLine($"\nFind successfully: {JsonConvert.SerializeObject(rivalPlayer.Result)}");
                 await _userMatchingService.RemovePlayerInWaitingQueue(rivalPlayer.Result);
-                var newGameSession = await _gameService.CreateNewGameSession(newUserMatchingModel, rivalPlayer.Result);
-                Console.WriteLine($"\nCreate new game success: {JsonConvert.SerializeObject(newGameSession)}");
+                await _gameService.CreateNewGameSession(newUserMatchingModel, rivalPlayer.Result);
+                
             }
             
         }
@@ -70,26 +71,34 @@ namespace Game_Realtime.Hubs
             
             string senderId = (jObjData["senderId"]?.ToString() ?? throw new InvalidOperationException());
             
-            var data = jObjData["data"]?.ToString() ?? throw new InvalidOperationException();
+            var data = jObjData["data"]! ?? throw new InvalidOperationException();
+            Console.WriteLine(actionId);
             switch(actionId)
             {
                 case ActionId.CastleTakeDamage:
-                    CastleTakeDamageData castleTakeDamageData = JsonConvert.DeserializeObject<CastleTakeDamageData>(data)!;
+                    CastleTakeDamageData castleTakeDamageData = JsonConvert.DeserializeObject<CastleTakeDamageData>(data.ToString())!;
                     
                     await _gameService.CastleTakeDamage(gameId, senderId, castleTakeDamageData);
 
                     break;
+
+                case ActionId.BuildTower:
+                    BuildTowerData buildTowerData = JsonConvert.DeserializeObject<BuildTowerData>(data.ToString())!;
+                    await _gameService.BuildTower(gameId, senderId, buildTowerData);
+                    break;
                 
-                case ActionId.PlaceCard:
-                    
-                    PlaceCardData placeCardData = JsonConvert.DeserializeObject<PlaceCardData>(data)!;
-                    
-                    await _gameService.PlaceCard(gameId, senderId, placeCardData);
-                    
+                case ActionId.PlaceSpell:
+                    PlaceSpellData placeSpellData = JsonConvert.DeserializeObject<PlaceSpellData>(data.ToString())!;
+                    await _gameService.PlaceSpell(gameId, senderId, placeSpellData);
+                    break;
+                
+                case ActionId.CreateMonster:
+                    CreateMonsterData createMonsterData = JsonConvert.DeserializeObject<CreateMonsterData>(data.ToString())!;
+                    await _gameService.CreateMonster(gameId, senderId, createMonsterData);
                     break;
                 
                 case ActionId.MonsterTakeDamage:
-                    MonsterTakeDamageData monsterTakeDamageData = JsonConvert.DeserializeObject<MonsterTakeDamageData>(data)!;
+                    MonsterTakeDamageData monsterTakeDamageData = JsonConvert.DeserializeObject<MonsterTakeDamageData>(data.ToString())!;
                     
                     await _gameService.MonsterTakeDamage(gameId, senderId, monsterTakeDamageData);
                     
@@ -97,12 +106,12 @@ namespace Game_Realtime.Hubs
                     
                 case ActionId.GetMap:
 
-                    await _gameService.GetMap(gameId);
+                    await _gameService.GetMap(gameId, Context.ConnectionId);
                     
                     break;
                 case ActionId.GetMyCard:
 
-                    await _gameService.GetCardInGame(gameId, senderId);
+                    await _gameService.GetCardInGame(gameId, senderId,Context.ConnectionId);
                     
                     break;
             }

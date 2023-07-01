@@ -2,13 +2,26 @@
 
 namespace Game_Realtime.Model.Data;
 
-public class PlaceCardData
+public class BuildTowerData
 {
     public string cardId;
-    public CardType typeOfCard;
     public int Xposition;
     public int Yposition;
-    public StatsCard stats;
+    public TowerStats stats;
+}
+public class CreateMonsterData
+{
+    public string cardId;
+    public int Xposition;
+    public int Yposition;
+    public MonsterStats stats;
+}
+public class PlaceSpellData
+{
+    public string cardId;
+    public int Xposition;
+    public int Yposition;
+    public SpellStats stats;
 }
 public class StatsCard
 {

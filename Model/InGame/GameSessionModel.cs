@@ -33,8 +33,7 @@ namespace Game_Realtime.Model
                 {playerB.userId, playerB}
             };
 
-            _mapService = new MapService(11, 21);
-
+            _mapService = new MapService(11, 21,playerA.userId,playerB.userId);
         }
 
         public bool HasPlayer(string userId)
@@ -53,9 +52,21 @@ namespace Game_Realtime.Model
             throw new NotImplementedException();
         }
 
-        public async Task<MonsterModel> CreateMonster(string playerId, PlaceCardData data)
+        public async Task<MonsterModel?> CreateMonster(string playerId, CreateMonsterData data)
         {
-           return await ((PlayerModel)_players[playerId]).CreateMonster(data);
+            if (!_mapService.IsValidPosition(new Vector2Int(data.Xposition, data.Yposition), playerId)) return null;
+            return await ((PlayerModel)_players[playerId]).CreateMonster(data);
+        }
+
+        public async Task<TowerModel?> BuildTower(string playerId, BuildTowerData data)
+        {
+            if (!_mapService.IsValidPosition(new Vector2Int(data.Xposition, data.Yposition), playerId)) return null;
+            return await ((PlayerModel)_players[playerId]).BuildTower(data);
+        }
+
+        public async Task<SpellModel?> PlaceSpell(string playerId, PlaceSpellData data)
+        {
+            return await ((PlayerModel)_players[playerId]).PlaceSpell(data);
         }
 
         public LogicTile[][] GetMap()
@@ -66,6 +77,11 @@ namespace Game_Realtime.Model
         public List<string> GetCard(string senderId)
         {
             return ((PlayerModel)_players[senderId]).cards;
+        }
+
+        public bool IsValidPosition(int dataXposition, int dataYposition, string playerId)
+        {
+            return _mapService.IsValidPosition(new Vector2Int(dataXposition, dataYposition), playerId);
         }
     }
 

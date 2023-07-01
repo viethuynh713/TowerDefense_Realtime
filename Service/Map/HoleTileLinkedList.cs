@@ -63,7 +63,7 @@ public class InitHole1Node
         else
         {
             Random random = new Random();
-            selectedTile = restTile[random.Next(0, restTile.Count + 1)];
+            selectedTile = restTile[random.Next(0, restTile.Count)];
         }
     }
     public bool CanAdd()

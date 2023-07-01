@@ -26,7 +26,7 @@ namespace Game_Realtime.Service;
             _columnIndexSplit = (height - 1) / 2;
             _monsterGatePosition = new Vector2Int((width-1)/2, _columnIndexSplit);
         }
-        public async Task<LogicTile[][]> CreateLogicMap()
+        public async Task<LogicTile[][]> CreateLogicMap(string playerId, string rivalPlayerId)
         {
             //Create new LogicTile
             _mapLogicResult = new LogicTile[_height][];
@@ -46,12 +46,12 @@ namespace Game_Realtime.Service;
                     // mark the tile is on player field or opponent field
                     if (j < (_width -1)/2)
                     {
-                        _mapLogicResult[i][j].OwnerId = "1";
+                        _mapLogicResult[i][j].OwnerId = playerId;
                         
                     }
                     else if (j > (_width - 1) / 2)
                     {
-                        _mapLogicResult[i][j].OwnerId = "2";
+                        _mapLogicResult[i][j].OwnerId = rivalPlayerId;
                     }
                     // mark type of LogicTile
                     if (j == 0 || j == _width - 1 || i == 0 || i == _height -1)
@@ -115,7 +115,7 @@ namespace Game_Realtime.Service;
             int nHole = random.Next(2, 8);
             for (int i = 0; i < nHole; i++)
             {
-                Vector2Int holePos = validTile[random.Next(0, validTile.Count + 1)];
+                Vector2Int holePos = validTile[random.Next(0, validTile.Count)];
                 InitHole(PublicLogicPos2PrivateLogicPos(holePos, true));
                 validTile.Remove(holePos);
                 validTile.Remove(new Vector2Int(holePos.x - 1, holePos.y));

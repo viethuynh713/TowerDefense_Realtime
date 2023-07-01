@@ -6,7 +6,9 @@ public interface IMythicEmpireHub
     public Task CancelSuccess();
     public Task OnStartGame(byte[] gameId);
     public Task OnEndGame(byte[] gameData);
-    public Task PlaceCard(byte[] cardData);
+    public Task BuildTower(byte[] cardData);
+    public Task CreateMonster(byte[] cardData);
+    public Task PlaceSpell(byte[] cardData);
     public Task UpdateEnergy(byte[] newEnergy);
     public Task UpdateCastleHp(byte[] newCastleHp);
     public Task UpdateWaveTime(byte[] time);

@@ -3,7 +3,9 @@
     public enum ActionId
     {
         None,
-        PlaceCard,
+        CreateMonster,
+        BuildTower,
+        PlaceSpell,
         CastleTakeDamage,
         MonsterTakeDamage,
         GetMyCard,

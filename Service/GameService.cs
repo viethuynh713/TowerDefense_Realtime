@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using Game_Realtime.Hubs;
 using Game_Realtime.Model;
 using Game_Realtime.Model.Data;
@@ -37,13 +38,15 @@ public class GameService : IGameService
         await _hubContext.Groups.AddToGroupAsync(playerB.contextId, gameId);
 
         GameSessionModel newGameSessionModel = new GameSessionModel(gameId, playerA.gameMode, playerModelA, playerModelB, _hubContext);
+        
     
         lock(_inGameKey)
         {
             _gameSessionModels.Add(gameId, newGameSessionModel);
         }
         await _hubContext.Clients.Groups(gameId).OnStartGame(Encoding.UTF8.GetBytes(gameId));
-
+        
+        Console.WriteLine($"\nCreate new game success: {JsonConvert.SerializeObject(newGameSessionModel)}");
         return newGameSessionModel;
     }
 
@@ -68,33 +71,7 @@ public class GameService : IGameService
         }
             
     }
-
-    public async Task PlaceCard(string gameId, string senderId, PlaceCardData data)
-    {
-        if (!_gameSessionModels.ContainsKey(gameId)) return;
-        if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
-        JObject senderData = new JObject();
-        senderData.Add(new JProperty("userid", senderId));
-        senderData.Add(new JProperty("cardId", data.cardId));
-        senderData.Add(new JProperty("Xposition", data.Xposition));
-        senderData.Add(new JProperty("Yposition", data.Yposition));
-        
-        switch (data.typeOfCard)
-        {
-            case CardType.SpellCard:
-                await _hubContext.Clients.Groups(gameId).PlaceCard(Encoding.UTF8.GetBytes(senderData.ToString()));
-                break;
-            case CardType.TowerCard:
-                await _hubContext.Clients.Groups(gameId).PlaceCard(Encoding.UTF8.GetBytes(senderData.ToString()));
-                break;
-            case CardType.MonsterCard:
-                var monster = await _gameSessionModels[gameId].CreateMonster(senderId,data);
-                await _hubContext.Clients.Groups(gameId).PlaceCard(Encoding.UTF8.GetBytes(senderData.ToString()));
-                break;
-        }
-       
-    }
-
+    
     public Task OnEndGame(string gameId)
     {
         throw new NotImplementedException();
@@ -108,20 +85,71 @@ public class GameService : IGameService
         
     }
 
-    public async Task GetMap(string gameId)
+    public async Task GetMap(string gameId, string contextId)
     {
         var map = _gameSessionModels[gameId].GetMap();
         byte[] mapByte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(map));
-        await _hubContext.Clients.Groups(gameId).OnGetMap(mapByte);
+        await _hubContext.Clients.Client(contextId).OnGetMap(mapByte);
     }
 
-    public async Task GetCardInGame(string gameId, string senderId)
+    public async Task GetCardInGame(string gameId, string senderId,string contextId)
     {
         List<string> cards = _gameSessionModels[gameId].GetCard(senderId);
         byte[] cardByte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(cards));
 
-        await _hubContext.Clients.Groups(gameId).OnGetCards(cardByte);
+        await _hubContext.Clients.Client(contextId).OnGetCards(cardByte);
         
+    }
+
+    public async Task BuildTower(string gameId, string senderId, BuildTowerData data)
+    {
+        if (!_gameSessionModels.ContainsKey(gameId)) return;
+        if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
+        // Console.WriteLine("Valid condition");
+        var towerModel = await _gameSessionModels[gameId].BuildTower(senderId,data);
+        if (towerModel != null)
+        {
+
+            var jsonTowerModel = JsonConvert.SerializeObject(towerModel);
+            await _hubContext.Clients.Groups(gameId).BuildTower(Encoding.UTF8.GetBytes(jsonTowerModel));
+            // await _hubContext.Clients.Groups(gameId).UpdateEnergy()
+
+        }
+        else
+        {
+            Console.WriteLine("Can't build tower");
+            
+        }
+
+    }
+
+    public async Task PlaceSpell(string gameId, string senderId, PlaceSpellData data)
+    {
+        if (!_gameSessionModels.ContainsKey(gameId)) return;
+        if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
+        
+        var spellModel = await _gameSessionModels[gameId].PlaceSpell(senderId,data);
+        if (spellModel != null)
+        {
+            var jsonSpellModel = JsonConvert.SerializeObject(spellModel);
+            await _hubContext.Clients.Groups(gameId).PlaceSpell(Encoding.UTF8.GetBytes(jsonSpellModel));
+            // await _hubContext.Clients.Groups(gameId).UpdateEnergy()
+
+        }
+    }
+
+    public async Task CreateMonster(string gameId, string senderId, CreateMonsterData data)
+    {
+        if (!_gameSessionModels.ContainsKey(gameId)) return;
+        if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
+        var monsterModel = await _gameSessionModels[gameId].CreateMonster(senderId,data);
+        if (monsterModel != null)
+        {
+            var jsonMonsterModel = JsonConvert.SerializeObject(monsterModel);
+            await _hubContext.Clients.Groups(gameId).CreateMonster(Encoding.UTF8.GetBytes(jsonMonsterModel));
+            // await _hubContext.Clients.Groups(gameId).UpdateEnergy()
+
+        }
     }
 
     public async Task<GameSessionModel> GetGameSession(string gameId)
@@ -138,10 +166,11 @@ public interface IGameService
     Task<GameSessionModel> GetGameSession(string gameId);
     Task<GameSessionModel> CreateNewGameSession(UserMatchingModel playerA, UserMatchingModel playerB);
     Task CastleTakeDamage(string gameId, string userId, CastleTakeDamageData data);
-    Task PlaceCard(string gameId, string userId, PlaceCardData data);
-
     Task OnEndGame(string gameId);
     Task MonsterTakeDamage(string gameId, string senderId, MonsterTakeDamageData monsterTakeDamageData);
-    Task GetMap(string gameId);
-    Task GetCardInGame(string gameId, string senderId);
+    Task GetMap(string gameId, string contextId);
+    Task GetCardInGame(string gameId, string senderId, string contextId);
+    Task BuildTower(string gameId, string senderId, BuildTowerData buildTowerData);
+    Task PlaceSpell(string gameId, string senderId, PlaceSpellData placeSpellData);
+    Task CreateMonster(string gameId, string senderId, CreateMonsterData createMonsterData);
 }
