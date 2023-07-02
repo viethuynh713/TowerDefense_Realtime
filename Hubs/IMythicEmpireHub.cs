@@ -16,4 +16,6 @@ public interface IMythicEmpireHub
     public Task OnGetMap(byte[] map);
     public Task OnGetCards(byte[] cards);
 
+    public Task SpawnWave(byte[] data);
+
 }

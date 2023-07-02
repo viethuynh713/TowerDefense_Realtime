@@ -4,7 +4,9 @@ using Game_Realtime.Model.Data;
 using Game_Realtime.Model.InGame;
 using Game_Realtime.Model.Map;
 using Game_Realtime.Service;
+using Game_Realtime.Service.WaveService;
 using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 
 namespace Game_Realtime.Model
 {
@@ -18,10 +20,17 @@ namespace Game_Realtime.Model
 
         private readonly Dictionary<string, BasePlayer> _players;
         
-        private MapService _mapService;
+        private readonly MapService _mapService;
+        
         private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;
 
+
         private Timer _timerUpdateEnergy;
+
+        private readonly WaveService _waveService;
+
+        private Timer countWave;
+
         public GameSessionModel(string gameId, 
             ModeGame modeGame, BasePlayer playerA, BasePlayer playerB, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
         {
@@ -37,6 +46,25 @@ namespace Game_Realtime.Model
             };
 
             _mapService = new MapService(11, 21,playerA.userId,playerB.userId);
+            _waveService = new WaveService();
+            countWave = new Timer(UpdateWave, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+        }
+
+        private void UpdateWave(object? state)
+        {
+            var currentWaveTime = _waveService.UpdateWaveTime(1f);
+            var currentWave = _waveService.GetCurrentWave();
+            if (currentWaveTime <= 0)
+            {
+                _hubContext.Clients.Groups(_gameId)
+                    .SpawnWave(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(currentWave.monsterIds)));
+                _waveService.NextWave();
+            }
+            else
+            {
+                _hubContext.Clients.Groups(_gameId)
+                    .UpdateWaveTime(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(currentWave)));
+            }
         }
         private void UpdateEnergy(object? state)
         {
@@ -92,11 +120,7 @@ namespace Game_Realtime.Model
             return ((PlayerModel)_players[senderId]).cards;
         }
 
-        public bool IsValidPosition(int dataXposition, int dataYposition, string playerId)
-        {
-            return _mapService.IsValidPosition(new Vector2Int(dataXposition, dataYposition), playerId);
-        }
-
+        
         public PlayerModel GetPlayer(string senderId)
         {
             return (PlayerModel)_players[senderId];

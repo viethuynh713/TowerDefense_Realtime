@@ -6,6 +6,7 @@ using Game_Realtime.Model.Data;
 using Newtonsoft.Json.Linq;
 using Game_Realtime.Model.InGame;
 using Game_Realtime.Service;
+using Game_Realtime.Service.WaveService;
 
 namespace Game_Realtime.Hubs
 {
@@ -19,6 +20,11 @@ namespace Game_Realtime.Hubs
         {
             this._userMatchingService = userMatchingService;
             this._gameService = gameService;
+            Dictionary<int, Wave> waves = new Dictionary<int, Wave>();
+            waves.Add(1,new Wave(10, new List<string>() { "1", "2" }));
+            waves.Add(2,new Wave(10, new List<string>() { "1", "2" }));
+            waves.Add(3,new Wave(10, new List<string>() { "4", "2" }));
+            Console.WriteLine(JsonConvert.SerializeObject(waves));
             Console.WriteLine("\n-----------------------IngameHub Init----------------------");
         }
         
