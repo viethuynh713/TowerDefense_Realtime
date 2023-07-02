@@ -1,9 +1,12 @@
-﻿using Game_Realtime.Hubs;
+﻿using System.Text;
+using Game_Realtime.Hubs;
 using Game_Realtime.Model.Data;
 using Game_Realtime.Model.InGame;
 using Game_Realtime.Model.Map;
 using Game_Realtime.Service;
+using Game_Realtime.Service.WaveService;
 using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 
 namespace Game_Realtime.Model
 {
@@ -17,12 +20,21 @@ namespace Game_Realtime.Model
 
         private readonly Dictionary<string, BasePlayer> _players;
         
-        private MapService _mapService;
+        private readonly MapService _mapService;
+        
         private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;
+
+
+        private Timer _timerUpdateEnergy;
+
+        private readonly WaveService _waveService;
+
+        private Timer countWave;
 
         public GameSessionModel(string gameId, 
             ModeGame modeGame, BasePlayer playerA, BasePlayer playerB, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
         {
+            _timerUpdateEnergy = new Timer(UpdateEnergy, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
             _gameId = gameId;
             _modeGame = modeGame;
             _hubContext = hubContext;
@@ -34,8 +46,37 @@ namespace Game_Realtime.Model
             };
 
             _mapService = new MapService(11, 21,playerA.userId,playerB.userId);
+            _waveService = new WaveService();
+            countWave = new Timer(UpdateWave, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
 
+        private void UpdateWave(object? state)
+        {
+            var currentWaveTime = _waveService.UpdateWaveTime(1f);
+            var currentWave = _waveService.GetCurrentWave();
+            if (currentWaveTime <= 0)
+            {
+                _hubContext.Clients.Groups(_gameId)
+                    .SpawnWave(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(currentWave.monsterIds)));
+                _waveService.NextWave();
+            }
+            else
+            {
+                _hubContext.Clients.Groups(_gameId)
+                    .UpdateWaveTime(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(currentWave)));
+            }
+        }
+        private void UpdateEnergy(object? state)
+        {
+
+            foreach (var player in _players)
+            {
+                int energy = player.Value.AddEnergy(1);
+                var playerId = GetPlayer(player.Key).ContextId;
+                _hubContext.Clients.Clients(playerId).UpdateEnergy(Encoding.UTF8.GetBytes(energy.ToString()));
+            }
+            
+        }
         public bool HasPlayer(string userId)
         {
             if (_players.ContainsKey(userId)) return true;
@@ -79,9 +120,14 @@ namespace Game_Realtime.Model
             return ((PlayerModel)_players[senderId]).cards;
         }
 
-        public bool IsValidPosition(int dataXposition, int dataYposition, string playerId)
+        
+        public PlayerModel GetPlayer(string senderId)
         {
-            return _mapService.IsValidPosition(new Vector2Int(dataXposition, dataYposition), playerId);
+            return (PlayerModel)_players[senderId];
+        }
+        public Dictionary<string, BasePlayer> GetPlayer()
+        {
+            return _players;
         }
     }
 

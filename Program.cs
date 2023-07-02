@@ -1,6 +1,6 @@
 using Game_Realtime.Hubs;
 using Game_Realtime.Service;
-using Microsoft.AspNetCore.SignalR;
+using Game_Realtime.Service.WaveService;
 
 var builder = WebApplication.CreateBuilder(args);
 
