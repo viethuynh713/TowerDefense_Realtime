@@ -111,7 +111,7 @@ public class GameService : IGameService
             var jsonTowerModel = JsonConvert.SerializeObject(towerModel);
             await _hubContext.Clients.Groups(gameId).BuildTower(Encoding.UTF8.GetBytes(jsonTowerModel));
             var player = _gameSessionModels[gameId].GetPlayer(senderId);
-            Console.WriteLine($"New energy of player {player.ContextId} : {player.energy}");
+            // Console.WriteLine($"New energy of player {player.ContextId} : {player.energy}");
             await _hubContext.Clients.Clients(player.ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
 
         }

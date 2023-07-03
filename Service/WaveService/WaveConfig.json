@@ -1,15 +1,24 @@
 {
-  "1": {
+  "0": {
     "currentTime": 10.0,
     "maxTimeWaiting": 10.0,
+    "monsterIds": [
+      "1",
+      "2",
+      "3"
+    ]
+  },
+  "1": {
+    "currentTime": 5,
+    "maxTimeWaiting": 5,
     "monsterIds": [
       "1",
       "2"
     ]
   },
   "2": {
-    "currentTime": 10.0,
-    "maxTimeWaiting": 10.0,
+    "currentTime": 20.0,
+    "maxTimeWaiting": 20.0,
     "monsterIds": [
       "1",
       "2"

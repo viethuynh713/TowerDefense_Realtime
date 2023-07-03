@@ -116,11 +116,9 @@
         {
             GenerateMapNodeCost cost = new GenerateMapNodeCost();
             cost.path.Add(src);
-            // Stopwatch stopwatch = new Stopwatch();
-            // stopwatch.Start();
+
             var resCost = DFSHelper(src, des, cost);
-            // stopwatch.Stop();
-            // UnityEngine.Debug.Log("Elapsed Time is {0} ms" + stopwatch.ElapsedMilliseconds.ToString());
+
             if (resCost == null)
             {
                 throw new Exception("Path is null. Maybe the graph is invalid.");

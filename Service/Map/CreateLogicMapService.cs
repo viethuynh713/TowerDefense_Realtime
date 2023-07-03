@@ -15,16 +15,17 @@ namespace Game_Realtime.Service;
         
         private LogicTile[][] _mapLogicResult;
 
-        public CreateLogicMapService (int height, int width)
+        public CreateLogicMapService (int height, int width, Vector2Int monsterGatePosition, Dictionary<TypePlayer, Vector2Int> castleLogicPosition)
         {
             _width = width;
             _height = height;
-            _castleLogicPosition = new Dictionary<TypePlayer, Vector2Int> {
-                    { TypePlayer.Opponent, new Vector2Int(0, (height-1)/2) },
-                    { TypePlayer.Player, new Vector2Int(width-1, (height-1)/2) }
-                };
+            // _castleLogicPosition = new Dictionary<TypePlayer, Vector2Int> {
+            //         { TypePlayer.Opponent, new Vector2Int(0, (height-1)/2) },
+            //         { TypePlayer.Player, new Vector2Int(width-1, (height-1)/2) }
+            //     };
             _columnIndexSplit = (height - 1) / 2;
-            _monsterGatePosition = new Vector2Int((width-1)/2, _columnIndexSplit);
+            _monsterGatePosition = monsterGatePosition;
+            _castleLogicPosition = castleLogicPosition;
         }
         public async Task<LogicTile[][]> CreateLogicMap(string playerId, string rivalPlayerId)
         {

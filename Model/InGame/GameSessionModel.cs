@@ -29,12 +29,11 @@ namespace Game_Realtime.Model
 
         private readonly WaveService _waveService;
 
-        private Timer countWave;
+        private Timer _countWave;
 
         public GameSessionModel(string gameId, 
             ModeGame modeGame, BasePlayer playerA, BasePlayer playerB, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
         {
-            _timerUpdateEnergy = new Timer(UpdateEnergy, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
             _gameId = gameId;
             _modeGame = modeGame;
             _hubContext = hubContext;
@@ -47,24 +46,27 @@ namespace Game_Realtime.Model
 
             _mapService = new MapService(11, 21,playerA.userId,playerB.userId);
             _waveService = new WaveService();
-            countWave = new Timer(UpdateWave, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+            
+            _countWave = new Timer(UpdateWave, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+            _timerUpdateEnergy = new Timer(UpdateEnergy, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
         }
 
         private void UpdateWave(object? state)
         {
-            var currentWaveTime = _waveService.UpdateWaveTime(1f);
-            var currentWave = _waveService.GetCurrentWave();
-            if (currentWaveTime <= 0)
-            {
-                _hubContext.Clients.Groups(_gameId)
-                    .SpawnWave(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(currentWave.monsterIds)));
-                _waveService.NextWave();
-            }
-            else
-            {
-                _hubContext.Clients.Groups(_gameId)
-                    .UpdateWaveTime(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(currentWave)));
-            }
+            // var currentWaveTime = _waveService.UpdateWaveTime(1f);
+            // var currentWave = _waveService.GetCurrentWave();
+            //
+            // if (currentWaveTime <= 0)
+            // {
+            //     _hubContext.Clients.Groups(_gameId)
+            //         .SpawnWave(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(currentWave.monsterIds)));
+            //     _waveService.NextWave();
+            // }
+            // else
+            // {
+            //     _hubContext.Clients.Groups(_gameId)
+            //         .UpdateWaveTime(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(currentWave)));
+            // }
         }
         private void UpdateEnergy(object? state)
         {
@@ -102,7 +104,20 @@ namespace Game_Realtime.Model
         public async Task<TowerModel?> BuildTower(string playerId, BuildTowerData data)
         {
             if (!_mapService.IsValidPosition(new Vector2Int(data.Xposition, data.Yposition), playerId)) return null;
-            return await ((PlayerModel)_players[playerId]).BuildTower(data);
+
+            var paths = _mapService.FindPathForMonster(playerId, new Vector2Int(data.Xposition, data.Yposition));
+            if (paths.Count == 0)
+            {
+                Console.WriteLine($"No monster path");
+                return null;
+            }
+
+            var tower =  await ((PlayerModel)_players[playerId]).BuildTower(data);
+            if (tower != null)
+            {
+                _mapService.BanPosition(data.Xposition, data.Yposition);
+            }
+            return tower;
         }
 
         public async Task<SpellModel?> PlaceSpell(string playerId, PlaceSpellData data)
