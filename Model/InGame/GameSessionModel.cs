@@ -73,7 +73,7 @@ namespace Game_Realtime.Model
 
             foreach (var player in _players)
             {
-                int energy = player.Value.AddEnergy(1);
+                int energy = player.Value.AddEnergy(1).Result;
                 var playerId = GetPlayer(player.Key).ContextId;
                 _hubContext.Clients.Clients(playerId).UpdateEnergy(Encoding.UTF8.GetBytes(energy.ToString()));
             }
@@ -87,18 +87,18 @@ namespace Game_Realtime.Model
 
         public int CastleTakeDamage(string senderId, int dataHpLose)
         {
-            return _players[senderId].CastleTakeDamage(dataHpLose);
+            return _players[senderId].CastleTakeDamage(dataHpLose).Result;
         }
 
         public void EndGame()
         {
-            throw new NotImplementedException();
+            
         }
 
         public async Task<MonsterModel?> CreateMonster(string playerId, CreateMonsterData data)
         {
             if (!_mapService.IsValidPosition(new Vector2Int(data.Xposition, data.Yposition), playerId)) return null;
-            return await ((PlayerModel)_players[playerId]).CreateMonster(data);
+            return await (_players[playerId]).CreateMonster(data);
         }
 
         public async Task<TowerModel?> BuildTower(string playerId, BuildTowerData data)
@@ -112,7 +112,7 @@ namespace Game_Realtime.Model
                 return null;
             }
 
-            var tower =  await ((PlayerModel)_players[playerId]).BuildTower(data);
+            var tower =  await _players[playerId].BuildTower(data);
             if (tower != null)
             {
                 _mapService.BanPosition(data.Xposition, data.Yposition);
@@ -122,7 +122,7 @@ namespace Game_Realtime.Model
 
         public async Task<SpellModel?> PlaceSpell(string playerId, PlaceSpellData data)
         {
-            return await ((PlayerModel)_players[playerId]).PlaceSpell(data);
+            return await (_players[playerId]).PlaceSpell(data);
         }
 
         public LogicTile[][] GetMap()
@@ -140,9 +140,55 @@ namespace Game_Realtime.Model
         {
             return (PlayerModel)_players[senderId];
         }
-        public Dictionary<string, BasePlayer> GetPlayer()
+
+        public PlayerModel? GetRivalPlayer(string playerId)
         {
-            return _players;
+            foreach (var player in _players)
+            {
+                if (player.Key != playerId) return (PlayerModel)player.Value;
+            }
+
+            return null;
+        }
+
+        public async Task MonsterTakeDamage(string senderId, MonsterTakeDamageData monsterTakeDamageData)
+        {
+            var newHp = _players[senderId]
+                .MonsterTakeDamage(monsterTakeDamageData.monsterId, monsterTakeDamageData.damage);
+            if (newHp.Result > 0)
+            {
+                // TODO: gen data
+                var data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(""));
+                await _hubContext.Clients.Groups(_gameId).UpdateMonsterHp(data);
+            }
+            else
+            {
+                var energyGain =  _players[senderId].KillMonster(monsterTakeDamageData.monsterId).Result;
+                await _hubContext.Clients.Groups(_gameId).KillMonster(Encoding.UTF8.GetBytes(monsterTakeDamageData.monsterId));
+                var rivalPlayer = GetRivalPlayer(senderId);
+
+                if (rivalPlayer != null)
+                {
+                    await _players[rivalPlayer.userId].AddEnergy(energyGain);
+
+                    await _hubContext.Clients.Clients(rivalPlayer.ContextId)
+                        .UpdateEnergy(Encoding.UTF8.GetBytes(rivalPlayer.energy.ToString()));
+                }
+            }
+        }
+
+        public async Task<TowerStats?> UpgradeTower(string senderId, UpgradeTowerData data)
+        {
+            return await _players[senderId].UpgradeTower(data.towerId, data.type);
+        }
+
+        public async Task<TowerModel> SellTower(string senderId, SellTowerData data)
+        {
+            var tower = await _players[senderId].SellTower(data.towerId);
+            
+            _mapService.ReleasePosition(tower.XLogicPosition,tower.YLogicPosition);
+            
+            return tower;
         }
     }
 

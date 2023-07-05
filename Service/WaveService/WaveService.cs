@@ -27,7 +27,7 @@ public class WaveService
     public void NextWave()
     {
         _currentWaveIndex++;
-        
+        if (waves.Count <= _currentWaveIndex) _currentWave = waves.Last().Value;
         _currentWave = waves[_currentWaveIndex];
     }
 

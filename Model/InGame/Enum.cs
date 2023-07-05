@@ -10,6 +10,8 @@
         MonsterTakeDamage,
         GetMyCard,
         GetMap,
+        UpgradeTower,
+        SellTower
     }
 
     public enum CardType

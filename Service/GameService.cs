@@ -80,8 +80,10 @@ public class GameService : IGameService
     {
         if (!_gameSessionModels.ContainsKey(gameId)) return;
         if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
-        
-        
+
+        _gameSessionModels[gameId].MonsterTakeDamage(senderId, monsterTakeDamageData);
+
+
     }
 
     public async Task GetMap(string gameId, string contextId)
@@ -111,7 +113,7 @@ public class GameService : IGameService
             var jsonTowerModel = JsonConvert.SerializeObject(towerModel);
             await _hubContext.Clients.Groups(gameId).BuildTower(Encoding.UTF8.GetBytes(jsonTowerModel));
             var player = _gameSessionModels[gameId].GetPlayer(senderId);
-            // Console.WriteLine($"New energy of player {player.ContextId} : {player.energy}");
+            
             await _hubContext.Clients.Clients(player.ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
 
         }
@@ -156,6 +158,30 @@ public class GameService : IGameService
         }
     }
 
+    public async Task UpgradeTower(string gameId, string senderId, UpgradeTowerData data)
+    {
+        if (!_gameSessionModels.ContainsKey(gameId)) return;
+        if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
+        var monsterStats = await _gameSessionModels[gameId].UpgradeTower(senderId,data);
+        JObject jsonData = new JObject()
+        {
+            new JProperty("towerId", data.towerId),
+            new JProperty("stats", JsonConvert.SerializeObject(monsterStats)),
+            
+        };
+        await _hubContext.Clients.Groups(gameId).UpgradeTower(Encoding.UTF8.GetBytes(jsonData.ToString()));
+
+    }
+
+    public async Task SellTower(string gameId, string senderId, SellTowerData data)
+    {
+        if (!_gameSessionModels.ContainsKey(gameId)) return;
+        if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
+        var towerModel = await _gameSessionModels[gameId].SellTower(senderId,data);
+
+        await _hubContext.Clients.Groups(gameId).SellTower(Encoding.UTF8.GetBytes(towerModel.towerId));
+    }
+
     public async Task<GameSessionModel> GetGameSession(string gameId)
     {
         return _gameSessionModels[gameId];
@@ -177,4 +203,6 @@ public interface IGameService
     Task BuildTower(string gameId, string senderId, BuildTowerData buildTowerData);
     Task PlaceSpell(string gameId, string senderId, PlaceSpellData placeSpellData);
     Task CreateMonster(string gameId, string senderId, CreateMonsterData createMonsterData);
+    Task UpgradeTower(string gameId, string senderId, UpgradeTowerData upgradeTowerData);
+    Task SellTower(string gameId, string senderId, SellTowerData data);
 }

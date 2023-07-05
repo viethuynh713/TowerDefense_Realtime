@@ -19,10 +19,6 @@ namespace Game_Realtime.Service;
         {
             _width = width;
             _height = height;
-            // _castleLogicPosition = new Dictionary<TypePlayer, Vector2Int> {
-            //         { TypePlayer.Opponent, new Vector2Int(0, (height-1)/2) },
-            //         { TypePlayer.Player, new Vector2Int(width-1, (height-1)/2) }
-            //     };
             _columnIndexSplit = (height - 1) / 2;
             _monsterGatePosition = monsterGatePosition;
             _castleLogicPosition = castleLogicPosition;

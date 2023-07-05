@@ -49,8 +49,8 @@ public class MapService
     {
         if (logicPos.y >= 0 && logicPos.y < _width)
         {
-            if (_logicMap[logicPos.x][logicPos.y].TypeOfType == TypeTile.Normal
-                && _logicMap[logicPos.x][logicPos.y].OwnerId == playerId)
+            if (_logicMap[logicPos.y][logicPos.x].TypeOfType == TypeTile.Normal
+                && _logicMap[logicPos.y][logicPos.x].OwnerId == playerId)
             {
                 return true;
             }
@@ -133,7 +133,7 @@ public class MapService
             visitedTiles.Add(checkTile);
             activeTiles.Remove(checkTile);
 
-            var walkableTiles = GetWalkableTiles(map, checkTile, finish,  playerId == _playerId);
+            var walkableTiles = GetWalkableTiles(map, checkTile, finish);
 
             foreach (var walkableTile in walkableTiles)
             {
@@ -162,26 +162,18 @@ public class MapService
 
         return new List<Vector2Int>();
     }
-    private List<FPTile> GetWalkableTiles(List<string> map, FPTile currentTile, FPTile targetTile, bool isMyPlayer)
+    private List<FPTile> GetWalkableTiles(List<string> map, FPTile currentTile, FPTile targetTile)
     {
         List<FPTile> possibleTiles;
 
         if (currentTile.x == _columnIndexSplit)
         {
-            if (isMyPlayer)
+            possibleTiles = new List<FPTile>()
             {
-                possibleTiles = new List<FPTile>()
-                {
-                    new FPTile { x = currentTile.x + 1, y = currentTile.y, parent = currentTile, cost = currentTile.cost + 1 }
-                };
-            }
-            else
-            {
-                possibleTiles = new List<FPTile>()
-                {
-                    new FPTile { x = currentTile.x - 1, y = currentTile.y, parent = currentTile, cost = currentTile.cost + 1 }
-                };
-            }
+                new FPTile { x = currentTile.x + 1, y = currentTile.y, parent = currentTile, cost = currentTile.cost + 1 },
+                new FPTile { x = currentTile.x - 1, y = currentTile.y, parent = currentTile, cost = currentTile.cost + 1 }
+            };
+            
         }
         else
         {
@@ -207,12 +199,12 @@ public class MapService
 
     public void BanPosition(int x, int y)
     {
-        _logicMap[x][y].TypeOfType = TypeTile.Barrier;
+        _logicMap[y][x].TypeOfType = TypeTile.Barrier;
     }
 
     public void ReleasePosition(int x, int y)
     {
-        _logicMap[x][y].TypeOfType = TypeTile.Normal;
+        _logicMap[y][x].TypeOfType = TypeTile.Normal;
 
     }
 }

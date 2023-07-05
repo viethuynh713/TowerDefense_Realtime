@@ -109,6 +109,15 @@ namespace Game_Realtime.Hubs
                     await _gameService.MonsterTakeDamage(gameId, senderId, monsterTakeDamageData);
                     
                     break;
+                case ActionId.UpgradeTower:
+                    UpgradeTowerData upgradeTowerData = JsonConvert.DeserializeObject<UpgradeTowerData>(data.ToString())!;
+                    await _gameService.UpgradeTower(gameId, senderId, upgradeTowerData);
+
+                    break;
+                case ActionId.SellTower:
+                    SellTowerData sellTowerData = JsonConvert.DeserializeObject<SellTowerData>(data.ToString())!;
+                    await _gameService.SellTower(gameId, senderId, sellTowerData);
+                    break;
                     
                 case ActionId.GetMap:
 
