@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Game_Realtime.Model.Data;
+using Newtonsoft.Json;
 
 namespace Game_Realtime.Model
 {
@@ -35,7 +36,7 @@ namespace Game_Realtime.Model
             energy -= stats.Energy;
             
             _monsters.Add(monster.monsterId,monster);
-
+            // Console.WriteLine($"Monster list : {JsonConvert.SerializeObject(_monsters)}");
             return monster;
         }
 
@@ -54,7 +55,8 @@ namespace Game_Realtime.Model
             energy -= stats.Energy;
 
             _towers.Add(tower.towerId, tower);
-            
+            // Console.WriteLine($"Tower list : {JsonConvert.SerializeObject(_towers)}");
+
             return tower;
         }
 
@@ -157,13 +159,16 @@ namespace Game_Realtime.Model
         {
             return null;
         }
-        public virtual async Task<int> MonsterTakeDamage(string monsterId, int damage)
+        public virtual async Task<int?> UpdateMonsterHp(MonsterTakeDamageData data)
         {
-            return _monsters[monsterId].TakeDamage(damage);
+            if (!_monsters.ContainsKey(data.monsterId)) return null;
+            return _monsters[data.monsterId].UpdateHp(data.damage);
         }
 
-        public virtual async Task<int> KillMonster(string monsterId)
+        public virtual async Task<int?> KillMonster(string monsterId)
         {
+            if (!_monsters.ContainsKey(monsterId)) return null;
+
             var energyGain = _monsters[monsterId].EnergyGainWhenDie;
             
             _monsters.Remove(monsterId);

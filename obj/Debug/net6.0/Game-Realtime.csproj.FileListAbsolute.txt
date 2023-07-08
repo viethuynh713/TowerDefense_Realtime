@@ -57,4 +57,4 @@ E:\Unity\Game-Realtime\TowerDefense_realtime\obj\Debug\net6.0\Game-Realtime.pdb
 E:\Unity\Game-Realtime\TowerDefense_realtime\obj\Debug\net6.0\Game-Realtime.genruntimeconfig.cache
 E:\Unity\Game-Realtime\TowerDefense_realtime\obj\Debug\net6.0\ref\Game-Realtime.dll
 E:\Unity\Game-Realtime\TowerDefense_realtime\bin\Debug\net6.0\CardConfig\MythicEmpire.Cards.json
-E:\Unity\Game-Realtime\TowerDefense_realtime\bin\Debug\net6.0\Service\WaveService\WaveConfig.json
+E:\Unity\Game-Realtime\TowerDefense_realtime\bin\Debug\net6.0\GameConfig\WaveConfig.json

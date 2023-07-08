@@ -103,10 +103,10 @@ namespace Game_Realtime.Hubs
                     await _gameService.CreateMonster(gameId, senderId, createMonsterData);
                     break;
                 
-                case ActionId.MonsterTakeDamage:
+                case ActionId.UpdateMonsterHp:
                     MonsterTakeDamageData monsterTakeDamageData = JsonConvert.DeserializeObject<MonsterTakeDamageData>(data.ToString())!;
                     
-                    await _gameService.MonsterTakeDamage(gameId, senderId, monsterTakeDamageData);
+                    await _gameService.UpdateMonsterHp(gameId, senderId, monsterTakeDamageData);
                     
                     break;
                 case ActionId.UpgradeTower:

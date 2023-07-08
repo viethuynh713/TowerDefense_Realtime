@@ -1,11 +1,10 @@
 using Game_Realtime.Hubs;
 using Game_Realtime.Service;
-using Game_Realtime.Service.WaveService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+// builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<MythicEmpireHub>();
 builder.Services.AddSingleton<IGameService,GameService>();
@@ -27,7 +26,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
+// app.MapRazorPages();
 app.MapHub<MythicEmpireHub>("/realtimeHub");
 
 app.Run();

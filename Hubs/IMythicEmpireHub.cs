@@ -6,7 +6,8 @@ public interface IMythicEmpireHub
     Task OnReceiveMatchMakingSuccess(int timeWaiting);
     Task CancelSuccess();
     Task OnStartGame(byte[] gameId);
-    Task OnEndGame(byte[] gameData);
+    Task OnGetMap(byte[] map);
+    Task OnGetCards(byte[] cards);
     Task BuildTower(byte[] cardData);
     Task CreateMonster(byte[] cardData);
     Task PlaceSpell(byte[] cardData);
@@ -14,10 +15,9 @@ public interface IMythicEmpireHub
     Task UpdateCastleHp(byte[] newCastleHp);
     Task UpdateWaveTime(byte[] time);
     Task SpawnWave(byte[] data);
-    Task OnGetMap(byte[] map);
-    Task OnGetCards(byte[] cards);
     Task KillMonster(byte[] data);
     Task UpdateMonsterHp(byte[] data);
     Task UpgradeTower(byte[] data);
     Task SellTower(byte[] data);
+    Task OnEndGame(byte[] gameData);
 }

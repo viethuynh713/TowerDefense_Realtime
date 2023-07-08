@@ -5,7 +5,7 @@ namespace Game_Realtime.Service.WaveService;
 
 public class WaveService
 {
-    private const string FilePath = "Service/WaveService/WaveConfig.json";
+    private const string FilePath = "GameConfig/WaveConfig.json";
 
     private int _currentWaveIndex;
 

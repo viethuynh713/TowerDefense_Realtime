@@ -1,12 +1,15 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using Game_Realtime.Hubs;
 using Game_Realtime.Model.Data;
+using Game_Realtime.Model.Data.DataSend;
 using Game_Realtime.Model.InGame;
 using Game_Realtime.Model.Map;
 using Game_Realtime.Service;
 using Game_Realtime.Service.WaveService;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Game_Realtime.Model
 {
@@ -70,6 +73,7 @@ namespace Game_Realtime.Model
         }
         private void UpdateEnergy(object? state)
         {
+            Console.WriteLine("Update Energy");
 
             foreach (var player in _players)
             {
@@ -85,14 +89,36 @@ namespace Game_Realtime.Model
             return false;
         }
 
-        public int CastleTakeDamage(string senderId, int dataHpLose)
+        public async Task<int> GetTotalTime()
         {
-            return _players[senderId].CastleTakeDamage(dataHpLose).Result;
+            TimeSpan timeSpan = DateTime.Now - _startTime;
+            return timeSpan.Seconds;
+        }
+        public  async Task<int> CastleTakeDamage(string senderId, CastleTakeDamageData data)
+        {
+            var newCastleHp = _players[senderId].CastleTakeDamage(data.HpLose);
+            if (newCastleHp.Result > 0)
+            {
+                var rivalPlayer = GetRivalPlayer(senderId);
+                if (rivalPlayer != null)
+                {
+                    var energyGain =  _players[rivalPlayer.userId].KillMonster(data.monsterId);
+                    await _hubContext.Clients.Groups(_gameId).KillMonster(Encoding.UTF8.GetBytes(data.monsterId));
+                    if (energyGain.Result != null) await _players[senderId].AddEnergy(energyGain.Result.Value);
+                }
+
+                var player = GetPlayer(senderId);
+                await _hubContext.Clients.Clients(player.ContextId)
+                        .UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
+                
+            }
+            return newCastleHp.Result;
         }
 
-        public void EndGame()
+        public async Task EndGame()
         {
-            
+            await _countWave.DisposeAsync();
+            await _timerUpdateEnergy.DisposeAsync();
         }
 
         public async Task<MonsterModel?> CreateMonster(string playerId, CreateMonsterData data)
@@ -140,6 +166,10 @@ namespace Game_Realtime.Model
         {
             return (PlayerModel)_players[senderId];
         }
+        public Dictionary<string, BasePlayer> GetPlayer()
+        {
+            return _players;
+        }
 
         public PlayerModel? GetRivalPlayer(string playerId)
         {
@@ -151,25 +181,30 @@ namespace Game_Realtime.Model
             return null;
         }
 
-        public async Task MonsterTakeDamage(string senderId, MonsterTakeDamageData monsterTakeDamageData)
+        public async Task UpdateMonsterHp(string senderId, MonsterTakeDamageData data)
         {
-            var newHp = _players[senderId]
-                .MonsterTakeDamage(monsterTakeDamageData.monsterId, monsterTakeDamageData.damage);
+            var newHp = _players[senderId].UpdateMonsterHp(data);
             if (newHp.Result > 0)
             {
-                // TODO: gen data
-                var data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(""));
-                await _hubContext.Clients.Groups(_gameId).UpdateMonsterHp(data);
+                var senderData = new UpdateMonsterHpDataSender()
+                {
+                    monsterId = data.monsterId,
+                    currentHp = newHp.Result.Value,
+                    
+                };
+                var jsonSenderData = JsonConvert.SerializeObject(senderData);
+                var dataSend = Encoding.UTF8.GetBytes(jsonSenderData);
+                await _hubContext.Clients.Groups(_gameId).UpdateMonsterHp(dataSend);
             }
             else
             {
-                var energyGain =  _players[senderId].KillMonster(monsterTakeDamageData.monsterId).Result;
-                await _hubContext.Clients.Groups(_gameId).KillMonster(Encoding.UTF8.GetBytes(monsterTakeDamageData.monsterId));
+                var energyGain =  _players[senderId].KillMonster(data.monsterId);
+                await _hubContext.Clients.Groups(_gameId).KillMonster(Encoding.UTF8.GetBytes(data.monsterId));
                 var rivalPlayer = GetRivalPlayer(senderId);
-
                 if (rivalPlayer != null)
                 {
-                    await _players[rivalPlayer.userId].AddEnergy(energyGain);
+                    if (energyGain.Result != null)
+                        await _players[rivalPlayer.userId].AddEnergy(energyGain.Result.Value);
 
                     await _hubContext.Clients.Clients(rivalPlayer.ContextId)
                         .UpdateEnergy(Encoding.UTF8.GetBytes(rivalPlayer.energy.ToString()));

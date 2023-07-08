@@ -29,9 +29,10 @@ namespace Game_Realtime.Model
             EnergyGainWhenDie = energyGainWhenDie;
         }
 
-        public int TakeDamage(int damage)
+        public int UpdateHp(int damage)
         {
-            monsterHp -= damage;
+            monsterHp += damage;
+            if (monsterHp > maxHp) monsterHp = maxHp;
             return monsterHp;
         }
     }
