@@ -208,6 +208,21 @@ public class GameService : IGameService
         await _hubContext.Clients.Clients(player.ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
     }
 
+    public async Task HandlePlayerDisconnect(string connectionId)
+    {
+        foreach (var game in _gameSessionModels)
+        {
+            if (game.Value.HasPlayerByConnectionId(connectionId))
+            {
+                BasePlayer player = game.Value.GetPlayerByConnectionId(connectionId);
+                await OnEndGame(game.Key, player.userId);
+                break;
+            }
+        }
+    }
+
+
+
     public async Task<GameSessionModel> GetGameSession(string gameId)
     {
         return _gameSessionModels[gameId];
@@ -231,4 +246,5 @@ public interface IGameService
     Task CreateMonster(string gameId, string senderId, CreateMonsterData createMonsterData);
     Task UpgradeTower(string gameId, string senderId, UpgradeTowerData upgradeTowerData);
     Task SellTower(string gameId, string senderId, SellTowerData data);
+    Task HandlePlayerDisconnect(string connectionId);
 }

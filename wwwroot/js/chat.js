@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/realtimeHub").build();
+var connection = new signalR.HubConnectionBuilder().withUrl("").build();
 
 connection.start().then(function () {
     console.log("Connect success")

@@ -225,6 +225,32 @@ namespace Game_Realtime.Model
             
             return tower;
         }
+
+        public bool HasPlayerByConnectionId(string connectionId)
+        {
+            foreach (var player in _players)
+            {
+                if (((PlayerModel)player.Value).ContextId == connectionId)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public BasePlayer GetPlayerByConnectionId(string connectionId)
+        {
+            foreach (var player in _players)
+            {
+                if (((PlayerModel)player.Value).ContextId == connectionId)
+                {
+                    return player.Value;
+                }
+            }
+
+            return null;
+        }
     }
 
 }

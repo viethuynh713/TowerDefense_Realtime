@@ -21,10 +21,10 @@ namespace Game_Realtime.Hubs
             this._userMatchingService = userMatchingService;
             this._gameService = gameService;
             Dictionary<int, Wave> waves = new Dictionary<int, Wave>();
-            waves.Add(1,new Wave(10, new List<string>() { "1", "2" }));
-            waves.Add(2,new Wave(10, new List<string>() { "1", "2" }));
-            waves.Add(3,new Wave(10, new List<string>() { "4", "2" }));
-            Console.WriteLine(JsonConvert.SerializeObject(waves));
+            // waves.Add(1,new Wave(10, new List<string>() { "1", "2" }));
+            // waves.Add(2,new Wave(10, new List<string>() { "1", "2" }));
+            // waves.Add(3,new Wave(10, new List<string>() { "4", "2" }));
+            // Console.WriteLine(JsonConvert.SerializeObject(waves));
             Console.WriteLine("\n-----------------------IngameHub Init----------------------");
         }
         
@@ -136,7 +136,7 @@ namespace Game_Realtime.Hubs
         {
             Console.WriteLine($"\nPlayer {Context.ConnectionId} disconnect");
             await _userMatchingService.CancelWaitingQueue(Context.ConnectionId);
-            
+            await _gameService.HandlePlayerDisconnect(Context.ConnectionId);
         }
     }
 }
