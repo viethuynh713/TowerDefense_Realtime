@@ -6,6 +6,7 @@ using Game_Realtime.Model.Data;
 using Newtonsoft.Json.Linq;
 using Game_Realtime.Model.InGame;
 using Game_Realtime.Service;
+using Game_Realtime.Service.WaveService;
 
 namespace Game_Realtime.Hubs
 {
@@ -19,6 +20,11 @@ namespace Game_Realtime.Hubs
         {
             this._userMatchingService = userMatchingService;
             this._gameService = gameService;
+            Dictionary<int, Wave> waves = new Dictionary<int, Wave>();
+            // waves.Add(1,new Wave(10, new List<string>() { "1", "2" }));
+            // waves.Add(2,new Wave(10, new List<string>() { "1", "2" }));
+            // waves.Add(3,new Wave(10, new List<string>() { "4", "2" }));
+            // Console.WriteLine(JsonConvert.SerializeObject(waves));
             Console.WriteLine("\n-----------------------IngameHub Init----------------------");
         }
         
@@ -97,11 +103,20 @@ namespace Game_Realtime.Hubs
                     await _gameService.CreateMonster(gameId, senderId, createMonsterData);
                     break;
                 
-                case ActionId.MonsterTakeDamage:
+                case ActionId.UpdateMonsterHp:
                     MonsterTakeDamageData monsterTakeDamageData = JsonConvert.DeserializeObject<MonsterTakeDamageData>(data.ToString())!;
                     
-                    await _gameService.MonsterTakeDamage(gameId, senderId, monsterTakeDamageData);
+                    await _gameService.UpdateMonsterHp(gameId, senderId, monsterTakeDamageData);
                     
+                    break;
+                case ActionId.UpgradeTower:
+                    UpgradeTowerData upgradeTowerData = JsonConvert.DeserializeObject<UpgradeTowerData>(data.ToString())!;
+                    await _gameService.UpgradeTower(gameId, senderId, upgradeTowerData);
+
+                    break;
+                case ActionId.SellTower:
+                    SellTowerData sellTowerData = JsonConvert.DeserializeObject<SellTowerData>(data.ToString())!;
+                    await _gameService.SellTower(gameId, senderId, sellTowerData);
                     break;
                     
                 case ActionId.GetMap:
@@ -121,7 +136,7 @@ namespace Game_Realtime.Hubs
         {
             Console.WriteLine($"\nPlayer {Context.ConnectionId} disconnect");
             await _userMatchingService.CancelWaitingQueue(Context.ConnectionId);
-            
+            await _gameService.HandlePlayerDisconnect(Context.ConnectionId);
         }
     }
 }

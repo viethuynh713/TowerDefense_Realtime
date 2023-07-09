@@ -30,7 +30,6 @@ public class StatsCard
 public class TowerStats : StatsCard
 {
     public int Damage;
-    public float Range;
     public float AttackSpeed;
     public float FireRange;
     public float ExploreRange;
@@ -38,7 +37,9 @@ public class TowerStats : StatsCard
 }
 public class SpellStats : StatsCard
 {
+    public float Time;
     public float Duration;
+    public float DamegePerDuration;
     public float Range;
     public string Detail;
 }
@@ -49,4 +50,5 @@ public class MonsterStats : StatsCard
     public float MoveSpeed;
     public float AttackRange;
     public int Damage;
+    public int EnergyGainWhenDie;
 }

@@ -116,7 +116,16 @@ public class MapGraph
     {
         if (src == des)
         {
-            return cost;
+            GenerateMapNodeCost cost = new GenerateMapNodeCost();
+            cost.path.Add(src);
+
+            var resCost = DFSHelper(src, des, cost);
+
+            if (resCost == null)
+            {
+                throw new Exception("Path is null. Maybe the graph is invalid.");
+            }
+            return resCost.path;
         }
         GenerateMapNodeCost bestCost = null;
         if (linkedListArray[src] != null)

@@ -7,9 +7,11 @@
         BuildTower,
         PlaceSpell,
         CastleTakeDamage,
-        MonsterTakeDamage,
+        UpdateMonsterHp,
         GetMyCard,
         GetMap,
+        UpgradeTower,
+        SellTower
     }
 
     public enum CardType

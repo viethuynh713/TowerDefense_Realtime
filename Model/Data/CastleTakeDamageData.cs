@@ -3,4 +3,6 @@
 public class CastleTakeDamageData
 {
     public int HpLose;
+    public string monsterId;
+
 }
