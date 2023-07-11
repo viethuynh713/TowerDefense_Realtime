@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\TowerDefense_Realtime\\Game-Realtime.csproj": {}
+    "E:\\Unity\\Game-Realtime\\TowerDefense_realtime\\Game-Realtime.csproj": {}
   },
   "projects": {
-    "D:\\Github\\TowerDefense_Realtime\\Game-Realtime.csproj": {
+    "E:\\Unity\\Game-Realtime\\TowerDefense_realtime\\Game-Realtime.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\TowerDefense_Realtime\\Game-Realtime.csproj",
+        "projectUniqueName": "E:\\Unity\\Game-Realtime\\TowerDefense_realtime\\Game-Realtime.csproj",
         "projectName": "Game-Realtime",
-        "projectPath": "D:\\Github\\TowerDefense_Realtime\\Game-Realtime.csproj",
+        "projectPath": "E:\\Unity\\Game-Realtime\\TowerDefense_realtime\\Game-Realtime.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\TowerDefense_Realtime\\obj\\",
+        "outputPath": "E:\\Unity\\Game-Realtime\\TowerDefense_realtime\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -64,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

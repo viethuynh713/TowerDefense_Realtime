@@ -23,7 +23,7 @@ public static class SelectCardService
             };
             foreach (var comparation in idComparation)
             {
-                if (AIConstant.cardGroup.TryGetValue(comparation.Key, out var cardGroup))
+                if (AIConstant.CardGroup.TryGetValue(comparation.Key, out var cardGroup))
                 {
                     foreach (var tinyCardGroup in cardGroup)
                     {

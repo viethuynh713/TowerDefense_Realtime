@@ -25,7 +25,7 @@ namespace Game_Realtime.Hubs
             // waves.Add(2,new Wave(10, new List<string>() { "1", "2" }));
             // waves.Add(3,new Wave(10, new List<string>() { "4", "2" }));
             // Console.WriteLine(JsonConvert.SerializeObject(waves));
-            Console.WriteLine("\n-----------------------IngameHub Init----------------------");
+            Console.WriteLine("\n-----------------------InGameHub Init----------------------");
         }
         
         public override Task OnConnectedAsync()
@@ -39,27 +39,38 @@ namespace Game_Realtime.Hubs
             // Deserialize list card
             var jsonCards = Encoding.UTF8.GetString(listCard);
             List<string>? cardsOfUser = JsonConvert.DeserializeObject<List<string>>(jsonCards);
-            
+           
+            var  mode = (ModeGame)Enum.Parse(typeof(ModeGame), gameMode.ToString());
             // Create UserMatchingModel
-            UserMatchingModel newUserMatchingModel = new UserMatchingModel(userId, Context.ConnectionId, (ModeGame)gameMode, cardsOfUser);
-            
-            //Find suitable UserMatchingModel in _userMatchingModels
-            var rivalPlayer = _userMatchingService.FindRivalPlayer(newUserMatchingModel);
+                if (cardsOfUser != null)
+                {
+                    UserMatchingModel newUserMatchingModel = new UserMatchingModel(userId, Context.ConnectionId, mode, cardsOfUser);
+                    
+                    if (mode == ModeGame.Arena)
+                    {
+                        //Find suitable UserMatchingModel in _userMatchingModels
+                        var rivalPlayer = _userMatchingService.FindRivalPlayer(newUserMatchingModel);
 
-            if (rivalPlayer.Result == null)
-            {
-                // Not found suitable UserMatchingModel and create new UserMatchingModel then add this to _userMatchingModels
-                await _userMatchingService.AddPlayerToWaitingQueue(newUserMatchingModel);
-                Console.WriteLine($"\nWaiting: {JsonConvert.SerializeObject(newUserMatchingModel)}");
-            }
-            else
-            {
-                Console.WriteLine($"\nFind successfully: {JsonConvert.SerializeObject(rivalPlayer.Result)}");
-                await _userMatchingService.RemovePlayerInWaitingQueue(rivalPlayer.Result);
-                await _gameService.CreateNewGameSession(newUserMatchingModel, rivalPlayer.Result);
-                
-            }
-            
+                        if (rivalPlayer.Result == null)
+                        {
+                            // Not found suitable UserMatchingModel and create new UserMatchingModel then add this to _userMatchingModels
+                            await _userMatchingService.AddPlayerToWaitingQueue(newUserMatchingModel);
+                            Console.WriteLine($"\nWaiting: {JsonConvert.SerializeObject(newUserMatchingModel)}");
+                        }
+                        else
+                        {
+                            Console.WriteLine(
+                                $"\nFind successfully: {JsonConvert.SerializeObject(rivalPlayer.Result)}");
+                            await _userMatchingService.RemovePlayerInWaitingQueue(rivalPlayer.Result);
+                            await _gameService.CreateArenaGame(newUserMatchingModel, rivalPlayer.Result);
+
+                        }
+                    }
+                    else
+                    {
+                        await _gameService.CreateAdventureGame(newUserMatchingModel);
+                    }
+                }
         }
         public async Task OnCancelMatchMakingRequest()
         {

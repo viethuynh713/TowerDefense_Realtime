@@ -9,7 +9,8 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
     public class BotBT: Tree
     {
         BotBTData data;
-        protected BotBT()
+
+        public BotBT()
         {
             data = new BotBTData();
         }

@@ -20,6 +20,11 @@ namespace Game_Realtime.Model
         private DateTime _startTime;
 
         private ModeGame _modeGame;
+        
+        public ModeGame ModeGame
+        {
+            get => _modeGame;
+        }
 
         private readonly Dictionary<string, BasePlayer> _players;
         
@@ -73,13 +78,17 @@ namespace Game_Realtime.Model
         }
         private void UpdateEnergy(object? state)
         {
-            Console.WriteLine("Update Energy");
+            // Console.WriteLine("Update Energy");
 
             foreach (var player in _players)
             {
                 int energy = player.Value.AddEnergy(1).Result;
-                var playerId = GetPlayer(player.Key).ContextId;
-                _hubContext.Clients.Clients(playerId).UpdateEnergy(Encoding.UTF8.GetBytes(energy.ToString()));
+                if (player.Value is PlayerModel)
+                {
+                    var playerId = GetPlayer(player.Key)?.ContextId;
+                    if (playerId != null)
+                        _hubContext.Clients.Clients(playerId).UpdateEnergy(Encoding.UTF8.GetBytes(energy.ToString()));
+                }
             }
             
         }
@@ -108,10 +117,11 @@ namespace Game_Realtime.Model
                 }
 
                 var player = GetPlayer(senderId);
-                await _hubContext.Clients.Clients(player.ContextId)
+                if (player != null)
+                    await _hubContext.Clients.Clients(player.ContextId)
                         .UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
-                
             }
+            
             return newCastleHp.Result;
         }
 
@@ -162,16 +172,17 @@ namespace Game_Realtime.Model
         }
 
         
-        public PlayerModel GetPlayer(string senderId)
+        public PlayerModel? GetPlayer(string senderId)
         {
-            return (PlayerModel)_players[senderId];
+            if(_players[senderId] is PlayerModel) return (PlayerModel)_players[senderId];
+            return null;
         }
-        public Dictionary<string, BasePlayer> GetPlayer()
+        public Dictionary<string, BasePlayer> GetAllPlayer()
         {
             return _players;
         }
 
-        public PlayerModel? GetRivalPlayer(string playerId)
+        private BasePlayer? GetRivalPlayer(string playerId)
         {
             foreach (var player in _players)
             {
@@ -205,9 +216,12 @@ namespace Game_Realtime.Model
                 {
                     if (energyGain.Result != null)
                         await _players[rivalPlayer.userId].AddEnergy(energyGain.Result.Value);
-
-                    await _hubContext.Clients.Clients(rivalPlayer.ContextId)
-                        .UpdateEnergy(Encoding.UTF8.GetBytes(rivalPlayer.energy.ToString()));
+                    if (rivalPlayer is PlayerModel)
+                    {
+                        
+                        await _hubContext.Clients.Clients(((PlayerModel)rivalPlayer).ContextId)
+                            .UpdateEnergy(Encoding.UTF8.GetBytes(rivalPlayer.energy.ToString()));
+                    }
                 }
             }
         }
@@ -230,6 +244,7 @@ namespace Game_Realtime.Model
         {
             foreach (var player in _players)
             {
+                if(player.Value is not  PlayerModel) continue;
                 if (((PlayerModel)player.Value).ContextId == connectionId)
                 {
                     return true;
@@ -239,10 +254,11 @@ namespace Game_Realtime.Model
             return false;
         }
 
-        public BasePlayer GetPlayerByConnectionId(string connectionId)
+        public BasePlayer? GetPlayerByConnectionId(string connectionId)
         {
             foreach (var player in _players)
             {
+                if(player.Value is not  PlayerModel) continue;
                 if (((PlayerModel)player.Value).ContextId == connectionId)
                 {
                     return player.Value;

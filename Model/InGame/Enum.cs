@@ -28,8 +28,10 @@
     }
     public enum ModeGame
     {
+        None,
         Adventure,
         Arena
+
     }
     public enum RarityCard
     {
