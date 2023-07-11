@@ -9,7 +9,7 @@
             root = SetUpTree();
         }
 
-        private void Update()
+        public void Update()
         {
             if (root != null)
             {

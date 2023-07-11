@@ -116,16 +116,15 @@ public class MapGraph
     {
         if (src == des)
         {
-            GenerateMapNodeCost cost = new GenerateMapNodeCost();
             cost.path.Add(src);
 
-            var resCost = DFSHelper(src, des, cost);
+            var resCost = FindPathForGenerateBotMap(src, des, cost);
 
             if (resCost == null)
             {
                 throw new Exception("Path is null. Maybe the graph is invalid.");
             }
-            return resCost.path;
+            return resCost;
         }
         GenerateMapNodeCost bestCost = null;
         if (linkedListArray[src] != null)

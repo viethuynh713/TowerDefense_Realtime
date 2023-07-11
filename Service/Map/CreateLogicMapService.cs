@@ -15,38 +15,48 @@ public class CreateLogicMapService
         
     private LogicTile[][] _mapLogicResult;
 
-        public CreateLogicMapService (int height, int width, Vector2Int monsterGatePosition, Dictionary<TypePlayer, Vector2Int> castleLogicPosition)
-        {
-            _width = width;
-            _height = height;
-            _columnIndexSplit = (height - 1) / 2;
-            _monsterGatePosition = monsterGatePosition;
-            _castleLogicPosition = castleLogicPosition;
-        }
-            
-            
+    public CreateLogicMapService (int height, int width, Vector2Int monsterGatePosition, Dictionary<TypePlayer, Vector2Int> castleLogicPosition)
+    {
+        _width = width;
+        _height = height;
+        _columnIndexSplit = (height - 1) / 2;
+        _monsterGatePosition = monsterGatePosition;
+        _castleLogicPosition = castleLogicPosition;
+    }
+
+    public async Task<LogicTile[][]> CreateLogicMap(string playerId, string rivalPlayerId)
+    {
+        //Create new LogicTile
+        _mapLogicResult = new LogicTile[_height][];
+
         for (int i = 0; i < _height; i++)
         {
-            for (int j = 0; j < _width ; j++)
+            _mapLogicResult[i] = new LogicTile[_width];
+        }
+
+
+        for (int i = 0; i < _height; i++)
+        {
+            for (int j = 0; j < _width; j++)
             {
 
-                _mapLogicResult[i][j] = new LogicTile(i,j);
+                _mapLogicResult[i][j] = new LogicTile(i, j);
                 // mark the tile is on player field or opponent field
-                if (j < (_width -1)/2)
+                if (j < (_width - 1) / 2)
                 {
                     _mapLogicResult[i][j].OwnerId = playerId;
-                        
+
                 }
                 else if (j > (_width - 1) / 2)
                 {
                     _mapLogicResult[i][j].OwnerId = rivalPlayerId;
                 }
                 // mark type of LogicTile
-                if (j == 0 || j == _width - 1 || i == 0 || i == _height -1)
+                if (j == 0 || j == _width - 1 || i == 0 || i == _height - 1)
                 {
                     _mapLogicResult[i][j].TypeOfType = TypeTile.Barrier;
                 }
-                else if(j == (_width -1)/2)
+                else if (j == (_width - 1) / 2)
                 {
                     if (i == _columnIndexSplit)
                     {
@@ -67,10 +77,10 @@ public class CreateLogicMapService
         {
             _mapLogicResult[pos.Value.y][pos.Value.x].TypeOfType = TypeTile.Castle;
         }
-        InitHoleStep1((_width-1)/2-1,_height-2);
-            
+        InitHoleStep1((_width - 1) / 2 - 1, _height - 2);
+
         var virtualPath = InitVirtualPath();
-            
+
         InitHoleStep3(virtualPath);
         return _mapLogicResult;
     }

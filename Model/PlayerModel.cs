@@ -283,6 +283,8 @@ namespace Game_Realtime.Model
         private async Task<bool> Battle()
         {
             behavior = new BotBT();
+            behavior.SetData(playMode, cardSelected, towerBuildingMap, energyBuildTowerRate);
+            behavior.Update();
             return true;
         }
     }

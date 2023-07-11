@@ -1,6 +1,62 @@
-﻿namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
+﻿using Game_Realtime.Model;
+using Game_Realtime.Service.AI.BehaviorTree.Structure;
+using System.Numerics;
+
+namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
 {
-    public class CheckUseSpeedup
+    public class CheckUseSpeedup: Node
     {
+        private BotBTData data;
+        private int energyRequired;
+        private string playerId;
+        private MonsterModel[] monsterList;
+        private Vector2 enemyBasePosition;
+
+        public CheckUseSpeedup(ref BotBTData data, int energyRequired, string playerId, MonsterModel[] monsterList, Vector2 enemyBasePosition)
+        {
+            this.data = data;
+            this.energyRequired = energyRequired;
+            this.playerId = playerId;
+            this.monsterList = monsterList;
+            this.enemyBasePosition = enemyBasePosition;
+        }
+
+        public override NodeState Evaluate()
+        {
+            //// Check if any monster is nearer 3 tiles away from base, set position to use explore
+            // check if enough energy to use
+            if (data.energyToBuildTower + data.energyToSummonMonster < energyRequired)
+            {
+                state = NodeState.FAILURE;
+                return state;
+            }
+            // Get all enemy monsters position which is nearer 3 tiles away from base
+            List<Vector2> monsterNearBasePosList = new List<Vector2>();
+            foreach (var monster in monsterList)
+            {
+                if (monster.ownerId != playerId)
+                {
+                    if (MathF.Sqrt(MathF.Pow(enemyBasePosition.X - monster.XLogicPosition, 2) + MathF.Pow(enemyBasePosition.Y - monster.YLogicPosition, 2)) <= 3)
+                    {
+                        monsterNearBasePosList.Add(new Vector2(monster.XLogicPosition, monster.YLogicPosition));
+                    }
+                }
+            }
+            // Use spell at the center of the monsters found
+            if (monsterNearBasePosList.Count > 0)
+            {
+                data.spellUsingPosition = new Vector2(0, 0);
+                foreach (var pos in monsterNearBasePosList)
+                {
+                    data.spellUsingPosition += pos / monsterNearBasePosList.Count;
+                }
+                data.spellUsingName = "Speedup";
+                state = NodeState.SUCCESS;
+                return state;
+            }
+
+            state = NodeState.FAILURE;
+            return state;
+        }
     }
 }

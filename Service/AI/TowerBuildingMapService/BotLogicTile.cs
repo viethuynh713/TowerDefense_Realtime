@@ -8,6 +8,10 @@ namespace Game_Realtime.Service.AI.TowerBuildingMapService
         public int YLogicPosition;
         public TypeTile TypeOfType;
         public string towerId;
+        public bool hasTower;
+        public int damageLevel;
+        public int fireRateLevel;
+        public int rangeLevel;
 
         public BotLogicTile(int x, int y)
         {
@@ -28,6 +32,10 @@ namespace Game_Realtime.Service.AI.TowerBuildingMapService
             YLogicPosition = tile.YLogicPosition;
             TypeOfType = tile.TypeOfType;
             towerId = "";
+            hasTower = false;
+            damageLevel = 0;
+            fireRateLevel = 0;
+            rangeLevel = 0;
         }
     }
 }

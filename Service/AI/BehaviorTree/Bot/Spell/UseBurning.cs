@@ -14,6 +14,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         public override NodeState Evaluate()
         {
             // TODO: Use burning at position
+            // ActiveSpell(data.spellUsingName, data.spellUsingPosition);
 
             state = NodeState.RUNNING;
             return state;

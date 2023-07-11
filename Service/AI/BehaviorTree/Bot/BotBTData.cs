@@ -12,11 +12,13 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
         public int towerBuildingMapWidth;
         public int towerBuildingMapHeight;
         public float energyBuildTowerRate;
+        public Vector2Int basePosition = new Vector2Int(0, 4);
 
         public float energyToBuildTower = 0;
         public float energyToSummonMonster = 0;
         public int energyGain = 0;
 
         public Vector2 spellUsingPosition = new Vector2();
+        public string spellUsingName = "";
     }
 }

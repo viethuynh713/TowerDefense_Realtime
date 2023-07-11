@@ -73,17 +73,17 @@ public class MapService
         Vector2Int startPos = new Vector2Int(_monsterGatePosition.x + 1, _monsterGatePosition.y);
         Vector2Int des = _castleLogicPosition[TypePlayer.Player];
         MapGraph graph = new MapGraph(_height, _width);
-        for (int i = 0; i < logicMap.Length; i++)
+        for (int i = 0; i < _logicMap.Length; i++)
         {
-            for (int j = (_width - 1) / 2 + 1; j < logicMap[i].Length - 1; j++)
+            for (int j = (_width - 1) / 2 + 1; j < _logicMap[i].Length - 1; j++)
             {
-                if (logicMap[i][j].TypeOfType == TypeTile.Normal)
+                if (_logicMap[i][j].TypeOfType == TypeTile.Normal)
                 {
-                    if (i < logicMap.Length - 1 && logicMap[i + 1][j].TypeOfType == TypeTile.Normal)
+                    if (i < _logicMap.Length - 1 && _logicMap[i + 1][j].TypeOfType == TypeTile.Normal)
                     {
                         graph.AddEdge(new Vector2Int(j, i), new Vector2Int(j, i + 1));
                     }
-                    if (j < logicMap[i].Length - 1 && logicMap[i + 1][j].TypeOfType == TypeTile.Normal)
+                    if (j < _logicMap[i].Length - 1 && _logicMap[i + 1][j].TypeOfType == TypeTile.Normal)
                     {
                         graph.AddEdge(new Vector2Int(j, i), new Vector2Int(j + 1, i));
                     }
