@@ -4,7 +4,7 @@ namespace Game_Realtime.Service.AI
 {
     public static class AIConstant
     {
-        public static readonly Dictionary<BotPlayMode, Dictionary<CardType, Dictionary<string, int>>> cardSelectingStrategy = new Dictionary<BotPlayMode, Dictionary<CardType, Dictionary<string, int>>>()
+        public static readonly Dictionary<BotPlayMode, Dictionary<CardType, Dictionary<string, int>>> CardSelectingStrategy = new Dictionary<BotPlayMode, Dictionary<CardType, Dictionary<string, int>>>()
         {
             { BotPlayMode.ATTACK, new Dictionary<CardType, Dictionary<string, int>>()
                 {
@@ -29,7 +29,7 @@ namespace Game_Realtime.Service.AI
             }
         };
 
-        public static readonly Dictionary<CardType, Dictionary<string, string[]>> cardGroup = new Dictionary<CardType, Dictionary<string, string[]>>()
+        public static readonly Dictionary<CardType, Dictionary<string, string[]>> CardGroup = new Dictionary<CardType, Dictionary<string, string[]>>()
         {
             {
                 CardType.TowerCard, new Dictionary<string, string[]>()
@@ -57,7 +57,7 @@ namespace Game_Realtime.Service.AI
             }
         };
 
-        public static readonly List<List<string>> towerTier = new List<List<string>>()
+        public static readonly List<List<string>> TowerTier = new List<List<string>>()
         {
             new List<string> {"7"},
             new List<string> {"1", "2", "3"},
@@ -65,7 +65,7 @@ namespace Game_Realtime.Service.AI
             new List<string> {"6"}
         };
 
-        public static readonly Dictionary<BotPlayMode, float> energyBuildTowerRate = new Dictionary<BotPlayMode, float>()
+        public static readonly Dictionary<BotPlayMode, float> EnergyBuildTowerRate = new Dictionary<BotPlayMode, float>()
         {
             { BotPlayMode.ATTACK, 0.4f },
             { BotPlayMode.DEFEND, 1f },

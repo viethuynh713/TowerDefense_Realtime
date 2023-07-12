@@ -8,7 +8,7 @@ public static class GameConfig
     
     public static int TOWER_ENERGY_PERCENT = 80;          // Percent energy gain when sell tower
     
-    public static int MAX_UPGRADE_LEVEL = 5;
+    public static int MAX_UPGRADE_LEVEL = 3;
 
     public static int ENERGY_UPDATE = 5;
 

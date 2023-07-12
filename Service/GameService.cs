@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text;
+﻿using System.Text;
 using Game_Realtime.Hubs;
 using Game_Realtime.Model;
 using Game_Realtime.Model.Data;
@@ -16,16 +15,57 @@ public class GameService : IGameService
     private readonly Dictionary<string, GameSessionModel> _gameSessionModels;
     private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;
     private readonly object _inGameKey;
+    private Timer _aiActionTimer;
 
-    public GameService(IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext, IUserMatchingService userMatchingService)
+    public GameService(IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
     {
         _hubContext = hubContext;
+        _aiActionTimer = new Timer(AiAction,null,TimeSpan.Zero,TimeSpan.FromSeconds(1));
         _gameSessionModels = new Dictionary<string, GameSessionModel>();
         _inGameKey = new object();
 
     }
-    
-    public async Task<GameSessionModel> CreateNewGameSession(UserMatchingModel playerA, UserMatchingModel playerB)
+
+    private void AiAction(object? state)
+    {
+        foreach (var game in _gameSessionModels)
+        {
+            if (game.Value.ModeGame == ModeGame.Adventure)
+            {
+                foreach (var ai in game.Value.GetAllPlayer())
+                {
+                    if (ai.Value is AiModel)
+                    {
+                        ((AiModel)ai.Value).Battle();
+                        
+                    }
+                }
+            }
+        }
+    }
+
+    public async Task CreateAdventureGame(UserMatchingModel player)
+    {
+        PlayerModel playerModel = new PlayerModel(player.userId, player.cards, player.contextId);
+
+        AiModel bot = new AiModel(player.cards);
+        
+        string gameId = Guid.NewGuid().ToString();
+
+        await _hubContext.Groups.AddToGroupAsync(player.contextId, gameId);
+        
+        GameSessionModel newGameSessionModel = new GameSessionModel(gameId, player.gameMode, playerModel, bot, _hubContext);
+
+        lock(_inGameKey)
+        {
+            _gameSessionModels.Add(gameId, newGameSessionModel);
+        }
+        
+        await _hubContext.Clients.Groups(gameId).OnStartGame(Encoding.UTF8.GetBytes(gameId));
+        Console.WriteLine($"\nCreate arena game success: {gameId}");
+
+    }
+    public async Task CreateArenaGame(UserMatchingModel playerA, UserMatchingModel playerB)
     {
         PlayerModel playerModelA = new PlayerModel(playerA.userId, playerA.cards, playerA.contextId);
 
@@ -46,8 +86,7 @@ public class GameService : IGameService
         }
         await _hubContext.Clients.Groups(gameId).OnStartGame(Encoding.UTF8.GetBytes(gameId));
         
-        Console.WriteLine($"\nCreate new game success: {JsonConvert.SerializeObject(newGameSessionModel)}");
-        return newGameSessionModel;
+        Console.WriteLine($"\nCreate arena game success: {gameId}");
     }
 
     public async Task CastleTakeDamage(string gameId, string senderId, CastleTakeDamageData data)
@@ -88,9 +127,10 @@ public class GameService : IGameService
         };
         var jsonData = JsonConvert.SerializeObject(endGameDataSender);
         await _hubContext.Clients.Groups(gameId).OnEndGame(Encoding.UTF8.GetBytes(jsonData));
-        foreach (var player in _gameSessionModels[gameId].GetPlayer())
+        foreach (var player in _gameSessionModels[gameId].GetAllPlayer())
         {
-            await _hubContext.Groups.RemoveFromGroupAsync(((PlayerModel)player.Value).ContextId, gameId);
+            if(player.Value is PlayerModel)
+                await _hubContext.Groups.RemoveFromGroupAsync(((PlayerModel)player.Value).ContextId, gameId);
         }
         _gameSessionModels.Remove(gameId);
     }
@@ -143,7 +183,6 @@ public class GameService : IGameService
         }
 
     }
-
     public async Task PlaceSpell(string gameId, string senderId, PlaceSpellData data)
     {
         if (!_gameSessionModels.ContainsKey(gameId)) return;
@@ -160,7 +199,6 @@ public class GameService : IGameService
 
         }
     }
-
     public async Task CreateMonster(string gameId, string senderId, CreateMonsterData data)
     {
         if (!_gameSessionModels.ContainsKey(gameId)) return;
@@ -176,7 +214,6 @@ public class GameService : IGameService
 
         }
     }
-
     public async Task UpgradeTower(string gameId, string senderId, UpgradeTowerData data)
     {
         if (!_gameSessionModels.ContainsKey(gameId)) return;
@@ -194,7 +231,6 @@ public class GameService : IGameService
             
         await _hubContext.Clients.Clients(player.ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
     }
-
     public async Task SellTower(string gameId, string senderId, SellTowerData data)
     {
         if (!_gameSessionModels.ContainsKey(gameId)) return;
@@ -204,25 +240,23 @@ public class GameService : IGameService
         await _hubContext.Clients.Groups(gameId).SellTower(Encoding.UTF8.GetBytes(towerModel.towerId));
         
         var player = _gameSessionModels[gameId].GetPlayer(senderId);
-            
-        await _hubContext.Clients.Clients(player.ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
-    }
 
+        if (player != null)
+            await _hubContext.Clients.Clients(player.ContextId)
+                .UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
+    }
     public async Task HandlePlayerDisconnect(string connectionId)
     {
         foreach (var game in _gameSessionModels)
         {
             if (game.Value.HasPlayerByConnectionId(connectionId))
             {
-                BasePlayer player = game.Value.GetPlayerByConnectionId(connectionId);
-                await OnEndGame(game.Key, player.userId);
+                BasePlayer? player = game.Value.GetPlayerByConnectionId(connectionId);
+                if (player != null) await OnEndGame(game.Key, player.userId);
                 break;
             }
         }
     }
-
-
-
     public async Task<GameSessionModel> GetGameSession(string gameId)
     {
         return _gameSessionModels[gameId];
@@ -235,7 +269,7 @@ public class GameService : IGameService
 public interface IGameService
 {
     Task<GameSessionModel> GetGameSession(string gameId);
-    Task<GameSessionModel> CreateNewGameSession(UserMatchingModel playerA, UserMatchingModel playerB);
+    Task CreateArenaGame(UserMatchingModel playerA, UserMatchingModel playerB);
     Task CastleTakeDamage(string gameId, string userId, CastleTakeDamageData data);
     Task OnEndGame(string gameId, string playerLose);
     Task UpdateMonsterHp(string gameId, string senderId, MonsterTakeDamageData monsterTakeDamageData);
@@ -247,4 +281,5 @@ public interface IGameService
     Task UpgradeTower(string gameId, string senderId, UpgradeTowerData upgradeTowerData);
     Task SellTower(string gameId, string senderId, SellTowerData data);
     Task HandlePlayerDisconnect(string connectionId);
+    Task CreateAdventureGame(UserMatchingModel newUserMatchingModel);
 }
