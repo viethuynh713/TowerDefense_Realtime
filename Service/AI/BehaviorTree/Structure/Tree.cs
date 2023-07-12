@@ -2,7 +2,7 @@
 {
     public abstract class Tree
     {
-        private Node root = new Node();
+        protected Node root = new Node();
 
         public Tree()
         {

@@ -8,11 +8,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
 {
     public class BotBT: Tree
     {
-        BotBTData data;
-        protected BotBT()
-        {
-            data = new BotBTData();
-        }
+        BotBTData data = new BotBTData();
         protected override Node SetUpTree()
         {
             List<Node> spellNodeList = new List<Node>();
