@@ -1,19 +1,25 @@
-﻿using Game_Realtime.Service.AI.BehaviorTree.Structure;
+﻿using Game_Realtime.Model;
+using Game_Realtime.Service.AI.BehaviorTree.Structure;
 
 namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
 {
     public class UseExplore: Node
     {
-        private BotBTData data;
-        public UseExplore(ref BotBTData data)
+        private AiModel bot;
+        public UseExplore(AiModel bot)
         {
-            this.data = data;
+            this.bot = bot;
         }
 
         public override NodeState Evaluate()
         {
-            // TODO: Use burning at position
-            // ActiveSpell(data.spellUsingName, data.spellUsingPosition);
+            bot.PlaceSpell(new Model.Data.PlaceSpellData()
+            {
+                cardId = "",
+                Xposition = bot.SpellUsingPosition.X,
+                Yposition = bot.SpellUsingPosition.Y,
+                stats = new Model.Data.SpellStats()
+            });
 
             state = NodeState.RUNNING;
             return state;

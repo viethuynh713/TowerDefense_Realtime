@@ -1,24 +1,23 @@
-﻿using Game_Realtime.Service.AI.BehaviorTree.Structure;
+﻿using Game_Realtime.Model;
+using Game_Realtime.Service.AI.BehaviorTree.Structure;
 using System.Security.Cryptography.Xml;
 
 namespace Game_Realtime.Service.AI.BehaviorTree.Bot
 {
     public class DivideEnergy: Node
     {
-        private BotBTData data;
-        private float energyBuildTowerRate;
+        private AiModel bot;
 
-        public DivideEnergy(ref BotBTData data)
+        public DivideEnergy(AiModel bot)
         {
-            this.data = data;
-            energyBuildTowerRate = data.energyBuildTowerRate;
+            this.bot = bot;
         }
 
         public override NodeState Evaluate()
         {
-            data.energyToBuildTower += data.energyGain * energyBuildTowerRate;
-            data.energyToSummonMonster += data.energyGain - data.energyToBuildTower;
-            data.energyGain = 0;
+            bot.EnergyToBuildTower += bot.EnergyGain * bot.EnergyBuildTowerRate;
+            bot.EnergyToSummonMonster += bot.EnergyGain - bot.EnergyToBuildTower;
+            bot.EnergyGain = 0;
 
             state = NodeState.RUNNING;
             return state;

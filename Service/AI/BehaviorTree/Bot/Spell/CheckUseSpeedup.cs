@@ -6,17 +6,15 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
 {
     public class CheckUseSpeedup: Node
     {
-        private BotBTData data;
+        private AiModel bot;
         private int energyRequired;
-        private string playerId;
         private MonsterModel[] monsterList;
         private Vector2 enemyBasePosition;
 
-        public CheckUseSpeedup(ref BotBTData data, int energyRequired, string playerId, MonsterModel[] monsterList, Vector2 enemyBasePosition)
+        public CheckUseSpeedup(AiModel bot, int energyRequired, MonsterModel[] monsterList, Vector2 enemyBasePosition)
         {
-            this.data = data;
+            this.bot = bot;
             this.energyRequired = energyRequired;
-            this.playerId = playerId;
             this.monsterList = monsterList;
             this.enemyBasePosition = enemyBasePosition;
         }
@@ -25,7 +23,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         {
             //// Check if any monster is nearer 3 tiles away from base, set position to use explore
             // check if enough energy to use
-            if (data.energyToBuildTower + data.energyToSummonMonster < energyRequired)
+            if (bot.EnergyToBuildTower + bot.EnergyToSummonMonster < energyRequired)
             {
                 state = NodeState.FAILURE;
                 return state;
@@ -34,9 +32,9 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             List<Vector2> monsterNearBasePosList = new List<Vector2>();
             foreach (var monster in monsterList)
             {
-                if (monster.ownerId != playerId)
+                if (monster.ownerId == bot.userId)
                 {
-                    if (MathF.Sqrt(MathF.Pow(enemyBasePosition.X - monster.XLogicPosition, 2) + MathF.Pow(enemyBasePosition.Y - monster.YLogicPosition, 2)) <= 3)
+                    if ((enemyBasePosition.X - monster.XLogicPosition) + (enemyBasePosition.Y - monster.YLogicPosition) < 3)
                     {
                         monsterNearBasePosList.Add(new Vector2(monster.XLogicPosition, monster.YLogicPosition));
                     }
@@ -45,12 +43,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             // Use spell at the center of the monsters found
             if (monsterNearBasePosList.Count > 0)
             {
-                data.spellUsingPosition = new Vector2(0, 0);
+                bot.SpellUsingPosition = new Vector2(0, 0);
                 foreach (var pos in monsterNearBasePosList)
                 {
-                    data.spellUsingPosition += pos / monsterNearBasePosList.Count;
+                    bot.SpellUsingPosition += pos / monsterNearBasePosList.Count;
                 }
-                data.spellUsingName = "Speedup";
+                bot.SpellUsingName = "Speedup";
                 state = NodeState.SUCCESS;
                 return state;
             }

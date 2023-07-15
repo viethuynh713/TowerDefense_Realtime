@@ -19,8 +19,8 @@ public class CreateMonsterData
 public class PlaceSpellData
 {
     public string cardId;
-    public int Xposition;
-    public int Yposition;
+    public float Xposition;
+    public float Yposition;
     public SpellStats stats;
 }
 public class StatsCard

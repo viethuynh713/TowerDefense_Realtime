@@ -86,10 +86,10 @@ namespace Game_Realtime.Model
         public string spellId;
         public string cardId;
         public string ownerId;
-        public int XLogicPosition;
-        public int YLogicPosition;
+        public float XLogicPosition;
+        public float YLogicPosition;
 
-        public SpellModel(string cardId,int x,int y, string ownerId)
+        public SpellModel(string cardId,float x,float y, string ownerId)
         {
             this.spellId = Guid.NewGuid().ToString();
             this.cardId = cardId;

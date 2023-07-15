@@ -6,16 +6,14 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
 {
     public class CheckUseHealing: Node
     {
-        private BotBTData data;
+        private AiModel bot;
         private int energyRequired;
-        private string playerId;
         private MonsterModel[] monsterList;
 
-        public CheckUseHealing(ref BotBTData data, int energyRequired, string playerId, MonsterModel[] monsterList)
+        public CheckUseHealing(AiModel bot, int energyRequired, MonsterModel[] monsterList)
         {
-            this.data = data;
+            this.bot = bot;
             this.energyRequired = energyRequired;
-            this.playerId = playerId;
             this.monsterList = monsterList;
         }
 
@@ -23,7 +21,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         {
             //// Check if any tile has 5 monsters or more nearby and at least 3 monsters has less than 30%HP, set position to use burning
             // check if enough energy to use
-            if (data.energyToBuildTower + data.energyToSummonMonster < energyRequired)
+            if (bot.EnergyToBuildTower + bot.EnergyToSummonMonster < energyRequired)
             {
                 state = NodeState.FAILURE;
                 return state;
@@ -34,14 +32,14 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             float HPRate = 0.6f;
             foreach (var monster in monsterList)
             {
-                if (monster.ownerId != playerId)
+                if (monster.ownerId == bot.userId)
                 {
                     for (int x = -1; x <= 1; x++)
                     {
                         for (int y = -1; y <= 1; y++)
                         {
-                            if (monster.XLogicPosition + x >= 0 && monster.XLogicPosition + x < data.towerBuildingMapWidth
-                                && monster.YLogicPosition + y >= 0 && monster.YLogicPosition + y < data.towerBuildingMapHeight)
+                            if (monster.XLogicPosition + x >= 0 && monster.XLogicPosition + x < bot.TowerBuildingMapWidth
+                                && monster.YLogicPosition + y >= 0 && monster.YLogicPosition + y < bot.TowerBuildingMapHeight)
                             {
                                 if (monstersInRange.TryGetValue(new Vector2(monster.XLogicPosition + x, monster.YLogicPosition + y), out var value))
                                 {
@@ -91,8 +89,8 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             // if enough monster to use spell, return spell type and position
             if (nMonsterInCrowded.Item1 >= 5)
             {
-                data.spellUsingPosition = crowdestPosition;
-                data.spellUsingName = "Healing";
+                bot.SpellUsingPosition = crowdestPosition;
+                bot.SpellUsingName = "Healing";
                 state = NodeState.SUCCESS;
                 return state;
             }

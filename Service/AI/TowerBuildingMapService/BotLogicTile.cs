@@ -8,7 +8,9 @@ namespace Game_Realtime.Service.AI.TowerBuildingMapService
         public int YLogicPosition;
         public TypeTile TypeOfType;
         public string towerId;
-        public bool hasTower;
+        public bool isBuildTower;       // will be used to build tower or not
+        public bool? hasTower;          // have tower or not
+        public bool isInProgress;       // is being build with the basic tower? (only use if bot building tower type is PROGRESS)
         public int damageLevel;
         public int fireRateLevel;
         public int rangeLevel;
@@ -32,7 +34,8 @@ namespace Game_Realtime.Service.AI.TowerBuildingMapService
             YLogicPosition = tile.YLogicPosition;
             TypeOfType = tile.TypeOfType;
             towerId = "";
-            hasTower = false;
+            hasTower = null;
+            isInProgress = false;
             damageLevel = 0;
             fireRateLevel = 0;
             rangeLevel = 0;

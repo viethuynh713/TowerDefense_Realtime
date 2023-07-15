@@ -4,6 +4,8 @@ namespace Game_Realtime.Service.AI
 {
     public static class AIConstant
     {
+        public static readonly string basicTowerId = "1";
+
         public static readonly Dictionary<BotPlayMode, Dictionary<CardType, Dictionary<string, int>>> CardSelectingStrategy = new Dictionary<BotPlayMode, Dictionary<CardType, Dictionary<string, int>>>()
         {
             { BotPlayMode.ATTACK, new Dictionary<CardType, Dictionary<string, int>>()
@@ -59,10 +61,10 @@ namespace Game_Realtime.Service.AI
 
         public static readonly List<List<string>> TowerTier = new List<List<string>>()
         {
-            new List<string> {"7"},
-            new List<string> {"1", "2", "3"},
-            new List<string> {"4", "5"},
-            new List<string> {"6"}
+            new List<string> {"7"},             // tier 1
+            new List<string> {"1", "2", "3"},   // tier 2
+            new List<string> {"4", "5"},        // tier 3
+            new List<string> {"6"}              // tier 4
         };
 
         public static readonly Dictionary<BotPlayMode, float> EnergyBuildTowerRate = new Dictionary<BotPlayMode, float>()
@@ -70,6 +72,22 @@ namespace Game_Realtime.Service.AI
             { BotPlayMode.ATTACK, 0.4f },
             { BotPlayMode.DEFEND, 1f },
             { BotPlayMode.HYBRIC, 0.8f }
+        };
+
+        public static readonly Dictionary<string, List<string>> supportMonster = new Dictionary<string, List<string>>()
+        {
+            { "1", new List<string> { "7", "4" } },
+            {"2", new List<string> { "7", "4" } },
+            {"3", new List<string> {"4", "7" } },
+            {"4", new List<string> { "5", "3", "1", "2", "6" } },
+            {"5", new List<string> { "4", "7" } },
+            {"7", new List<string> { "3", "5", "1", "2", "6" } },
+            {"6", new List < string > { "7", "4" } }
+        };
+
+        public static readonly List<string> towerStrength = new List<string>()
+        {
+            "1", "2", "3", "7", "4", "5", "6"
         };
     }
 }
