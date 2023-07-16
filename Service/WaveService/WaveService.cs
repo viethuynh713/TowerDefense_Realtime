@@ -24,11 +24,22 @@ public class WaveService
         _currentWave = waves[_currentWaveIndex];
     }
 
-    public void NextWave()
+    public Task NextWave()
     {
+        Thread.Sleep(10000);
         _currentWaveIndex++;
-        if (waves.Count <= _currentWaveIndex) _currentWave = waves.Last().Value;
-        _currentWave = waves[_currentWaveIndex];
+        if (waves.Count <= _currentWaveIndex)
+        {
+            _currentWave = waves.Last().Value;
+            _currentWave.UpgradeData();
+        }
+        else
+        {
+            _currentWave = waves[_currentWaveIndex];
+        }
+
+        return Task.CompletedTask;
+
     }
 
     public Wave GetCurrentWave()

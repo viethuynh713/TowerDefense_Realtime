@@ -65,6 +65,25 @@ public class GameService : IGameService
         Console.WriteLine($"\nCreate arena game success: {gameId}");
 
     }
+
+    public async Task GetGameInfo(string gameId, string senderId, string contextConnectionId)
+    {
+        var map = _gameSessionModels[gameId].GetMap();
+        List<string> cards = _gameSessionModels[gameId].GetCard(senderId);
+        var mode = _gameSessionModels[gameId].GetMode();
+
+        GameInfoSenderData data = new GameInfoSenderData()
+        {
+            gameId = gameId,
+            map = map,
+            myListCard = cards,
+            mode = mode
+        };
+        var jsonData = JsonConvert.SerializeObject(data);
+        _hubContext.Clients.Clients(contextConnectionId).OnGameInfo(Encoding.UTF8.GetBytes(jsonData));
+
+    }
+
     public async Task CreateArenaGame(UserMatchingModel playerA, UserMatchingModel playerB)
     {
         PlayerModel playerModelA = new PlayerModel(playerA.userId, playerA.cards, playerA.contextId);
@@ -93,26 +112,17 @@ public class GameService : IGameService
     {
         if (!_gameSessionModels.ContainsKey(gameId)) return;
         if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
-
-        int newCastleHp = _gameSessionModels[gameId].CastleTakeDamage(senderId, data).Result;
-
-        if (newCastleHp < 0)
+        
+        
+        var newCastleHp = _gameSessionModels[gameId].CastleTakeDamage(data).Result;
+        if (newCastleHp != null)
         {
-            await OnEndGame(gameId,senderId);
-        }
-        else
-        {
-            CastleTakeDamageSender senderdata = new CastleTakeDamageSender()
+            if (newCastleHp.Value <= 0)
             {
-                userId = senderId,
-                currentCastleHp = newCastleHp,
-                maxCastleHp = GameConfig.GameConfig.MAX_CASTLE_HP
-            };
-            var jsonSenderData = JsonConvert.SerializeObject(senderdata);
-            await _hubContext.Clients.Groups(gameId).UpdateCastleHp(Encoding.UTF8.GetBytes(jsonSenderData));
+                await OnEndGame(gameId,senderId);
+            }
             
         }
-            
     }
     
     public async Task OnEndGame(string gameId,string playerLose)
@@ -140,25 +150,9 @@ public class GameService : IGameService
         if (!_gameSessionModels.ContainsKey(gameId)) return;
         if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
 
-        await _gameSessionModels[gameId].UpdateMonsterHp(senderId, monsterTakeDamageData);
+        await _gameSessionModels[gameId].UpdateMonsterHp(monsterTakeDamageData);
 
 
-    }
-
-    public async Task GetMap(string gameId, string contextId)
-    {
-        var map = _gameSessionModels[gameId].GetMap();
-        byte[] mapByte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(map));
-        await _hubContext.Clients.Client(contextId).OnGetMap(mapByte);
-    }
-
-    public async Task GetCardInGame(string gameId, string senderId,string contextId)
-    {
-        List<string> cards = _gameSessionModels[gameId].GetCard(senderId);
-        byte[] cardByte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(cards));
-
-        await _hubContext.Clients.Clients(contextId).OnGetCards(cardByte);
-        
     }
 
     public async Task BuildTower(string gameId, string senderId, BuildTowerData data)
@@ -273,8 +267,6 @@ public interface IGameService
     Task CastleTakeDamage(string gameId, string userId, CastleTakeDamageData data);
     Task OnEndGame(string gameId, string playerLose);
     Task UpdateMonsterHp(string gameId, string senderId, MonsterTakeDamageData monsterTakeDamageData);
-    Task GetMap(string gameId, string contextId);
-    Task GetCardInGame(string gameId, string senderId, string contextId);
     Task BuildTower(string gameId, string senderId, BuildTowerData buildTowerData);
     Task PlaceSpell(string gameId, string senderId, PlaceSpellData placeSpellData);
     Task CreateMonster(string gameId, string senderId, CreateMonsterData createMonsterData);
@@ -282,4 +274,5 @@ public interface IGameService
     Task SellTower(string gameId, string senderId, SellTowerData data);
     Task HandlePlayerDisconnect(string connectionId);
     Task CreateAdventureGame(UserMatchingModel newUserMatchingModel);
+    Task GetGameInfo(string gameId, string senderId, string contextConnectionId);
 }

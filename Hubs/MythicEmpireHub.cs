@@ -18,12 +18,9 @@ namespace Game_Realtime.Hubs
         
         public MythicEmpireHub(IUserMatchingService userMatchingService, IGameService gameService)
         {
-            this._userMatchingService = userMatchingService;
-            this._gameService = gameService;
-            Dictionary<int, Wave> waves = new Dictionary<int, Wave>();
-            // waves.Add(1,new Wave(10, new List<string>() { "1", "2" }));
-            // waves.Add(2,new Wave(10, new List<string>() { "1", "2" }));
-            // waves.Add(3,new Wave(10, new List<string>() { "4", "2" }));
+            _userMatchingService = userMatchingService;
+            _gameService = gameService;
+            // Dictionary<int, Wave> waves = new Dictionary<int, Wave>();
             // Console.WriteLine(JsonConvert.SerializeObject(waves));
             Console.WriteLine("\n-----------------------InGameHub Init----------------------");
         }
@@ -130,16 +127,12 @@ namespace Game_Realtime.Hubs
                     await _gameService.SellTower(gameId, senderId, sellTowerData);
                     break;
                     
-                case ActionId.GetMap:
+                case ActionId.GetGameInfo:
 
-                    await _gameService.GetMap(gameId, Context.ConnectionId);
+                    await _gameService.GetGameInfo(gameId, senderId, Context.ConnectionId);
                     
                     break;
-                case ActionId.GetMyCard:
 
-                    await _gameService.GetCardInGame(gameId, senderId,Context.ConnectionId);
-                    
-                    break;
             }
         }
         

@@ -63,15 +63,58 @@ public class BasePlayer
 
         public virtual async Task<MonsterModel?> CreateMonster(CreateMonsterData data)
         {
-            return null;
+            var stats = (data.stats);
+            
+            if (stats.Energy > energy) return null;
+            energy -= stats.Energy;
+            
+            
+            var monster = new MonsterModel(data.cardId,
+                stats.Hp, 
+                data.Xposition, 
+                data.Yposition,
+                this.userId,
+                stats.EnergyGainWhenDie);
+            
+            _monsters.Add(monster.monsterId,monster);
+            
+            // Console.WriteLine($"Monster list : {JsonConvert.SerializeObject(_monsters)}");
+            return monster;
         }
         public virtual async  Task<TowerModel?> BuildTower(BuildTowerData data)
         {
-            return null;
+            var stats = data.stats;
+            
+            if (stats.Energy > energy) return null;
+            
+            var tower = new TowerModel(data.cardId, 
+                data.Xposition, 
+                data.Yposition,
+                this.userId, 
+                (int)(stats.Energy*(GameConfig.GameConfig.TOWER_ENERGY_PERCENT/100)) );
+            
+            energy -= stats.Energy;
+
+            _towers.Add(tower.towerId, tower);
+
+            return tower;
         }
         public virtual async Task<SpellModel?> PlaceSpell(PlaceSpellData data)
         {
-            return null;
+            var stats = data.stats;
+            
+            if (stats.Energy > energy) return null;
+            
+            var spell = new SpellModel(
+                data.cardId, 
+                data.Xposition, 
+                data.Yposition,
+                this.userId
+            );
+            
+            energy -= stats.Energy;
+
+            return spell;
         }
         public virtual async Task<int?> UpdateMonsterHp(MonsterTakeDamageData data)
         {
