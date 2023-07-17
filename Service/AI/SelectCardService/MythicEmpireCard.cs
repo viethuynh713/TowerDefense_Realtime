@@ -4,6 +4,7 @@
     {
         public string CardId { get; set; }
         public string CardName { get; set; }
+        public int Energy { get; set; }
         public int CardStar { get; set; }
         public int TypeOfCard { get; set; }
         public int CardRarity { get; set; }

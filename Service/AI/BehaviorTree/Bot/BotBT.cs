@@ -47,12 +47,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                     new Selector(spellNodeList),
                     new Sequence(new List<Node>
                     {
-                        new CheckSpawnMonsterToDefend(bot, 0, new MonsterModel[0], new Vector2(0, 4)),
+                        new CheckSpawnMonsterToDefend(bot, AIMethod.GetMinMonsterEnergy(bot.CardSelected), new MonsterModel[0], new Vector2(0, 4)),
                         new SpawnMonsterToDefend(bot, new MonsterModel[0], new Vector2(0, 4))
                     }),
                     new Sequence(new List<Node>
                     {
-                        new CheckSpawnMonsterToAttack(bot, 0),
+                        new CheckSpawnMonsterToAttack(bot, AIMethod.GetMinMonsterEnergy(bot.CardSelected)),
                         new SpawnMonsterToAttack(bot, new Vector2Int(10, 4), new MonsterModel[0])
                     }),
                     new Sequence(new List<Node>
@@ -88,54 +88,59 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
         {
             if (spellName == "Burning")
             {
-                if (bot.CardSelected.Contains((CardType.SpellCard, "Burning")))
+                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Burning")))
                 {
+                    int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Burning"));
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseBurning(bot, 0, new MonsterModel[0]),
-                        new UseBurning(bot)
+                        new CheckUseBurning(bot, cardEnergy, new MonsterModel[0]),
+                        new UseBurning(bot, cardEnergy)
                     }));
                 }
             }
             if (spellName == "Explore")
             {
-                if (bot.CardSelected.Contains((CardType.SpellCard, "Explore")))
+                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Explore")))
                 {
+                    int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Explore"));
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseExplore(bot, 0, new MonsterModel[0], new Vector2(0, 4)),
-                        new UseExplore(bot)
+                        new CheckUseExplore(bot, cardEnergy, new MonsterModel[0], new Vector2(0, 4)),
+                        new UseExplore(bot, cardEnergy)
                     }));
                 }
             }
             if (spellName == "Freeze")
             {
-                if (bot.CardSelected.Contains((CardType.SpellCard, "Freeze")))
+                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Freeze")))
                 {
+                    int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Freeze"));
                     spellNodeList.Add(new Sequence(new List<Node>() {
-                        new CheckUseFreeze(bot, 0, new MonsterModel[0]),
-                        new UseFreeze(bot)
+                        new CheckUseFreeze(bot, cardEnergy, new MonsterModel[0]),
+                        new UseFreeze(bot, cardEnergy)
                     })); ;
                 }
             }
             if (spellName == "Healing")
             {
-                if (bot.CardSelected.Contains((CardType.SpellCard, "Healing")))
+                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Healing")))
                 {
+                    int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Healing"));
                     spellNodeList.Add(new Sequence(new List<Node>() {
-                        new CheckUseHealing(bot, 0, new MonsterModel[0]),
-                        new UseHealing(bot)
+                        new CheckUseHealing(bot, cardEnergy, new MonsterModel[0]),
+                        new UseHealing(bot, cardEnergy)
                     })); 
                 }
             }
             if (spellName == "Speedup")
             {
-                if (bot.CardSelected.Contains((CardType.SpellCard, "Speedup")))
+                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Speedup")))
                 {
+                    int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Speedup"));
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseSpeedup(bot, 0, new MonsterModel[0], new Vector2(20, 4)),
-                        new UseSpeedup(bot)
+                        new CheckUseSpeedup(bot, cardEnergy, new MonsterModel[0], new Vector2(20, 4)),
+                        new UseSpeedup(bot, cardEnergy)
                     }));
                 }
             }

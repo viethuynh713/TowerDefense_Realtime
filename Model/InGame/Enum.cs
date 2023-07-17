@@ -15,10 +15,10 @@
 
     public enum CardType
     {
-        None,
         TowerCard,
         MonsterCard,
-        SpellCard
+        SpellCard,
+        None
     }
     public enum TypePlayer
     {

@@ -7,7 +7,7 @@ namespace Game_Realtime.Service.AI.TowerBuildingMapService
         public int XLogicPosition;
         public int YLogicPosition;
         public TypeTile TypeOfType;
-        public string towerId;
+        public string towerName;
         public bool isBuildTower;       // will be used to build tower or not
         public bool? hasTower;          // have tower or not
         public bool isInProgress;       // is being build with the basic tower? (only use if bot building tower type is PROGRESS)
@@ -25,7 +25,7 @@ namespace Game_Realtime.Service.AI.TowerBuildingMapService
 
         public void SetTower(string id)
         {
-            towerId = id;
+            towerName = id;
         }
 
         public void Copy(LogicTile tile)
@@ -33,7 +33,7 @@ namespace Game_Realtime.Service.AI.TowerBuildingMapService
             XLogicPosition = tile.XLogicPosition;
             YLogicPosition = tile.YLogicPosition;
             TypeOfType = tile.TypeOfType;
-            towerId = "";
+            towerName = "";
             hasTower = null;
             isInProgress = false;
             damageLevel = 0;

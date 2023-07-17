@@ -1,4 +1,5 @@
 ﻿using Game_Realtime.Model;
+using Game_Realtime.Model.InGame;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 using System.Numerics;
 using System.Threading;
@@ -20,7 +21,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
 
         public override NodeState Evaluate()
         {
-            // NOTE: check energy before using card
             // get monster near castle
             foreach (var monster in monsterList)
             {
@@ -30,9 +30,9 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                     {
                         foreach (var monsterCard in bot.CardSelected)
                         {
-                            if (monsterCard.Item1 == Model.InGame.CardType.MonsterCard && monsterCard.Item2 == monster.monsterId)
+                            if (monsterCard.Item1 == CardType.MonsterCard && monsterCard.Item2 == monster.monsterId)
                             {
-                                if (true /* bot.EnergyToSummonMonster >= energy[monster.cardId] */)
+                                if (bot.EnergyToSummonMonster >= AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, monster.cardId)))
                                 {
                                     // if bot has a monster card same as monster near castle, use that card
                                     SummonMonster(monster.cardId);
@@ -45,11 +45,11 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                 }
             }
             // otherwise, use a random monster card
-            var monsterCardList = bot.CardSelected.Where(monsterCard => monsterCard.Item1 == Model.InGame.CardType.MonsterCard).ToList();
+            var monsterCardList = bot.CardSelected.Where(monsterCard => monsterCard.Item1 == CardType.MonsterCard).ToList();
             if (monsterCardList.Count > 0)
             {
                 var cardSelect = monsterCardList[new Random().Next(0, monsterCardList.Count)];
-                while (false /* bot.EnergyToSummonMonster < energy[cardSelect.Item2] */)
+                while (bot.EnergyToSummonMonster < AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, cardSelect.Item2)))
                 {
                     monsterCardList.Remove(cardSelect);
                     cardSelect = monsterCardList[new Random().Next(0, monsterCardList.Count)];
@@ -62,7 +62,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
 
         private void SummonMonster(string id)
         {
-            int energy = 1; // get energy to use monster card by id
+            // summon monster
             bot.CreateMonster(new Model.Data.CreateMonsterData()
             {
                 cardId = id,
@@ -70,6 +70,8 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                 Yposition = (int)botBasePosition.Y,
                 stats = new Model.Data.MonsterStats()
             });
+            // cost energy
+            bot.EnergyToSummonMonster -= AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, id));
         }
     }
 }

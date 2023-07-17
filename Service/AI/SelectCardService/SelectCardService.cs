@@ -94,7 +94,7 @@ public static class SelectCardService
         }
     }
 
-    public static bool IsGreaterThan((CardType, string) x, (CardType, string) y, BotPlayMode mode)
+    public static bool IsGreaterThan((CardType, string, int) x, (CardType, string, int) y, BotPlayMode mode)
     {
         CardPower cardPowerX = new CardPower(x.Item1, x.Item2, mode);
         CardPower cardPowerY = new CardPower(y.Item1, y.Item2, mode);

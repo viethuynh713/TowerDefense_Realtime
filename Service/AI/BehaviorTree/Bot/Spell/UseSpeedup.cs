@@ -6,13 +6,16 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
     public class UseSpeedup : Node
     {
         private AiModel bot;
-        public UseSpeedup(AiModel bot)
+        private int energyRequired;
+        public UseSpeedup(AiModel bot, int energyRequired)
         {
             this.bot = bot;
+            this.energyRequired = energyRequired;
         }
 
         public override NodeState Evaluate()
         {
+            // use spell
             bot.PlaceSpell(new Model.Data.PlaceSpellData()
             {
                 cardId = "",
@@ -20,6 +23,9 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
                 Yposition = bot.SpellUsingPosition.Y,
                 stats = new Model.Data.SpellStats()
             });
+            // cost energy
+            bot.EnergyToBuildTower -= energyRequired * bot.EnergyBuildTowerRate;
+            bot.EnergyToSummonMonster -= energyRequired * (1 - bot.EnergyBuildTowerRate);
 
             state = NodeState.RUNNING;
             return state;
