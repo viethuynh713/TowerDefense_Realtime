@@ -157,4 +157,11 @@ public class BasePlayer
             
             return _towers[towerId].Upgrade(type);
         }
+
+        public Task UpdateMonsterPosition(UpdateMonsterPositionData data)
+        {
+            if(_monsters.ContainsKey(data.monsterId))
+                _monsters[data.monsterId].UpdatePosition(data.Xposition, data.YPosition);
+            return Task.CompletedTask;
+        }
     }

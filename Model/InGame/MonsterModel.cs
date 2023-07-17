@@ -12,8 +12,8 @@ namespace Game_Realtime.Model
         public string ownerId;
         public int monsterHp;
         public int maxHp;
-        public int XLogicPosition;
-        public int YLogicPosition;
+        public float XLogicPosition;
+        public float YLogicPosition;
         public int EnergyGainWhenDie;
 
 
@@ -34,6 +34,13 @@ namespace Game_Realtime.Model
             monsterHp += damage;
             if (monsterHp > maxHp) monsterHp = maxHp;
             return monsterHp;
+        }
+
+        public void UpdatePosition(float x, float y)
+        {
+            this.XLogicPosition = x;
+            this.YLogicPosition = y;
+
         }
     }
     public class TowerModel

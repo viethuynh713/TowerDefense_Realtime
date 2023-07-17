@@ -21,6 +21,7 @@ namespace Game_Realtime.Model
 
         private ModeGame _modeGame;
         
+        private Timer _aiActionTimer;
         public ModeGame ModeGame
         {
             get => _modeGame;
@@ -40,11 +41,10 @@ namespace Game_Realtime.Model
 
         private Timer _countWave;
 
-        public GameSessionModel(string gameId, 
-            ModeGame modeGame, BasePlayer playerA, BasePlayer playerB, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
+        public GameSessionModel(string gameId, BasePlayer playerA, BasePlayer playerB, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
         {
             _gameId = gameId;
-            _modeGame = modeGame;
+            _modeGame = ModeGame.Arena;
             _hubContext = hubContext;
             _startTime = DateTime.Now;
             _players = new Dictionary<string, BasePlayer>
@@ -58,8 +58,48 @@ namespace Game_Realtime.Model
             _validatePackageService = new ValidatePackageService();
             _countWave = new Timer(UpdateWave, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
             _timerUpdateEnergy = new Timer(UpdateEnergy, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
+
         }
 
+        public GameSessionModel(string gameId, BasePlayer player, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
+        {
+            _gameId = gameId;
+            _modeGame = ModeGame.Arena;
+            _hubContext = hubContext;
+            _startTime = DateTime.Now;
+            var ai = CreateAi();
+            _players = new Dictionary<string, BasePlayer>
+            {
+                { player.userId, player }, 
+                {ai.userId, ai}
+            };
+
+            _mapService = new MapService(11, 21,player.userId,ai.userId);
+            _waveService = new WaveService();
+            _validatePackageService = new ValidatePackageService();
+            _countWave = new Timer(UpdateWave, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+            _timerUpdateEnergy = new Timer(UpdateEnergy, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
+            _aiActionTimer = new Timer(AiAction, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+        }
+
+        private BasePlayer CreateAi()
+        {
+            var newBot = new AiModel();
+            return newBot;
+        }
+
+        private void AiAction(object? state)
+        {
+
+            foreach (var ai in GetAllPlayer())
+            {
+                if (ai.Value is AiModel model)
+                {
+                    model.Battle();
+                
+                }
+            }
+        }
         public bool isPawnWave = false;
         private void UpdateWave(object? state)
         {
@@ -194,7 +234,22 @@ namespace Game_Realtime.Model
         public async Task<MonsterModel?> CreateMonster(string playerId, CreateMonsterData data)
         {
             if (!_mapService.IsValidPosition(new Vector2Int(data.Xposition, data.Yposition), playerId)) return null;
-            return await (_players[playerId]).CreateMonster(data);
+            var monsterModel = await (_players[playerId]).CreateMonster(data);
+            
+            if (monsterModel != null)
+            {
+                var jsonMonsterModel = JsonConvert.SerializeObject(monsterModel);
+                await _hubContext.Clients.Groups(_gameId).CreateMonster(Encoding.UTF8.GetBytes(jsonMonsterModel));
+                var player = GetPlayer(playerId);
+
+                if (player != null)
+                {
+                    await _hubContext.Clients.Clients(player.ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
+                }
+
+            }
+
+            return monsterModel;
         }
 
         public async Task<TowerModel?> BuildTower(string playerId, BuildTowerData data)
@@ -213,12 +268,46 @@ namespace Game_Realtime.Model
             {
                 _mapService.BanPosition(data.Xposition, data.Yposition);
             }
+            if (tower != null)
+            {
+
+                var jsonTowerModel = JsonConvert.SerializeObject(tower);
+                await _hubContext.Clients.Groups(_gameId).BuildTower(Encoding.UTF8.GetBytes(jsonTowerModel));
+                var player = GetPlayer(playerId);
+
+                if (player != null)
+                {
+                    await _hubContext.Clients.Clients(player.ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
+                }
+            }
+            else
+            {
+                Console.WriteLine("Can't build tower");
+            
+            }
             return tower;
+
         }
 
         public async Task<SpellModel?> PlaceSpell(string playerId, PlaceSpellData data)
         {
-            return await (_players[playerId]).PlaceSpell(data);
+            var spellModel = await (_players[playerId]).PlaceSpell(data);
+            
+            if (spellModel != null)
+            {
+                var jsonSpellModel = JsonConvert.SerializeObject(spellModel);
+                await _hubContext.Clients.Groups(_gameId).PlaceSpell(Encoding.UTF8.GetBytes(jsonSpellModel));
+                
+                var player = GetPlayer(playerId);
+                if (player != null)
+                {
+                    await _hubContext.Clients.Clients(player.ContextId)
+                        .UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
+                }
+
+            }
+
+            return spellModel;
         }
 
         public LogicTile[][] GetMap()
@@ -291,6 +380,17 @@ namespace Game_Realtime.Model
         public async Task<TowerStats?> UpgradeTower(string senderId, UpgradeTowerData data)
         {
             return await _players[senderId].UpgradeTower(data.towerId, data.type);
+            // JObject jsonData = new JObject()
+            // {
+            //     new JProperty("towerId", data.towerId),
+            //     new JProperty("stats", JsonConvert.SerializeObject(towerStats)),
+            //     
+            // };
+            // await _hubContext.Clients.Groups(gameId).UpgradeTower(Encoding.UTF8.GetBytes(jsonData.ToString()));
+            //
+            // var player = _gameSessionModels[gameId].GetPlayer(senderId);
+            //     
+            // await _hubContext.Clients.Clients(player.ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
         }
 
         public async Task<TowerModel> SellTower(string senderId, SellTowerData data)
@@ -298,6 +398,15 @@ namespace Game_Realtime.Model
             var tower = await _players[senderId].SellTower(data.towerId);
             
             _mapService.ReleasePosition(tower.XLogicPosition,tower.YLogicPosition);
+
+            var jsonData = JsonConvert.SerializeObject(tower);
+            await _hubContext.Clients.Groups(_gameId).SellTower(Encoding.UTF8.GetBytes(jsonData));
+        
+            var player = GetPlayer(senderId);
+
+            if (player != null)
+                await _hubContext.Clients.Clients(player.ContextId)
+                    .UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
             
             return tower;
         }
@@ -328,6 +437,11 @@ namespace Game_Realtime.Model
             }
 
             return null;
+        }
+
+        public async Task UpdateMonsterPosition(UpdateMonsterPositionData data)
+        {
+            await _players[data.ownerId].UpdateMonsterPosition(data);
         }
     }
 

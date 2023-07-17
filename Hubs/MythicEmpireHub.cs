@@ -20,8 +20,6 @@ namespace Game_Realtime.Hubs
         {
             _userMatchingService = userMatchingService;
             _gameService = gameService;
-            // Dictionary<int, Wave> waves = new Dictionary<int, Wave>();
-            // Console.WriteLine(JsonConvert.SerializeObject(waves));
             Console.WriteLine("\n-----------------------InGameHub Init----------------------");
         }
         
@@ -131,6 +129,12 @@ namespace Game_Realtime.Hubs
 
                     await _gameService.GetGameInfo(gameId, senderId, Context.ConnectionId);
                     
+                    break;
+                case ActionId.UpdateMonsterPosition:
+                    UpdateMonsterPositionData updatePosition = JsonConvert.DeserializeObject<UpdateMonsterPositionData>(data.ToString())!;
+
+                    await _gameService.UpdateMonsterPosition(gameId, updatePosition);
+
                     break;
 
             }
