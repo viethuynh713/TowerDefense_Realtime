@@ -1,960 +1,4235 @@
 [{
   "_id": {
-    "$oid": "6453df7c7024d543707cc696"
+    "$oid": "64b26533db1272013e92d4a6"
   },
-  "CardId": "0e47c4ae-ff6d-4785-b98f-002a537055f2",
-  "CardName": "Cyber",
+  "CardId": "32c13273-b6e7-4061-aaf6-f957c50f0cba",
+  "CardName": "Slime",
+  "Energy": 12,
   "CardStar": 0,
   "TypeOfCard": 2,
   "CardRarity": 2
 },
 {
   "_id": {
-    "$oid": "6453dfb87024d543707cc697"
+    "$oid": "64b26533db1272013e92d4a7"
   },
-  "CardId": "2ee83ffe-62fb-45b6-abdc-6b77df579697",
-  "CardName": "Cyber",
-  "CardStar": 4,
-  "TypeOfCard": 2,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb87024d543707cc698"
-  },
-  "CardId": "8788c311-62ef-4881-9edd-3d330d7c847c",
-  "CardName": "Cyber",
-  "CardStar": 3,
-  "TypeOfCard": 2,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb87024d543707cc699"
-  },
-  "CardId": "85f73478-fb31-4a0c-a101-dcc7ce5acb97",
-  "CardName": "Cyber",
-  "CardStar": 4,
+  "CardId": "d669cf03-b5ed-4d18-9a57-eb5bcc8c4ece",
+  "CardName": "Golem",
+  "Energy": 15,
+  "CardStar": 1,
   "TypeOfCard": 2,
   "CardRarity": 2
 },
 {
   "_id": {
-    "$oid": "6453dfb87024d543707cc69a"
+    "$oid": "64b26533db1272013e92d4a9"
   },
-  "CardId": "f63923a6-c429-44a8-ad3b-240454d4e982",
-  "CardName": "Cyber",
+  "CardId": "80169078-32c2-421a-9f8b-6176b92158da",
+  "CardName": "Slime",
+  "Energy": 12,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4aa"
+  },
+  "CardId": "07a10dc6-80c9-4e42-b2bc-4d58973bf5c6",
+  "CardName": "Slime",
+  "Energy": 14,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4ab"
+  },
+  "CardId": "afc0810d-5865-430f-af65-9643489ca530",
+  "CardName": "Slime",
+  "Energy": 12,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4ac"
+  },
+  "CardId": "beb956ba-98df-45ab-98a1-ea1a1dbdf645",
+  "CardName": "Slime",
+  "Energy": 10,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4af"
+  },
+  "CardId": "aa93437e-2a01-4db1-811d-840d3bc66a10",
+  "CardName": "Golem",
+  "Energy": 12,
+  "CardStar": 5,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4a8"
+  },
+  "CardId": "1072d35f-02db-4e69-b8c4-913225124499",
+  "CardName": "Slime",
+  "Energy": 16,
   "CardStar": 1,
   "TypeOfCard": 2,
   "CardRarity": 4
 },
 {
   "_id": {
-    "$oid": "6453dfb87024d543707cc69b"
+    "$oid": "64b26533db1272013e92d4ae"
   },
-  "CardId": "02dc58b9-11b2-4094-aac7-a8f21b114790",
-  "CardName": "Cyber",
+  "CardId": "615472b3-36f3-4717-888d-54a30d0fc576",
+  "CardName": "Slime",
+  "Energy": 16,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4ad"
+  },
+  "CardId": "4b041372-906b-4653-b6a7-2c01b1cdb69e",
+  "CardName": "Slime",
+  "Energy": 16,
+  "CardStar": 5,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4b1"
+  },
+  "CardId": "5668ddbe-169a-4e94-8ca4-28add66d47f8",
+  "CardName": "Slime",
+  "Energy": 16,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4b0"
+  },
+  "CardId": "02947c90-83f1-436a-a570-5aae6a8fefe1",
+  "CardName": "Golem",
+  "Energy": 12,
   "CardStar": 0,
   "TypeOfCard": 2,
   "CardRarity": 1
 },
 {
   "_id": {
-    "$oid": "6453dfb87024d543707cc69c"
+    "$oid": "64b26533db1272013e92d4b2"
   },
-  "CardId": "3e205625-41f5-455e-9363-4396e9efa8c9",
-  "CardName": "Cyber",
-  "CardStar": 2,
-  "TypeOfCard": 2,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfb87024d543707cc69d"
-  },
-  "CardId": "986e4b53-a602-412c-abdd-3ce7a7c471d7",
-  "CardName": "Cyber",
-  "CardStar": 5,
-  "TypeOfCard": 2,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb87024d543707cc69e"
-  },
-  "CardId": "bf0e550d-6ead-45e7-9af1-7c6bb2d86de1",
-  "CardName": "Explode Poison",
-  "CardStar": 4,
-  "TypeOfCard": 3,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb87024d543707cc69f"
-  },
-  "CardId": "bff4fbd8-36eb-467d-ac9b-8865ed2dca1b",
+  "CardId": "632bd2a9-d45d-4838-aa36-310157f6ac79",
   "CardName": "Golem",
-  "CardStar": 4,
-  "TypeOfCard": 2,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6a0"
-  },
-  "CardId": "45a2e220-524b-4ac7-b06d-64dfc67c43ec",
-  "CardName": "Golem",
-  "CardStar": 3,
-  "TypeOfCard": 2,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6a1"
-  },
-  "CardId": "0896a8b7-cff0-4a03-8633-36ddb17efef3",
-  "CardName": "Golem",
-  "CardStar": 2,
-  "TypeOfCard": 2,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6a2"
-  },
-  "CardId": "0dc946c1-8c8a-4eff-818b-673b3e001971",
-  "CardName": "Diamond Tower",
-  "CardStar": 3,
-  "TypeOfCard": 1,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6a3"
-  },
-  "CardId": "51957f85-9382-480a-966d-1f86a3406569",
-  "CardName": "Golem",
+  "Energy": 15,
   "CardStar": 0,
   "TypeOfCard": 2,
   "CardRarity": 2
 },
 {
   "_id": {
-    "$oid": "6453dfb97024d543707cc6a5"
+    "$oid": "64b26533db1272013e92d4b3"
   },
-  "CardId": "ac14b3b6-02dc-4636-8e11-132570ac698c",
-  "CardName": "Cyber",
-  "CardStar": 4,
-  "TypeOfCard": 2,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6a4"
-  },
-  "CardId": "a1eec34c-3573-4c2e-82c2-22cfa05981c6",
-  "CardName": "Golem",
-  "CardStar": 5,
-  "TypeOfCard": 2,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6a7"
-  },
-  "CardId": "a834f248-bdf6-41dd-9665-a36e294fda5e",
-  "CardName": "Golem",
-  "CardStar": 5,
-  "TypeOfCard": 2,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6a6"
-  },
-  "CardId": "99a7a1db-e370-4040-81c3-5d4c346fb478",
-  "CardName": "Golem",
-  "CardStar": 1,
-  "TypeOfCard": 2,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6a8"
-  },
-  "CardId": "4fb9a89b-3c8f-4ec3-948f-81b580944705",
-  "CardName": "Explode Poison",
-  "CardStar": 3,
-  "TypeOfCard": 3,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6a9"
-  },
-  "CardId": "2b770545-adaf-4cc6-b5dc-60ada0a3c49c",
-  "CardName": "Golem",
-  "CardStar": 1,
-  "TypeOfCard": 2,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6aa"
-  },
-  "CardId": "d8a35ffe-3bbd-44ff-ae51-5a8bd8800856",
-  "CardName": "Explode Poison",
-  "CardStar": 0,
-  "TypeOfCard": 3,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6ac"
-  },
-  "CardId": "78b3b7d2-76c7-4603-abd8-1548dc8d7b83",
-  "CardName": "Explode Poison",
-  "CardStar": 0,
-  "TypeOfCard": 3,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6ab"
-  },
-  "CardId": "b4e7f18d-3682-4e73-a8a3-b96eb8db1a8c",
-  "CardName": "Diamond Tower",
-  "CardStar": 5,
-  "TypeOfCard": 1,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6ad"
-  },
-  "CardId": "ed4998a4-744b-4516-9e5e-cff3351b17d3",
-  "CardName": "Explode Poison",
-  "CardStar": 5,
-  "TypeOfCard": 3,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6ae"
-  },
-  "CardId": "6c2332cd-42e2-42ae-9e4e-e30a90226932",
-  "CardName": "Golem",
-  "CardStar": 5,
-  "TypeOfCard": 2,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6af"
-  },
-  "CardId": "09e87415-7980-4d35-acea-e90205934e6c",
-  "CardName": "Diamond Tower",
-  "CardStar": 0,
-  "TypeOfCard": 1,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6b1"
-  },
-  "CardId": "370fddbb-438d-4e83-b2bf-450e69d25443",
-  "CardName": "Cyber",
-  "CardStar": 1,
-  "TypeOfCard": 2,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6b0"
-  },
-  "CardId": "c43d11be-c072-4b41-bae7-8acb6974604d",
-  "CardName": "Cyber",
-  "CardStar": 3,
-  "TypeOfCard": 2,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6b3"
-  },
-  "CardId": "6d45721d-9eba-4afe-885b-8d429faead3f",
-  "CardName": "Diamond Tower",
-  "CardStar": 3,
-  "TypeOfCard": 1,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6b6"
-  },
-  "CardId": "013f8313-3cad-44c7-bc25-56ac5ec216d8",
-  "CardName": "Golem",
-  "CardStar": 4,
-  "TypeOfCard": 2,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6b4"
-  },
-  "CardId": "d77f8399-79a0-424c-8432-ed1bca4060af",
-  "CardName": "Golem",
-  "CardStar": 4,
-  "TypeOfCard": 2,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6b8"
-  },
-  "CardId": "d4102b9f-4ccc-4754-8303-b78453bbf166",
-  "CardName": "Explode Poison",
-  "CardStar": 1,
-  "TypeOfCard": 3,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6b5"
-  },
-  "CardId": "ee3aa06e-afbf-46a1-a310-5807a1fcc29c",
-  "CardName": "Golem",
-  "CardStar": 1,
-  "TypeOfCard": 2,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6b7"
-  },
-  "CardId": "d86ec1e0-7149-4eb1-b0e5-df9ed88965f2",
-  "CardName": "Explode Poison",
-  "CardStar": 2,
-  "TypeOfCard": 3,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6b2"
-  },
-  "CardId": "9e6e7689-3542-45ba-ab4a-0788fb5df24a",
-  "CardName": "Diamond Tower",
-  "CardStar": 3,
-  "TypeOfCard": 1,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6b9"
-  },
-  "CardId": "c6fc1535-f6c0-4694-a305-c2c35f1e65a1",
-  "CardName": "Explode Poison",
-  "CardStar": 2,
-  "TypeOfCard": 3,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6ba"
-  },
-  "CardId": "01ab28d7-8362-4747-82db-df118b3bcd47",
-  "CardName": "Explode Poison",
-  "CardStar": 5,
-  "TypeOfCard": 3,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6bc"
-  },
-  "CardId": "6d480a38-8ec6-4a4d-9f14-78bc98f44a87",
-  "CardName": "Cyber",
-  "CardStar": 3,
-  "TypeOfCard": 2,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6bf"
-  },
-  "CardId": "acb777a0-4abc-45a9-90c7-15ea01ed3c7b",
-  "CardName": "Cyber",
-  "CardStar": 2,
-  "TypeOfCard": 2,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6be"
-  },
-  "CardId": "9c30e204-4426-46ef-bfcc-3eebb727e29f",
-  "CardName": "Golem",
-  "CardStar": 2,
-  "TypeOfCard": 2,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6c0"
-  },
-  "CardId": "9aa575cc-78f8-4f61-955c-43a5589fa3cd",
-  "CardName": "Cyber",
-  "CardStar": 5,
-  "TypeOfCard": 2,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6c1"
-  },
-  "CardId": "f1ef9117-a248-4db8-9447-4072ee2b7e29",
-  "CardName": "Explode Poison",
-  "CardStar": 1,
-  "TypeOfCard": 3,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6c2"
-  },
-  "CardId": "001ac689-b888-4f3e-979c-a8c6891e28f5",
-  "CardName": "Explode Poison",
-  "CardStar": 3,
-  "TypeOfCard": 3,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6c3"
-  },
-  "CardId": "6c82fcb3-622d-4d70-95f1-256b7ccb7a1c",
-  "CardName": "Diamond Tower",
-  "CardStar": 1,
-  "TypeOfCard": 1,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6c5"
-  },
-  "CardId": "78b6f458-9c3f-4237-a4db-301c7122c889",
-  "CardName": "Diamond Tower",
-  "CardStar": 4,
-  "TypeOfCard": 1,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6c4"
-  },
-  "CardId": "7667cf3b-8459-47e7-8b25-de7ffd4f3e5d",
-  "CardName": "Cyber",
+  "CardId": "5c9ba035-d00f-4bbe-b2d4-7362979c020f",
+  "CardName": "Slime",
+  "Energy": 12,
   "CardStar": 3,
   "TypeOfCard": 2,
   "CardRarity": 2
 },
 {
   "_id": {
-    "$oid": "6453dfb97024d543707cc6c6"
+    "$oid": "64b26533db1272013e92d4b5"
   },
-  "CardId": "21934142-e7f2-40c1-aaa0-21e5c789107e",
-  "CardName": "Diamond Tower",
-  "CardStar": 2,
-  "TypeOfCard": 1,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6c7"
-  },
-  "CardId": "ed4b0be0-d993-4ebb-9d15-0afd02f1f17c",
-  "CardName": "Explode Poison",
-  "CardStar": 3,
-  "TypeOfCard": 3,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6c8"
-  },
-  "CardId": "f599d6f7-f966-4658-8dcf-181f80aaeeb3",
-  "CardName": "Golem",
-  "CardStar": 4,
-  "TypeOfCard": 2,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfb97024d543707cc6bb"
-  },
-  "CardId": "19f9f9a7-a106-4780-90ba-5e26c9b3b1fc",
-  "CardName": "Cyber",
-  "CardStar": 0,
-  "TypeOfCard": 2,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6cb"
-  },
-  "CardId": "58eb4169-04e9-4a8e-b6fe-d2d12dffda75",
-  "CardName": "Explode Poison",
-  "CardStar": 4,
-  "TypeOfCard": 3,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6cc"
-  },
-  "CardId": "38842417-c8ae-47d7-afdf-af5afd820677",
-  "CardName": "Golem",
+  "CardId": "2cc7916f-300c-4f18-a3b2-ae07e4597bd7",
+  "CardName": "Slime",
+  "Energy": 14,
   "CardStar": 3,
   "TypeOfCard": 2,
   "CardRarity": 3
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6cd"
+    "$oid": "64b26533db1272013e92d4b6"
   },
-  "CardId": "dd43e6df-77be-493f-b8dd-99607426cfc5",
-  "CardName": "Diamond Tower",
-  "CardStar": 2,
-  "TypeOfCard": 1,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6c9"
-  },
-  "CardId": "bd6757ca-f47e-41cb-a0a5-4e120388fd39",
-  "CardName": "Explode Poison",
-  "CardStar": 0,
-  "TypeOfCard": 3,
+  "CardId": "af742fb1-772a-43b6-84b7-bbc99bab3ace",
+  "CardName": "Slime",
+  "Energy": 12,
+  "CardStar": 5,
+  "TypeOfCard": 2,
   "CardRarity": 2
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6ca"
+    "$oid": "64b26533db1272013e92d4b7"
   },
-  "CardId": "704afc4a-0071-4aa0-8379-d9b78a6f3e8a",
-  "CardName": "Diamond Tower",
+  "CardId": "65e4ecf4-363c-43bd-a22a-c871cae51276",
+  "CardName": "Slime",
+  "Energy": 10,
   "CardStar": 5,
-  "TypeOfCard": 1,
+  "TypeOfCard": 2,
   "CardRarity": 1
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6ce"
+    "$oid": "64b26533db1272013e92d4b8"
   },
-  "CardId": "989f5b35-30e8-472d-999f-877211c5853b",
+  "CardId": "246d597f-40e7-4a0b-aa65-2706cc9ce81e",
+  "CardName": "Slime",
+  "Energy": 10,
+  "CardStar": 3,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4b9"
+  },
+  "CardId": "4c00261a-bd3a-4f20-acec-7aac1a8eec1f",
   "CardName": "Golem",
+  "Energy": 15,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4ba"
+  },
+  "CardId": "7d3c9358-8aee-44f0-9946-8ef1284cdc4f",
+  "CardName": "Slime",
+  "Energy": 10,
+  "CardStar": 0,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4bb"
+  },
+  "CardId": "e5d04cc3-5922-4e05-9ea9-9c6949f794fa",
+  "CardName": "Slime",
+  "Energy": 12,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4bc"
+  },
+  "CardId": "098eeece-d9f6-4ad8-b366-c3f79c864d76",
+  "CardName": "Slime",
+  "Energy": 14,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4bd"
+  },
+  "CardId": "25cba7ea-045c-4c3c-9b97-f491124aa2f3",
+  "CardName": "Slime",
+  "Energy": 14,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4be"
+  },
+  "CardId": "3c5a5ddd-375d-426d-b980-102ebe4634b3",
+  "CardName": "Slime",
+  "Energy": 16,
+  "CardStar": 0,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4bf"
+  },
+  "CardId": "014b77ce-c0a6-4df2-8533-d4b8a48a8eb5",
+  "CardName": "Slime",
+  "Energy": 14,
+  "CardStar": 5,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4c0"
+  },
+  "CardId": "ac280915-3c38-4446-a682-985bf9fe5dfa",
+  "CardName": "Golem",
+  "Energy": 15,
   "CardStar": 3,
   "TypeOfCard": 2,
   "CardRarity": 2
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6cf"
+    "$oid": "64b26533db1272013e92d4c1"
   },
-  "CardId": "5e99b525-bab4-494e-bbe8-75c8c584906a",
-  "CardName": "Cyber",
-  "CardStar": 4,
+  "CardId": "ca58ac97-a46c-4e42-9b6e-02feaaad5fe1",
+  "CardName": "Golem",
+  "Energy": 18,
+  "CardStar": 0,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4c2"
+  },
+  "CardId": "f1b36d15-66d9-4de0-a676-376d48ecaceb",
+  "CardName": "Golem",
+  "Energy": 12,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4c3"
+  },
+  "CardId": "0bebbc63-1336-4648-a24e-2fae18540bdc",
+  "CardName": "Golem",
+  "Energy": 18,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4c4"
+  },
+  "CardId": "b369018a-f0e5-4a9a-bb16-f3d21aeda63a",
+  "CardName": "Dog",
+  "Energy": 14,
+  "CardStar": 0,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4cd"
+  },
+  "CardId": "538bece9-473f-443a-af52-248860955415",
+  "CardName": "Golem",
+  "Energy": 21,
+  "CardStar": 2,
   "TypeOfCard": 2,
   "CardRarity": 4
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6d0"
+    "$oid": "64b26533db1272013e92d4c7"
   },
-  "CardId": "f6792167-89c5-495b-b2be-a6498da28218",
-  "CardName": "Explode Poison",
+  "CardId": "91a7459d-5d4f-4f3b-90ef-5901a2f1b331",
+  "CardName": "Golem",
+  "Energy": 15,
   "CardStar": 5,
-  "TypeOfCard": 3,
-  "CardRarity": 1
+  "TypeOfCard": 2,
+  "CardRarity": 2
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6d1"
+    "$oid": "64b26533db1272013e92d4c5"
   },
-  "CardId": "9c0c8f52-13b3-4227-933e-9be22718d7af",
-  "CardName": "Diamond Tower",
-  "CardStar": 0,
-  "TypeOfCard": 1,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6d3"
-  },
-  "CardId": "3aeab76b-bad0-43fa-9320-4cd43f1166f4",
-  "CardName": "Diamond Tower",
-  "CardStar": 4,
-  "TypeOfCard": 1,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6d2"
-  },
-  "CardId": "5d8a94b0-94a5-48ad-87ca-b6785904d567",
-  "CardName": "Explode Poison",
-  "CardStar": 4,
-  "TypeOfCard": 3,
+  "CardId": "31489195-48cf-4977-aede-45c4a43ebaca",
+  "CardName": "Golem",
+  "Energy": 18,
+  "CardStar": 2,
+  "TypeOfCard": 2,
   "CardRarity": 3
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6d4"
+    "$oid": "64b26533db1272013e92d4c6"
   },
-  "CardId": "c3dada12-2d2f-43a0-b79f-721a03a28378",
+  "CardId": "58f6d32f-842a-43f8-87cf-a8d1ed1ddd21",
   "CardName": "Golem",
-  "CardStar": 0,
+  "Energy": 18,
+  "CardStar": 3,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4c9"
+  },
+  "CardId": "086839ee-8ec9-489a-822f-14e9c1f657ef",
+  "CardName": "Dog",
+  "Energy": 14,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4cc"
+  },
+  "CardId": "e3942ac4-5822-490f-95b4-2eb995ecc2b8",
+  "CardName": "Golem",
+  "Energy": 18,
+  "CardStar": 5,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4cb"
+  },
+  "CardId": "9082c513-4fd8-47a2-9e46-5e39248f645f",
+  "CardName": "Dog",
+  "Energy": 14,
+  "CardStar": 5,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26533db1272013e92d4c8"
+  },
+  "CardId": "d3c0a553-cbd7-4de5-901b-38298bb1cd20",
+  "CardName": "Golem",
+  "Energy": 21,
+  "CardStar": 5,
   "TypeOfCard": 2,
   "CardRarity": 4
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6d5"
+    "$oid": "64b26533db1272013e92d4ca"
   },
-  "CardId": "325f786f-0a18-4d53-b3ee-f043245896f7",
-  "CardName": "Cyber",
-  "CardStar": 2,
-  "TypeOfCard": 2,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6d6"
-  },
-  "CardId": "30d3e977-612b-4f65-b3c1-b665453d1606",
-  "CardName": "Diamond Tower",
-  "CardStar": 4,
-  "TypeOfCard": 1,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6d7"
-  },
-  "CardId": "64f88c92-b80e-4b1e-8903-1835d3b9b2d0",
-  "CardName": "Explode Poison",
-  "CardStar": 2,
-  "TypeOfCard": 3,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6d9"
-  },
-  "CardId": "f3b72aea-0cd4-4a55-aa8e-a177c2d69877",
-  "CardName": "Diamond Tower",
-  "CardStar": 4,
-  "TypeOfCard": 1,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6d8"
-  },
-  "CardId": "2b0d4add-8b84-4fbe-9ae3-94f55dd77c1d",
+  "CardId": "57a735c7-982f-44bd-b239-162345293fd8",
   "CardName": "Golem",
+  "Energy": 18,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26534db1272013e92d4ce"
+  },
+  "CardId": "46a5cc6a-80ed-46e5-88a9-03afadc9fa73",
+  "CardName": "Golem",
+  "Energy": 21,
   "CardStar": 3,
   "TypeOfCard": 2,
   "CardRarity": 4
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6dc"
+    "$oid": "64b26534db1272013e92d4cf"
   },
-  "CardId": "bdbc8e0b-365b-40b2-94e5-7e7850421d91",
-  "CardName": "Diamond Tower",
-  "CardStar": 5,
-  "TypeOfCard": 1,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6da"
-  },
-  "CardId": "54a377ba-7803-47db-836c-609a41af3f89",
+  "CardId": "f2c211fa-eab8-44d2-b6ac-102261c32f3a",
   "CardName": "Golem",
-  "CardStar": 2,
+  "Energy": 21,
+  "CardStar": 0,
   "TypeOfCard": 2,
   "CardRarity": 4
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6db"
+    "$oid": "64b26534db1272013e92d4d2"
   },
-  "CardId": "ebc27d10-ef1e-4eec-97bf-9e591bebb3e6",
-  "CardName": "Diamond Tower",
-  "CardStar": 1,
-  "TypeOfCard": 1,
+  "CardId": "b921fedc-a3dc-45e5-8efa-ebd624c25a93",
+  "CardName": "Dog",
+  "Energy": 14,
+  "CardStar": 3,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26534db1272013e92d4d0"
+  },
+  "CardId": "97f97be4-86d3-4411-b6b7-6329b3521170",
+  "CardName": "Slime",
+  "Energy": 16,
+  "CardStar": 3,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26534db1272013e92d4d1"
+  },
+  "CardId": "93ab466b-139e-4772-ac85-4ab7e5b1e255",
+  "CardName": "Slime",
+  "Energy": 14,
+  "CardStar": 0,
+  "TypeOfCard": 2,
   "CardRarity": 3
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6dd"
+    "$oid": "64b26533db1272013e92d4b4"
   },
-  "CardId": "35c9c72b-3aac-44f9-9b0b-f42195a41add",
+  "CardId": "4d124e24-e4b4-4ec0-a2e5-d5dacd1b052e",
+  "CardName": "Slime",
+  "Energy": 10,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26534db1272013e92d4d3"
+  },
+  "CardId": "e3a29d72-c89c-4cc9-bbcf-e11ecacf23ef",
   "CardName": "Golem",
+  "Energy": 15,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4d4"
+  },
+  "CardId": "318bfbf8-dd76-41b5-acff-80f6b12d07f3",
+  "CardName": "Dog",
+  "Energy": 15,
+  "CardStar": 3,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4d5"
+  },
+  "CardId": "1e469ead-05d5-4190-81c4-34336af81bc2",
+  "CardName": "Golem",
+  "Energy": 12,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4d6"
+  },
+  "CardId": "20f5c5f0-f859-4356-bf72-b873ec7766e6",
+  "CardName": "Dog",
+  "Energy": 15,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4d8"
+  },
+  "CardId": "e44e36c0-475c-4ee4-8ec4-a5f4eb2174c3",
+  "CardName": "Slime",
+  "Energy": 10,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4d7"
+  },
+  "CardId": "1cf8cadc-de8b-4c83-96f2-1b6e4f528f70",
+  "CardName": "Dog",
+  "Energy": 15,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4da"
+  },
+  "CardId": "91444b08-5ba9-48e2-be34-94c2518d79d3",
+  "CardName": "Dog",
+  "Energy": 15,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4d9"
+  },
+  "CardId": "1e86ca42-616a-4654-9ad6-e9cc40f5819e",
+  "CardName": "Golem",
+  "Energy": 21,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4db"
+  },
+  "CardId": "443d7e7e-bc72-4e9e-af83-2a2e78fe73ad",
+  "CardName": "Dog",
+  "Energy": 15,
+  "CardStar": 3,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4dc"
+  },
+  "CardId": "c4b07495-e49e-45e3-b57f-af4b355f712b",
+  "CardName": "Dog",
+  "Energy": 15,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4dd"
+  },
+  "CardId": "69fed93f-9b42-47c8-9d3c-345468d96abb",
+  "CardName": "Golem",
+  "Energy": 21,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4de"
+  },
+  "CardId": "3d584807-c8f6-43bb-bbce-bcc3e8024c66",
+  "CardName": "Dog",
+  "Energy": 15,
+  "CardStar": 0,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4e0"
+  },
+  "CardId": "47545b62-7f9d-4e5a-8d73-b6ddfe37a9a8",
+  "CardName": "Golem",
+  "Energy": 12,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4df"
+  },
+  "CardId": "ed75b01b-e08d-4f52-9c0e-7af5ae8dfe22",
+  "CardName": "Wizard",
+  "Energy": 15,
+  "CardStar": 0,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4e1"
+  },
+  "CardId": "ce73d95b-dea1-4b82-9313-25de6a9bde83",
+  "CardName": "Explode",
+  "Energy": 0,
   "CardStar": 5,
-  "TypeOfCard": 2,
-  "CardRarity": 4
+  "TypeOfCard": 3,
+  "CardRarity": 1
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6de"
+    "$oid": "64b26535db1272013e92d4e2"
   },
-  "CardId": "64aa9074-9d6d-45e5-9c47-75556b5622a1",
-  "CardName": "Cyber",
-  "CardStar": 0,
+  "CardId": "7356c618-ff50-4395-891d-8f4ee2d31825",
+  "CardName": "Dog",
+  "Energy": 15,
+  "CardStar": 4,
   "TypeOfCard": 2,
-  "CardRarity": 4
+  "CardRarity": 3
 },
 {
   "_id": {
-    "$oid": "6453dfb97024d543707cc6bd"
+    "$oid": "64b26535db1272013e92d4e3"
   },
-  "CardId": "bae963f5-fa92-49b5-b5fa-18df7f52a8d5",
-  "CardName": "Cyber",
-  "CardStar": 1,
-  "TypeOfCard": 2,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6df"
-  },
-  "CardId": "eb75a0e3-6775-4130-873a-526910314c92",
-  "CardName": "Explode Poison",
-  "CardStar": 1,
+  "CardId": "229819be-30cd-45f8-b09e-b15c7eea389b",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 5,
   "TypeOfCard": 3,
   "CardRarity": 2
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6e0"
+    "$oid": "64b26535db1272013e92d4e4"
   },
-  "CardId": "75e383ae-4158-4a2a-a13f-e11b402c8455",
-  "CardName": "Explode Poison",
-  "CardStar": 0,
-  "TypeOfCard": 3,
-  "CardRarity": 4
+  "CardId": "91b10c2d-b4e1-4633-92ef-a9637c4bd598",
+  "CardName": "Dog",
+  "Energy": 14,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 1
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6e1"
+    "$oid": "64b26535db1272013e92d4e5"
   },
-  "CardId": "7e01764f-0d1a-4f8b-9bb2-17214171ecd0",
-  "CardName": "Explode Poison",
+  "CardId": "ad25428a-7f48-4a56-bf42-c69dd0f0edd9",
+  "CardName": "Freeze",
+  "Energy": 0,
   "CardStar": 4,
   "TypeOfCard": 3,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6e3"
-  },
-  "CardId": "2bf570ee-a62d-4d59-9db4-1e97d519e7ce",
-  "CardName": "Diamond Tower",
-  "CardStar": 1,
-  "TypeOfCard": 1,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6e2"
-  },
-  "CardId": "f1d7be0c-6066-414a-ae22-9c9a562abd33",
-  "CardName": "Diamond Tower",
-  "CardStar": 2,
-  "TypeOfCard": 1,
-  "CardRarity": 4
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6e6"
-  },
-  "CardId": "d5899c47-d0d2-4ac0-a53f-735e7202925e",
-  "CardName": "Explode Poison",
-  "CardStar": 2,
-  "TypeOfCard": 3,
-  "CardRarity": 2
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6e5"
-  },
-  "CardId": "785ff582-2c2d-401e-8e9e-98442dff8254",
-  "CardName": "Golem",
-  "CardStar": 1,
-  "TypeOfCard": 2,
   "CardRarity": 3
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6e4"
+    "$oid": "64b26535db1272013e92d4e6"
   },
-  "CardId": "5562d935-c2b8-436e-8987-f4c2a1afb07e",
-  "CardName": "Golem",
+  "CardId": "355c3e55-f140-4d41-a3da-b613b5f92c91",
+  "CardName": "Heal",
+  "Energy": 0,
   "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4e7"
+  },
+  "CardId": "85576709-34d3-47e8-9499-825cb13738a7",
+  "CardName": "Wizard",
+  "Energy": 13,
+  "CardStar": 4,
   "TypeOfCard": 2,
   "CardRarity": 1
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6e7"
+    "$oid": "64b26535db1272013e92d4e8"
   },
-  "CardId": "449b9646-8dad-4b1c-aa3c-c675a36d7847",
-  "CardName": "Golem",
-  "CardStar": 2,
-  "TypeOfCard": 2,
-  "CardRarity": 1
-},
-{
-  "_id": {
-    "$oid": "6453dfba7024d543707cc6e8"
-  },
-  "CardId": "b3548c41-b270-4dcc-99a0-d4d59442b7ce",
-  "CardName": "Explode Poison",
-  "CardStar": 1,
+  "CardId": "09727ed9-380d-4089-b27d-967a6ea97e97",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 5,
   "TypeOfCard": 3,
   "CardRarity": 1
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6e9"
+    "$oid": "64b26535db1272013e92d4e9"
   },
-  "CardId": "d7ff16ab-246d-4fb9-afb6-259e696d5ba4",
-  "CardName": "Cyber",
-  "CardStar": 2,
-  "TypeOfCard": 2,
+  "CardId": "fed9e56a-b32d-4c5b-92b8-2fc7daaafacf",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
   "CardRarity": 1
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6ea"
+    "$oid": "64b26535db1272013e92d4ea"
   },
-  "CardId": "7bdcd349-5106-470f-b94e-89b43d717292",
-  "CardName": "Explode Poison",
+  "CardId": "80345efe-2e94-421f-b3d4-7543bc8419fe",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4eb"
+  },
+  "CardId": "66f31db7-bb30-4ef6-9a31-304937aa61b8",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4ec"
+  },
+  "CardId": "66fc5cab-196f-4222-8fde-454a98700365",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4ed"
+  },
+  "CardId": "95c74e4c-a938-417d-a2f7-01ed824c7a21",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4ef"
+  },
+  "CardId": "b73c1538-f05d-4cb0-b74e-6d1df4bdee6d",
+  "CardName": "Speed",
+  "Energy": 0,
   "CardStar": 3,
   "TypeOfCard": 3,
   "CardRarity": 3
 },
 {
   "_id": {
-    "$oid": "6453dfba7024d543707cc6eb"
+    "$oid": "64b26535db1272013e92d4ee"
   },
-  "CardId": "5c1b787d-5132-4c46-be5c-83a50ecc9a2d",
-  "CardName": "Diamond Tower",
-  "CardStar": 5,
-  "TypeOfCard": 1,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfbb7024d543707cc6ec"
-  },
-  "CardId": "deb6e1e5-1897-4ef6-9e24-37fae44368bf",
-  "CardName": "Cyber",
-  "CardStar": 1,
+  "CardId": "4553ecc1-f42d-4c5a-8f5d-53c287fcecb8",
+  "CardName": "Wizard",
+  "Energy": 15,
+  "CardStar": 3,
   "TypeOfCard": 2,
   "CardRarity": 3
 },
 {
   "_id": {
-    "$oid": "6453dfbb7024d543707cc6ed"
+    "$oid": "64b26535db1272013e92d4f0"
   },
-  "CardId": "fd4c6d60-005b-45d5-aeef-aba186dedb93",
-  "CardName": "Diamond Tower",
+  "CardId": "cabae695-6942-46b8-8d3b-01f75dbaeb25",
+  "CardName": "Dog",
+  "Energy": 16,
   "CardStar": 4,
-  "TypeOfCard": 1,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfbb7024d543707cc6ee"
-  },
-  "CardId": "48925007-f86d-436f-a612-c45e1d3119ef",
-  "CardName": "Cyber",
-  "CardStar": 5,
-  "TypeOfCard": 2,
-  "CardRarity": 3
-},
-{
-  "_id": {
-    "$oid": "6453dfbb7024d543707cc6ef"
-  },
-  "CardId": "4c8959a1-1380-44cf-9e2c-8b2fc043b9d3",
-  "CardName": "Cyber",
-  "CardStar": 5,
   "TypeOfCard": 2,
   "CardRarity": 4
 },
 {
   "_id": {
-    "$oid": "6453dfbb7024d543707cc6f0"
+    "$oid": "64b26535db1272013e92d4f1"
   },
-  "CardId": "0792f2ec-4f15-4d6c-a41f-fb8e7f8351a8",
-  "CardName": "Diamond Tower",
-  "CardStar": 0,
-  "TypeOfCard": 1,
+  "CardId": "2092b1d8-2dda-4086-9b43-2b399c3fd751",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
   "CardRarity": 3
 },
 {
   "_id": {
-    "$oid": "6453dfbb7024d543707cc6f2"
+    "$oid": "64b26535db1272013e92d4f2"
   },
-  "CardId": "9c55d36f-2504-4e7e-94f2-fcbe66f53b04",
-  "CardName": "Diamond Tower",
-  "CardStar": 2,
-  "TypeOfCard": 1,
+  "CardId": "2461a9e1-2811-458e-ba68-9835aab10de4",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4f3"
+  },
+  "CardId": "5b15fa55-7bcb-4da0-81be-114c545be632",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4f4"
+  },
+  "CardId": "a8290c06-e285-4485-ae87-8e3500aecf2d",
+  "CardName": "Wizard",
+  "Energy": 14,
+  "CardStar": 5,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4f5"
+  },
+  "CardId": "c36a4591-e361-4fc8-b591-2cfec0027017",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
   "CardRarity": 1
 },
 {
   "_id": {
-    "$oid": "6453dfbb7024d543707cc6f1"
+    "$oid": "64b26535db1272013e92d4f6"
   },
-  "CardId": "7d01524c-31b3-44fa-904b-c4f8a375b2cf",
-  "CardName": "Diamond Tower",
+  "CardId": "fe680486-56a9-42ad-ae75-4a7fb627f7eb",
+  "CardName": "Dog",
+  "Energy": 16,
   "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4f7"
+  },
+  "CardId": "30fce4e6-6db1-4014-8f7e-684d7beb258f",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4f8"
+  },
+  "CardId": "b27729e5-9789-4e51-b847-e77e04b8b577",
+  "CardName": "Wizard",
+  "Energy": 15,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4f9"
+  },
+  "CardId": "0478625a-93a9-4146-8d21-0fa5fcfe1f29",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4fa"
+  },
+  "CardId": "8693dcbc-b11e-4ada-811d-4a4cac5e2b1c",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4fb"
+  },
+  "CardId": "65a89936-20a2-4ba1-beb3-547d53e33bf2",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4fc"
+  },
+  "CardId": "ceeccff2-83f9-474f-ba55-11b385210d75",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4fe"
+  },
+  "CardId": "a14b0bbf-458c-4035-ac30-be66dd49761e",
+  "CardName": "Dog",
+  "Energy": 15,
+  "CardStar": 5,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4fd"
+  },
+  "CardId": "9b88ee2b-d958-4893-b7e2-f55323d89484",
+  "CardName": "Wizard",
+  "Energy": 15,
+  "CardStar": 5,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d4ff"
+  },
+  "CardId": "557e0b6c-a4dc-433b-8e38-9f3c60bba9d9",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d500"
+  },
+  "CardId": "68c8de14-0a77-403b-a4d4-675b1b82aa95",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d501"
+  },
+  "CardId": "d2990e78-c7ab-4a5f-83e2-714bb1bedd39",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d502"
+  },
+  "CardId": "23f176c2-8002-48ea-94e6-fba2fcde6a1e",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d503"
+  },
+  "CardId": "06c675ee-de3e-436e-bdf5-433aa73e5574",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d505"
+  },
+  "CardId": "a3e4c690-82ec-4339-9972-bd1e13609eed",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d509"
+  },
+  "CardId": "2256bfcd-e22f-40f9-95e6-97e297a7b672",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 0,
   "TypeOfCard": 1,
   "CardRarity": 4
 },
 {
   "_id": {
-    "$oid": "6453dfbb7024d543707cc6f3"
+    "$oid": "64b26535db1272013e92d507"
   },
-  "CardId": "d7fb68f1-9adb-4127-b5a7-6432ecefd319",
-  "CardName": "Diamond Tower",
+  "CardId": "41168664-459d-478a-a726-f5ac54490786",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d516"
+  },
+  "CardId": "857a5a6d-be22-42d7-802c-6e9f807b1aca",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d517"
+  },
+  "CardId": "c37d5df5-454a-4b17-9bc1-53347a7fb05c",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d50f"
+  },
+  "CardId": "3b20c657-029f-40a4-aee2-9163f1aad007",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d515"
+  },
+  "CardId": "5b711b63-df9c-41e6-9fd2-eaf8865cd6c4",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d512"
+  },
+  "CardId": "ee2d2f00-64ef-4586-8d74-ce7e7cb21c84",
+  "CardName": "Wizard",
+  "Energy": 13,
+  "CardStar": 5,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d50d"
+  },
+  "CardId": "6e904f38-d9ce-46ea-894b-6bc4c7d32fc0",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d508"
+  },
+  "CardId": "aba8c412-923f-4e98-b880-2736de0f6b3a",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d50b"
+  },
+  "CardId": "52d929dc-7dae-4f7b-8b4a-b7b499d14fb1",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d50e"
+  },
+  "CardId": "ea5ad013-03ed-4800-a975-d3acd651d858",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d504"
+  },
+  "CardId": "d67aa8c4-fb45-4dac-9ec6-ab4150a25020",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d50a"
+  },
+  "CardId": "9f186a3a-c2bd-4208-b42a-962b4b6394d3",
+  "CardName": "Dog",
+  "Energy": 16,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d514"
+  },
+  "CardId": "560c2f3b-0d1b-4664-b108-c7629ccbea76",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d511"
+  },
+  "CardId": "e24d268a-9565-46e5-bf21-4f8d0fbdd89c",
+  "CardName": "Crossbow",
+  "Energy": 0,
   "CardStar": 0,
   "TypeOfCard": 1,
   "CardRarity": 2
 },
 {
   "_id": {
-    "$oid": "6453dfbb7024d543707cc6f4"
+    "$oid": "64b26535db1272013e92d50c"
   },
-  "CardId": "6fe5103f-633c-41c6-a339-83c26f9853d3",
-  "CardName": "Golem",
+  "CardId": "2d5e1d16-c3eb-4269-817d-73a96886fad4",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d506"
+  },
+  "CardId": "f0cc2633-ef62-49d5-a4f0-935d17562ecb",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d510"
+  },
+  "CardId": "03484b44-e1b2-43e7-a921-a7935f85a1e4",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26535db1272013e92d513"
+  },
+  "CardId": "5912f133-1683-4cff-83f4-931a5355a3b2",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d518"
+  },
+  "CardId": "5199d180-96b5-440e-be6b-c1647ceade68",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d519"
+  },
+  "CardId": "22807016-d1ed-41be-af2b-70cc92d58294",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d51c"
+  },
+  "CardId": "8dc666dc-0bfa-4337-84cb-a7563fcf6f3f",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d51b"
+  },
+  "CardId": "fd69bad5-4cf4-435f-96be-8088cce9f5fd",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d51f"
+  },
+  "CardId": "244c1ec6-66ff-4cd1-888c-a2dfd30b4eea",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d534"
+  },
+  "CardId": "4d3816eb-98db-4525-99a1-9d98573fb52e",
+  "CardName": "Wizard",
+  "Energy": 16,
+  "CardStar": 5,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d51e"
+  },
+  "CardId": "e839ab0c-03fc-4b3c-a88a-ddd5fa19b8dd",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d52d"
+  },
+  "CardId": "3091d268-6fde-43d1-88c6-c029834afb1d",
+  "CardName": "Wizard",
+  "Energy": 13,
+  "CardStar": 0,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d538"
+  },
+  "CardId": "37b124f9-7f6d-4020-a457-52a0a0b683bf",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d522"
+  },
+  "CardId": "16812585-ee74-4ad7-bb45-db58651ca801",
+  "CardName": "Dog",
+  "Energy": 16,
+  "CardStar": 0,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d52b"
+  },
+  "CardId": "55540b62-c5a6-4c29-b353-7be0df34231a",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d521"
+  },
+  "CardId": "322ca944-709e-44f2-b078-aae9374bfc27",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d53a"
+  },
+  "CardId": "0ae0fffb-cfa6-406d-9a6b-a55b2f9846bf",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d51d"
+  },
+  "CardId": "7f211a7a-596d-4abb-9dd6-701f4ec95496",
+  "CardName": "Wizard",
+  "Energy": 14,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d526"
+  },
+  "CardId": "99c83ff9-de5a-4331-b851-c065f64d59c0",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d52c"
+  },
+  "CardId": "730c549f-6056-486a-b8dd-31fa75dfdcc9",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d532"
+  },
+  "CardId": "e80cec0a-b2e5-450d-872c-a3eab376821e",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d52e"
+  },
+  "CardId": "957b6c9c-c43c-42d8-a3ea-65cb3bfeb828",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d529"
+  },
+  "CardId": "ff61419f-25e0-451c-bbfd-79c587c77534",
+  "CardName": "Wizard",
+  "Energy": 16,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d531"
+  },
+  "CardId": "ae24a9f5-e588-4690-972d-300e1c64598e",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d520"
+  },
+  "CardId": "6e68c49b-b44c-4f35-bb49-5b01c0a4ac3a",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d527"
+  },
+  "CardId": "b5f78508-e595-492e-9b01-cc5452439e19",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d55a"
+  },
+  "CardId": "af2b622b-24af-49b7-9683-d910de6231bc",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d558"
+  },
+  "CardId": "4a8e7148-3690-4d64-81ae-aafddfa87ccd",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d524"
+  },
+  "CardId": "c80944eb-104d-46d2-a3d4-3c9d5685d8c7",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d536"
+  },
+  "CardId": "04266494-88b5-44d7-8da4-70b82b58dd49",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d55b"
+  },
+  "CardId": "c651c742-3765-4cff-b2ca-faf988cc6942",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d55c"
+  },
+  "CardId": "269585f0-e7a2-4cd5-92b0-b1ae07f34fa6",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d55e"
+  },
+  "CardId": "ce2678f7-c5c2-4cd7-b5d0-9d7deafc9fed",
+  "CardName": "Wizard",
+  "Energy": 16,
+  "CardStar": 3,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d55d"
+  },
+  "CardId": "fd320c04-550a-492f-b5db-dc49621df36a",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d530"
+  },
+  "CardId": "3b578ea7-3bc8-425d-91b9-2c8e044a4991",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d533"
+  },
+  "CardId": "460e4f53-ca63-43cb-a7dd-38404411b36b",
+  "CardName": "Wizard",
+  "Energy": 14,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d54e"
+  },
+  "CardId": "ffa4d50c-707e-4fc6-9214-adbcdcee5e80",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d52f"
+  },
+  "CardId": "5449b97f-3c40-4728-8dee-5faf5cbbb457",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d537"
+  },
+  "CardId": "57e65c19-5bba-442b-9ede-f4e45cedcd88",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d55f"
+  },
+  "CardId": "a8534a39-29c9-4861-a60d-38947ea0e455",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d535"
+  },
+  "CardId": "5261e2e1-11dc-4aa2-b655-da83bd302024",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d560"
+  },
+  "CardId": "e2f9a0d3-1883-4d4c-87e7-603fce9553e3",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d539"
+  },
+  "CardId": "51f2cc6e-3454-433d-a85e-6c4981ac0136",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d554"
+  },
+  "CardId": "9a5fa1ac-9452-4b7b-810a-fe88b7cea77e",
+  "CardName": "Wizard",
+  "Energy": 14,
+  "CardStar": 0,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d559"
+  },
+  "CardId": "37655aa3-bd14-4094-8885-a4b172c8f46a",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d552"
+  },
+  "CardId": "ae5717a0-891c-4018-ba70-8eff27b6df63",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d546"
+  },
+  "CardId": "79e7369c-6dfa-4d68-99aa-cf1b83560f6e",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d54a"
+  },
+  "CardId": "521d6eec-e76f-4a69-8bef-24664ab91b52",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d555"
+  },
+  "CardId": "6999fdd7-ed2e-4d7d-bde1-f5b9a76a8195",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d548"
+  },
+  "CardId": "321d5056-b765-40f4-aca3-a57ae765830c",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d557"
+  },
+  "CardId": "5728b460-6112-4038-b3d5-76403dda3fbb",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d528"
+  },
+  "CardId": "5c7a1674-714f-45f0-8dfe-1b70251b6170",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d54b"
+  },
+  "CardId": "6f45b0b3-11f2-468e-8506-a842f2a77dd3",
+  "CardName": "Wizard",
+  "Energy": 15,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d550"
+  },
+  "CardId": "1cd4842b-ae33-4b56-8b29-3b02e97d4229",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d549"
+  },
+  "CardId": "167e21af-7cdf-443f-ab19-149050326ca1",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d523"
+  },
+  "CardId": "5863cf68-2f98-4ba9-b30c-9dae9228f263",
+  "CardName": "Wizard",
+  "Energy": 16,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d525"
+  },
+  "CardId": "d1a70a9a-1890-4e3a-ae6b-7d534d3cdac2",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d51a"
+  },
+  "CardId": "cbdc2e56-29be-4453-8214-736ca467368e",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d54d"
+  },
+  "CardId": "a46c1df3-dbb0-495d-b66d-65a9c3d42f5d",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d551"
+  },
+  "CardId": "d97538cc-9ee4-4f69-af4f-518e65ec8dce",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d545"
+  },
+  "CardId": "86e5e86e-defc-405a-9cc5-3d465e989414",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d556"
+  },
+  "CardId": "6e2c4a6a-a08a-410d-affe-9daafd6a818f",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d54c"
+  },
+  "CardId": "7c797989-02b5-4eaf-9b7e-fc944797bf2f",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d553"
+  },
+  "CardId": "4da1d35d-36a7-46d1-b465-c550f44b880a",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d54f"
+  },
+  "CardId": "0a0bfd5f-e957-4d60-bc1e-6b0982cfe3d8",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d547"
+  },
+  "CardId": "7dfa4ebc-c03b-489b-8b7c-09a4e2e2df4f",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d56f"
+  },
+  "CardId": "77be881c-76d6-4255-bb94-b7e6cf43dc59",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d574"
+  },
+  "CardId": "e7338aa9-d342-465e-a218-0e8724e3d585",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d573"
+  },
+  "CardId": "55529f66-83c1-4321-8e00-4af309399dea",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d575"
+  },
+  "CardId": "92227c4d-ac1b-413d-99e2-6d01ad8e4688",
+  "CardName": "Dog",
+  "Energy": 16,
+  "CardStar": 3,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d576"
+  },
+  "CardId": "a345ef93-82f5-4c7a-b6aa-2ccb2565968e",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d56c"
+  },
+  "CardId": "40d0e2de-35aa-4bf4-8f85-e5b5fc6d9c31",
+  "CardName": "Wizard",
+  "Energy": 13,
+  "CardStar": 3,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d570"
+  },
+  "CardId": "d6064d75-7b65-4538-8b77-dce15cca9b2a",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d572"
+  },
+  "CardId": "6da37b61-6346-4f25-9aa3-a9e338e557b0",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d578"
+  },
+  "CardId": "cb410401-2177-45ac-9b88-0ff6d9a83f9d",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d57b"
+  },
+  "CardId": "1349e4cd-b3a3-4b3e-97e0-6febf000fbfe",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d579"
+  },
+  "CardId": "4053f183-0ce2-4e61-943e-b31d713585ef",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d57a"
+  },
+  "CardId": "72774568-4aa7-49e7-8caf-22ab5dc37fb9",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d57d"
+  },
+  "CardId": "a990da02-89f6-41a1-9d3e-7b1b8c4a714a",
+  "CardName": "Dog",
+  "Energy": 15,
+  "CardStar": 5,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d57c"
+  },
+  "CardId": "41cf71aa-029a-4453-a81f-cd9a12f8def7",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d52a"
+  },
+  "CardId": "c9eb2ba6-26a4-4a61-8aba-89252ed0ac3f",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d53b"
+  },
+  "CardId": "ec5aaaff-1194-4090-9a59-eb0d6ed13598",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d540"
+  },
+  "CardId": "5269c89b-0a3e-4627-b888-aad2db52ed0a",
+  "CardName": "Dog",
+  "Energy": 15,
   "CardStar": 0,
   "TypeOfCard": 2,
   "CardRarity": 3
 },
 {
   "_id": {
-    "$oid": "6453dfbb7024d543707cc6f5"
+    "$oid": "64b26537db1272013e92d571"
   },
-  "CardId": "43cc1904-23d0-4d50-9567-1bd1cae17445",
-  "CardName": "Explode Poison",
+  "CardId": "59b0a685-cf18-4186-86f6-9676118a6526",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d56e"
+  },
+  "CardId": "6270e23c-8d13-4c29-b58e-97a17c219d94",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d53d"
+  },
+  "CardId": "9c7f67f7-06fe-418a-8009-5b642cc2c8c0",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d53f"
+  },
+  "CardId": "30be478e-60da-487d-8a9e-b895b8acc9b1",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d543"
+  },
+  "CardId": "f7efaa2d-69a0-469f-a619-24e5ed6cfec4",
+  "CardName": "Heal",
+  "Energy": 0,
   "CardStar": 5,
   "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d56d"
+  },
+  "CardId": "289e55a3-ea06-476a-89d5-b3a9ec2c799d",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d585"
+  },
+  "CardId": "6c1504a6-bfbd-4ef3-a319-f19ebf94ebe5",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d587"
+  },
+  "CardId": "bf33d442-facb-49c5-b639-e3cfbf0201cb",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d569"
+  },
+  "CardId": "89db4ccb-9f2a-4a62-a62b-30d6ccf9d707",
+  "CardName": "Wizard",
+  "Energy": 15,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d581"
+  },
+  "CardId": "e44abb6c-f062-4737-b6cf-55680d89f72e",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d582"
+  },
+  "CardId": "788cd5d3-e049-4edd-b7c9-120234466b3c",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d589"
+  },
+  "CardId": "c1cd0ef3-96bf-4162-96e6-331546877ce3",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d583"
+  },
+  "CardId": "8b9e2fe3-0601-43f0-9d82-b24519009323",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d566"
+  },
+  "CardId": "39de2519-2e7e-43a2-b9be-ad0ca84b6338",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d58c"
+  },
+  "CardId": "956bf519-197a-4dd7-b40d-afeee0d8181d",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d58d"
+  },
+  "CardId": "64716f76-201e-4232-86b9-3816487e050e",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d57e"
+  },
+  "CardId": "e3864a59-9ed6-4e75-91cc-a9fb3d8bc832",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d561"
+  },
+  "CardId": "a1e895df-7348-4b27-b66e-f52f6fc2ba7b",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5b3"
+  },
+  "CardId": "f548dbe0-78e7-43d6-92a6-f7e1d6d1df1c",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d584"
+  },
+  "CardId": "26f59e0f-84a1-4454-8ce4-90054cb007b9",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d59a"
+  },
+  "CardId": "081cac07-7789-42b7-a207-e0fc8807b884",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d541"
+  },
+  "CardId": "12d18a2b-e9b7-450a-812b-d9454b4f9823",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d588"
+  },
+  "CardId": "e354d865-3850-441f-92d5-d8859498ccf9",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d58e"
+  },
+  "CardId": "b4318379-eae2-4b59-ae51-372d29c19e21",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d58b"
+  },
+  "CardId": "6fc5e920-fab4-449c-8f16-c767bbd994c7",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d586"
+  },
+  "CardId": "a32bf31e-d3c6-4bd0-b75f-cfc8824528e3",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d544"
+  },
+  "CardId": "9fef758e-5cc4-4dd4-9171-278deb971bcb",
+  "CardName": "Dog",
+  "Energy": 14,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d580"
+  },
+  "CardId": "c9d95c0c-1182-4793-989a-d59a7be64ab0",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d567"
+  },
+  "CardId": "f890b38b-bf9c-40ad-b148-78ed1964b8cb",
+  "CardName": "Wizard",
+  "Energy": 13,
+  "CardStar": 2,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5ba"
+  },
+  "CardId": "ec2c082c-cdfe-485a-94a0-c17874e8ae7b",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d568"
+  },
+  "CardId": "d6a98296-26b0-4f64-b0a8-b76552ba6e76",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5a8"
+  },
+  "CardId": "74dfa5e0-5da9-4847-bd23-17fe45258591",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d57f"
+  },
+  "CardId": "50f2d95b-4fae-4d52-af52-67938af7d528",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d542"
+  },
+  "CardId": "d0d2142c-15ec-4da4-9d3c-6b486557ba81",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5ad"
+  },
+  "CardId": "8891d706-07e8-4094-b233-e28c234b7c5b",
+  "CardName": "Dog",
+  "Energy": 16,
+  "CardStar": 5,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5a3"
+  },
+  "CardId": "fa62d3fa-1fcd-489c-b486-4698a14cb874",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d59e"
+  },
+  "CardId": "85563a9f-457d-450c-81e9-206002bfca34",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d577"
+  },
+  "CardId": "876bd475-cf6e-41b1-ae88-2a6449152b63",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5bf"
+  },
+  "CardId": "80689951-5603-4061-884c-afcb55269a49",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5c0"
+  },
+  "CardId": "b8f451ee-480d-42ed-952b-0a114d910652",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5c2"
+  },
+  "CardId": "c79107f5-df13-4b59-8cda-8014a7942237",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5be"
+  },
+  "CardId": "1897c0f9-e4f6-46d2-9fdf-7cc900729f14",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5c1"
+  },
+  "CardId": "09782a31-2763-4f05-8463-ba8e872b5758",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5c3"
+  },
+  "CardId": "5dc08227-cd63-4fe6-8dcf-dc43887fdf2a",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5b6"
+  },
+  "CardId": "0ca60842-1867-4560-8b5f-e8999df869cf",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5b7"
+  },
+  "CardId": "0d9deccf-8d13-41ab-94b4-8c71c90db9ef",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d599"
+  },
+  "CardId": "7f9de823-9675-48d2-b219-7df942de9fa7",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5c4"
+  },
+  "CardId": "1671c66b-e408-4f2f-8c35-ce06c8834c0a",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5c7"
+  },
+  "CardId": "f5f4d3a7-4365-41f9-9d1f-9d470863acbd",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5c6"
+  },
+  "CardId": "e2a82c19-ff1e-496f-8839-63f965693f77",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d564"
+  },
+  "CardId": "1942308a-eb47-4bee-ba5d-59c9a73175bb",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5b1"
+  },
+  "CardId": "b2ed5ea6-fb14-41cf-bdee-1d48459a679a",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d563"
+  },
+  "CardId": "c1131a5b-a17d-4d2b-911c-3b180258a521",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d595"
+  },
+  "CardId": "0e443847-65b5-4eb4-aaca-1e3ebec753fc",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5cd"
+  },
+  "CardId": "adbdb3c8-27d0-4b13-b519-cda4ae49da93",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5ca"
+  },
+  "CardId": "cf19a4ed-d885-4572-8499-2c26da958d9c",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5cf"
+  },
+  "CardId": "67713e92-db81-4cf9-a056-4637c630248a",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d598"
+  },
+  "CardId": "9618296c-8fd2-43b3-bf59-813f8c3f3e87",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5c5"
+  },
+  "CardId": "9c9b33ac-34db-4b8d-8a20-4eebe76384b1",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5c8"
+  },
+  "CardId": "76d17ecb-2dc3-40f8-9c8d-55e9e586951b",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5d1"
+  },
+  "CardId": "8fc7eee5-3853-418f-ae76-2acf03cec27b",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5cb"
+  },
+  "CardId": "81cf838e-95d8-4c58-a709-e90165576d1c",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5d2"
+  },
+  "CardId": "c45f6a45-0d87-4e8c-b9ba-67cd73438ea8",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d5f8"
+  },
+  "CardId": "8832186a-6499-40d1-8b8f-ac9abe3e14cf",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5d8"
+  },
+  "CardId": "e2f6fbb8-b605-483b-9130-b1260f928ac4",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5b5"
+  },
+  "CardId": "fd150d43-7017-49d3-9959-4bbad77845cd",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5dc"
+  },
+  "CardId": "37da6ce1-0c3a-4c11-8f11-f02de5237f16",
+  "CardName": "Wizard",
+  "Energy": 16,
+  "CardStar": 0,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5da"
+  },
+  "CardId": "f3ebc82d-a132-4feb-8e68-726d8437b965",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d601"
+  },
+  "CardId": "983722e8-82d6-4857-8182-663c1ee84284",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5de"
+  },
+  "CardId": "47759341-262f-4e06-9a6a-f7e9d72ecdbf",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5d4"
+  },
+  "CardId": "3310001d-053b-4222-b0e9-1fc53ce9d43c",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5d6"
+  },
+  "CardId": "08b43493-e5f5-47c1-b68b-9452796d688b",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d5f4"
+  },
+  "CardId": "178e8c5a-ae43-46ef-90ca-ea4217e57c11",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5d7"
+  },
+  "CardId": "864145ee-d988-42b8-94a7-cf93c3a1d4e4",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d5ff"
+  },
+  "CardId": "7e78f7d7-916d-4756-b6e5-b80c1b36a5a0",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5d3"
+  },
+  "CardId": "0e1d3659-f8e6-4653-a75c-f0c6e213442b",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5b9"
+  },
+  "CardId": "b9f41dfe-c0a6-4215-9b1c-751f902eed30",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d5fc"
+  },
+  "CardId": "0bafd2d9-fcdf-4814-9951-1f40925279b0",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5db"
+  },
+  "CardId": "805ffc25-643c-492a-887c-b2440bd5d90a",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d562"
+  },
+  "CardId": "7a626fcf-e32c-48a7-8f12-fc2307c43a05",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d5f9"
+  },
+  "CardId": "71285eea-95bb-4efd-84ea-fa9c6fec8a88",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5e0"
+  },
+  "CardId": "b04fca4a-1a5f-4a17-b7b8-95f2a94932c0",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5d0"
+  },
+  "CardId": "2514fa26-8d06-4495-b6df-0727ee85c9c7",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5dd"
+  },
+  "CardId": "a94f0452-1a05-4829-8b90-3e1707d61b5f",
+  "CardName": "Wizard",
+  "Energy": 14,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d5fb"
+  },
+  "CardId": "0eefe6b2-da35-4d1d-a924-68f5b9f06401",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5cc"
+  },
+  "CardId": "d856a473-dddb-4442-bf0f-a3dbe81f0f72",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5f2"
+  },
+  "CardId": "27b13c5a-3168-48d1-8b9d-f5020b806c96",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5d9"
+  },
+  "CardId": "074bde41-5414-47dd-a013-47d77e3126a5",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d56a"
+  },
+  "CardId": "c2d31163-8c00-4c9e-80d1-aeaebf262e1b",
+  "CardName": "Golem",
+  "Energy": 12,
+  "CardStar": 3,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d596"
+  },
+  "CardId": "3027f2cf-2453-4e95-9ac2-3d52ec10a67d",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d5fa"
+  },
+  "CardId": "9fe1ceb0-bcaa-4354-92c1-cc6cf18c73e7",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5d5"
+  },
+  "CardId": "2d73a895-b0b3-43b9-a284-54b2419297f4",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5c9"
+  },
+  "CardId": "ebd8a95b-e053-480a-a977-73a7dbec8270",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5ce"
+  },
+  "CardId": "7e91c436-0bac-4884-895e-a6d386064dda",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d594"
+  },
+  "CardId": "4e10846f-f4eb-44bd-a297-c714cb627d8f",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d597"
+  },
+  "CardId": "53f99236-b434-4c86-93eb-e3b0033e9f02",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5b0"
+  },
+  "CardId": "bb628feb-043b-4253-a1e6-75b32b162e3c",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d56b"
+  },
+  "CardId": "85e572b4-92f2-4f07-af69-a516383d42e7",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d604"
+  },
+  "CardId": "ae6950e1-c83d-4c8c-aad2-99456f818c0b",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d603"
+  },
+  "CardId": "efccd75c-2806-4898-98c3-e0f2690a1449",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d59c"
+  },
+  "CardId": "a83f8eda-3139-4308-b6f5-5de26d4ae73d",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d605"
+  },
+  "CardId": "1327363f-1222-4d83-97c4-8e8b4171cdba",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5e1"
+  },
+  "CardId": "c912fed8-bcc6-4363-b34c-cc916171b2af",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d606"
+  },
+  "CardId": "9b50e01f-5e81-4dde-8226-748cce4177a4",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5b2"
+  },
+  "CardId": "e99087d9-faf9-4064-9a2d-36b3cbf0c931",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d58f"
+  },
+  "CardId": "59e4ffd2-6d67-464c-80b8-cd7142b8cdd1",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5e9"
+  },
+  "CardId": "66b2d2af-dbe7-4e7b-a147-4b3e6699ec5e",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5ea"
+  },
+  "CardId": "8a199aa5-98ad-4ee5-b6b5-c522cb9e3580",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d59d"
+  },
+  "CardId": "03015dc7-8ac5-4152-a60b-6371f5788328",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5eb"
+  },
+  "CardId": "110857fb-2fbe-4ade-83b5-895eeb8b2e47",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5a4"
+  },
+  "CardId": "4a30dcf8-e590-4872-81e0-53d235d35410",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5ee"
+  },
+  "CardId": "d978ec27-4ca6-4060-9146-84c7a8a17ce5",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5ec"
+  },
+  "CardId": "cbb1ac1f-9c4f-4a57-aa50-71cb93290b5b",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d59f"
+  },
+  "CardId": "57ad5a80-2ac6-471c-a2fa-8ddad1096299",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5a0"
+  },
+  "CardId": "f19e3ab1-5ab9-4574-8f12-b6d59f1315d2",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5df"
+  },
+  "CardId": "85cb9a22-3356-4eee-88a0-00ef1b5699f5",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d60a"
+  },
+  "CardId": "32c19508-e03e-410f-9854-570fd0bc4edb",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d607"
+  },
+  "CardId": "81562ce3-1793-4088-80fc-f3eaf5b0eed2",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d609"
+  },
+  "CardId": "2caa6ee1-d8c2-41b0-9ffd-70641777e7e6",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d608"
+  },
+  "CardId": "a8c9bade-025f-46e6-a664-1c112ddf830d",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d60b"
+  },
+  "CardId": "555d48f4-dc93-47a5-872c-a56d47783396",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5ef"
+  },
+  "CardId": "1ea4a649-a7cb-481c-840e-a46d1753e642",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d5f5"
+  },
+  "CardId": "006d2b0e-188c-4acc-af3e-2b82f791ea33",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d592"
+  },
+  "CardId": "05343e1e-39a2-4044-a2f3-e55039ce21c4",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d5f7"
+  },
+  "CardId": "93d023ca-279e-4682-b6df-e79329e0a5fa",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5b4"
+  },
+  "CardId": "cc55853f-cc52-4c7b-abe7-12263678ed3e",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b2653adb1272013e92d61d"
+  },
+  "CardId": "8f19961f-fc68-4dc7-acc2-eb71107fcf45",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b2653bdb1272013e92d621"
+  },
+  "CardId": "ae4c24b5-b93d-48bf-a9a3-9442164f8eb6",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b2653adb1272013e92d61e"
+  },
+  "CardId": "c59155be-2bf4-4288-91a3-768149c3fbf9",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b2653adb1272013e92d615"
+  },
+  "CardId": "45eaffa3-2076-403f-ba7a-645d464c713b",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d5fe"
+  },
+  "CardId": "89764feb-f64f-425d-b67a-cca65a86167d",
+  "CardName": "Wizard",
+  "Energy": 13,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d593"
+  },
+  "CardId": "b8181870-8349-48e9-a189-238d8e3a16cc",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d610"
+  },
+  "CardId": "8d0d5a17-d481-49aa-b3a7-f4f1b62e0f20",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d612"
+  },
+  "CardId": "1809f566-494d-4924-bd95-1388a23c3c76",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b2653adb1272013e92d61a"
+  },
+  "CardId": "054c0bfe-85e8-4c65-be9a-0182f1c85ec9",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b2653adb1272013e92d616"
+  },
+  "CardId": "33fc8f54-24a5-4c87-8393-7d95fb3c21a8",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d58a"
+  },
+  "CardId": "7046a631-0462-4489-999f-e177005bbd90",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b2653adb1272013e92d61b"
+  },
+  "CardId": "ccaaa4f4-85ea-4d39-8c82-576c3c20f4a9",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5f3"
+  },
+  "CardId": "c015d318-1de1-4db5-b1ac-ae06637f79c6",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d565"
+  },
+  "CardId": "6d584789-1eb9-4967-8cd3-decddac47056",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d613"
+  },
+  "CardId": "31a769fb-b3a7-4115-80ca-85cc13e741a3",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d5fd"
+  },
+  "CardId": "61087f02-250d-45e4-bb2f-b63dcb2af0ba",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5ae"
+  },
+  "CardId": "6cc3dc11-0da5-4616-b399-1a2fd51b0f66",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b2653adb1272013e92d61c"
+  },
+  "CardId": "b0c674b9-1841-4a2a-91d6-31bc6d78f5d8",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5ac"
+  },
+  "CardId": "87ba6407-c8da-4a36-a4b2-0be659a7102b",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5aa"
+  },
+  "CardId": "f931a903-f65a-4d8a-bd46-efd11b8ba7f9",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d602"
+  },
+  "CardId": "161725b6-f018-453a-ac5b-12843dd7766c",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b2653bdb1272013e92d620"
+  },
+  "CardId": "13ff659c-4649-43cf-9c9a-ba49a002fdb6",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5e8"
+  },
+  "CardId": "8ff0e784-a339-458a-960f-d11dd7eec556",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d59b"
+  },
+  "CardId": "1b85fb63-5216-482c-95e6-3b7c0aa9796b",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d60f"
+  },
+  "CardId": "43169b0c-81a3-4bb1-9fd0-4981a3e599bd",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b2653bdb1272013e92d623"
+  },
+  "CardId": "c86a3dff-f3fd-4326-8775-e044813813bd",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b2653adb1272013e92d614"
+  },
+  "CardId": "fe66a483-06b2-46af-a75b-c7749dac80c6",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d60d"
+  },
+  "CardId": "e6585bc6-6f5c-49ec-9f47-d5e7d613a4ef",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d60c"
+  },
+  "CardId": "bf9e1021-df06-433b-b392-845738855972",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d591"
+  },
+  "CardId": "67ced509-da2c-40f6-b445-281ed821c678",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 3,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b2653adb1272013e92d619"
+  },
+  "CardId": "cac25850-2f4e-44b9-9d1d-cdca109a467a",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b2653bdb1272013e92d622"
+  },
+  "CardId": "f1b86aac-3b1f-43e1-bc4f-02840002d45a",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b2653adb1272013e92d618"
+  },
+  "CardId": "8b0c6a67-0a35-4c26-81c1-a65fb407b65b",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b2653adb1272013e92d617"
+  },
+  "CardId": "713117fe-c12a-4533-8804-25f50c061824",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d60e"
+  },
+  "CardId": "98715085-c2a4-4cb0-91e4-07199773ca2e",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5bb"
+  },
+  "CardId": "c24268d8-9d92-401d-a7a6-2e6a1f21f1ec",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b2653adb1272013e92d61f"
+  },
+  "CardId": "e6324297-e8d1-4d24-b901-8145e2ab08cf",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d611"
+  },
+  "CardId": "8f8ba315-000a-478e-b3a5-d961bf9bd91b",
+  "CardName": "Dog",
+  "Energy": 15,
+  "CardStar": 1,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b2653cdb1272013e92d624"
+  },
+  "CardId": "e3dc20fb-2f87-4d9a-8469-ec39904d5bff",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d600"
+  },
+  "CardId": "12186725-385b-4dd8-9852-6626f0259e2c",
+  "CardName": "Energy",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5f0"
+  },
+  "CardId": "bd3e13db-0ea0-4e5e-b2af-1526fffe7b01",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26539db1272013e92d5f6"
+  },
+  "CardId": "99b2576e-14cc-4eaa-88ba-736b29847c8d",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5a1"
+  },
+  "CardId": "5bf42398-bdb1-4b66-ac42-b7e8a32a9c38",
+  "CardName": "Heal",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5e6"
+  },
+  "CardId": "cc50c6e1-7d41-40c6-9a3e-19efc45d21d8",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5e5"
+  },
+  "CardId": "d0303584-4b2f-4ba0-9351-bd1428d1df01",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5ab"
+  },
+  "CardId": "a191939b-9e4a-4742-b14e-34615eb958f3",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 4,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5e7"
+  },
+  "CardId": "61b6e132-8672-450a-9d5f-365334ba2628",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d53c"
+  },
+  "CardId": "0cb1839a-d030-4522-bfe9-ea9341121d37",
+  "CardName": "Crossbow",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5a2"
+  },
+  "CardId": "dd44d22c-9b40-435b-b9fa-3b341e2ce851",
+  "CardName": "Wizard",
+  "Energy": 14,
+  "CardStar": 3,
+  "TypeOfCard": 2,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b2653cdb1272013e92d625"
+  },
+  "CardId": "4ef28c6e-ca5d-4ca4-8ef9-2c8a0792d789",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5bd"
+  },
+  "CardId": "2e89dfd3-d596-4d89-95cb-a6e6e88b99f9",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5ed"
+  },
+  "CardId": "dc0ffd85-2268-402e-b320-d222e77c5508",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 5,
+  "TypeOfCard": 1,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5a9"
+  },
+  "CardId": "08193eb0-6ea5-4def-90cf-2f2ff6008c4c",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5bc"
+  },
+  "CardId": "ea4dd316-c7f7-4137-9453-f6ffa7ac80f0",
+  "CardName": "Toxic",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5a5"
+  },
+  "CardId": "5b485751-c100-499e-b4b0-749281ea99e9",
+  "CardName": "Wizard",
+  "Energy": 16,
+  "CardStar": 4,
+  "TypeOfCard": 2,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5af"
+  },
+  "CardId": "18515043-9bd3-4bb5-bc40-b9d69b7f2882",
+  "CardName": "Cannon",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 2
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5b8"
+  },
+  "CardId": "e1f27a18-66c5-4418-a6af-7d041d489ab2",
+  "CardName": "Explode",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 3,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5e4"
+  },
+  "CardId": "fcc1f768-f138-467c-9557-f3bdf0f14063",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5e3"
+  },
+  "CardId": "f02dd9d3-eb33-432a-8b19-09f86c44bf40",
+  "CardName": "Fireball",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5e2"
+  },
+  "CardId": "0f53f627-3fba-4c65-9e5c-1d2a64903bad",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 2,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26536db1272013e92d53e"
+  },
+  "CardId": "994c04d0-3996-415e-920f-9e33604cf7c9",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 0,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5a6"
+  },
+  "CardId": "379d70df-2408-4d8d-be90-8a77f60b2fbe",
+  "CardName": "Freeze",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 4
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d5a7"
+  },
+  "CardId": "81159d46-f666-4f67-9ec6-63fcdc1c610a",
+  "CardName": "Speed",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 3,
+  "CardRarity": 1
+},
+{
+  "_id": {
+    "$oid": "64b2653cdb1272013e92d626"
+  },
+  "CardId": "c7f77cae-0440-4ae4-a8e7-9cb73691963e",
+  "CardName": "Gatling",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26537db1272013e92d590"
+  },
+  "CardId": "38a46654-730f-493e-bae2-4d01b148df67",
+  "CardName": "Fire",
+  "Energy": 0,
+  "CardStar": 1,
+  "TypeOfCard": 1,
+  "CardRarity": 3
+},
+{
+  "_id": {
+    "$oid": "64b26538db1272013e92d5f1"
+  },
+  "CardId": "cd53c370-0e27-421d-8ec9-5bc6715c9e3e",
+  "CardName": "Rocket",
+  "Energy": 0,
+  "CardStar": 3,
+  "TypeOfCard": 1,
   "CardRarity": 4
 }]

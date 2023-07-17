@@ -8,8 +8,7 @@
         PlaceSpell,
         CastleTakeDamage,
         UpdateMonsterHp,
-        GetMyCard,
-        GetMap,
+        GetGameInfo,
         UpgradeTower,
         SellTower
     }

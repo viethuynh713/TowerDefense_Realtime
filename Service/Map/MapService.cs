@@ -11,6 +11,10 @@ public class MapService
     private readonly int _height;
     private readonly int _columnIndexSplit;
     private readonly Vector2Int _monsterGatePosition;
+    public Vector2Int MonsterGate
+    {
+        get => _monsterGatePosition;
+    }
     private Dictionary<string, Vector2Int>_castleLogicPosition;
 
     private readonly string _playerId;
@@ -123,7 +127,7 @@ public class MapService
             map.Add(row);
         }
         ReleasePosition(checkPosition.x, checkPosition.y);
-        Console.WriteLine($"Check map: {JsonConvert.SerializeObject(map)}");
+        // Console.WriteLine($"Check map: {JsonConvert.SerializeObject(map)}");
         var start = new FPTile();
         start.y = map.FindIndex(x => x.Contains("A"));
         start.x = map[start.y].IndexOf("A");

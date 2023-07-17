@@ -2,19 +2,21 @@
 
 public interface IMythicEmpireHub
 {
-    Task ReceiveMessage(string user, string message);
+    Task NotifyStatus(string message);
     Task OnReceiveMatchMakingSuccess(int timeWaiting);
     Task CancelSuccess();
-    Task OnStartGame(byte[] gameId);
-    Task OnGetMap(byte[] map);
-    Task OnGetCards(byte[] cards);
+    Task OnStartGame(byte[] data);
+
+    Task OnGameInfo(byte[] gameData);
+    // Task OnGetMap(byte[] map);
+    // Task OnGetCards(byte[] cards);
     Task BuildTower(byte[] cardData);
     Task CreateMonster(byte[] cardData);
     Task PlaceSpell(byte[] cardData);
     Task UpdateEnergy(byte[] newEnergy);
     Task UpdateCastleHp(byte[] newCastleHp);
     Task UpdateWaveTime(byte[] time);
-    Task SpawnWave(byte[] data);
+    Task SpawnMonsterWave(byte[] data);
     Task KillMonster(byte[] data);
     Task UpdateMonsterHp(byte[] data);
     Task UpgradeTower(byte[] data);
