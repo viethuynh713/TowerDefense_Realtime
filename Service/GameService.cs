@@ -5,6 +5,7 @@ using Game_Realtime.Model.Data;
 using Game_Realtime.Model.Data.DataSend;
 using Game_Realtime.Model.InGame;
 using Microsoft.AspNetCore.SignalR;
+using Networking_System.Model.Data.DataReceive;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -70,6 +71,14 @@ public class GameService : IGameService
         await _gameSessionModels[gameId].UpdateMonsterPosition(data);
     }
 
+    public async Task AddEnergy(string gameId, AddEnergyData data)
+    {
+        if (!_gameSessionModels.ContainsKey(gameId)) return;
+        if (!_gameSessionModels[gameId].HasPlayer(data.ownerId)) return;
+
+        await _gameSessionModels[gameId].AddEnergy(data);
+    }
+
     public async Task CreateArenaGame(UserMatchingModel playerA, UserMatchingModel playerB)
     {
         PlayerModel playerModelA = new PlayerModel(playerA.userId, playerA.cards, playerA.contextId);
@@ -105,20 +114,20 @@ public class GameService : IGameService
         {
             if (newCastleHp.Value <= 0)
             {
-                await OnEndGame(gameId,senderId);
+                await OnEndGame(gameId,data.ownerId);
             }
             
         }
     }
     
-    public async Task OnEndGame(string gameId,string playerLose)
+    public async Task OnEndGame(string gameId,string playerWin)
     {
         Console.WriteLine("End Game");
         await _gameSessionModels [gameId].EndGame();
         var endGameDataSender = new EndGameDataSender()
         {
             gameId = gameId,
-            playerLose = playerLose,
+            playerWin = playerWin,
             totalTime = _gameSessionModels[gameId].GetTotalTime().Result
         };
         var jsonData = JsonConvert.SerializeObject(endGameDataSender);
@@ -209,4 +218,5 @@ public interface IGameService
     Task CreateAdventureGame(UserMatchingModel newUserMatchingModel);
     Task GetGameInfo(string gameId, string senderId, string contextConnectionId);
     Task UpdateMonsterPosition(string gameId, UpdateMonsterPositionData data);
+    Task AddEnergy(string gameId, AddEnergyData addEnergyData);
 }

@@ -8,6 +8,7 @@ using Game_Realtime.Model.Map;
 using Game_Realtime.Service;
 using Game_Realtime.Service.WaveService;
 using Microsoft.AspNetCore.SignalR;
+using Networking_System.Model.Data.DataReceive;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -41,7 +42,7 @@ namespace Game_Realtime.Model
 
         private Timer _countWave;
 
-        public GameSessionModel(string gameId, BasePlayer playerA, BasePlayer playerB, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
+        public GameSessionModel(string gameId, PlayerModel playerA, PlayerModel playerB, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
         {
             _gameId = gameId;
             _modeGame = ModeGame.Arena;
@@ -61,13 +62,13 @@ namespace Game_Realtime.Model
 
         }
 
-        public GameSessionModel(string gameId, BasePlayer player, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
+        public GameSessionModel(string gameId, PlayerModel player, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
         {
             _gameId = gameId;
             _modeGame = ModeGame.Arena;
             _hubContext = hubContext;
             _startTime = DateTime.Now;
-            var ai = CreateAi();
+            var ai = new AiModel(player.cards);
             _players = new Dictionary<string, BasePlayer>
             {
                 { player.userId, player }, 
@@ -79,14 +80,10 @@ namespace Game_Realtime.Model
             _validatePackageService = new ValidatePackageService();
             _countWave = new Timer(UpdateWave, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
             _timerUpdateEnergy = new Timer(UpdateEnergy, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
+            ai.InitBot(this);
             _aiActionTimer = new Timer(AiAction, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
-
-        private BasePlayer CreateAi()
-        {
-            var newBot = new AiModel();
-            return newBot;
-        }
+        
 
         private void AiAction(object? state)
         {
@@ -195,8 +192,8 @@ namespace Game_Realtime.Model
             
             if (!_validatePackageService.ValidCastlePackage(data)) return null;
             
-            var newCastleHp = _players[rivalPlayer.userId].CastleTakeDamage(data.HpLose);
-            if (newCastleHp.Result > 0)
+            var newCastleHp = await _players[rivalPlayer.userId].CastleTakeDamage(data.HpLose);
+            if (newCastleHp > 0)
             {
                 // Kill monster
                 var energyGain =  _players[data.ownerId].KillMonster(data.monsterId);
@@ -214,7 +211,7 @@ namespace Game_Realtime.Model
                 {
                     indexPackage = data.indexPackage + 1,
                     userId = rivalPlayer.userId,
-                    currentCastleHp = newCastleHp.Result,
+                    currentCastleHp = newCastleHp,
                     maxCastleHp = GameConfig.GameConfig.MAX_CASTLE_HP
                 };
                 var jsonSenderData = JsonConvert.SerializeObject(senderData);
@@ -222,13 +219,17 @@ namespace Game_Realtime.Model
             }
             
             
-            return newCastleHp.Result;
+            return newCastleHp;
         }
 
         public async Task EndGame()
         {
             await _countWave.DisposeAsync();
             await _timerUpdateEnergy.DisposeAsync();
+            if (_modeGame == ModeGame.Adventure)
+            {
+                await _aiActionTimer.DisposeAsync();
+            }
         }
 
         public async Task<MonsterModel?> CreateMonster(string playerId, CreateMonsterData data)
@@ -379,18 +380,29 @@ namespace Game_Realtime.Model
 
         public async Task<TowerStats?> UpgradeTower(string senderId, UpgradeTowerData data)
         {
-            return await _players[senderId].UpgradeTower(data.towerId, data.type);
-            // JObject jsonData = new JObject()
-            // {
-            //     new JProperty("towerId", data.towerId),
-            //     new JProperty("stats", JsonConvert.SerializeObject(towerStats)),
-            //     
-            // };
-            // await _hubContext.Clients.Groups(gameId).UpgradeTower(Encoding.UTF8.GetBytes(jsonData.ToString()));
-            //
-            // var player = _gameSessionModels[gameId].GetPlayer(senderId);
-            //     
-            // await _hubContext.Clients.Clients(player.ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
+            var tower =  await _players[senderId].UpgradeTower(data.towerId, data.type);
+
+            if (tower != null)
+            {
+                UpgradeTowerDataSender dataSender = new UpgradeTowerDataSender()
+                {
+                    towerId = data.towerId,
+                    attackSpeed = tower.AttackSpeed,
+                    damage = tower.Damage,
+                    range = tower.FireRange,
+                };
+                var jsonDataSender = JsonConvert.SerializeObject(dataSender);
+                await _hubContext.Clients.Groups(_gameId).UpgradeTower(Encoding.UTF8.GetBytes(jsonDataSender));
+                
+                var player = GetPlayer(senderId);
+                if (player != null)
+                {
+                    await _hubContext.Clients.Clients(player.ContextId)
+                        .UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
+                }
+            }
+
+            return tower;
         }
 
         public async Task<TowerModel> SellTower(string senderId, SellTowerData data)
@@ -401,7 +413,8 @@ namespace Game_Realtime.Model
 
             var jsonData = JsonConvert.SerializeObject(tower);
             await _hubContext.Clients.Groups(_gameId).SellTower(Encoding.UTF8.GetBytes(jsonData));
-        
+
+            // await _players[senderId].AddEnergy(tower.EnergyGainWhenSell);
             var player = GetPlayer(senderId);
 
             if (player != null)
@@ -442,6 +455,18 @@ namespace Game_Realtime.Model
         public async Task UpdateMonsterPosition(UpdateMonsterPositionData data)
         {
             await _players[data.ownerId].UpdateMonsterPosition(data);
+        }
+
+        public async Task AddEnergy(AddEnergyData data)
+        {
+            await _players[data.ownerId].AddEnergy(data.energy);
+
+            var player = GetPlayer(data.ownerId);
+
+            if (player != null)
+                await _hubContext.Clients.Clients(player.ContextId)
+                    .UpdateEnergy(Encoding.UTF8.GetBytes(player.energy.ToString()));
+
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using Game_Realtime.Model.Data;
+using Game_Realtime.Model.InGame;
 
 namespace Game_Realtime.Model
 {
@@ -10,12 +11,8 @@ namespace Game_Realtime.Model
         public PlayerModel(string id,List<string> cards, string contextId) : base(id)
         {
             this.cards = cards;
-
-            _monsters = new Dictionary<string,MonsterModel>();
-
             ContextId = contextId;
 
-            _towers = new Dictionary<string, TowerModel>();
         }
         
     }
