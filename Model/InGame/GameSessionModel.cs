@@ -29,8 +29,8 @@ namespace Game_Realtime.Model
         }
 
         private readonly Dictionary<string, BasePlayer> _players;
-        
-        private readonly MapService _mapService;
+
+        public readonly MapService _mapService;
         private ValidatePackageService _validatePackageService;
         
         private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;

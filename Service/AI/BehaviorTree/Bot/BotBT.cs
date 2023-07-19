@@ -12,6 +12,13 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
     public class BotBT: Tree
     {
         AiModel bot;
+
+        public BotBT(AiModel bot)
+        {
+            this.bot = bot;
+            root = SetUpTree();
+        }
+
         protected override Node SetUpTree()
         {
             List<Node> spellNodeList = new List<Node>();
@@ -77,11 +84,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
             });
 
             return root;
-        }
-
-        public void SetData(AiModel bot)
-        {
-            this.bot = bot;
         }
 
         private void AddSpellBehavior(ref List<Node> spellNodeList, string spellName)

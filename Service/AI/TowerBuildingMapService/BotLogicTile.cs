@@ -34,6 +34,7 @@ namespace Game_Realtime.Service.AI.TowerBuildingMapService
             YLogicPosition = tile.YLogicPosition;
             TypeOfType = tile.TypeOfType;
             towerName = "";
+            isBuildTower = false;
             hasTower = null;
             isInProgress = false;
             damageLevel = 0;

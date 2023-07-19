@@ -60,7 +60,7 @@ public class AiModel: BasePlayer
         this.gameSessionModel = gameSessionModel;
 
         CalculateEnergyRateUsing();
-        //CreateTowerBuildingMap();
+        CreateTowerBuildingMap(gameSessionModel._mapService);
         SelectBattleMode();
         Battle();
     }
@@ -191,7 +191,8 @@ public class AiModel: BasePlayer
         {
             for (int j = 0; j < towerBuildingMapWidth; j++)
             {
-                towerBuildingMap[j][i].Copy(map.LogicMap[j + towerBuildingMapWidth + 2][i]);
+                towerBuildingMap[i][j] = new BotLogicTile();
+                towerBuildingMap[i][j].Copy(map.LogicMap[j + towerBuildingMapWidth + 2][i]);
             }
         }
         // build tower building map
@@ -199,19 +200,20 @@ public class AiModel: BasePlayer
         {
             for (int j = 0; j < towerBuildingMapWidth; j++)
             {
-                if (towerBuildingMap[j][i].TypeOfType == TypeTile.Normal)
+                if (towerBuildingMap[i][j].TypeOfType == TypeTile.Normal)
                 {
-                    if (longestPath.Contains(new Vector2Int(i, j)))
+                    if (longestPath.Contains(new Vector2Int(j, i)))
                     {
-                        towerBuildingMap[j][i].hasTower = false;
+                        towerBuildingMap[i][j].isBuildTower = false;
                     }
                     else
                     {
-                        towerBuildingMap[j][i].hasTower = true;
+                        towerBuildingMap[i][j].isBuildTower = true;
+                        towerBuildingMap[i][j].hasTower = false;
                         // count number of adjacent path tile
-                        var adjacentTile = new Vector2Int[] { new Vector2Int(i - 1, j), new Vector2Int(i + 1, j), new Vector2Int(i, j - 1),
-                            new Vector2Int(i, j + 1), new Vector2Int(i - 1, j - 1), new Vector2Int(i - 1, j + 1),
-                            new Vector2Int(i + 1, j - 1), new Vector2Int(i + 1, j + 1)};
+                        var adjacentTile = new Vector2Int[] { new Vector2Int(j - 1, i), new Vector2Int(j + 1, i), new Vector2Int(j, i - 1),
+                            new Vector2Int(j, i + 1), new Vector2Int(j - 1, i - 1), new Vector2Int(j - 1, i + 1),
+                            new Vector2Int(j + 1, i - 1), new Vector2Int(j + 1, i + 1)};
                         int nAdjacentTile = 0;
                         foreach (var tile in adjacentTile)
                         {
@@ -227,7 +229,7 @@ public class AiModel: BasePlayer
                         else if (nAdjacentTile < 6) towerGroupTier = 2;
                         else towerGroupTier = 3;
                         List<string> towerCanChose = FindCardSelected(AIConstant.TowerTier[towerGroupTier], CardType.TowerCard);
-                        towerBuildingMap[j][i].towerName = towerCanChose[new Random().Next(0, towerCanChose.Count)];
+                        towerBuildingMap[i][j].towerName = towerCanChose[new Random().Next(0, towerCanChose.Count)];
                     }
                 }
                     
@@ -270,6 +272,7 @@ public class AiModel: BasePlayer
         // the first is position
         // the second is strength (get by index in AIConstant.towerStrength)
         // the third is number of empty adjacent node which is not used to build tower
+        towerBuildOrder = new List<Vector2Int>();
         if (findTowerPosStrategy == FindTowerPosStrategy.WEAK_TO_STRONG || findTowerPosStrategy == FindTowerPosStrategy.STRONG_TO_WEAK)
         {
             List<(Vector2Int, int, int)> calcTowerBuildOrder = new List<(Vector2Int, int, int)>();
@@ -401,8 +404,7 @@ public class AiModel: BasePlayer
 
     public async Task<bool> Battle()
     {
-        behavior = new BotBT();
-        behavior.SetData(this);
+        behavior = new BotBT(this);
         behavior.Update();
         return true;
     }

@@ -39,12 +39,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
                     {
                         for (int y = -1; y <= 1; y++)
                         {
-                            if (bot.TowerBuildingMap[i + y][j + x].hasTower != null)
+                            if (bot.TowerBuildingMap[i + y][j + x].hasTower != null
+                                && bot.TowerBuildingMap[i + y][j + x].hasTower.Value)
                             {
-                                if (bot.TowerBuildingMap[i + y][j + x].hasTower.Value)
-                                {
-                                    nTower++;
-                                }
+                                nTower++;
                             }
                         }
                     }
