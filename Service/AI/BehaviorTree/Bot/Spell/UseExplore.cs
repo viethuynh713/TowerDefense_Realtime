@@ -16,7 +16,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         public override NodeState Evaluate()
         {
             // use spell
-            bot.PlaceSpell(new Model.Data.PlaceSpellData()
+            bot.GameSessionModel.PlaceSpell(bot.userId, new Model.Data.PlaceSpellData()
             {
                 cardId = "",
                 Xposition = bot.SpellUsingPosition.X,

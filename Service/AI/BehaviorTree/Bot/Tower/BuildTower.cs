@@ -25,7 +25,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
                 bot.TowerBuildingMap[bot.TowerSelectPos.Value.y][bot.TowerSelectPos.Value.x].isInProgress = true;
             }
             // send request building tower
-            bot.BuildTower(new Model.Data.BuildTowerData()
+            bot.GameSessionModel.BuildTower(bot.userId, new Model.Data.BuildTowerData()
             {
                 cardId = towerId,
                 Xposition = bot.TowerSelectPos.Value.x,

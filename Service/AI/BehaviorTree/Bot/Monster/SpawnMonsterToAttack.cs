@@ -90,7 +90,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
             int nMonster = (int)bot.EnergyToSummonMonster / energy;
             for (int i = 0; i < nMonster; i++)
             {
-                bot.CreateMonster(new Model.Data.CreateMonsterData()
+                bot.GameSessionModel.CreateMonster(bot.userId, new Model.Data.CreateMonsterData()
                 {
                     cardId = id,
                     Xposition = monsterGatePos.x,

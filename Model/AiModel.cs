@@ -35,6 +35,8 @@ public class AiModel: BasePlayer
     private List<Vector2Int> towerBuildOrder;
     private List<Vector2Int> towerBuildProgressOrder;
     private List<Vector2Int> longestPath;
+
+    private GameSessionModel gameSessionModel;
     
 
     public AiModel(List<string> rivalPlayerCard) : base()
@@ -52,14 +54,15 @@ public class AiModel: BasePlayer
         towerSelectPos = null;
 
         ChooseListCard(rivalPlayerCard);
+    }
+    public void InitBot(GameSessionModel gameSessionModel)
+    {
+        this.gameSessionModel = gameSessionModel;
+
         CalculateEnergyRateUsing();
         //CreateTowerBuildingMap();
         SelectBattleMode();
         Battle();
-    }
-    public void InitBot(GameSessionModel gameSessionModel)
-    {
-        
     }
 
     public async Task<List<string>> ChooseListCard(List<string> rivalCards)
@@ -437,5 +440,5 @@ public class AiModel: BasePlayer
     public FindTowerPosStrategy FindTowerPosStrategy { get { return findTowerPosStrategy; } }
     public List<Vector2Int> TowerBuildOrder { get { return towerBuildOrder; } set { towerBuildOrder = value; } }
     public List<Vector2Int> TowerBuildProgressOrder { get { return towerBuildProgressOrder; } set { towerBuildProgressOrder = value; } }
-
+    public GameSessionModel GameSessionModel { get { return gameSessionModel; } }
 }
