@@ -3,7 +3,7 @@
 public class EndGameDataSender
 {
     public string gameId;
-    public string playerLose;
+    public string playerWin;
     public int totalTime;
     
 }

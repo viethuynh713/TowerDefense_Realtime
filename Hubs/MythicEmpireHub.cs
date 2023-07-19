@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using Game_Realtime.Model.InGame;
 using Game_Realtime.Service;
 using Game_Realtime.Service.WaveService;
+using Networking_System.Model.Data.DataReceive;
 
 namespace Game_Realtime.Hubs
 {
@@ -20,8 +21,6 @@ namespace Game_Realtime.Hubs
         {
             _userMatchingService = userMatchingService;
             _gameService = gameService;
-            // Dictionary<int, Wave> waves = new Dictionary<int, Wave>();
-            // Console.WriteLine(JsonConvert.SerializeObject(waves));
             Console.WriteLine("\n-----------------------InGameHub Init----------------------");
         }
         
@@ -131,6 +130,18 @@ namespace Game_Realtime.Hubs
 
                     await _gameService.GetGameInfo(gameId, senderId, Context.ConnectionId);
                     
+                    break;
+                case ActionId.UpdateMonsterPosition:
+                    UpdateMonsterPositionData updatePosition = JsonConvert.DeserializeObject<UpdateMonsterPositionData>(data.ToString())!;
+
+                    await _gameService.UpdateMonsterPosition(gameId, updatePosition);
+
+                    break;
+                case ActionId.AddEnergy:
+                    
+                    AddEnergyData addEnergyData = JsonConvert.DeserializeObject<AddEnergyData>(data.ToString())!;
+                    await _gameService.AddEnergy(gameId, addEnergyData);
+
                     break;
 
             }

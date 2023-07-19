@@ -12,8 +12,8 @@ namespace Game_Realtime.Model
         public string ownerId;
         public int monsterHp;
         public int maxHp;
-        public int XLogicPosition;
-        public int YLogicPosition;
+        public float XLogicPosition;
+        public float YLogicPosition;
         public int EnergyGainWhenDie;
 
 
@@ -35,67 +35,13 @@ namespace Game_Realtime.Model
             if (monsterHp > maxHp) monsterHp = maxHp;
             return monsterHp;
         }
-    }
-    public class TowerModel
-    {
-        public readonly string towerId;
-        public string cardId;
-        public string ownerId;
-        public int XLogicPosition;
-        public int YLogicPosition;
-        public TowerStats stats;
-        public int EnergyGainWhenSell;
 
-
-        public TowerModel(string cardId,int x,int y, string ownerId, int energyGainWhenSell)
+        public void UpdatePosition(float x, float y)
         {
-            this.towerId = Guid.NewGuid().ToString();
-            this.cardId = cardId;
             this.XLogicPosition = x;
             this.YLogicPosition = y;
-            this.ownerId = ownerId;
-            EnergyGainWhenSell = energyGainWhenSell;
-        }
 
-        public TowerStats Upgrade(UpgradeType type)
-        {
-            switch (type)
-            {
-                case UpgradeType.Damage:
-                    
-                    stats.Damage = (int)(stats.Damage * GameConfig.GameConfig.DAMAGE_UPGRADE_PERCENT);
-                    
-                    break;
-                case UpgradeType.Range:
-                    
-                    stats.FireRange = (int)(stats.FireRange * GameConfig.GameConfig.RANGE_UPGRADE_PERCENT);
-
-                    break;
-                case UpgradeType.AttackSpeed:
-                    
-                    stats.AttackSpeed = (int)(stats.FireRange * GameConfig.GameConfig.ATTACKSPEED_UPGRADE_PERCENT);
-
-                    break;
-            }
-
-            return stats;
         }
     }
-    public class SpellModel
-    {
-        public string spellId;
-        public string cardId;
-        public string ownerId;
-        public float XLogicPosition;
-        public float YLogicPosition;
-
-        public SpellModel(string cardId,float x,float y, string ownerId)
-        {
-            this.spellId = Guid.NewGuid().ToString();
-            this.cardId = cardId;
-            this.XLogicPosition = x;
-            this.YLogicPosition = y;
-            this.ownerId = ownerId;
-        }
-    }
+    
 }

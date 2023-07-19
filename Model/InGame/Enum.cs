@@ -10,7 +10,9 @@
         UpdateMonsterHp,
         GetGameInfo,
         UpgradeTower,
-        SellTower
+        SellTower,
+        UpdateMonsterPosition,
+        AddEnergy
     }
 
     public enum CardType

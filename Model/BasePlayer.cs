@@ -1,4 +1,5 @@
 ﻿using Game_Realtime.Model.Data;
+using Game_Realtime.Model.InGame;
 
 namespace Game_Realtime.Model;
 
@@ -14,7 +15,6 @@ public class BasePlayer
 
         protected Dictionary <string,TowerModel> _towers;
 
-        protected Dictionary<UpgradeType, int> countUpgrade;
         protected BasePlayer() 
         {
             this.userId = Guid.NewGuid().ToString();
@@ -22,12 +22,6 @@ public class BasePlayer
             this.energy = GameConfig.GameConfig.MAX_ENERGY;
             _monsters = new Dictionary<string, MonsterModel>();
             _towers = new Dictionary<string, TowerModel>();
-            this.countUpgrade = new Dictionary<UpgradeType, int>()
-            {
-                { UpgradeType.Damage ,1},
-                { UpgradeType.Range ,1},
-                { UpgradeType.AttackSpeed ,1},
-            };
         }
 
         protected BasePlayer(string userId)
@@ -37,12 +31,7 @@ public class BasePlayer
             this.energy = GameConfig.GameConfig.MAX_ENERGY;
             _monsters = new Dictionary<string, MonsterModel>();
             _towers = new Dictionary<string, TowerModel>();
-            this.countUpgrade = new Dictionary<UpgradeType, int>()
-            {
-                { UpgradeType.Damage ,1},
-                { UpgradeType.Range ,1},
-                { UpgradeType.AttackSpeed ,1},
-            };
+
         }
 
         public async Task<int> CastleTakeDamage(int damage)
@@ -91,7 +80,8 @@ public class BasePlayer
                 data.Xposition, 
                 data.Yposition,
                 this.userId, 
-                (int)(stats.Energy*(GameConfig.GameConfig.TOWER_ENERGY_PERCENT/100)) );
+                (int)(stats.Energy*((float) GameConfig.GameConfig.TOWER_ENERGY_PERCENT/100)),
+                data.stats);
             
             energy -= stats.Energy;
 
@@ -147,14 +137,22 @@ public class BasePlayer
 
         public virtual async Task<TowerStats?> UpgradeTower(string towerId, UpgradeType type)
         {
-            if (countUpgrade[type] > GameConfig.GameConfig.MAX_UPGRADE_LEVEL) return null;
+
+            if(_towers[towerId].level[type] > GameConfig.GameConfig.MAX_UPGRADE_LEVEL) return null;
             
-            var upgradeEnergy = countUpgrade[type] * GameConfig.GameConfig.ENERGY_UPDATE;
+            var upgradeEnergy = _towers[towerId].level[type] * GameConfig.GameConfig.ENERGY_UPDATE;
             
             if (energy < upgradeEnergy) return null;
             
             energy -= upgradeEnergy;
             
             return _towers[towerId].Upgrade(type);
+        }
+
+        public Task UpdateMonsterPosition(UpdateMonsterPositionData data)
+        {
+            if(_monsters.ContainsKey(data.monsterId))
+                _monsters[data.monsterId].UpdatePosition(data.Xposition, data.YPosition);
+            return Task.CompletedTask;
         }
     }
