@@ -13,8 +13,6 @@ namespace Game_Realtime.Model;
 
 public class AiModel: BasePlayer
 {
-    private Vector2Int basePosition = new Vector2Int(0, 4);
-
     private float energyToBuildTower;
     private float energyToSummonMonster;
     private int energyGain;
@@ -41,8 +39,6 @@ public class AiModel: BasePlayer
 
     public AiModel(List<string> rivalPlayerCard) : base()
     {
-        basePosition = new Vector2Int(0, 4);
-
         energyToBuildTower = 0;
         energyToSummonMonster = 0;
         energyGain = 0;
@@ -192,7 +188,7 @@ public class AiModel: BasePlayer
             for (int j = 0; j < towerBuildingMapWidth; j++)
             {
                 towerBuildingMap[i][j] = new BotLogicTile();
-                towerBuildingMap[i][j].Copy(map.LogicMap[j + towerBuildingMapWidth + 2][i]);
+                towerBuildingMap[i][j].Copy(map.LogicMap[i][j + towerBuildingMapWidth + 2]);
             }
         }
         // build tower building map
