@@ -4,7 +4,7 @@ namespace Game_Realtime.Service.AI
 {
     public static class AIConstant
     {
-        public static readonly string basicTowerName = "ArrowTower";
+        public static readonly string basicTowerName = "Crossbow";
 
         public static readonly Dictionary<BotPlayMode, Dictionary<CardType, Dictionary<string, int>>> CardSelectingStrategy = new Dictionary<BotPlayMode, Dictionary<CardType, Dictionary<string, int>>>()
         {
@@ -36,35 +36,35 @@ namespace Game_Realtime.Service.AI
             {
                 CardType.TowerCard, new Dictionary<string, string[]>()
                 {
-                    { "weak", new string[] { "ArrowTower", "CannonTower" } },
-                    { "medium", new string[] { "RockTower", "Flamethrower", "EnergyTower" } },
-                    { "strong", new string[] { "GatlingTower", "RocketTower" } }
+                    { "weak", new string[] { "Crossbow", "Cannon" } },
+                    { "medium", new string[] { "Fireball", "Fire", "Energy" } },
+                    { "heavy", new string[] { "Gatling", "Rocket" } }
                 }
             },
             {
                 CardType.MonsterCard, new Dictionary<string, string[]>()
                 {
-                    { "weak", new string[] { "DogPolyart", "FemaleCharacter", "Slime" } },
-                    { "medium", new string[] { "Footman", "Golem" } },
-                    { "strong", new string[] { "SciFiWarrior", "Wizard" } }
+                    { "weak", new string[] { "Dog", "Hero", "Slime" } },
+                    { "medium", new string[] { "Legion", "Golem" } },
+                    { "heavy", new string[] { "Cyber", "Wizard" } }
                 }
             },
             {
                 CardType.SpellCard, new Dictionary<string, string[]>()
                 {
-                    { "weak", new string[] { "Explore", "Healing" } },
-                    { "medium", new string[] { "Burning", "Freeze" } },
-                    { "strong", new string[] { "Speedup" } }
+                    { "weak", new string[] { "Explode", "Heal" } },
+                    { "medium", new string[] { "Toxic", "Freeze" } },
+                    { "heavy", new string[] { "Speed" } }
                 }
             }
         };
 
         public static readonly List<List<string>> TowerTier = new List<List<string>>()
         {
-            new List<string> {"EnergyTower"},                               // tier D
-            new List<string> {"ArrowTower", "CannonTower", "RockTower"},    // tier C
-            new List<string> { "GatlingTower", "RocketTower"},              // tier B
-            new List<string> { "Flamethrower" }                             // tier A
+            new List<string> {"Energy"},                               // tier D
+            new List<string> {"Crossbow", "Cannon", "Fireball"},    // tier C
+            new List<string> { "Gatling", "Rocket"},              // tier B
+            new List<string> { "Fire" }                             // tier A
         };
 
         public static readonly Dictionary<BotPlayMode, float> EnergyBuildTowerRate = new Dictionary<BotPlayMode, float>()
@@ -76,18 +76,18 @@ namespace Game_Realtime.Service.AI
 
         public static readonly Dictionary<string, List<string>> supportMonster = new Dictionary<string, List<string>>()
         {
-            { "DogPolyart", new List<string> { "Wizard", "SciFiWarrior" } },
-            {"FemaleCharacter", new List<string> { "Wizard", "SciFiWarrior" } },
-            {"Footman", new List<string> {"SciFiWarrior", "Wizard" } },
-            {"SciFiWarrior", new List<string> { "Golem", "Footman", "DogPolyart", "FemaleCharacter", "Slime" } },
-            {"Golem", new List<string> { "SciFiWarrior", "Wizard" } },
-            {"Wizard", new List<string> { "Footman", "Golem", "DogPolyart", "FemaleCharacter", "Slime" } },
-            {"Slime", new List < string > { "Wizard", "SciFiWarrior" } }
+            { "Dog", new List<string> { "Wizard", "Cyber" } },
+            {"Hero", new List<string> { "Wizard", "Cyber" } },
+            {"Legion", new List<string> {"Cyber", "Wizard" } },
+            {"Cyber", new List<string> { "Golem", "Legion", "Dog", "Hero", "Slime" } },
+            {"Golem", new List<string> { "Cyber", "Wizard" } },
+            {"Wizard", new List<string> { "Legion", "Golem", "Dog", "Hero", "Slime" } },
+            {"Slime", new List < string > { "Wizard", "Cyber" } }
         };
 
         public static readonly List<string> towerStrength = new List<string>()
         {
-            "ArrowTower", "CannonTower", "RockTower", "EnergyTower", "GatlingTower", "RocketTower", "Flamethrower"
+            "Crossbow", "Cannon", "Fireball", "Energy", "Gatling", "Rocket", "Fire"
         };
     }
 }

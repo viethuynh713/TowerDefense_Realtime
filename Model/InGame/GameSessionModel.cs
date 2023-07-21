@@ -68,7 +68,7 @@ namespace Game_Realtime.Model
             _modeGame = ModeGame.Arena;
             _hubContext = hubContext;
             _startTime = DateTime.Now;
-            var ai = new AiModel(player.cards);
+            var ai = new AiModel();
             _players = new Dictionary<string, BasePlayer>
             {
                 { player.userId, player }, 
@@ -92,7 +92,7 @@ namespace Game_Realtime.Model
             {
                 if (ai.Value is AiModel model)
                 {
-                    model.Battle();
+                    //model.Battle();
                 
                 }
             }
@@ -332,7 +332,7 @@ namespace Game_Realtime.Model
             return _players;
         }
 
-        private BasePlayer? GetRivalPlayer(string playerId)
+        public BasePlayer? GetRivalPlayer(string playerId)
         {
             foreach (var player in _players)
             {

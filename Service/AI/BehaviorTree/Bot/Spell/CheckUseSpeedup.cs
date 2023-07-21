@@ -48,7 +48,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
                 {
                     bot.SpellUsingPosition += pos / monsterNearBasePosList.Count;
                 }
-                bot.SpellUsingName = "Speedup";
+                bot.SpellUsingName = "Speed";
                 state = NodeState.SUCCESS;
                 return state;
             }

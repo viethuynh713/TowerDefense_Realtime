@@ -22,7 +22,7 @@ public class AiModel: BasePlayer
     private Vector2Int? towerSelectPos;
 
     private BotPlayMode playMode;
-    private List<(CardType, string, int)> cardSelected;
+    private List<(string, CardType, string, int)> cardSelected; // (cardid, cardtype, cardname, energy)
     private BotLogicTile[][] towerBuildingMap;
     private int towerBuildingMapWidth;
     private int towerBuildingMapHeight;
@@ -35,9 +35,12 @@ public class AiModel: BasePlayer
     private List<Vector2Int> longestPath;
 
     private GameSessionModel gameSessionModel;
-    
 
-    public AiModel(List<string> rivalPlayerCard) : base()
+    public AiModel() : base()
+    {
+
+    }
+    public async void InitBot(GameSessionModel gameSessionModel)
     {
         energyToBuildTower = 0;
         energyToSummonMonster = 0;
@@ -49,28 +52,29 @@ public class AiModel: BasePlayer
         playMode = (BotPlayMode)new Random().Next(0, 3);
         towerSelectPos = null;
 
-        ChooseListCard(rivalPlayerCard);
-    }
-    public void InitBot(GameSessionModel gameSessionModel)
-    {
         this.gameSessionModel = gameSessionModel;
 
-        CalculateEnergyRateUsing();
-        CreateTowerBuildingMap(gameSessionModel._mapService);
-        SelectBattleMode();
-        Battle();
+        var rivalPlayer = gameSessionModel.GetRivalPlayer(userId);
+        if (rivalPlayer != null && rivalPlayer is PlayerModel)
+        {
+            await ChooseListCard(((PlayerModel) rivalPlayer).cards);
+            await CalculateEnergyRateUsing();
+            await CreateTowerBuildingMap(gameSessionModel._mapService);
+            await SelectBattleMode();
+        }
     }
 
     public async Task<List<string>> ChooseListCard(List<string> rivalCards)
     {
         // get card json file
-        var json = File.ReadAllText("../CardConfig/MythicEmpire.Cards.json");
+        var json = File.ReadAllText("./CardConfig/MythicEmpire.Cards.json");
         var stockCards = JsonConvert.DeserializeObject<List<MythicEmpireCard>>(json);
         if (stockCards == null) Console.WriteLine("Get MythicEmpire.Cards Error!");
         if (stockCards != null)
         {
             // select card by mode
-            cardSelected = new List<(CardType, string, int)>();
+            cardSelected = new List<(string, CardType, string, int)>();
+            Console.WriteLine("Playmode: " + playMode.ToString());
             AIConstant.CardSelectingStrategy.TryGetValue(playMode, out var strategy);
             if (strategy != null)
             {
@@ -87,12 +91,14 @@ public class AiModel: BasePlayer
                                 for (int i = 0; i < nCardOfType.Value; i++)
                                 {
                                     string cardName = cardList[new Random().Next(0, cardList.Length)];
-                                    var card = stockCards.FirstOrDefault(c => c.CardName == cardName && c.TypeOfCard == (int)cardTypeStrategy.Key);
+                                    Console.WriteLine(cardName);
+                                    var card = stockCards.FirstOrDefault(c => c.CardName == cardName/* && c.TypeOfCard == (int)cardTypeStrategy.Key*/);
                                     if (card != null)
                                     {
-                                        cardSelected.Add((cardTypeStrategy.Key, cardName, card.Energy));
+                                        cardSelected.Add((card.CardId, cardTypeStrategy.Key, cardName, card.Energy));
                                     }
                                 }
+                                
                             }
                         }
                     }
@@ -122,7 +128,7 @@ public class AiModel: BasePlayer
             //// set rarity for cards
             {
                 int i, j;
-                (CardType, string, int) temp;
+                (string, CardType, string, int) temp;
                 bool swapped;
                 // sort card selecting list by priority (defend on bot play mode)
                 for (i = 0; i < cardSelected.Count - 1; i++)
@@ -150,13 +156,18 @@ public class AiModel: BasePlayer
                 for (int i = cardIterationIdx; i < cardIterationIdx + rarity.Value; i++)
                 {
                     var stockCard = stockCards.FirstOrDefault(c =>
-                        c.TypeOfCard == (int)cardSelected[i].Item1 && c.CardName == cardSelected[i].Item2
+                        c.TypeOfCard == (int)cardSelected[i].Item2 && c.CardName == cardSelected[i].Item3
                         && c.CardRarity == rarity.Key);
                     if (stockCard != null)
                     {
                         cardSelectingIdList.Add(stockCard.CardId);
                     }
                 }
+            }
+            Console.WriteLine("Choose List Card: " + cardSelected.Count.ToString());
+            foreach (var card in cardSelected)
+            {
+                Console.WriteLine(card.Item1.ToString() + ", " + card.Item2.ToString() + ", " + card.Item3.ToString());
             }
             return cardSelectingIdList;
         }
@@ -166,17 +177,45 @@ public class AiModel: BasePlayer
     public Task CalculateEnergyRateUsing()
     {
         energyBuildTowerRate = AIConstant.EnergyBuildTowerRate[playMode];
+        Console.WriteLine("EnergyBuildTowerRate: " + energyBuildTowerRate.ToString());
         return Task.CompletedTask;
             
     }
         
     public async Task CreateTowerBuildingMap(MapService map)
     {
-        // get longest path
-        longestPath = map.InitLongestPath();
-        // initial tower building map
         towerBuildingMapWidth = (map.Width - 3) / 2;
-        towerBuildingMapHeight = map.Height;
+        towerBuildingMapHeight = map.Height - 2;
+        // get longest path
+        Console.WriteLine("Map: ");
+        foreach (var row in map._logicMap)
+        {
+            foreach (var tile in row)
+            {
+                if (tile.TypeOfType == TypeTile.Barrier)
+                {
+                    Console.Write("#");
+                }
+                else
+                {
+                    Console.Write(".");
+                }
+            }
+            Console.WriteLine("");
+        }
+        longestPath = map.InitLongestPath();
+        longestPath.RemoveAt(longestPath.Count - 1);
+        for (int i = 0; i < longestPath.Count; i++)
+        {
+            longestPath[i] = new Vector2Int(longestPath[i].x - 1, longestPath[i].y - 1);
+        }
+        Console.WriteLine("LongestPath: " + longestPath.Count.ToString());
+        foreach (var tile in longestPath)
+        {
+            Console.Write("(" + tile.x.ToString() + ", " + tile.y.ToString() + ") -> ");
+        }
+        Console.WriteLine("");
+        // initial tower building map
         towerBuildingMap = new BotLogicTile[towerBuildingMapHeight][];
         for (int i = 0; i < towerBuildingMapHeight; i++)
         {
@@ -188,7 +227,7 @@ public class AiModel: BasePlayer
             for (int j = 0; j < towerBuildingMapWidth; j++)
             {
                 towerBuildingMap[i][j] = new BotLogicTile();
-                towerBuildingMap[i][j].Copy(map.LogicMap[i][j + towerBuildingMapWidth + 2]);
+                towerBuildingMap[i][j].Copy(map.LogicMap[i + 1][j + 1]);
             }
         }
         // build tower building map
@@ -227,9 +266,31 @@ public class AiModel: BasePlayer
                         List<string> towerCanChose = FindCardSelected(AIConstant.TowerTier[towerGroupTier], CardType.TowerCard);
                         towerBuildingMap[i][j].towerName = towerCanChose[new Random().Next(0, towerCanChose.Count)];
                     }
-                }
-                    
+                } 
             }
+        }
+        Console.WriteLine("TowerBuildingMap: ");
+        foreach (var row in towerBuildingMap)
+        {
+            foreach (var tile in row)
+            {
+                if (tile.TypeOfType == TypeTile.Barrier)
+                {
+                    Console.Write("#\t");
+                }
+                else
+                {
+                    if (tile.isBuildTower)
+                    {
+                        Console.Write(tile.towerName[0] + tile.towerName.Length.ToString() + "\t");
+                    }
+                    else
+                    {
+                        Console.Write(".\t");
+                    }
+                }
+            }
+            Console.WriteLine("");
         }
     }
 
@@ -242,12 +303,12 @@ public class AiModel: BasePlayer
         var otherResult = new List<string>();
         foreach (var card in cardSelected)
         {
-            if (card.Item1 == cardType)
+            if (card.Item2 == cardType)
             {
-                otherResult.Add(card.Item2);
-                if (idList.Contains(card.Item2))
+                otherResult.Add(card.Item3);
+                if (idList.Contains(card.Item3))
                 {
-                    result.Add(card.Item2);
+                    result.Add(card.Item3);
                 }
             }
         }
@@ -258,7 +319,7 @@ public class AiModel: BasePlayer
         return otherResult;
     }
 
-    private void SelectBattleMode()
+    private Task SelectBattleMode()
     {
         // select find tower type strategy
         findTowerTypeStrategy = (FindTowerTypeStrategy)new Random().Next(0, 2);
@@ -396,6 +457,9 @@ public class AiModel: BasePlayer
                 towerBuildProgressOrder.Add(tilePos);
             }
         }
+        Console.WriteLine("FindTowerTypeStrategy: " + findTowerTypeStrategy.ToString());
+        Console.WriteLine("FindTowerPosStrategy: " + findTowerPosStrategy.ToString());
+        return Task.CompletedTask;
     }
 
     public async Task<bool> Battle()
@@ -420,7 +484,7 @@ public class AiModel: BasePlayer
     }
 
     public BotPlayMode PlayMode { get { return playMode; } }
-    public List<(CardType, string, int)> CardSelected { get { return cardSelected; } }
+    public List<(string, CardType, string, int)> CardSelected { get { return cardSelected; } }
     public BotLogicTile[][] TowerBuildingMap { get { return towerBuildingMap; } }
     public int TowerBuildingMapWidth { get { return towerBuildingMapWidth; } }
     public int TowerBuildingMapHeight { get { return towerBuildingMapHeight; } }

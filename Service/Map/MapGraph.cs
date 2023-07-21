@@ -2,7 +2,7 @@
 
 public class MapGraph
 {
-    Dictionary<Vector2Int, LinkedList<Vector2Int>> linkedListArray;
+    public Dictionary<Vector2Int, LinkedList<Vector2Int>> linkedListArray;
     private int mapHeight;
     private int mapWidth;
     private int columnIndexSplit;
@@ -116,15 +116,7 @@ public class MapGraph
     {
         if (src == des)
         {
-            cost.path.Add(src);
-
-            var resCost = FindPathForGenerateBotMap(src, des, cost);
-
-            if (resCost == null)
-            {
-                throw new Exception("Path is null. Maybe the graph is invalid.");
-            }
-            return resCost;
+            return cost;
         }
         GenerateMapNodeCost bestCost = null;
         if (linkedListArray[src] != null)
@@ -158,7 +150,7 @@ public class MapGraph
                 // increase distance
                 costClone.distance++;
                 costClone.path.Add(item);
-                var checkCost = FindPathForGenerateMap(item, des, costClone);
+                var checkCost = FindPathForGenerateBotMap(item, des, costClone);
                 if (bestCost == null || (checkCost != null && checkCost > bestCost))
                 {
                     bestCost = checkCost;

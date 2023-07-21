@@ -30,7 +30,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                     {
                         foreach (var monsterCard in bot.CardSelected)
                         {
-                            if (monsterCard.Item1 == CardType.MonsterCard && monsterCard.Item2 == monster.monsterId)
+                            if (monsterCard.Item2 == CardType.MonsterCard && monsterCard.Item3 == monster.monsterId)
                             {
                                 if (bot.EnergyToSummonMonster >= AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, monster.cardId)))
                                 {
@@ -45,16 +45,16 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                 }
             }
             // otherwise, use a random monster card
-            var monsterCardList = bot.CardSelected.Where(monsterCard => monsterCard.Item1 == CardType.MonsterCard).ToList();
+            var monsterCardList = bot.CardSelected.Where(monsterCard => monsterCard.Item2 == CardType.MonsterCard).ToList();
             if (monsterCardList.Count > 0)
             {
                 var cardSelect = monsterCardList[new Random().Next(0, monsterCardList.Count)];
-                while (bot.EnergyToSummonMonster < AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, cardSelect.Item2)))
+                while (bot.EnergyToSummonMonster < AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, cardSelect.Item3)))
                 {
                     monsterCardList.Remove(cardSelect);
                     cardSelect = monsterCardList[new Random().Next(0, monsterCardList.Count)];
                 }
-                SummonMonster(cardSelect.Item2);
+                SummonMonster(cardSelect.Item1);
             }
             state = NodeState.RUNNING;
             return state;

@@ -1,4 +1,5 @@
 ﻿using Game_Realtime.Model;
+using Game_Realtime.Model.InGame;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 
 namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
@@ -18,7 +19,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             // use spell
             bot.GameSessionModel.PlaceSpell(bot.userId, new Model.Data.PlaceSpellData()
             {
-                cardId = "",
+                cardId = AIMethod.GetCardId(bot.CardSelected, (CardType.SpellCard, "Heal")),
                 Xposition = bot.SpellUsingPosition.X,
                 Yposition = bot.SpellUsingPosition.Y,
                 stats = new Model.Data.SpellStats()

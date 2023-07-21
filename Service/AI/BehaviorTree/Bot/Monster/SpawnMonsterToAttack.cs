@@ -21,14 +21,14 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
         public override NodeState Evaluate()
         {
             // get a monster to calculate for summoning
-            string checkMonsterId = "";
+            string checkMonsterCardId = "";
             foreach (var monster in monsterList)
             {
                 if (MathF.Abs(monsterGatePos.x - monster.XLogicPosition) + MathF.Abs(monsterGatePos.y - monster.YLogicPosition) < 3)
                 {
-                    if (checkMonsterId == "" || new Random().Next(0, 2) == 0)
+                    if (checkMonsterCardId == "" || new Random().Next(0, 2) == 0)
                     {
-                        checkMonsterId = monster.monsterId;
+                        checkMonsterCardId = monster.cardId;
                     }
                 }
             }
@@ -40,10 +40,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
             if (mode == 0)
             {
                 // if having card as same as monster to summon, summon it
-                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.MonsterCard, checkMonsterId))
-                    && bot.EnergyToSummonMonster >= AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, checkMonsterId)))
+                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.MonsterCard, checkMonsterCardId))
+                    && bot.EnergyToSummonMonster >= AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, checkMonsterCardId)))
                 {
-                    SummonMonster(checkMonsterId);
+                    SummonMonster(checkMonsterCardId);
                     state = NodeState.RUNNING;
                     return state;
                 }
@@ -52,13 +52,13 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
             if (mode == 1)
             {
                 // get a 'support' card from sample list, if having card, summon it
-                if (AIConstant.supportMonster.TryGetValue(checkMonsterId, out var supportMonsterIdList))
+                if (AIConstant.supportMonster.TryGetValue(checkMonsterCardId, out var supportMonsterNameList))
                 {
-                    foreach (var monsterId in supportMonsterIdList)
+                    foreach (var monsterName in supportMonsterNameList)
                     {
-                        if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.MonsterCard, monsterId)))
+                        if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.MonsterCard, monsterName)))
                         {
-                            SummonMonster(monsterId);
+                            SummonMonster(AIMethod.GetCardId(bot.CardSelected, (CardType.MonsterCard, monsterName)));
                             state = NodeState.RUNNING;
                             return state;
                         }
@@ -66,17 +66,17 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                 }
             }
             // otherwise, use a random monster card
-            var monsterCardList = bot.CardSelected.Where(monsterCard => monsterCard.Item1 == CardType.MonsterCard).ToList();
+            var monsterCardList = bot.CardSelected.Where(monsterCard => monsterCard.Item2 == CardType.MonsterCard).ToList();
             if (monsterCardList.Count > 0)
             {
                 var cardSelect = monsterCardList[new Random().Next(0, monsterCardList.Count)];
-                int monsterEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, cardSelect.Item2));
+                int monsterEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, cardSelect.Item3));
                 while (bot.EnergyToSummonMonster < monsterEnergy)
                 {
                     monsterCardList.Remove(cardSelect);
                     cardSelect = monsterCardList[new Random().Next(0, monsterCardList.Count)];
                 }
-                SummonMonster(cardSelect.Item2);
+                SummonMonster(cardSelect.Item1);
             }
             state = NodeState.RUNNING;
             return state;

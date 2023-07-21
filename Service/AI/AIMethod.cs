@@ -5,11 +5,11 @@ namespace Game_Realtime.Service.AI
 {
     public static class AIMethod
     {
-        public static bool IsBotCardSelectedContain(List<(CardType, string, int)> cardSelected, (CardType, string) cardModel)
+        public static bool IsBotCardSelectedContain(List<(string, CardType, string, int)> cardSelected, (CardType, string) cardModel)
         {
             foreach (var card in cardSelected)
             {
-                if (card.Item1 == cardModel.Item1 && card.Item2 == cardModel.Item2)
+                if (card.Item2 == cardModel.Item1 && card.Item3 == cardModel.Item2)
                 {
                     return true;
                 }
@@ -17,29 +17,41 @@ namespace Game_Realtime.Service.AI
             return false;
         }
 
-        public static int GetEnergy(List<(CardType, string, int)> cardSelected, (CardType, string) cardModel)
+        public static int GetEnergy(List<(string, CardType, string, int)> cardSelected, (CardType, string) cardModel)
         {
             foreach (var card in cardSelected)
             {
-                if (card.Item1 == cardModel.Item1 && card.Item2 == cardModel.Item2)
+                if (card.Item2 == cardModel.Item1 && card.Item3 == cardModel.Item2)
                 {
-                    return card.Item3;
+                    return card.Item4;
                 }
             }
             return 0;
         }
 
-        public static int GetMinMonsterEnergy(List<(CardType, string, int)> cardSelected)
+        public static int GetMinMonsterEnergy(List<(string, CardType, string, int)> cardSelected)
         {
             int result = 999999999;
             foreach (var card in cardSelected)
             {
-                if (card.Item1 == CardType.MonsterCard && card.Item3 < result)
+                if (card.Item2 == CardType.MonsterCard && card.Item4 < result)
                 {
-                    result = card.Item3;
+                    result = card.Item4;
                 }
             }
             return result;
+        }
+
+        public static string GetCardId(List<(string, CardType, string, int)> cardSelected, (CardType, string) cardModel)
+        {
+            foreach (var card in cardSelected)
+            {
+                if (card.Item2 == cardModel.Item1 && card.Item3 == cardModel.Item2)
+                {
+                    return card.Item1;
+                }
+            }
+            return "";
         }
     }
 }

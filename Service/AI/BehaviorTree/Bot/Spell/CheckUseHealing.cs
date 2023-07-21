@@ -90,7 +90,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             if (nMonsterInCrowded.Item1 >= 5)
             {
                 bot.SpellUsingPosition = crowdestPosition;
-                bot.SpellUsingName = "Healing";
+                bot.SpellUsingName = "Heal";
                 state = NodeState.SUCCESS;
                 return state;
             }
