@@ -183,6 +183,7 @@ namespace Game_Realtime.Model
         {
             TimeSpan timeSpan = DateTime.Now - _startTime;
             return timeSpan.Seconds;
+            
         }
         public  async Task<int?> CastleTakeDamage(CastleTakeDamageData data)
         {
@@ -332,7 +333,7 @@ namespace Game_Realtime.Model
             return _players;
         }
 
-        private BasePlayer? GetRivalPlayer(string playerId)
+        public BasePlayer? GetRivalPlayer(string playerId)
         {
             foreach (var player in _players)
             {

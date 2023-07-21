@@ -22,4 +22,5 @@ public interface IMythicEmpireHub
     Task UpgradeTower(byte[] data);
     Task SellTower(byte[] data);
     Task OnEndGame(byte[] gameData);
+    Task QuitGame();
 }

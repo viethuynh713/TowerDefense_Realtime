@@ -39,23 +39,23 @@ public class AiModel: BasePlayer
 
     public AiModel(List<string> rivalPlayerCard) : base()
     {
-        basePosition = new Vector2Int(0, 4);
-
-        energyToBuildTower = 0;
-        energyToSummonMonster = 0;
-        energyGain = 0;
-
-        spellUsingPosition = new Vector2();
-        spellUsingName = "";
-
-        playMode = (BotPlayMode)new Random().Next(0, 3);
-        towerSelectPos = null;
-
-        ChooseListCard(rivalPlayerCard);
-        CalculateEnergyRateUsing();
-        //CreateTowerBuildingMap();
-        SelectBattleMode();
-        Battle();
+        // basePosition = new Vector2Int(0, 4);
+        //
+        // energyToBuildTower = 0;
+        // energyToSummonMonster = 0;
+        // energyGain = 0;
+        //
+        // spellUsingPosition = new Vector2();
+        // spellUsingName = "";
+        //
+        // playMode = (BotPlayMode)new Random().Next(0, 3);
+        // towerSelectPos = null;
+        //
+        // ChooseListCard(rivalPlayerCard);
+        // CalculateEnergyRateUsing();
+        // //CreateTowerBuildingMap();
+        // SelectBattleMode();
+        // Battle();
     }
     public void InitBot(GameSessionModel gameSessionModel)
     {
