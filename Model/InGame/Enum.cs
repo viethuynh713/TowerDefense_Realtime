@@ -12,7 +12,8 @@
         UpgradeTower,
         SellTower,
         UpdateMonsterPosition,
-        AddEnergy
+        AddEnergy,
+        QuitGame
     }
 
     public enum CardType

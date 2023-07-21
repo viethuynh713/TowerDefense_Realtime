@@ -47,6 +47,7 @@ public class GameService : IGameService
 
     public async Task GetGameInfo(string gameId, string senderId, string contextConnectionId)
     {
+        if (!_gameSessionModels.ContainsKey(gameId)) return;
         var map = _gameSessionModels[gameId].GetMap();
         List<string> cards = _gameSessionModels[gameId].GetCard(senderId);
         var mode = _gameSessionModels[gameId].GetMode();
@@ -77,6 +78,22 @@ public class GameService : IGameService
         if (!_gameSessionModels[gameId].HasPlayer(data.ownerId)) return;
 
         await _gameSessionModels[gameId].AddEnergy(data);
+    }
+
+    public async Task HandlePlayerQuitGame(string gameId, string senderId)
+    {
+        if (!_gameSessionModels.ContainsKey(gameId)) return;
+        if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
+        var player = _gameSessionModels[gameId].GetPlayer(senderId);
+        if (player != null)
+        {
+            var playerWin = _gameSessionModels[gameId].GetRivalPlayer(senderId)?.userId;
+            if (playerWin != null)
+                await OnEndGame(gameId, playerWin);
+
+            await _hubContext.Clients.Clients(player.ContextId).QuitGame();
+        }
+
     }
 
     public async Task CreateArenaGame(UserMatchingModel playerA, UserMatchingModel playerB)
@@ -194,7 +211,13 @@ public class GameService : IGameService
             if (game.Value.HasPlayerByConnectionId(connectionId))
             {
                 BasePlayer? player = game.Value.GetPlayerByConnectionId(connectionId);
-                if (player != null) await OnEndGame(game.Key, player.userId);
+                if (player != null)
+                {
+                    var playerWin = game.Value.GetRivalPlayer(player.userId)?.userId;
+                    if (playerWin != null)
+                        await OnEndGame(game.Key, playerWin);
+                }
+
                 break;
             }
         }
@@ -219,4 +242,5 @@ public interface IGameService
     Task GetGameInfo(string gameId, string senderId, string contextConnectionId);
     Task UpdateMonsterPosition(string gameId, UpdateMonsterPositionData data);
     Task AddEnergy(string gameId, AddEnergyData addEnergyData);
+    Task HandlePlayerQuitGame(string gameId, string senderId);
 }

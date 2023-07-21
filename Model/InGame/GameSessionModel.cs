@@ -183,6 +183,7 @@ namespace Game_Realtime.Model
         {
             TimeSpan timeSpan = DateTime.Now - _startTime;
             return timeSpan.Seconds;
+            
         }
         public  async Task<int?> CastleTakeDamage(CastleTakeDamageData data)
         {

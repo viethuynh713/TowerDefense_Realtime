@@ -143,6 +143,9 @@ namespace Game_Realtime.Hubs
                     await _gameService.AddEnergy(gameId, addEnergyData);
 
                     break;
+                case ActionId.QuitGame:
+                    await _gameService.HandlePlayerQuitGame(gameId,senderId);
+                    break;
 
             }
         }
