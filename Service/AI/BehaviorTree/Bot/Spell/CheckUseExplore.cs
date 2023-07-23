@@ -8,14 +8,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
     {
         private AiModel bot;
         private int energyRequired;
-        private MonsterModel[] monsterList;
         private Vector2 botBasePosition;
 
-        public CheckUseExplore(AiModel bot, int energyRequired, MonsterModel[] monsterList, Vector2 botBasePosition)
+        public CheckUseExplore(AiModel bot, int energyRequired, Vector2 botBasePosition)
         {
             this.bot = bot;
             this.energyRequired = energyRequired;
-            this.monsterList = monsterList;
             this.botBasePosition = botBasePosition;
         }
 
@@ -30,14 +28,11 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             }
             // Get all enemy monsters position which is nearer 3 tiles away from base
             List<Vector2> monsterNearBasePosList = new List<Vector2>();
-            foreach (var monster in monsterList)
+            foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
             {
-                if (monster.ownerId != bot.userId)
+                if ((botBasePosition.X - monster.Value.XLogicPosition) + (botBasePosition.Y - monster.Value.YLogicPosition) < 3)
                 {
-                    if ((botBasePosition.X - monster.XLogicPosition) + (botBasePosition.Y - monster.YLogicPosition) < 3)
-                    {
-                        monsterNearBasePosList.Add(new Vector2(monster.XLogicPosition, monster.YLogicPosition));
-                    }
+                    monsterNearBasePosList.Add(new Vector2(monster.Value.XLogicPosition, monster.Value.YLogicPosition));
                 }
             }
             // Use spell at the center of the monsters found

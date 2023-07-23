@@ -9,26 +9,27 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
     {
         private AiModel bot;
         private Vector2Int monsterGatePos;
-        private MonsterModel[] monsterList;
 
-        public SpawnMonsterToAttack(AiModel bot, Vector2Int monsterGatePos, MonsterModel[] monsterList)
+        public SpawnMonsterToAttack(AiModel bot, Vector2Int monsterGatePos)
         {
             this.bot = bot;
             this.monsterGatePos = monsterGatePos;
-            this.monsterList = monsterList;
         }
 
         public override NodeState Evaluate()
         {
             // get a monster to calculate for summoning
             string checkMonsterCardId = "";
-            foreach (var monster in monsterList)
+            foreach (var monster in bot._monsters)
             {
-                if (MathF.Abs(monsterGatePos.x - monster.XLogicPosition) + MathF.Abs(monsterGatePos.y - monster.YLogicPosition) < 3)
+                if (monster.Value.ownerId == bot.userId)
                 {
-                    if (checkMonsterCardId == "" || new Random().Next(0, 2) == 0)
+                    if (MathF.Abs(monsterGatePos.x - monster.Value.XLogicPosition) + MathF.Abs(monsterGatePos.y - monster.Value.YLogicPosition) < 3)
                     {
-                        checkMonsterCardId = monster.cardId;
+                        if (checkMonsterCardId == "" || new Random().Next(0, 2) == 0)
+                        {
+                            checkMonsterCardId = monster.Value.cardId;
+                        }
                     }
                 }
             }

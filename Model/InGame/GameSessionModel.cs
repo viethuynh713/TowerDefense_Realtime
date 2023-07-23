@@ -92,8 +92,8 @@ namespace Game_Realtime.Model
             {
                 if (ai.Value is AiModel model)
                 {
-                    //model.Battle();
-                
+                    model.Battle();
+
                 }
             }
         }

@@ -9,13 +9,11 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
     {
         private AiModel bot;
         private int energyRequired;
-        private MonsterModel[] monsterList;
 
-        public CheckUseFreeze(AiModel bot, int energyRequired, MonsterModel[] monsterList)
+        public CheckUseFreeze(AiModel bot, int energyRequired)
         {
             this.bot = bot;
             this.energyRequired = energyRequired;
-            this.monsterList = monsterList;
         }
 
         public override NodeState Evaluate()
@@ -57,13 +55,13 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             // check if at least 3 monster with HP greater than 70% nearby this tile
             int nMonster = 0;
             float HPRate = 0.7f;
-            foreach (var monster in monsterList)
+            foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
             {
-                if (monster.ownerId != bot.userId)
+                if (monster.Value.ownerId != bot.userId)
                 {
-                    if (MathF.Abs(monster.XLogicPosition - mostTowerTilePos.x) <= 1.5
-                        && MathF.Abs(monster.YLogicPosition - mostTowerTilePos.y) <= 1.5
-                        && monster.monsterHp / monster.maxHp > HPRate)
+                    if (MathF.Abs(monster.Value.XLogicPosition - mostTowerTilePos.x) <= 1.5
+                        && MathF.Abs(monster.Value.YLogicPosition - mostTowerTilePos.y) <= 1.5
+                        && monster.Value.monsterHp / monster.Value.maxHp > HPRate)
                     {
                         nMonster++;
                     }

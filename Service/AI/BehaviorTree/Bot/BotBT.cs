@@ -54,13 +54,13 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                     new Selector(spellNodeList),
                     new Sequence(new List<Node>
                     {
-                        new CheckSpawnMonsterToDefend(bot, AIMethod.GetMinMonsterEnergy(bot.CardSelected), new MonsterModel[0], new Vector2(0, 4)),
-                        new SpawnMonsterToDefend(bot, new MonsterModel[0], new Vector2(0, 4))
+                        new CheckSpawnMonsterToDefend(bot, new Vector2(0, 4)),
+                        new SpawnMonsterToDefend(bot, new Vector2(0, 4))
                     }),
                     new Sequence(new List<Node>
                     {
-                        new CheckSpawnMonsterToAttack(bot, AIMethod.GetMinMonsterEnergy(bot.CardSelected)),
-                        new SpawnMonsterToAttack(bot, new Vector2Int(10, 4), new MonsterModel[0])
+                        new CheckSpawnMonsterToAttack(bot),
+                        new SpawnMonsterToAttack(bot, new Vector2Int(10, 4))
                     }),
                     new Sequence(new List<Node>
                     {
@@ -95,7 +95,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                     int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Toxic"));
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseBurning(bot, cardEnergy, new MonsterModel[0]),
+                        new CheckUseBurning(bot, cardEnergy),
                         new UseBurning(bot, cardEnergy)
                     }));
                 }
@@ -107,7 +107,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                     int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Explode"));
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseExplore(bot, cardEnergy, new MonsterModel[0], new Vector2(0, 4)),
+                        new CheckUseExplore(bot, cardEnergy, new Vector2(0, 4)),
                         new UseExplore(bot, cardEnergy)
                     }));
                 }
@@ -118,7 +118,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                 {
                     int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Freeze"));
                     spellNodeList.Add(new Sequence(new List<Node>() {
-                        new CheckUseFreeze(bot, cardEnergy, new MonsterModel[0]),
+                        new CheckUseFreeze(bot, cardEnergy),
                         new UseFreeze(bot, cardEnergy)
                     })); ;
                 }
@@ -129,7 +129,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                 {
                     int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Heal"));
                     spellNodeList.Add(new Sequence(new List<Node>() {
-                        new CheckUseHealing(bot, cardEnergy, new MonsterModel[0]),
+                        new CheckUseHealing(bot, cardEnergy),
                         new UseHealing(bot, cardEnergy)
                     })); 
                 }
@@ -141,7 +141,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                     int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Speed"));
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseSpeedup(bot, cardEnergy, new MonsterModel[0], new Vector2(20, 4)),
+                        new CheckUseSpeedup(bot, cardEnergy, new Vector2(20, 4)),
                         new UseSpeedup(bot, cardEnergy)
                     }));
                 }

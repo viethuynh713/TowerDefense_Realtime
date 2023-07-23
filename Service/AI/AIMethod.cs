@@ -29,6 +29,18 @@ namespace Game_Realtime.Service.AI
             return 0;
         }
 
+        public static int GetEnergy(List<(string, CardType, string, int)> cardSelected, string cardId)
+        {
+            foreach (var card in cardSelected)
+            {
+                if (card.Item1 == cardId)
+                {
+                    return card.Item4;
+                }
+            }
+            return 0;
+        }
+
         public static int GetMinMonsterEnergy(List<(string, CardType, string, int)> cardSelected)
         {
             int result = 999999999;

@@ -11,7 +11,7 @@ public class BasePlayer
 
         public int energy;
         
-        protected Dictionary<string,MonsterModel> _monsters;
+        public Dictionary<string,MonsterModel> _monsters;
 
         protected Dictionary <string,TowerModel> _towers;
 

@@ -9,36 +9,31 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
     public class SpawnMonsterToDefend: Node
     {
         private AiModel bot;
-        private MonsterModel[] monsterList;
         private Vector2 botBasePosition;
 
-        public SpawnMonsterToDefend(AiModel bot, MonsterModel[] monsterList, Vector2 botBasePosition)
+        public SpawnMonsterToDefend(AiModel bot, Vector2 botBasePosition)
         {
             this.bot = bot;
-            this.monsterList = monsterList;
             this.botBasePosition = botBasePosition;
         }
 
         public override NodeState Evaluate()
         {
             // get monster near castle
-            foreach (var monster in monsterList)
+            foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
             {
-                if (monster.ownerId != bot.userId)
+                if ((botBasePosition.X - monster.Value.XLogicPosition) + (botBasePosition.Y - monster.Value.YLogicPosition) < 3)
                 {
-                    if ((botBasePosition.X - monster.XLogicPosition) + (botBasePosition.Y - monster.YLogicPosition) < 3)
+                    foreach (var monsterCard in bot.CardSelected)
                     {
-                        foreach (var monsterCard in bot.CardSelected)
+                        if (monsterCard.Item2 == CardType.MonsterCard && monsterCard.Item3 == monster.Value.monsterId)
                         {
-                            if (monsterCard.Item2 == CardType.MonsterCard && monsterCard.Item3 == monster.monsterId)
+                            if (bot.EnergyToSummonMonster >= AIMethod.GetEnergy(bot.CardSelected, monster.Value.cardId))
                             {
-                                if (bot.EnergyToSummonMonster >= AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, monster.cardId)))
-                                {
-                                    // if bot has a monster card same as monster near castle, use that card
-                                    SummonMonster(monster.cardId);
-                                    state = NodeState.RUNNING;
-                                    return state;
-                                }
+                                // if bot has a monster card same as monster near castle, use that card
+                                SummonMonster(monster.Value.cardId);
+                                state = NodeState.RUNNING;
+                                return state;
                             }
                         }
                     }
