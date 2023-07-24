@@ -30,7 +30,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             List<Vector2> monsterNearBasePosList = new List<Vector2>();
             foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
             {
-                if ((botBasePosition.X - monster.Value.XLogicPosition) + (botBasePosition.Y - monster.Value.YLogicPosition) < 3)
+                if (MathF.Abs(botBasePosition.X - monster.Value.XLogicPosition) + MathF.Abs(botBasePosition.Y - monster.Value.YLogicPosition) < 3)
                 {
                     monsterNearBasePosList.Add(new Vector2(monster.Value.XLogicPosition, monster.Value.YLogicPosition));
                 }

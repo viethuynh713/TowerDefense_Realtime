@@ -15,7 +15,7 @@ public class MapService
     {
         get => _monsterGatePosition;
     }
-    private Dictionary<string, Vector2Int>_castleLogicPosition;
+    public Dictionary<string, Vector2Int>_castleLogicPosition;
 
     private readonly string _playerId;
     private readonly string _rivalPlayerId;

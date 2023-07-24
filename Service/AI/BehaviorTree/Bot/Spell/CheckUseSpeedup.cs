@@ -15,6 +15,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             this.bot = bot;
             this.energyRequired = energyRequired;
             this.enemyBasePosition = enemyBasePosition;
+            Console.WriteLine("CheckUseSpeedup 1: " + enemyBasePosition.X + ", " + enemyBasePosition.Y);
         }
 
         public override NodeState Evaluate()
@@ -30,8 +31,9 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             List<Vector2> monsterNearBasePosList = new List<Vector2>();
             foreach (var monster in bot._monsters)
             {
-                if ((enemyBasePosition.X - monster.Value.XLogicPosition) + (enemyBasePosition.Y - monster.Value.YLogicPosition) < 3)
+                if (MathF.Abs(enemyBasePosition.X - monster.Value.XLogicPosition) + MathF.Abs(enemyBasePosition.Y - monster.Value.YLogicPosition) < 3)
                 {
+                    Console.WriteLine("CheckUseSpeedup 2: " + ((enemyBasePosition.X - monster.Value.XLogicPosition) + (enemyBasePosition.Y - monster.Value.YLogicPosition)).ToString());
                     monsterNearBasePosList.Add(new Vector2(monster.Value.XLogicPosition, monster.Value.YLogicPosition));
                 }
             }

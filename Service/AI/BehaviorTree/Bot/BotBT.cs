@@ -56,13 +56,13 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                     new Selector(spellNodeList),
                     new Sequence(new List<Node>
                     {
-                        new CheckSpawnMonsterToDefend(bot, new Vector2(10, 5)),
-                        new SpawnMonsterToDefend(bot, new Vector2(10, 5))
+                        new CheckSpawnMonsterToDefend(bot, bot.GameSessionModel._mapService._castleLogicPosition[bot.userId].CastToVector2()),
+                        new SpawnMonsterToDefend(bot, bot.GameSessionModel._mapService._castleLogicPosition[bot.userId].CastToVector2())
                     }),
                     new Sequence(new List<Node>
                     {
                         new CheckSpawnMonsterToAttack(bot),
-                        new SpawnMonsterToAttack(bot, new Vector2Int(-10, 5))
+                        new SpawnMonsterToAttack(bot, bot.GameSessionModel._mapService.MonsterGate)
                     }),
                     new Sequence(new List<Node>
                     {
@@ -109,7 +109,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                     int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Explode"));
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseExplore(bot, cardEnergy, new Vector2(10, 5)),
+                        new CheckUseExplore(bot, cardEnergy, bot.GameSessionModel._mapService._castleLogicPosition[bot.userId].CastToVector2()),
                         new UseExplore(bot, cardEnergy)
                     }));
                 }
@@ -143,7 +143,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                     int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Speed"));
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseSpeedup(bot, cardEnergy, new Vector2(-10, 5)),
+                        new CheckUseSpeedup(bot, cardEnergy, bot.GameSessionModel._mapService._castleLogicPosition[bot.GameSessionModel.GetRivalPlayer(bot.userId).userId].CastToVector2()),
                         new UseSpeedup(bot, cardEnergy)
                     }));
                 }
