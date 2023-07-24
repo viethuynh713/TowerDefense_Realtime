@@ -17,6 +17,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
         {
             this.bot = bot;
             bot.TowerSelectPos = bot.TowerBuildOrder[0];
+            bot.TowerBuildOrder.RemoveAt(0);
             root = SetUpTree();
         }
 
