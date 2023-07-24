@@ -81,13 +81,13 @@ namespace Game_Realtime.Model
             _countWave = new Timer(UpdateWave, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
             _timerUpdateEnergy = new Timer(UpdateEnergy, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
             ai.InitBot(this);
-            _aiActionTimer = new Timer(AiAction, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+            _aiActionTimer = new Timer(AiAction, null, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(1));
         }
         
 
         private void AiAction(object? state)
         {
-
+            
             foreach (var ai in GetAllPlayer())
             {
                 if (ai.Value is AiModel model)

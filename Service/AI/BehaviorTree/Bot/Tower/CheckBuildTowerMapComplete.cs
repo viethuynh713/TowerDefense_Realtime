@@ -14,6 +14,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
 
         public override NodeState Evaluate()
         {
+            Console.WriteLine("Check Build Tower Map Complete");
             // check if map build tower completely (not check level up)
             bool isBuildTowerComplete = true;
             foreach (var row in bot.TowerBuildingMap)

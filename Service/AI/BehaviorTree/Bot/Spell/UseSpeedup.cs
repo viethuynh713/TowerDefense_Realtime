@@ -16,6 +16,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
 
         public override NodeState Evaluate()
         {
+            Console.WriteLine("Use Speedup");
             // use spell
             bot.GameSessionModel.PlaceSpell(bot.userId, new Model.Data.PlaceSpellData()
             {

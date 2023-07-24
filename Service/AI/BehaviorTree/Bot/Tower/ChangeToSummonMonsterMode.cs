@@ -14,6 +14,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
 
         public override NodeState Evaluate()
         {
+            Console.WriteLine("Change To Summon Monster Mode");
             bot.EnergyBuildTowerRate = 0;
 
             state = NodeState.RUNNING;

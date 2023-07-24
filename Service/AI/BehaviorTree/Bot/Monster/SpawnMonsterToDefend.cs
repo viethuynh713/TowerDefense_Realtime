@@ -19,6 +19,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
 
         public override NodeState Evaluate()
         {
+            Console.WriteLine("Spawn Monster To Defend");
             // get monster near castle
             foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
             {

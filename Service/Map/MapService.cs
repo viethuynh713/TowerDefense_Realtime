@@ -53,11 +53,13 @@ public class MapService
     }
     public bool IsValidPosition(Vector2Int logicPos, string playerId)
     {
+        Console.WriteLine("IsValidPosition: " + logicPos.x + ", " + logicPos.y);
         if (logicPos.y >= 0 && logicPos.y < _width)
         {
             if (_logicMap[logicPos.y][logicPos.x].TypeOfType == TypeTile.Normal
                 && _logicMap[logicPos.y][logicPos.x].OwnerId == playerId)
             {
+                Console.WriteLine("Build Tower");
                 return true;
             }
         }
@@ -74,20 +76,20 @@ public class MapService
         int _columnIndexSplit = (_height - 1) / 2;
         Vector2Int _monsterGatePosition = new Vector2Int((_width - 1) / 2, _columnIndexSplit);
 
-        Vector2Int startPos = new Vector2Int(_monsterGatePosition.x - 1, _monsterGatePosition.y);
-        Vector2Int des = _castleLogicPosition[TypePlayer.Opponent];
+        Vector2Int startPos = new Vector2Int(_monsterGatePosition.x + 1, _monsterGatePosition.y);
+        Vector2Int des = _castleLogicPosition[TypePlayer.Player];
         MapGraph graph = new MapGraph(_height, _width);
         for (int i = 0; i < _logicMap.Length; i++)
         {
-            for (int j = 0; j < (_width - 1) / 2; j++)
+            for (int j = (_width - 1) / 2 + 1; j < _width; j++)
             {
                 if (_logicMap[i][j].TypeOfType == TypeTile.Normal)
                 {
-                    if (i < (_width - 1) / 2 - 1 && _logicMap[i + 1][j].TypeOfType == TypeTile.Normal)
+                    if (i < _height - 2 && _logicMap[i + 1][j].TypeOfType == TypeTile.Normal)
                     {
                         graph.AddEdge(new Vector2Int(j, i), new Vector2Int(j, i + 1));
                     }
-                    if (j < (_width - 1) / 2 - 1 && _logicMap[i][j + 1].TypeOfType == TypeTile.Normal)
+                    if (j < _width - 2 && _logicMap[i][j + 1].TypeOfType == TypeTile.Normal)
                     {
                         graph.AddEdge(new Vector2Int(j, i), new Vector2Int(j + 1, i));
                     }

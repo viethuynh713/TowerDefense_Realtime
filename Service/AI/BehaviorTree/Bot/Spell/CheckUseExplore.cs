@@ -19,6 +19,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
 
         public override NodeState Evaluate()
         {
+            Console.WriteLine("Check Use Explore");
             //// Check if any monster is nearer 3 tiles away from base, set position to use explore
             // check if enough energy to use
             if (bot.EnergyToBuildTower + bot.EnergyToSummonMonster < energyRequired)

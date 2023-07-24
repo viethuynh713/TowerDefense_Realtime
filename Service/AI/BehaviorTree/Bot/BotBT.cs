@@ -16,6 +16,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
         public BotBT(AiModel bot)
         {
             this.bot = bot;
+            bot.TowerSelectPos = bot.TowerBuildOrder[0];
             root = SetUpTree();
         }
 

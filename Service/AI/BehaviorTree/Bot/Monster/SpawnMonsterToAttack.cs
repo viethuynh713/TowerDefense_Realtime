@@ -18,6 +18,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
 
         public override NodeState Evaluate()
         {
+            Console.WriteLine("Spawn Monster To Attack");
             // get a monster to calculate for summoning
             string checkMonsterCardId = "";
             foreach (var monster in bot._monsters)

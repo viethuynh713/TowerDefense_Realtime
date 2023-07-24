@@ -26,6 +26,8 @@ public class AiModel: BasePlayer
     private BotLogicTile[][] towerBuildingMap;
     private int towerBuildingMapWidth;
     private int towerBuildingMapHeight;
+    private int realMapWidth;
+    private int realMapHeight;
     private float energyBuildTowerRate;
     private BotBT behavior;
     private FindTowerTypeStrategy findTowerTypeStrategy;
@@ -44,13 +46,16 @@ public class AiModel: BasePlayer
     {
         energyToBuildTower = 0;
         energyToSummonMonster = 0;
-        energyGain = 0;
+        energyGain = energy;
 
         spellUsingPosition = new Vector2();
         spellUsingName = "";
 
         playMode = (BotPlayMode)new Random().Next(0, 3);
         towerSelectPos = null;
+
+        realMapWidth = gameSessionModel._mapService.Width;
+        realMapHeight = gameSessionModel._mapService.Height;
 
         this.gameSessionModel = gameSessionModel;
 
@@ -61,6 +66,7 @@ public class AiModel: BasePlayer
             await CalculateEnergyRateUsing();
             await CreateTowerBuildingMap(gameSessionModel._mapService);
             await SelectBattleMode();
+            behavior = new BotBT(this);
         }
     }
 
@@ -167,7 +173,7 @@ public class AiModel: BasePlayer
             Console.WriteLine("Choose List Card: " + cardSelected.Count.ToString());
             foreach (var card in cardSelected)
             {
-                Console.WriteLine(card.Item1.ToString() + ", " + card.Item2.ToString() + ", " + card.Item3.ToString());
+                Console.WriteLine(card.Item1.ToString() + ", " + card.Item2.ToString() + ", " + card.Item3.ToString() + ", " + card.Item4.ToString());
             }
             return cardSelectingIdList;
         }
@@ -204,10 +210,9 @@ public class AiModel: BasePlayer
             Console.WriteLine("");
         }
         longestPath = map.InitLongestPath();
-        longestPath.RemoveAt(longestPath.Count - 1);
         for (int i = 0; i < longestPath.Count; i++)
         {
-            longestPath[i] = new Vector2Int(longestPath[i].x - 1, longestPath[i].y - 1);
+            longestPath[i] = new Vector2Int(longestPath[i].x - towerBuildingMapWidth - 2, longestPath[i].y - 1);
         }
         Console.WriteLine("LongestPath: " + longestPath.Count.ToString());
         foreach (var tile in longestPath)
@@ -227,7 +232,7 @@ public class AiModel: BasePlayer
             for (int j = 0; j < towerBuildingMapWidth; j++)
             {
                 towerBuildingMap[i][j] = new BotLogicTile();
-                towerBuildingMap[i][j].Copy(map.LogicMap[i + 1][j + 1]);
+                towerBuildingMap[i][j].Copy(map.LogicMap[i + 1][j + towerBuildingMapWidth + 2]);
             }
         }
         // build tower building map
@@ -325,6 +330,8 @@ public class AiModel: BasePlayer
         findTowerTypeStrategy = (FindTowerTypeStrategy)new Random().Next(0, 2);
         // select find tower position strategy
         findTowerPosStrategy = (FindTowerPosStrategy)new Random().Next(0, 4);
+        Console.WriteLine("FindTowerTypeStrategy: " + findTowerTypeStrategy.ToString());
+        Console.WriteLine("FindTowerPosStrategy: " + findTowerPosStrategy.ToString());
         // create tower building order
         // the first is position
         // the second is strength (get by index in AIConstant.towerStrength)
@@ -405,13 +412,14 @@ public class AiModel: BasePlayer
         {
             // get list of tile which will be used to build tower
             List<Vector2Int> towerBuildingTileList = new List<Vector2Int>();
-            foreach (var row in towerBuildingMap)
+            for (int i = 0; i < towerBuildingMapHeight; i++)
             {
-                foreach (var _tile in row)
+                for (int j = 0; j < towerBuildingMapWidth; j++)
                 {
+                    var _tile = towerBuildingMap[i][j];
                     if (_tile.isBuildTower)
                     {
-                        towerBuildingTileList.Add(new Vector2Int(_tile.XLogicPosition, _tile.YLogicPosition));
+                        towerBuildingTileList.Add(new Vector2Int(j, i));
                     }
                 }
             }
@@ -457,19 +465,16 @@ public class AiModel: BasePlayer
                 towerBuildProgressOrder.Add(tilePos);
             }
         }
-        Console.WriteLine("FindTowerTypeStrategy: " + findTowerTypeStrategy.ToString());
-        Console.WriteLine("FindTowerPosStrategy: " + findTowerPosStrategy.ToString());
         return Task.CompletedTask;
     }
 
     public async Task<bool> Battle()
     {
-        behavior = new BotBT(this);
         behavior.Update();
         return true;
     }
 
-    private void ToggleAutoSummonMonsterCurrently()
+    public void ToggleAutoSummonMonsterCurrently()
     {
         // NOTE: This function is called each time game controller summons a new monster wave
         hasAutoSummonMonsterCurrently = true;
@@ -477,7 +482,7 @@ public class AiModel: BasePlayer
         hasAutoSummonMonsterCurrently = false;
     }
 
-    private void BotGainEnergy(int energyGain)
+    public void BotGainEnergy(int energyGain)
     {
         // NOTE: This function is called anytime when bot received energy from anything
         this.energyGain += energyGain;
@@ -489,7 +494,7 @@ public class AiModel: BasePlayer
     public int TowerBuildingMapWidth { get { return towerBuildingMapWidth; } }
     public int TowerBuildingMapHeight { get { return towerBuildingMapHeight; } }
     public float EnergyBuildTowerRate { get { return energyBuildTowerRate; } set { energyBuildTowerRate = value; } }
-    public BotBT Behavior { get { return behavior; } }
+    public BotBT Behavior { get { return behavior; } set { behavior = value; } }
 
     public float EnergyToBuildTower { get { return energyToBuildTower; } set { energyToBuildTower = value; } }
     public float EnergyToSummonMonster { get { return energyToSummonMonster; } set { energyToSummonMonster = value; } }
@@ -503,4 +508,6 @@ public class AiModel: BasePlayer
     public List<Vector2Int> TowerBuildOrder { get { return towerBuildOrder; } set { towerBuildOrder = value; } }
     public List<Vector2Int> TowerBuildProgressOrder { get { return towerBuildProgressOrder; } set { towerBuildProgressOrder = value; } }
     public GameSessionModel GameSessionModel { get { return gameSessionModel; } }
+    public int RealMapWidth { get { return realMapWidth; } }
+    public int RealMapHeight { get {  return realMapHeight; } }
 }

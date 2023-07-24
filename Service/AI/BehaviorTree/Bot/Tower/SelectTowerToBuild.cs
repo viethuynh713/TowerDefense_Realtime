@@ -14,6 +14,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
 
         public override NodeState Evaluate()
         {
+            Console.WriteLine("Select Tower To Build");
             // choose the first position in order
             if (bot.TowerBuildOrder.Count > 0)
             {
