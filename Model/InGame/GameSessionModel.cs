@@ -140,6 +140,10 @@ namespace Game_Realtime.Model
                             var jsonData = JsonConvert.SerializeObject(m.Result);
                             _hubContext.Clients.Groups(_gameId).SpawnMonsterWave(Encoding.UTF8.GetBytes(jsonData));
                         }
+                        if (player.Value is AiModel)
+                        {
+                            ((AiModel)player.Value).ToggleAutoSummonMonsterCurrently();
+                        }
                     }
                 }
 

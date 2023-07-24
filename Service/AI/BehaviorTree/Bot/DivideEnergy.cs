@@ -18,7 +18,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
             Console.WriteLine("Bot Divide Energy");
 
             bot.EnergyToBuildTower += bot.EnergyGain * bot.EnergyBuildTowerRate;
-            bot.EnergyToSummonMonster += bot.EnergyGain - bot.EnergyToBuildTower;
+            bot.EnergyToSummonMonster += bot.EnergyGain * (1 - bot.EnergyBuildTowerRate);
             bot.EnergyGain = 0;
 
             state = NodeState.RUNNING;

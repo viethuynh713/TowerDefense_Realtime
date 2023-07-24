@@ -42,14 +42,14 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
                 }
                 else
                 {
-                    if (towerName == AIConstant.basicTowerName)
+                    if (towerName == bot.BasicTowerName)
                     {
                         bot.TowerBuildingMap[bot.TowerSelectPos.Value.y][bot.TowerSelectPos.Value.x].hasTower = true;
                     }
                     // if find tower building type is PROGRESS, the tower is not a basic tower and tile is empty, build a basic tower
                     else
                     {
-                        towerName = AIConstant.basicTowerName;
+                        towerName = bot.BasicTowerName;
                         bot.TowerBuildingMap[bot.TowerSelectPos.Value.y][bot.TowerSelectPos.Value.x].isInProgress = true;
                     }
                 }

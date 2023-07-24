@@ -4,8 +4,6 @@ namespace Game_Realtime.Service.AI
 {
     public static class AIConstant
     {
-        public static readonly string basicTowerName = "Crossbow";
-
         public static readonly Dictionary<BotPlayMode, Dictionary<CardType, Dictionary<string, int>>> CardSelectingStrategy = new Dictionary<BotPlayMode, Dictionary<CardType, Dictionary<string, int>>>()
         {
             { BotPlayMode.ATTACK, new Dictionary<CardType, Dictionary<string, int>>()
@@ -62,6 +60,13 @@ namespace Game_Realtime.Service.AI
         public static readonly List<List<string>> TowerTier = new List<List<string>>()
         {
             new List<string> {"Energy"},                               // tier D
+            new List<string> {"Crossbow", "Cannon", "Fireball"},    // tier C
+            new List<string> { "Gatling", "Rocket"},              // tier B
+            new List<string> { "Fire" }                             // tier A
+        };
+
+        public static readonly List<List<string>> AttackTowerTier = new List<List<string>>()
+        {
             new List<string> {"Crossbow", "Cannon", "Fireball"},    // tier C
             new List<string> { "Gatling", "Rocket"},              // tier B
             new List<string> { "Fire" }                             // tier A

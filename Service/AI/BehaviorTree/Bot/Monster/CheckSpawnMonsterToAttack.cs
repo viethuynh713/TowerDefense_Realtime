@@ -17,9 +17,8 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
 
         public override NodeState Evaluate()
         {
-            Console.WriteLine("Check Spawn Monster To Attack");
             // check if enough energy to use
-            if (bot.EnergyToSummonMonster <= minEnergyRequired)
+            if (bot.EnergyToSummonMonster < minEnergyRequired)
             {
                 state = NodeState.FAILURE;
                 return state;

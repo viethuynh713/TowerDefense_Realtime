@@ -58,11 +58,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
 
         private void SummonMonster(string id)
         {
+            Console.WriteLine("SummonMonster: " + id);
             // summon monster
             bot.GameSessionModel.CreateMonster(bot.userId, new Model.Data.CreateMonsterData()
             {
                 cardId = id,
-                Xposition = (int)botBasePosition.X,
+                Xposition = (int)botBasePosition.X - 1,
                 Yposition = (int)botBasePosition.Y,
                 stats = new Model.Data.MonsterStats()
             });

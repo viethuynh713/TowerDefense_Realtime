@@ -53,13 +53,11 @@ public class MapService
     }
     public bool IsValidPosition(Vector2Int logicPos, string playerId)
     {
-        Console.WriteLine("IsValidPosition: " + logicPos.x + ", " + logicPos.y);
         if (logicPos.y >= 0 && logicPos.y < _width)
         {
             if (_logicMap[logicPos.y][logicPos.x].TypeOfType == TypeTile.Normal
                 && _logicMap[logicPos.y][logicPos.x].OwnerId == playerId)
             {
-                Console.WriteLine("Build Tower");
                 return true;
             }
         }

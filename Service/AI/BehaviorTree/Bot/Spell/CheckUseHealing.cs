@@ -17,7 +17,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
 
         public override NodeState Evaluate()
         {
-            Console.WriteLine("Check Use Healing");
             //// Check if any tile has 5 monsters or more nearby and at least 3 monsters has less than 30%HP, set position to use burning
             // check if enough energy to use
             if (bot.EnergyToBuildTower + bot.EnergyToSummonMonster < energyRequired)

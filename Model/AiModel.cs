@@ -29,6 +29,7 @@ public class AiModel: BasePlayer
     private int realMapWidth;
     private int realMapHeight;
     private float energyBuildTowerRate;
+    private string basicTowerName;
     private BotBT behavior;
     private FindTowerTypeStrategy findTowerTypeStrategy;
     private FindTowerPosStrategy findTowerPosStrategy;
@@ -51,7 +52,8 @@ public class AiModel: BasePlayer
         spellUsingPosition = new Vector2();
         spellUsingName = "";
 
-        playMode = (BotPlayMode)new Random().Next(0, 3);
+        playMode = BotPlayMode.ATTACK;
+        //playMode = (BotPlayMode)new Random().Next(0, 3);
         towerSelectPos = null;
 
         realMapWidth = gameSessionModel._mapService.Width;
@@ -326,10 +328,11 @@ public class AiModel: BasePlayer
 
     private Task SelectBattleMode()
     {
+        findTowerPosStrategy = FindTowerPosStrategy.GATE_TO_CASTLE;
         // select find tower type strategy
         findTowerTypeStrategy = (FindTowerTypeStrategy)new Random().Next(0, 2);
         // select find tower position strategy
-        findTowerPosStrategy = (FindTowerPosStrategy)new Random().Next(0, 4);
+        //findTowerPosStrategy = (FindTowerPosStrategy)new Random().Next(0, 4);
         Console.WriteLine("FindTowerTypeStrategy: " + findTowerTypeStrategy.ToString());
         Console.WriteLine("FindTowerPosStrategy: " + findTowerPosStrategy.ToString());
         // create tower building order
@@ -458,9 +461,31 @@ public class AiModel: BasePlayer
         }
         // create a clone list tower to build again if tower building type is PROGRESS, this list don't have tile with build basic tower
         towerBuildProgressOrder = new List<Vector2Int>();
+        basicTowerName = "";
+        if (findTowerTypeStrategy == FindTowerTypeStrategy.PROGRESS)
+        {
+            foreach (var towerList in AIConstant.AttackTowerTier)
+            {
+                bool found = false;
+                foreach (var towerName in towerList)
+                {
+                    if (AIMethod.IsBotCardSelectedContain(CardSelected, (CardType.TowerCard, towerName)))
+                    {
+                        basicTowerName = towerName;
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) break;
+            }
+            if (basicTowerName == "")
+            {
+                basicTowerName = "Energy";
+            }
+        }
         foreach (var tilePos in towerBuildOrder)
         {
-            if (towerBuildingMap[tilePos.y][tilePos.x].towerName != AIConstant.basicTowerName)
+            if (towerBuildingMap[tilePos.y][tilePos.x].towerName != basicTowerName)
             {
                 towerBuildProgressOrder.Add(tilePos);
             }
@@ -474,12 +499,13 @@ public class AiModel: BasePlayer
         return true;
     }
 
-    public void ToggleAutoSummonMonsterCurrently()
+    public Task ToggleAutoSummonMonsterCurrently()
     {
         // NOTE: This function is called each time game controller summons a new monster wave
         hasAutoSummonMonsterCurrently = true;
-        // delay 2 seconds
+        Thread.Sleep(2000);
         hasAutoSummonMonsterCurrently = false;
+        return Task.CompletedTask;
     }
 
     public void BotGainEnergy(int energyGain)
@@ -510,4 +536,5 @@ public class AiModel: BasePlayer
     public GameSessionModel GameSessionModel { get { return gameSessionModel; } }
     public int RealMapWidth { get { return realMapWidth; } }
     public int RealMapHeight { get {  return realMapHeight; } }
+    public string BasicTowerName { get {  return basicTowerName; } }
 }

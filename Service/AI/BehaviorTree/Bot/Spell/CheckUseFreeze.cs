@@ -18,7 +18,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
 
         public override NodeState Evaluate()
         {
-            Console.WriteLine("Check Use Freeze");
             //// Check if at tile which has the most tower surround has at least 3 monsters greater than 70% HP, set position to use freeze
             // check if enough energy to use
             if (bot.EnergyToBuildTower + bot.EnergyToSummonMonster < energyRequired)
