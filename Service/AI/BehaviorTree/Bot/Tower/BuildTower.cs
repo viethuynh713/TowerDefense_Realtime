@@ -15,7 +15,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
 
         public override NodeState Evaluate()
         {
-            Console.WriteLine("Build Tower");
             var tile = bot.TowerBuildingMap[bot.TowerSelectPos.Value.y][bot.TowerSelectPos.Value.x];
             // get tower id from selected tile
             string towerName = tile.towerName;
@@ -58,7 +57,8 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
             {
                 bot.TowerBuildingMap[bot.TowerSelectPos.Value.y][bot.TowerSelectPos.Value.x].hasTower = true;
             }
-            Console.WriteLine("In Build Tower: " + bot.TowerSelectPos.Value.x.ToString() + " - " + bot.TowerSelectPos.Value.y.ToString());
+            Console.WriteLine("Bot build tower " + AIMethod.GetCardId(bot.CardSelected, (CardType.TowerCard, towerName)) + " at (" +
+                bot.TowerSelectPos.Value.x.ToString() + ", " + bot.TowerSelectPos.Value.y.ToString() + ")");
             // send request building tower
             bot.GameSessionModel.BuildTower(bot.userId, new Model.Data.BuildTowerData()
             {

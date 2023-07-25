@@ -15,7 +15,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
 
         public override NodeState Evaluate()
         {
-            Console.WriteLine("Energy: " + bot.EnergyToBuildTower.ToString());
             // check if a tower is selected to build
             if (bot.TowerSelectPos == null)
             {

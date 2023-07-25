@@ -18,7 +18,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
 
         public override NodeState Evaluate()
         {
-            Console.WriteLine("Spawn Monster To Attack");
             // get a monster to calculate for summoning
             string checkMonsterCardId = "";
             foreach (var monster in bot._monsters)
@@ -86,6 +85,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
 
         private void SummonMonster(string id)
         {
+            Console.WriteLine("Spawn Monster " + id + " To Attack");
             // get cost to use a monster card
             int energy = AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, id));
             // get maximum monsters can be summoned

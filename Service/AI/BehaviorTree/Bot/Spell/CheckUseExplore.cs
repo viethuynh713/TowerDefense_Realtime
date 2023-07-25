@@ -26,13 +26,17 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
                 state = NodeState.FAILURE;
                 return state;
             }
-            // Get all enemy monsters position which is nearer 3 tiles away from base
+            // Get all enemy monsters position which is nearer 3 tiles away from base and HP > 60%
             List<Vector2> monsterNearBasePosList = new List<Vector2>();
+            float HPRate = 0.6f;
             foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
             {
                 if (MathF.Abs(botBasePosition.X - monster.Value.XLogicPosition) + MathF.Abs(botBasePosition.Y - monster.Value.YLogicPosition) < 3)
                 {
-                    monsterNearBasePosList.Add(new Vector2(monster.Value.XLogicPosition, monster.Value.YLogicPosition));
+                    if ((float)monster.Value.monsterHp / monster.Value.maxHp > HPRate)
+                    {
+                        monsterNearBasePosList.Add(new Vector2(monster.Value.XLogicPosition, monster.Value.YLogicPosition));
+                    }
                 }
             }
             // Use spell at the center of the monsters found

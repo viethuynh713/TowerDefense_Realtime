@@ -61,7 +61,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
                 {
                     if (MathF.Abs(monster.Value.XLogicPosition - mostTowerTilePos.x) <= 1.5
                         && MathF.Abs(monster.Value.YLogicPosition - mostTowerTilePos.y) <= 1.5
-                        && monster.Value.monsterHp / monster.Value.maxHp > HPRate)
+                        && (float)monster.Value.monsterHp / monster.Value.maxHp > HPRate)
                     {
                         nMonster++;
                     }

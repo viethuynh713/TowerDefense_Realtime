@@ -40,14 +40,14 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
                             if (monstersInRange.TryGetValue(new Vector2(monster.Value.XLogicPosition + x, monster.Value.YLogicPosition + y), out var value))
                             {
                                 value.Item1++;
-                                if (monster.Value.monsterHp / monster.Value.maxHp < HPRate)
+                                if ((float)monster.Value.monsterHp / monster.Value.maxHp < HPRate)
                                 {
                                     value.Item2++;
                                 }
                             }
                             else
                             {
-                                if (monster.Value.monsterHp / monster.Value.maxHp < HPRate)
+                                if ((float)monster.Value.monsterHp / monster.Value.maxHp < HPRate)
                                 {
                                     monstersInRange.Add(new Vector2(monster.Value.XLogicPosition + x, monster.Value.YLogicPosition + y), (1, 1));
                                 }

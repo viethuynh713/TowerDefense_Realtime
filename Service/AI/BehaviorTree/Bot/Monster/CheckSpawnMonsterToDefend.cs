@@ -19,7 +19,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
 
         public override NodeState Evaluate()
         {
-            Console.WriteLine("Spawn Monster To Defend 1: " + bot.EnergyToSummonMonster.ToString() + " - " + minEnergyRequired.ToString());
             // check if enough energy to use
             if (bot.EnergyToSummonMonster < minEnergyRequired)
             {
@@ -32,8 +31,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                 // and any opponent monsters are near castle, summon a monster at castle to defend
                 foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
                 {
-                    Console.WriteLine("Spawn Monster To Defend 2: " + monster.Value.XLogicPosition.ToString() + ", " + monster.Value.YLogicPosition.ToString());
-                    Console.WriteLine("Spawn Monster To Defend 3: " + ((botBasePosition.X - monster.Value.XLogicPosition) + (botBasePosition.Y - monster.Value.YLogicPosition)).ToString());
                     if ((botBasePosition.X - monster.Value.XLogicPosition) + (botBasePosition.Y - monster.Value.YLogicPosition) < 3)
                     {
                         state = NodeState.SUCCESS;
