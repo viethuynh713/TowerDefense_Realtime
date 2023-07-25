@@ -51,8 +51,7 @@ public class AiModel: BasePlayer
 
         spellUsingPosition = new Vector2();
 
-        playMode = BotPlayMode.ATTACK;
-        //playMode = (BotPlayMode)new Random().Next(0, 3);
+        playMode = (BotPlayMode)new Random().Next(0, 3);
         towerSelectPos = null;
 
         realMapWidth = gameSessionModel._mapService.Width;
