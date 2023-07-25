@@ -51,7 +51,8 @@ public class AiModel: BasePlayer
 
         spellUsingPosition = new Vector2();
 
-        playMode = (BotPlayMode)new Random().Next(0, 3);
+        playMode = BotPlayMode.ATTACK;
+        //playMode = (BotPlayMode)new Random().Next(0, 3);
         towerSelectPos = null;
 
         realMapWidth = gameSessionModel._mapService.Width;
@@ -160,7 +161,6 @@ public class AiModel: BasePlayer
                         }
                         idx--;
                     }
-                    Console.WriteLine("While: length: " + length.ToString() + " - idx: " + idx.ToString());
                 }
             }
             //// set rarity for cards

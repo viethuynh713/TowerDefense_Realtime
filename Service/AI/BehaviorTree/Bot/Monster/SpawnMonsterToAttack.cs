@@ -95,7 +95,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                 await bot.GameSessionModel.CreateMonster(bot.userId, new Model.Data.CreateMonsterData()
                 {
                     cardId = card.CardId,
-                    Xposition = monsterGatePos.x - 1,
+                    Xposition = monsterGatePos.x + 1,
                     Yposition = monsterGatePos.y,
                     stats = new Model.Data.MonsterStats
                     {
