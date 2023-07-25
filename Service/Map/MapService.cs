@@ -172,7 +172,7 @@ public class MapService
             visitedTiles.Add(checkTile);
             activeTiles.Remove(checkTile);
 
-            var walkableTiles = GetWalkableTiles(map, checkTile, finish);
+            var walkableTiles = GetWalkableTiles(map, checkTile, finish, playerId == _rivalPlayerId);
 
             foreach (var walkableTile in walkableTiles)
             {
@@ -201,18 +201,27 @@ public class MapService
 
         return new List<Vector2Int>();
     }
-    private List<FPTile> GetWalkableTiles(List<string> map, FPTile currentTile, FPTile targetTile)
+    private List<FPTile> GetWalkableTiles(List<string> map, FPTile currentTile, FPTile targetTile, bool isRightSide)
     {
         List<FPTile> possibleTiles;
 
-        if (currentTile.x == _columnIndexSplit)
+        if (currentTile.x == (_width - 1) / 2)
         {
-            possibleTiles = new List<FPTile>()
+            if (isRightSide)
             {
-                new FPTile { x = currentTile.x + 1, y = currentTile.y, parent = currentTile, cost = currentTile.cost + 1 },
-                new FPTile { x = currentTile.x - 1, y = currentTile.y, parent = currentTile, cost = currentTile.cost + 1 }
-            };
-            
+                possibleTiles = new List<FPTile>()
+                     {
+                         new FPTile { x = currentTile.x + 1, y = currentTile.y, parent = currentTile, cost = currentTile.cost + 1 }
+                     };
+            }
+            else
+            {
+                possibleTiles = new List<FPTile>()
+                     {
+                         new FPTile { x = currentTile.x - 1, y = currentTile.y, parent = currentTile, cost = currentTile.cost + 1 }
+                     };
+            }
+
         }
         else
         {
