@@ -7,20 +7,19 @@ using Game_Realtime.Model.InGame;
 using Microsoft.AspNetCore.SignalR;
 using Networking_System.Model.Data.DataReceive;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Game_Realtime.Service;
 
 public class GameService : IGameService
 {
-    private readonly Dictionary<string, GameSessionModel> _gameSessionModels;
+    private readonly Dictionary<string, IGameSessionModel> _gameSessionModels;
     private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;
     private readonly object _inGameKey;
 
     public GameService(IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
     {
         _hubContext = hubContext;
-        _gameSessionModels = new Dictionary<string, GameSessionModel>();
+        _gameSessionModels = new Dictionary<string, IGameSessionModel>();
         _inGameKey = new object();
 
     }
@@ -230,7 +229,6 @@ public interface IGameService
 {
     Task CreateArenaGame(UserMatchingModel playerA, UserMatchingModel playerB);
     Task CastleTakeDamage(string gameId, string userId, CastleTakeDamageData data);
-    Task OnEndGame(string gameId, string playerLose);
     Task UpdateMonsterHp(string gameId, string senderId, MonsterTakeDamageData monsterTakeDamageData);
     Task BuildTower(string gameId, string senderId, BuildTowerData buildTowerData);
     Task PlaceSpell(string gameId, string senderId, PlaceSpellData placeSpellData);

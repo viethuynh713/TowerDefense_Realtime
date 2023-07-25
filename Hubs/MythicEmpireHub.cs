@@ -6,7 +6,6 @@ using Game_Realtime.Model.Data;
 using Newtonsoft.Json.Linq;
 using Game_Realtime.Model.InGame;
 using Game_Realtime.Service;
-using Game_Realtime.Service.WaveService;
 using Networking_System.Model.Data.DataReceive;
 
 namespace Game_Realtime.Hubs
@@ -16,11 +15,13 @@ namespace Game_Realtime.Hubs
     {
         private readonly IUserMatchingService _userMatchingService;
         private readonly IGameService _gameService;
+        private readonly IOnlineService _onlineService;
         
-        public MythicEmpireHub(IUserMatchingService userMatchingService, IGameService gameService)
+        public MythicEmpireHub(IUserMatchingService userMatchingService, IGameService gameService, IOnlineService onlineService)
         {
             _userMatchingService = userMatchingService;
             _gameService = gameService;
+            _onlineService = onlineService;
             Console.WriteLine("\n-----------------------InGameHub Init----------------------");
         }
         
@@ -30,6 +31,15 @@ namespace Game_Realtime.Hubs
             return Task.CompletedTask;
         }
 
+        public Task Online(string userId)
+        {
+            _onlineService.IsOnline();
+            return Task.CompletedTask;
+        }
+        public Task Offline(string userId)
+        {
+            return Task.CompletedTask;
+        }
         public async Task OnReceiveMatchMakingRequest(string userId, byte[] listCard, int gameMode)
         {
             // Deserialize list card

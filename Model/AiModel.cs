@@ -9,6 +9,9 @@ using Newtonsoft.Json;
 using Service.Models;
 using System.Linq;
 using System.Numerics;
+using Game_Realtime.Model.InGame;
+using CardType = Service.Models.CardType;
+using RarityCard = Service.Models.RarityCard;
 
 namespace Game_Realtime.Model;
 

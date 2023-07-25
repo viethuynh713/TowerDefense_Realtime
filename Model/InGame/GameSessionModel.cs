@@ -1,20 +1,17 @@
-﻿using System.Diagnostics;
-using System.Text;
+﻿using System.Text;
 using Game_Realtime.Hubs;
 using Game_Realtime.Model.Data;
 using Game_Realtime.Model.Data.DataSend;
-using Game_Realtime.Model.InGame;
 using Game_Realtime.Model.Map;
 using Game_Realtime.Service;
 using Game_Realtime.Service.WaveService;
 using Microsoft.AspNetCore.SignalR;
 using Networking_System.Model.Data.DataReceive;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace Game_Realtime.Model
+namespace Game_Realtime.Model.InGame
 {
-    public class GameSessionModel
+    public class GameSessionModel : IGameSessionModel
     {
         private string _gameId;
 
@@ -183,10 +180,10 @@ namespace Game_Realtime.Model
         {
             return _modeGame;
         }
-        public async Task<int> GetTotalTime()
+        public Task<int> GetTotalTime()
         {
             TimeSpan timeSpan = DateTime.Now - _startTime;
-            return timeSpan.Seconds;
+            return Task.FromResult(timeSpan.Seconds);
             
         }
         public  async Task<int?> CastleTakeDamage(CastleTakeDamageData data)
@@ -231,10 +228,9 @@ namespace Game_Realtime.Model
         {
             await _countWave.DisposeAsync();
             await _timerUpdateEnergy.DisposeAsync();
-            if (_modeGame == ModeGame.Adventure)
-            {
-                await _aiActionTimer.DisposeAsync();
-            }
+
+            await _aiActionTimer.DisposeAsync();
+            
         }
 
         public async Task<MonsterModel?> CreateMonster(string playerId, CreateMonsterData data)
@@ -303,6 +299,7 @@ namespace Game_Realtime.Model
             return tower;
 
         }
+        
 
         public async Task<SpellModel?> PlaceSpell(string playerId, PlaceSpellData data)
         {
@@ -484,4 +481,28 @@ namespace Game_Realtime.Model
         }
     }
 
+    public interface IGameSessionModel
+    {
+        Task AddEnergy(AddEnergyData data);
+        Task UpdateMonsterPosition(UpdateMonsterPositionData data);
+        BasePlayer? GetPlayerByConnectionId(string connectionId);
+        bool HasPlayerByConnectionId(string connectionId);
+        Task<TowerModel> SellTower(string senderId, SellTowerData data);
+        Task<TowerStats?> UpgradeTower(string senderId, UpgradeTowerData data);
+        Task UpdateMonsterHp(MonsterTakeDamageData data);
+        BasePlayer? GetRivalPlayer(string playerId);
+        Dictionary<string, BasePlayer> GetAllPlayer();
+        PlayerModel? GetPlayer(string senderId);
+        List<string> GetCard(string senderId);
+        LogicTile[][] GetMap();
+
+        Task<SpellModel?> PlaceSpell(string playerId, PlaceSpellData data);
+        Task<MonsterModel?> CreateMonster(string playerId, CreateMonsterData data);
+        Task<int?> CastleTakeDamage(CastleTakeDamageData data);
+        Task<TowerModel?> BuildTower(string playerId, BuildTowerData data);
+        Task<int> GetTotalTime();
+        ModeGame GetMode();
+        bool HasPlayer(string dataOwnerId);
+        Task EndGame();
+    }
 }

@@ -9,6 +9,7 @@ builder.Services.AddSignalR();
 builder.Services.AddSingleton<MythicEmpireHub>();
 builder.Services.AddSingleton<IGameService,GameService>();
 builder.Services.AddSingleton<IUserMatchingService,UserMatchingService>();
+builder.Services.AddSingleton<IOnlineService,OnlineService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
