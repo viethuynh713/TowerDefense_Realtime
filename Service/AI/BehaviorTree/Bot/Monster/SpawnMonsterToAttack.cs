@@ -18,6 +18,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
 
         public override NodeState Evaluate()
         {
+            Console.WriteLine("SpawnMonsterToAttack");
             // get a monster to calculate for summoning
             string checkMonsterCardId = "";
             foreach (var monster in bot._monsters)
@@ -83,7 +84,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
             return state;
         }
 
-        private void SummonMonster(string id)
+        private async Task SummonMonster(string id)
         {
             Console.WriteLine("Spawn Monster " + id + " To Attack");
             // get cost to use a monster card
@@ -92,10 +93,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
             int nMonster = (int)bot.EnergyToSummonMonster / energy;
             for (int i = 0; i < nMonster; i++)
             {
-                bot.GameSessionModel.CreateMonster(bot.userId, new Model.Data.CreateMonsterData()
+                await bot.GameSessionModel.CreateMonster(bot.userId, new Model.Data.CreateMonsterData()
                 {
                     cardId = id,
-                    Xposition = monsterGatePos.x,
+                    Xposition = monsterGatePos.x - 1,
                     Yposition = monsterGatePos.y,
                     stats = new Model.Data.MonsterStats()
                 });

@@ -52,8 +52,7 @@ public class AiModel: BasePlayer
         spellUsingPosition = new Vector2();
         spellUsingName = "";
 
-        playMode = BotPlayMode.ATTACK;
-        //playMode = (BotPlayMode)new Random().Next(0, 3);
+        playMode = (BotPlayMode)new Random().Next(0, 3);
         towerSelectPos = null;
 
         realMapWidth = gameSessionModel._mapService.Width;
@@ -328,11 +327,10 @@ public class AiModel: BasePlayer
 
     private Task SelectBattleMode()
     {
-        findTowerPosStrategy = FindTowerPosStrategy.GATE_TO_CASTLE;
         // select find tower type strategy
         findTowerTypeStrategy = (FindTowerTypeStrategy)new Random().Next(0, 2);
         // select find tower position strategy
-        //findTowerPosStrategy = (FindTowerPosStrategy)new Random().Next(0, 4);
+        findTowerPosStrategy = (FindTowerPosStrategy)new Random().Next(0, 4);
         Console.WriteLine("FindTowerTypeStrategy: " + findTowerTypeStrategy.ToString());
         Console.WriteLine("FindTowerPosStrategy: " + findTowerPosStrategy.ToString());
         // create tower building order
@@ -502,6 +500,7 @@ public class AiModel: BasePlayer
     public Task ToggleAutoSummonMonsterCurrently()
     {
         // NOTE: This function is called each time game controller summons a new monster wave
+        Console.WriteLine("ToggleAutoSummonMonsterCurrently");
         hasAutoSummonMonsterCurrently = true;
         Thread.Sleep(2000);
         hasAutoSummonMonsterCurrently = false;
