@@ -1,41 +1,48 @@
 ﻿using Game_Realtime.Model;
+using Service.Models;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 using System.Numerics;
 using System.Threading;
+using Newtonsoft.Json;
 
 namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
 {
     public class SpawnMonsterToDefend: Node
     {
         private AiModel bot;
-        private MonsterModel[] monsterList;
         private Vector2 botBasePosition;
+        private List<CardModel> stockCards;
 
-        public SpawnMonsterToDefend(AiModel bot, MonsterModel[] monsterList, Vector2 botBasePosition)
+        public SpawnMonsterToDefend(AiModel bot, Vector2 botBasePosition)
         {
             this.bot = bot;
-            this.monsterList = monsterList;
             this.botBasePosition = botBasePosition;
+
+            var json = File.ReadAllText("./CardConfig/MythicEmpire.Cards.json");
+            var stockCards = JsonConvert.DeserializeObject<List<CardModel>>(json);
+            if (stockCards == null) Console.WriteLine("Get MythicEmpire.Cards Error!");
         }
 
         public override NodeState Evaluate()
         {
-            // NOTE: check energy before using card
             // get monster near castle
-            foreach (var monster in monsterList)
+            foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
             {
-                if (monster.ownerId != bot.userId)
+                if ((botBasePosition.X - monster.Value.XLogicPosition) + (botBasePosition.Y - monster.Value.YLogicPosition) < 3)
                 {
-                    if ((botBasePosition.X - monster.XLogicPosition) + (botBasePosition.Y - monster.YLogicPosition) < 3)
+                    foreach (var monsterCard in bot.CardSelected)
                     {
-                        foreach (var monsterCard in bot.CardSelected)
+                        CardModel sampleCard = stockCards.FirstOrDefault(c => c.CardId == monster.Value.monsterId);
+                        if (sampleCard != null)
                         {
-                            if (monsterCard.Item1 == Model.InGame.CardType.MonsterCard && monsterCard.Item2 == monster.monsterId)
+                            string cardName = sampleCard.CardName;
+                            if (monsterCard.TypeOfCard == CardType.MonsterCard && monsterCard.CardName == cardName)
                             {
-                                if (true /* bot.EnergyToSummonMonster >= energy[monster.cardId] */)
+                                CardModel card = AIMethod.GetCardModel(bot.CardSelected, (CardType.MonsterCard, cardName));
+                                if (bot.EnergyToSummonMonster >= card.Energy)
                                 {
                                     // if bot has a monster card same as monster near castle, use that card
-                                    SummonMonster(monster.cardId);
+                                    SummonMonster(card);
                                     state = NodeState.RUNNING;
                                     return state;
                                 }
@@ -45,31 +52,37 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                 }
             }
             // otherwise, use a random monster card
-            var monsterCardList = bot.CardSelected.Where(monsterCard => monsterCard.Item1 == Model.InGame.CardType.MonsterCard).ToList();
+            var monsterCardList = bot.CardSelected.Where(monsterCard => monsterCard.TypeOfCard == CardType.MonsterCard).ToList();
             if (monsterCardList.Count > 0)
             {
                 var cardSelect = monsterCardList[new Random().Next(0, monsterCardList.Count)];
-                while (false /* bot.EnergyToSummonMonster < energy[cardSelect.Item2] */)
+                while (bot.EnergyToSummonMonster < cardSelect.Energy)
                 {
                     monsterCardList.Remove(cardSelect);
                     cardSelect = monsterCardList[new Random().Next(0, monsterCardList.Count)];
                 }
-                SummonMonster(cardSelect.Item2);
+                SummonMonster(cardSelect);
             }
             state = NodeState.RUNNING;
             return state;
         }
 
-        private void SummonMonster(string id)
+        private void SummonMonster(CardModel card)
         {
-            int energy = 1; // get energy to use monster card by id
-            bot.CreateMonster(new Model.Data.CreateMonsterData()
+            Console.WriteLine("Spawn Monster " + card.CardId + " To Defend");
+            // summon monster
+            bot.GameSessionModel.CreateMonster(bot.userId, new Model.Data.CreateMonsterData()
             {
-                cardId = id,
-                Xposition = (int)botBasePosition.X,
+                cardId = card.CardId,
+                Xposition = (int)botBasePosition.X - 1,
                 Yposition = (int)botBasePosition.Y,
-                stats = new Model.Data.MonsterStats()
+                stats = new Model.Data.MonsterStats
+                {
+                    Energy = card.Energy
+                }
             });
+            // cost energy
+            bot.EnergyToSummonMonster -= card.Energy;
         }
     }
 }

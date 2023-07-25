@@ -6,7 +6,7 @@ namespace Game_Realtime.Service;
 
 public class MapService
 {
-    private readonly LogicTile[][] _logicMap;
+    public readonly LogicTile[][] _logicMap;
     private readonly int _width;
     private readonly int _height;
     private readonly int _columnIndexSplit;
@@ -15,7 +15,7 @@ public class MapService
     {
         get => _monsterGatePosition;
     }
-    private Dictionary<string, Vector2Int>_castleLogicPosition;
+    public Dictionary<string, Vector2Int>_castleLogicPosition;
 
     private readonly string _playerId;
     private readonly string _rivalPlayerId;
@@ -68,8 +68,8 @@ public class MapService
     public List<Vector2Int> InitLongestPath()
     {
         Dictionary<TypePlayer, Vector2Int> _castleLogicPosition = new Dictionary<TypePlayer, Vector2Int> {
-                { TypePlayer.Opponent, new Vector2Int(0, (_height-1)/2) },
-                { TypePlayer.Player, new Vector2Int(_width-1, (_height-1)/2) }
+                { TypePlayer.Opponent, new Vector2Int(1, (_height-1)/2) },
+                { TypePlayer.Player, new Vector2Int(_width-2, (_height-1)/2) }
             };
         int _columnIndexSplit = (_height - 1) / 2;
         Vector2Int _monsterGatePosition = new Vector2Int((_width - 1) / 2, _columnIndexSplit);
@@ -79,15 +79,15 @@ public class MapService
         MapGraph graph = new MapGraph(_height, _width);
         for (int i = 0; i < _logicMap.Length; i++)
         {
-            for (int j = (_width - 1) / 2 + 1; j < _logicMap[i].Length - 1; j++)
+            for (int j = (_width - 1) / 2 + 1; j < _width; j++)
             {
                 if (_logicMap[i][j].TypeOfType == TypeTile.Normal)
                 {
-                    if (i < _logicMap.Length - 1 && _logicMap[i + 1][j].TypeOfType == TypeTile.Normal)
+                    if (i < _height - 2 && _logicMap[i + 1][j].TypeOfType == TypeTile.Normal)
                     {
                         graph.AddEdge(new Vector2Int(j, i), new Vector2Int(j, i + 1));
                     }
-                    if (j < _logicMap[i].Length - 1 && _logicMap[i + 1][j].TypeOfType == TypeTile.Normal)
+                    if (j < _width - 2 && _logicMap[i][j + 1].TypeOfType == TypeTile.Normal)
                     {
                         graph.AddEdge(new Vector2Int(j, i), new Vector2Int(j + 1, i));
                     }
@@ -172,7 +172,7 @@ public class MapService
             visitedTiles.Add(checkTile);
             activeTiles.Remove(checkTile);
 
-            var walkableTiles = GetWalkableTiles(map, checkTile, finish);
+            var walkableTiles = GetWalkableTiles(map, checkTile, finish, playerId == _rivalPlayerId);
 
             foreach (var walkableTile in walkableTiles)
             {
@@ -201,18 +201,27 @@ public class MapService
 
         return new List<Vector2Int>();
     }
-    private List<FPTile> GetWalkableTiles(List<string> map, FPTile currentTile, FPTile targetTile)
+    private List<FPTile> GetWalkableTiles(List<string> map, FPTile currentTile, FPTile targetTile, bool isRightSide)
     {
         List<FPTile> possibleTiles;
 
-        if (currentTile.x == _columnIndexSplit)
+        if (currentTile.x == (_width - 1) / 2)
         {
-            possibleTiles = new List<FPTile>()
+            if (isRightSide)
             {
-                new FPTile { x = currentTile.x + 1, y = currentTile.y, parent = currentTile, cost = currentTile.cost + 1 },
-                new FPTile { x = currentTile.x - 1, y = currentTile.y, parent = currentTile, cost = currentTile.cost + 1 }
-            };
-            
+                possibleTiles = new List<FPTile>()
+                     {
+                         new FPTile { x = currentTile.x + 1, y = currentTile.y, parent = currentTile, cost = currentTile.cost + 1 }
+                     };
+            }
+            else
+            {
+                possibleTiles = new List<FPTile>()
+                     {
+                         new FPTile { x = currentTile.x - 1, y = currentTile.y, parent = currentTile, cost = currentTile.cost + 1 }
+                     };
+            }
+
         }
         else
         {

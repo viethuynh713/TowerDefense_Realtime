@@ -6,16 +6,15 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
     public class SelectTowerToBuild : Node
     {
         private AiModel bot;
-        private List<Vector2Int> towerBuildOrderClone;
 
         public SelectTowerToBuild(AiModel bot)
         {
             this.bot = bot;
-            towerBuildOrderClone = new List<Vector2Int>(bot.TowerBuildOrder);
         }
 
         public override NodeState Evaluate()
         {
+            Console.WriteLine("Select Tower To Build");
             // choose the first position in order
             if (bot.TowerBuildOrder.Count > 0)
             {

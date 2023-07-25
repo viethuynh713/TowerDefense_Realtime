@@ -5,40 +5,41 @@ build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Game_Realtime
 build_property.RootNamespace = Game_Realtime
-build_property.ProjectDir = E:\Unity\Game-Realtime\TowerDefense_realtime\
+build_property.ProjectDir = D:\Github\TowerDefense_Realtime\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = E:\Unity\Game-Realtime\TowerDefense_realtime
+build_property.MSBuildProjectDirectory = D:\Github\TowerDefense_Realtime
 build_property._RazorSourceGeneratorDebug = 
 
-[E:/Unity/Game-Realtime/TowerDefense_realtime/Pages/Error.cshtml]
+[D:/Github/TowerDefense_Realtime/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Unity/Game-Realtime/TowerDefense_realtime/Pages/Index.cshtml]
+[D:/Github/TowerDefense_Realtime/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Unity/Game-Realtime/TowerDefense_realtime/Pages/Privacy.cshtml]
+[D:/Github/TowerDefense_Realtime/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Unity/Game-Realtime/TowerDefense_realtime/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Github/TowerDefense_Realtime/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Unity/Game-Realtime/TowerDefense_realtime/Pages/_ViewImports.cshtml]
+[D:/Github/TowerDefense_Realtime/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Unity/Game-Realtime/TowerDefense_realtime/Pages/_ViewStart.cshtml]
+[D:/Github/TowerDefense_Realtime/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Unity/Game-Realtime/TowerDefense_realtime/Pages/Shared/_Layout.cshtml]
+[D:/Github/TowerDefense_Realtime/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-vd4k34kczj

@@ -1,4 +1,5 @@
 ﻿using Game_Realtime.Model;
+using Service.Models;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 using System.Numerics;
 using System.Security.Cryptography.Xml;
@@ -10,13 +11,11 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
     {
         private AiModel bot;
         private int energyRequired;
-        private MonsterModel[] monsterList;
 
-        public CheckUseBurning(AiModel bot, int energyRequired, MonsterModel[] monsterList)
+        public CheckUseBurning(AiModel bot)
         {
             this.bot = bot;
-            this.energyRequired = energyRequired;
-            this.monsterList = monsterList;
+            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Toxic")).Energy;
         }
 
         public override NodeState Evaluate()
@@ -32,35 +31,32 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             // (int, int): the first is number of monsters, the second is number of monsters whose HP is less than 30%
             Dictionary<Vector2, (int, int)> monstersInRange = new Dictionary<Vector2, (int, int)> ();
             float HPRate = 0.3f;
-            foreach (var monster in monsterList)
+            foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
             {
-                if (monster.ownerId != bot.userId)
+                for (int x = -1; x <= 1; x++)
                 {
-                    for (int x = -1; x <= 1; x++)
+                    for (int y = -1; y <= 1; y++)
                     {
-                        for (int y = -1; y <= 1; y++)
+                        if (monster.Value.XLogicPosition + x >= 0 && monster.Value.XLogicPosition + x < bot.TowerBuildingMapWidth
+                            && monster.Value.YLogicPosition + y >= 0 && monster.Value.YLogicPosition + y < bot.TowerBuildingMapHeight)
                         {
-                            if (monster.XLogicPosition + x >= 0 && monster.XLogicPosition + x < bot.TowerBuildingMapWidth
-                                && monster.YLogicPosition + y >= 0 && monster.YLogicPosition + y < bot.TowerBuildingMapHeight)
+                            if (monstersInRange.TryGetValue(new Vector2(monster.Value.XLogicPosition + x, monster.Value.YLogicPosition + y), out var value))
                             {
-                                if (monstersInRange.TryGetValue(new Vector2(monster.XLogicPosition + x, monster.YLogicPosition + y), out var value))
+                                value.Item1++;
+                                if ((float)monster.Value.monsterHp / monster.Value.maxHp < HPRate)
                                 {
-                                    value.Item1++;
-                                    if (monster.monsterHp / monster.maxHp < HPRate)
-                                    {
-                                        value.Item2++;
-                                    }
+                                    value.Item2++;
+                                }
+                            }
+                            else
+                            {
+                                if ((float)monster.Value.monsterHp / monster.Value.maxHp < HPRate)
+                                {
+                                    monstersInRange.Add(new Vector2(monster.Value.XLogicPosition + x, monster.Value.YLogicPosition + y), (1, 1));
                                 }
                                 else
                                 {
-                                    if (monster.monsterHp / monster.maxHp < HPRate)
-                                    {
-                                        monstersInRange.Add(new Vector2(monster.XLogicPosition + x, monster.YLogicPosition + y), (1, 1));
-                                    }
-                                    else
-                                    {
-                                        monstersInRange.Add(new Vector2(monster.XLogicPosition + x, monster.YLogicPosition + y), (1, 0));
-                                    }
+                                    monstersInRange.Add(new Vector2(monster.Value.XLogicPosition + x, monster.Value.YLogicPosition + y), (1, 0));
                                 }
                             }
                         }
@@ -92,7 +88,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             if (nMonsterInCrowded.Item1 >= 5)
             {
                 bot.SpellUsingPosition = crowdestPosition;
-                bot.SpellUsingName = "Burning";
                 state = NodeState.SUCCESS;
                 return state;
             }

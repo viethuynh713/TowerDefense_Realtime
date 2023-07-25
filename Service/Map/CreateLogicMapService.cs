@@ -1,5 +1,6 @@
 ﻿using Game_Realtime.Model.InGame;
 using Game_Realtime.Model.Map;
+using System.Numerics;
 
 namespace Game_Realtime.Service;
 
@@ -228,6 +229,11 @@ public struct Vector2Int : IEquatable<Vector2Int>
     {
         if (this.x == other.x && this.y == other.y) return true;
         return false;
+    }
+
+    public Vector2 CastToVector2()
+    {
+        return new Vector2(x, y);
     }
     
     public static Vector2Int operator -(Vector2Int v) => new Vector2Int(-v.x, -v.y);

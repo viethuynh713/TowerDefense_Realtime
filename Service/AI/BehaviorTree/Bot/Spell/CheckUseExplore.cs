@@ -1,5 +1,6 @@
 ﻿using Game_Realtime.Model;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
+using Service.Models;
 using System.Numerics;
 
 namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
@@ -8,14 +9,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
     {
         private AiModel bot;
         private int energyRequired;
-        private MonsterModel[] monsterList;
         private Vector2 botBasePosition;
 
-        public CheckUseExplore(AiModel bot, int energyRequired, MonsterModel[] monsterList, Vector2 botBasePosition)
+        public CheckUseExplore(AiModel bot, Vector2 botBasePosition)
         {
             this.bot = bot;
-            this.energyRequired = energyRequired;
-            this.monsterList = monsterList;
+            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Explode")).Energy;
             this.botBasePosition = botBasePosition;
         }
 
@@ -28,15 +27,16 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
                 state = NodeState.FAILURE;
                 return state;
             }
-            // Get all enemy monsters position which is nearer 3 tiles away from base
+            // Get all enemy monsters position which is nearer 3 tiles away from base and HP > 60%
             List<Vector2> monsterNearBasePosList = new List<Vector2>();
-            foreach (var monster in monsterList)
+            float HPRate = 0.6f;
+            foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
             {
-                if (monster.ownerId != bot.userId)
+                if (MathF.Abs(botBasePosition.X - monster.Value.XLogicPosition) + MathF.Abs(botBasePosition.Y - monster.Value.YLogicPosition) < 3)
                 {
-                    if ((botBasePosition.X - monster.XLogicPosition) + (botBasePosition.Y - monster.YLogicPosition) < 3)
+                    if ((float)monster.Value.monsterHp / monster.Value.maxHp > HPRate)
                     {
-                        monsterNearBasePosList.Add(new Vector2(monster.XLogicPosition, monster.YLogicPosition));
+                        monsterNearBasePosList.Add(new Vector2(monster.Value.XLogicPosition, monster.Value.YLogicPosition));
                     }
                 }
             }
@@ -48,7 +48,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
                 {
                     bot.SpellUsingPosition += pos / monsterNearBasePosList.Count;
                 }
-                bot.SpellUsingName = "Explore";
                 state = NodeState.SUCCESS;
                 return state;
             }

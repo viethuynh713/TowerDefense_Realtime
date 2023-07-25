@@ -20,9 +20,9 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
             {
                 foreach (var tile in row)
                 {
-                    if (tile.hasTower != null)
+                    if (tile.hasTower != null && tile.isBuildTower)
                     {
-                        if (tile.isBuildTower && !tile.hasTower.Value)
+                        if (!tile.hasTower.Value || tile.isInProgress)
                         {
                             isBuildTowerComplete = false;
                             break;

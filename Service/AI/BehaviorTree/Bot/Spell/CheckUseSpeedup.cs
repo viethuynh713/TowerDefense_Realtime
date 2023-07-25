@@ -1,4 +1,5 @@
 ﻿using Game_Realtime.Model;
+using Service.Models;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 using System.Numerics;
 
@@ -8,14 +9,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
     {
         private AiModel bot;
         private int energyRequired;
-        private MonsterModel[] monsterList;
         private Vector2 enemyBasePosition;
 
-        public CheckUseSpeedup(AiModel bot, int energyRequired, MonsterModel[] monsterList, Vector2 enemyBasePosition)
+        public CheckUseSpeedup(AiModel bot, Vector2 enemyBasePosition)
         {
             this.bot = bot;
-            this.energyRequired = energyRequired;
-            this.monsterList = monsterList;
+            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Speed")).Energy;
             this.enemyBasePosition = enemyBasePosition;
         }
 
@@ -30,13 +29,14 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             }
             // Get all enemy monsters position which is nearer 3 tiles away from base
             List<Vector2> monsterNearBasePosList = new List<Vector2>();
-            foreach (var monster in monsterList)
+            float HPRate = 0.3f;
+            foreach (var monster in bot._monsters)
             {
-                if (monster.ownerId == bot.userId)
+                if (MathF.Abs(enemyBasePosition.X - monster.Value.XLogicPosition) + MathF.Abs(enemyBasePosition.Y - monster.Value.YLogicPosition) < 3)
                 {
-                    if ((enemyBasePosition.X - monster.XLogicPosition) + (enemyBasePosition.Y - monster.YLogicPosition) < 3)
+                    if ((float)monster.Value.monsterHp / monster.Value.maxHp < HPRate)
                     {
-                        monsterNearBasePosList.Add(new Vector2(monster.XLogicPosition, monster.YLogicPosition));
+                        monsterNearBasePosList.Add(new Vector2(monster.Value.XLogicPosition, monster.Value.YLogicPosition));
                     }
                 }
             }
@@ -48,7 +48,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
                 {
                     bot.SpellUsingPosition += pos / monsterNearBasePosList.Count;
                 }
-                bot.SpellUsingName = "Speedup";
                 state = NodeState.SUCCESS;
                 return state;
             }

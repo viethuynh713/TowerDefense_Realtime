@@ -9,16 +9,16 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
         private AiModel bot;
         private int minEnergyRequired;
 
-        public CheckSpawnMonsterToAttack(AiModel bot, int minEnergyRequired)
+        public CheckSpawnMonsterToAttack(AiModel bot)
         {
             this.bot = bot;
-            this.minEnergyRequired = minEnergyRequired;
+            minEnergyRequired = AIMethod.GetMinMonsterEnergy(bot.CardSelected);
         }
 
         public override NodeState Evaluate()
         {
             // check if enough energy to use
-            if (bot.EnergyToSummonMonster <= minEnergyRequired)
+            if (bot.EnergyToSummonMonster < minEnergyRequired)
             {
                 state = NodeState.FAILURE;
                 return state;

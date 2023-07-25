@@ -23,4 +23,6 @@ public interface IMythicEmpireHub
     Task SellTower(byte[] data);
     Task OnEndGame(byte[] gameData);
     Task QuitGame();
+    Task LoginSuccess();
+    Task LogoutSuccess();
 }

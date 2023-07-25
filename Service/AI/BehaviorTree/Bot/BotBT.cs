@@ -1,10 +1,8 @@
-﻿using Game_Realtime.Model.InGame;
+﻿using Service.Models;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
-using Game_Realtime.Service.AI.TowerBuildingMapService;
 using Game_Realtime.Service.AI.BehaviorTree.Bot.Spell;
 using Game_Realtime.Model;
 using Game_Realtime.Service.AI.BehaviorTree.Bot.Monster;
-using System.Numerics;
 using Game_Realtime.Service.AI.BehaviorTree.Bot.Tower;
 
 namespace Game_Realtime.Service.AI.BehaviorTree.Bot
@@ -12,29 +10,38 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
     public class BotBT: Tree
     {
         AiModel bot;
+
+        public BotBT(AiModel bot)
+        {
+            this.bot = bot;
+            bot.TowerSelectPos = bot.TowerBuildOrder[0];
+            bot.TowerBuildOrder.RemoveAt(0);
+            root = SetUpTree();
+        }
+
         protected override Node SetUpTree()
         {
             List<Node> spellNodeList = new List<Node>();
             switch (bot.PlayMode)
             {
                 case BotPlayMode.ATTACK:
-                    AddSpellBehavior(ref spellNodeList, "Speedup");
-                    AddSpellBehavior(ref spellNodeList, "Healing");
-                    AddSpellBehavior(ref spellNodeList, "Burning");
-                    AddSpellBehavior(ref spellNodeList, "Explore");
+                    AddSpellBehavior(ref spellNodeList, "Speed");
+                    AddSpellBehavior(ref spellNodeList, "Heal");
+                    AddSpellBehavior(ref spellNodeList, "Toxic");
+                    AddSpellBehavior(ref spellNodeList, "Explode");
                     break;
                 case BotPlayMode.DEFEND:
-                    AddSpellBehavior(ref spellNodeList, "Explore");
+                    AddSpellBehavior(ref spellNodeList, "Explode");
                     AddSpellBehavior(ref spellNodeList, "Freeze");
-                    AddSpellBehavior(ref spellNodeList, "Burning");
-                    AddSpellBehavior(ref spellNodeList, "Healing");
-                    AddSpellBehavior(ref spellNodeList, "Speedup");
+                    AddSpellBehavior(ref spellNodeList, "Toxic");
+                    AddSpellBehavior(ref spellNodeList, "Heal");
+                    AddSpellBehavior(ref spellNodeList, "Speed");
                     break;
                 case BotPlayMode.HYBRIC:
-                    AddSpellBehavior(ref spellNodeList, "Burning");
-                    AddSpellBehavior(ref spellNodeList, "Healing");
-                    AddSpellBehavior(ref spellNodeList, "Explore");
-                    AddSpellBehavior(ref spellNodeList, "Speedup");
+                    AddSpellBehavior(ref spellNodeList, "Toxic");
+                    AddSpellBehavior(ref spellNodeList, "Heal");
+                    AddSpellBehavior(ref spellNodeList, "Explode");
+                    AddSpellBehavior(ref spellNodeList, "Speed");
                     AddSpellBehavior(ref spellNodeList, "Freeze");
                     break;
             }
@@ -47,13 +54,13 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                     new Selector(spellNodeList),
                     new Sequence(new List<Node>
                     {
-                        new CheckSpawnMonsterToDefend(bot, 0, new MonsterModel[0], new Vector2(0, 4)),
-                        new SpawnMonsterToDefend(bot, new MonsterModel[0], new Vector2(0, 4))
+                        new CheckSpawnMonsterToDefend(bot, bot.GameSessionModel._mapService._castleLogicPosition[bot.userId].CastToVector2()),
+                        new SpawnMonsterToDefend(bot, bot.GameSessionModel._mapService._castleLogicPosition[bot.userId].CastToVector2())
                     }),
                     new Sequence(new List<Node>
                     {
-                        new CheckSpawnMonsterToAttack(bot, 0),
-                        new SpawnMonsterToAttack(bot, new Vector2Int(10, 4), new MonsterModel[0])
+                        new CheckSpawnMonsterToAttack(bot),
+                        new SpawnMonsterToAttack(bot, bot.GameSessionModel._mapService.MonsterGate)
                     }),
                     new Sequence(new List<Node>
                     {
@@ -79,62 +86,57 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
             return root;
         }
 
-        public void SetData(AiModel bot)
-        {
-            this.bot = bot;
-        }
-
         private void AddSpellBehavior(ref List<Node> spellNodeList, string spellName)
         {
-            if (spellName == "Burning")
+            if (spellName == "Toxic")
             {
-                if (bot.CardSelected.Contains((CardType.SpellCard, "Burning")))
+                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Toxic")))
                 {
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseBurning(bot, 0, new MonsterModel[0]),
+                        new CheckUseBurning(bot),
                         new UseBurning(bot)
                     }));
                 }
             }
-            if (spellName == "Explore")
+            if (spellName == "Explode")
             {
-                if (bot.CardSelected.Contains((CardType.SpellCard, "Explore")))
+                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Explode")))
                 {
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseExplore(bot, 0, new MonsterModel[0], new Vector2(0, 4)),
+                        new CheckUseExplore(bot, bot.GameSessionModel._mapService._castleLogicPosition[bot.userId].CastToVector2()),
                         new UseExplore(bot)
                     }));
                 }
             }
             if (spellName == "Freeze")
             {
-                if (bot.CardSelected.Contains((CardType.SpellCard, "Freeze")))
+                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Freeze")))
                 {
                     spellNodeList.Add(new Sequence(new List<Node>() {
-                        new CheckUseFreeze(bot, 0, new MonsterModel[0]),
+                        new CheckUseFreeze(bot),
                         new UseFreeze(bot)
                     })); ;
                 }
             }
-            if (spellName == "Healing")
+            if (spellName == "Heal")
             {
-                if (bot.CardSelected.Contains((CardType.SpellCard, "Healing")))
+                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Heal")))
                 {
                     spellNodeList.Add(new Sequence(new List<Node>() {
-                        new CheckUseHealing(bot, 0, new MonsterModel[0]),
+                        new CheckUseHealing(bot),
                         new UseHealing(bot)
                     })); 
                 }
             }
-            if (spellName == "Speedup")
+            if (spellName == "Speed")
             {
-                if (bot.CardSelected.Contains((CardType.SpellCard, "Speedup")))
+                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Speed")))
                 {
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseSpeedup(bot, 0, new MonsterModel[0], new Vector2(20, 4)),
+                        new CheckUseSpeedup(bot, bot.GameSessionModel._mapService._castleLogicPosition[bot.GameSessionModel.GetRivalPlayer(bot.userId).userId].CastToVector2()),
                         new UseSpeedup(bot)
                     }));
                 }

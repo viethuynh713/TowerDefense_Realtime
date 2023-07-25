@@ -8,21 +8,19 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
     {
         private AiModel bot;
         private int minEnergyRequired;
-        private MonsterModel[] monsterList;
         private Vector2 botBasePosition;
 
-        public CheckSpawnMonsterToDefend(AiModel bot, int minEnergyRequired, MonsterModel[] monsterList, Vector2 botBasePosition)
+        public CheckSpawnMonsterToDefend(AiModel bot, Vector2 botBasePosition)
         {
             this.bot = bot;
-            this.minEnergyRequired = minEnergyRequired;
-            this.monsterList = monsterList;
+            minEnergyRequired = AIMethod.GetMinMonsterEnergy(bot.CardSelected);
             this.botBasePosition = botBasePosition;
         }
 
         public override NodeState Evaluate()
         {
             // check if enough energy to use
-            if (bot.EnergyToSummonMonster <= minEnergyRequired)
+            if (bot.EnergyToSummonMonster < minEnergyRequired)
             {
                 state = NodeState.FAILURE;
                 return state;
@@ -31,15 +29,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
             if (bot.PlayMode != BotPlayMode.DEFEND || bot.castleHp < GameConfig.GameConfig.MAX_CASTLE_HP * 0.3f)
             {
                 // and any opponent monsters are near castle, summon a monster at castle to defend
-                foreach (var monster in monsterList)
+                foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
                 {
-                    if (monster.ownerId != bot.userId)
+                    if ((botBasePosition.X - monster.Value.XLogicPosition) + (botBasePosition.Y - monster.Value.YLogicPosition) < 3)
                     {
-                        if ((botBasePosition.X - monster.XLogicPosition) + (botBasePosition.Y - monster.YLogicPosition) < 3)
-                        {
-                            state = NodeState.SUCCESS;
-                            return state;
-                        }
+                        state = NodeState.SUCCESS;
+                        return state;
                     }
                 }
             }

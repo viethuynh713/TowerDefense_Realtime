@@ -1,4 +1,5 @@
 ﻿using Game_Realtime.Model;
+using Service.Models;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 
 namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
@@ -21,8 +22,9 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
                 return state;
             }
             // check if enough energy to use
-            int energy = 1; // energy[bot.TowerBuildingMap[bot.TowerSelectPos.Value.y][bot.TowerSelectPos.Value.x].towerId]
-            if (bot.EnergyToBuildTower <= energy)
+            string towerId = bot.TowerBuildingMap[bot.TowerSelectPos.Value.y][bot.TowerSelectPos.Value.x].towerName;
+            CardModel card = AIMethod.GetCardModel(bot.CardSelected, (CardType.TowerCard, towerId));
+            if (bot.EnergyToBuildTower >= card.Energy)
             {
                 state = NodeState.SUCCESS;
                 return state;

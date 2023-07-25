@@ -11,9 +11,9 @@ public class BasePlayer
 
         public int energy;
         
-        protected Dictionary<string,MonsterModel> _monsters;
+        public Dictionary<string,MonsterModel> _monsters;
 
-        protected Dictionary <string,TowerModel> _towers;
+        public Dictionary <string,TowerModel> _towers;
 
         protected BasePlayer() 
         {
@@ -42,10 +42,15 @@ public class BasePlayer
 
         public async Task<int> AddEnergy(int addedEnergy)
         {
+            int oldEnergy = this.energy;
             this.energy += addedEnergy;
             if (this.energy >= GameConfig.GameConfig.MAX_ENERGY)
             {
                 this.energy = GameConfig.GameConfig.MAX_ENERGY;
+            }
+            if (this is AiModel)
+            {
+                ((AiModel)this).BotGainEnergy(this.energy - oldEnergy);
             }
             return this.energy;
         }

@@ -1,20 +1,17 @@
-﻿using System.Diagnostics;
-using System.Text;
+﻿using System.Text;
 using Game_Realtime.Hubs;
 using Game_Realtime.Model.Data;
 using Game_Realtime.Model.Data.DataSend;
-using Game_Realtime.Model.InGame;
 using Game_Realtime.Model.Map;
 using Game_Realtime.Service;
 using Game_Realtime.Service.WaveService;
 using Microsoft.AspNetCore.SignalR;
 using Networking_System.Model.Data.DataReceive;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace Game_Realtime.Model
+namespace Game_Realtime.Model.InGame
 {
-    public class GameSessionModel
+    public class GameSessionModel : IGameSessionModel
     {
         private string _gameId;
 
@@ -29,8 +26,8 @@ namespace Game_Realtime.Model
         }
 
         private readonly Dictionary<string, BasePlayer> _players;
-        
-        private readonly MapService _mapService;
+
+        public readonly MapService _mapService;
         private ValidatePackageService _validatePackageService;
         
         private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;
@@ -68,7 +65,7 @@ namespace Game_Realtime.Model
             _modeGame = ModeGame.Arena;
             _hubContext = hubContext;
             _startTime = DateTime.Now;
-            var ai = new AiModel(player.cards);
+            var ai = new AiModel();
             _players = new Dictionary<string, BasePlayer>
             {
                 { player.userId, player }, 
@@ -81,19 +78,19 @@ namespace Game_Realtime.Model
             _countWave = new Timer(UpdateWave, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
             _timerUpdateEnergy = new Timer(UpdateEnergy, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
             ai.InitBot(this);
-            _aiActionTimer = new Timer(AiAction, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+            _aiActionTimer = new Timer(AiAction, null, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(1));
         }
         
 
         private void AiAction(object? state)
         {
-
+            
             foreach (var ai in GetAllPlayer())
             {
                 if (ai.Value is AiModel model)
                 {
                     model.Battle();
-                
+
                 }
             }
         }
@@ -140,6 +137,10 @@ namespace Game_Realtime.Model
                             var jsonData = JsonConvert.SerializeObject(m.Result);
                             _hubContext.Clients.Groups(_gameId).SpawnMonsterWave(Encoding.UTF8.GetBytes(jsonData));
                         }
+                        if (player.Value is AiModel)
+                        {
+                            ((AiModel)player.Value).ToggleAutoSummonMonsterCurrently();
+                        }
                     }
                 }
 
@@ -179,10 +180,10 @@ namespace Game_Realtime.Model
         {
             return _modeGame;
         }
-        public async Task<int> GetTotalTime()
+        public Task<int> GetTotalTime()
         {
             TimeSpan timeSpan = DateTime.Now - _startTime;
-            return timeSpan.Seconds;
+            return Task.FromResult(timeSpan.Seconds);
             
         }
         public  async Task<int?> CastleTakeDamage(CastleTakeDamageData data)
@@ -227,10 +228,9 @@ namespace Game_Realtime.Model
         {
             await _countWave.DisposeAsync();
             await _timerUpdateEnergy.DisposeAsync();
-            if (_modeGame == ModeGame.Adventure)
-            {
-                await _aiActionTimer.DisposeAsync();
-            }
+
+            await _aiActionTimer.DisposeAsync();
+            
         }
 
         public async Task<MonsterModel?> CreateMonster(string playerId, CreateMonsterData data)
@@ -259,6 +259,15 @@ namespace Game_Realtime.Model
             if (!_mapService.IsValidPosition(new Vector2Int(data.Xposition, data.Yposition), playerId)) return null;
 
             var paths = _mapService.FindPathForMonster(playerId, new Vector2Int(data.Xposition, data.Yposition));
+            if (_players[playerId] is PlayerModel)
+            {
+                Console.Write("Path: ");
+                foreach (var tile in paths)
+                {
+                    Console.Write("(" + tile.x + ", " + tile.y + ") -> ");
+                }
+                Console.WriteLine("");
+            }
             if (paths.Count == 0)
             {
                 Console.WriteLine($"No monster path");
@@ -290,6 +299,7 @@ namespace Game_Realtime.Model
             return tower;
 
         }
+        
 
         public async Task<SpellModel?> PlaceSpell(string playerId, PlaceSpellData data)
         {
@@ -471,4 +481,28 @@ namespace Game_Realtime.Model
         }
     }
 
+    public interface IGameSessionModel
+    {
+        Task AddEnergy(AddEnergyData data);
+        Task UpdateMonsterPosition(UpdateMonsterPositionData data);
+        BasePlayer? GetPlayerByConnectionId(string connectionId);
+        bool HasPlayerByConnectionId(string connectionId);
+        Task<TowerModel> SellTower(string senderId, SellTowerData data);
+        Task<TowerStats?> UpgradeTower(string senderId, UpgradeTowerData data);
+        Task UpdateMonsterHp(MonsterTakeDamageData data);
+        BasePlayer? GetRivalPlayer(string playerId);
+        Dictionary<string, BasePlayer> GetAllPlayer();
+        PlayerModel? GetPlayer(string senderId);
+        List<string> GetCard(string senderId);
+        LogicTile[][] GetMap();
+
+        Task<SpellModel?> PlaceSpell(string playerId, PlaceSpellData data);
+        Task<MonsterModel?> CreateMonster(string playerId, CreateMonsterData data);
+        Task<int?> CastleTakeDamage(CastleTakeDamageData data);
+        Task<TowerModel?> BuildTower(string playerId, BuildTowerData data);
+        Task<int> GetTotalTime();
+        ModeGame GetMode();
+        bool HasPlayer(string dataOwnerId);
+        Task EndGame();
+    }
 }

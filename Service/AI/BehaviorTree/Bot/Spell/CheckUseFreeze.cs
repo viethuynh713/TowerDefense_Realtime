@@ -1,7 +1,7 @@
 ﻿using Game_Realtime.Model;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 using System.Numerics;
-using System.Threading;
+using Service.Models;
 
 namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
 {
@@ -9,13 +9,11 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
     {
         private AiModel bot;
         private int energyRequired;
-        private MonsterModel[] monsterList;
 
-        public CheckUseFreeze(AiModel bot, int energyRequired, MonsterModel[] monsterList)
+        public CheckUseFreeze(AiModel bot)
         {
             this.bot = bot;
-            this.energyRequired = energyRequired;
-            this.monsterList = monsterList;
+            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Freeze")).Energy;
         }
 
         public override NodeState Evaluate()
@@ -39,12 +37,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
                     {
                         for (int y = -1; y <= 1; y++)
                         {
-                            if (bot.TowerBuildingMap[i + y][j + x].hasTower != null)
+                            if (bot.TowerBuildingMap[i + y][j + x].hasTower != null
+                                && bot.TowerBuildingMap[i + y][j + x].hasTower.Value)
                             {
-                                if (bot.TowerBuildingMap[i + y][j + x].hasTower.Value)
-                                {
-                                    nTower++;
-                                }
+                                nTower++;
                             }
                         }
                     }
@@ -59,13 +55,13 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             // check if at least 3 monster with HP greater than 70% nearby this tile
             int nMonster = 0;
             float HPRate = 0.7f;
-            foreach (var monster in monsterList)
+            foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
             {
-                if (monster.ownerId != bot.userId)
+                if (monster.Value.ownerId != bot.userId)
                 {
-                    if (MathF.Abs(monster.XLogicPosition - mostTowerTilePos.x) <= 1.5
-                        && MathF.Abs(monster.YLogicPosition - mostTowerTilePos.y) <= 1.5
-                        && monster.monsterHp / monster.maxHp > HPRate)
+                    if (MathF.Abs(monster.Value.XLogicPosition - mostTowerTilePos.x) <= 1.5
+                        && MathF.Abs(monster.Value.YLogicPosition - mostTowerTilePos.y) <= 1.5
+                        && (float)monster.Value.monsterHp / monster.Value.maxHp > HPRate)
                     {
                         nMonster++;
                     }
@@ -74,7 +70,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             if (nMonster >= 3)
             {
                 bot.SpellUsingPosition = new Vector2(mostTowerTilePos.x, mostTowerTilePos.y);
-                bot.SpellUsingName = "Freeze";
                 state = NodeState.SUCCESS;
                 return state;
             }
