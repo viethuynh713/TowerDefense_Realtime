@@ -108,7 +108,6 @@ public class AiModel: BasePlayer
                                         });
                                     }
                                 }
-                                
                             }
                         }
                     }
@@ -131,10 +130,39 @@ public class AiModel: BasePlayer
                     {
                         nRarity[rarity] = n + 1;
                     }
-                    f_star += stockCard.CardStar / 8f;
+                    f_star += stockCard.CardStar / rivalCards.Count;
                 }
             }
             star = (int)Math.Round(f_star);
+            if (rivalCards.Count < cardSelected.Count)
+            {
+                int length = rivalCards.Count;
+                Dictionary<RarityCard, int> nRarityTemp = new Dictionary<RarityCard, int>(nRarity);
+                int idx = (int)RarityCard.Legend;
+                while (length < cardSelected.Count)
+                {
+                    if (idx < 1)
+                    {
+                        idx = (int)RarityCard.Legend;
+                    }
+                    else if (nRarity.TryGetValue((RarityCard)idx, out int n))
+                    {
+                        int nTemp = nRarityTemp[(RarityCard)idx];
+                        if (cardSelected.Count - length <= nTemp)
+                        {
+                            nRarity[(RarityCard)idx] = n + (cardSelected.Count - length);
+                            length = cardSelected.Count;
+                        }
+                        else
+                        {
+                            nRarity[(RarityCard)idx] = n + nTemp;
+                            length += nTemp;
+                        }
+                        idx--;
+                    }
+                    Console.WriteLine("While: length: " + length.ToString() + " - idx: " + idx.ToString());
+                }
+            }
             //// set rarity for cards
             {
                 int i, j;
