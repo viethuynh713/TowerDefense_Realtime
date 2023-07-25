@@ -1,4 +1,4 @@
-﻿using Game_Realtime.Model.InGame;
+﻿using Service.Models;
 using Game_Realtime.Model;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 
@@ -57,18 +57,22 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
             {
                 bot.TowerBuildingMap[bot.TowerSelectPos.Value.y][bot.TowerSelectPos.Value.x].hasTower = true;
             }
-            Console.WriteLine("Bot build tower " + AIMethod.GetCardId(bot.CardSelected, (CardType.TowerCard, towerName)) + " at (" +
-                bot.TowerSelectPos.Value.x.ToString() + ", " + bot.TowerSelectPos.Value.y.ToString() + ")");
             // send request building tower
+            CardModel card = AIMethod.GetCardModel(bot.CardSelected, (CardType.TowerCard, towerName));
+            Console.WriteLine("Bot build tower " + card.CardId + " at (" +
+                bot.TowerSelectPos.Value.x.ToString() + ", " + bot.TowerSelectPos.Value.y.ToString() + ")");
             bot.GameSessionModel.BuildTower(bot.userId, new Model.Data.BuildTowerData()
             {
-                cardId = AIMethod.GetCardId(bot.CardSelected, (CardType.TowerCard, towerName)),
+                cardId = card.CardId,
                 Xposition = bot.TowerSelectPos.Value.x + bot.TowerBuildingMapWidth + 2,
                 Yposition = bot.TowerSelectPos.Value.y + 1,
-                stats = new Model.Data.TowerStats()
+                stats = new Model.Data.TowerStats
+                {
+                    Energy = card.Energy
+                }
             });
             // cost energy
-            bot.EnergyToBuildTower -= AIMethod.GetEnergy(bot.CardSelected, (CardType.TowerCard, towerName));
+            bot.EnergyToBuildTower -= card.Energy;
 
             state = NodeState.RUNNING;
             return state;

@@ -1,4 +1,4 @@
-﻿using Game_Realtime.Model.InGame;
+﻿using Service.Models;
 
 namespace Game_Realtime.Service.AI
 {

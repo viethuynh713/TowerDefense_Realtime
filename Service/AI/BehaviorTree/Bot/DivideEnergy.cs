@@ -16,6 +16,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
         public override NodeState Evaluate()
         {
             Console.WriteLine("Bot Divide Energy");
+            Console.WriteLine("Energy: " + bot.energy.ToString());
 
             bot.EnergyToBuildTower += bot.EnergyGain * bot.EnergyBuildTowerRate;
             bot.EnergyToSummonMonster += bot.EnergyGain * (1 - bot.EnergyBuildTowerRate);

@@ -1,5 +1,5 @@
 ﻿using Game_Realtime.Model;
-using Game_Realtime.Model.InGame;
+using Service.Models;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 using System.Numerics;
 
@@ -42,12 +42,14 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
             if (mode == 0)
             {
                 // if having card as same as monster to summon, summon it
-                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.MonsterCard, checkMonsterCardId))
-                    && bot.EnergyToSummonMonster >= AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, checkMonsterCardId)))
-                {
-                    SummonMonster(checkMonsterCardId);
-                    state = NodeState.RUNNING;
-                    return state;
+                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.MonsterCard, checkMonsterCardId))) {
+                    CardModel card = AIMethod.GetCardModel(bot.CardSelected, (CardType.MonsterCard, checkMonsterCardId));
+                    if (bot.EnergyToSummonMonster >= card.Energy)
+                    {
+                        SummonMonster(card);
+                        state = NodeState.RUNNING;
+                        return state;
+                    }
                 }
             }
 
@@ -60,7 +62,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                     {
                         if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.MonsterCard, monsterName)))
                         {
-                            SummonMonster(AIMethod.GetCardId(bot.CardSelected, (CardType.MonsterCard, monsterName)));
+                            SummonMonster(AIMethod.GetCardModel(bot.CardSelected, (CardType.MonsterCard, monsterName)));
                             state = NodeState.RUNNING;
                             return state;
                         }
@@ -68,41 +70,41 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                 }
             }
             // otherwise, use a random monster card
-            var monsterCardList = bot.CardSelected.Where(monsterCard => monsterCard.Item2 == CardType.MonsterCard).ToList();
+            var monsterCardList = bot.CardSelected.Where(monsterCard => monsterCard.TypeOfCard == CardType.MonsterCard).ToList();
             if (monsterCardList.Count > 0)
             {
                 var cardSelect = monsterCardList[new Random().Next(0, monsterCardList.Count)];
-                int monsterEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, cardSelect.Item3));
-                while (bot.EnergyToSummonMonster < monsterEnergy)
+                while (bot.EnergyToSummonMonster < cardSelect.Energy)
                 {
                     monsterCardList.Remove(cardSelect);
                     cardSelect = monsterCardList[new Random().Next(0, monsterCardList.Count)];
                 }
-                SummonMonster(cardSelect.Item1);
+                SummonMonster(cardSelect);
             }
             state = NodeState.RUNNING;
             return state;
         }
 
-        private async Task SummonMonster(string id)
+        private async Task SummonMonster(CardModel card)
         {
-            Console.WriteLine("Spawn Monster " + id + " To Attack");
-            // get cost to use a monster card
-            int energy = AIMethod.GetEnergy(bot.CardSelected, (CardType.MonsterCard, id));
+            Console.WriteLine("Spawn Monster " + card.CardId + " To Attack");
             // get maximum monsters can be summoned
-            int nMonster = (int)bot.EnergyToSummonMonster / energy;
+            int nMonster = (int)bot.EnergyToSummonMonster / card.Energy;
             for (int i = 0; i < nMonster; i++)
             {
                 await bot.GameSessionModel.CreateMonster(bot.userId, new Model.Data.CreateMonsterData()
                 {
-                    cardId = id,
+                    cardId = card.CardId,
                     Xposition = monsterGatePos.x - 1,
                     Yposition = monsterGatePos.y,
-                    stats = new Model.Data.MonsterStats()
+                    stats = new Model.Data.MonsterStats
+                    {
+                        Energy = card.Energy
+                    }
                 });
             }
             // cost energy
-            bot.EnergyToSummonMonster -= energy * nMonster;
+            bot.EnergyToSummonMonster -= card.Energy * nMonster;
         }
     }
 }

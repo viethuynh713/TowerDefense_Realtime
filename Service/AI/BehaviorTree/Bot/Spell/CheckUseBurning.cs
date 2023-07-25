@@ -1,4 +1,5 @@
 ﻿using Game_Realtime.Model;
+using Service.Models;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 using System.Numerics;
 using System.Security.Cryptography.Xml;
@@ -11,10 +12,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         private AiModel bot;
         private int energyRequired;
 
-        public CheckUseBurning(AiModel bot, int energyRequired)
+        public CheckUseBurning(AiModel bot)
         {
             this.bot = bot;
-            this.energyRequired = energyRequired;
+            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Toxic")).Energy;
         }
 
         public override NodeState Evaluate()
@@ -87,7 +88,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             if (nMonsterInCrowded.Item1 >= 5)
             {
                 bot.SpellUsingPosition = crowdestPosition;
-                bot.SpellUsingName = "Toxic";
                 state = NodeState.SUCCESS;
                 return state;
             }

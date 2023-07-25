@@ -1,7 +1,7 @@
 ﻿using Game_Realtime.Model;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 using System.Numerics;
-using System.Threading;
+using Service.Models;
 
 namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
 {
@@ -10,10 +10,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         private AiModel bot;
         private int energyRequired;
 
-        public CheckUseFreeze(AiModel bot, int energyRequired)
+        public CheckUseFreeze(AiModel bot)
         {
             this.bot = bot;
-            this.energyRequired = energyRequired;
+            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Freeze")).Energy;
         }
 
         public override NodeState Evaluate()
@@ -70,7 +70,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             if (nMonster >= 3)
             {
                 bot.SpellUsingPosition = new Vector2(mostTowerTilePos.x, mostTowerTilePos.y);
-                bot.SpellUsingName = "Freeze";
                 state = NodeState.SUCCESS;
                 return state;
             }

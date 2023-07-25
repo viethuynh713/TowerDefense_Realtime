@@ -1,4 +1,4 @@
-﻿using Game_Realtime.Model.InGame;
+﻿using Game_Realtime.Model.Data;
 using Game_Realtime.Model.Map;
 using Game_Realtime.Service;
 using Game_Realtime.Service.AI;
@@ -6,6 +6,7 @@ using Game_Realtime.Service.AI.BehaviorTree.Bot;
 using Game_Realtime.Service.AI.SelectCardService;
 using Game_Realtime.Service.AI.TowerBuildingMapService;
 using Newtonsoft.Json;
+using Service.Models;
 using System.Linq;
 using System.Numerics;
 
@@ -17,12 +18,11 @@ public class AiModel: BasePlayer
     private float energyToSummonMonster;
     private int energyGain;
     private Vector2 spellUsingPosition;
-    private string spellUsingName;
     private bool hasAutoSummonMonsterCurrently;
     private Vector2Int? towerSelectPos;
 
     private BotPlayMode playMode;
-    private List<(string, CardType, string, int)> cardSelected; // (cardid, cardtype, cardname, energy)
+    private List<CardModel> cardSelected;
     private BotLogicTile[][] towerBuildingMap;
     private int towerBuildingMapWidth;
     private int towerBuildingMapHeight;
@@ -50,7 +50,6 @@ public class AiModel: BasePlayer
         energyGain = energy;
 
         spellUsingPosition = new Vector2();
-        spellUsingName = "";
 
         playMode = (BotPlayMode)new Random().Next(0, 3);
         towerSelectPos = null;
@@ -75,12 +74,12 @@ public class AiModel: BasePlayer
     {
         // get card json file
         var json = File.ReadAllText("./CardConfig/MythicEmpire.Cards.json");
-        var stockCards = JsonConvert.DeserializeObject<List<MythicEmpireCard>>(json);
+        var stockCards = JsonConvert.DeserializeObject<List<CardModel>>(json);
         if (stockCards == null) Console.WriteLine("Get MythicEmpire.Cards Error!");
         if (stockCards != null)
         {
             // select card by mode
-            cardSelected = new List<(string, CardType, string, int)>();
+            cardSelected = new List<CardModel>();
             Console.WriteLine("Playmode: " + playMode.ToString());
             AIConstant.CardSelectingStrategy.TryGetValue(playMode, out var strategy);
             if (strategy != null)
@@ -99,10 +98,14 @@ public class AiModel: BasePlayer
                                 {
                                     string cardName = cardList[new Random().Next(0, cardList.Length)];
                                     Console.WriteLine(cardName);
-                                    var card = stockCards.FirstOrDefault(c => c.CardName == cardName/* && c.TypeOfCard == (int)cardTypeStrategy.Key*/);
+                                    var card = stockCards.FirstOrDefault(c => c.CardName == cardName && c.TypeOfCard == cardTypeStrategy.Key);
                                     if (card != null)
                                     {
-                                        cardSelected.Add((card.CardId, cardTypeStrategy.Key, cardName, card.Energy));
+                                        cardSelected.Add(new CardModel
+                                        {
+                                            TypeOfCard = card.TypeOfCard,
+                                            CardName = cardName,
+                                        });
                                     }
                                 }
                                 
@@ -112,9 +115,9 @@ public class AiModel: BasePlayer
                 }
             }
             // get player cards' rarity
-            Dictionary<int, int> nRarity = new Dictionary<int, int>()
+            Dictionary<RarityCard, int> nRarity = new Dictionary<RarityCard, int>()
             {
-                { 4, 0 }, { 3, 0 }, { 2, 0 }, { 1, 0 }
+                { RarityCard.Legend, 0 }, { RarityCard.Mythic, 0 }, { RarityCard.Rare, 0 }, { RarityCard.Common, 0 }
             };
             int star = 0;
             float f_star = 0;
@@ -123,10 +126,10 @@ public class AiModel: BasePlayer
                 var stockCard = stockCards.FirstOrDefault(c => c.CardId == rivalCard);
                 if (stockCard != null)
                 {
-                    var rarity = stockCard.CardRarity;
+                    RarityCard rarity = stockCard.CardRarity;
                     if (nRarity.TryGetValue(rarity, out int n))
                     {
-                        n++;
+                        nRarity[rarity] = n + 1;
                     }
                     f_star += stockCard.CardStar / 8f;
                 }
@@ -135,7 +138,7 @@ public class AiModel: BasePlayer
             //// set rarity for cards
             {
                 int i, j;
-                (string, CardType, string, int) temp;
+                CardModel temp;
                 bool swapped;
                 // sort card selecting list by priority (defend on bot play mode)
                 for (i = 0; i < cardSelected.Count - 1; i++)
@@ -160,21 +163,27 @@ public class AiModel: BasePlayer
             int cardIterationIdx = 0;
             foreach (var rarity in nRarity)
             {
+                Console.WriteLine(rarity.Key.ToString() + ": " + rarity.Value.ToString());
                 for (int i = cardIterationIdx; i < cardIterationIdx + rarity.Value; i++)
                 {
                     var stockCard = stockCards.FirstOrDefault(c =>
-                        c.TypeOfCard == (int)cardSelected[i].Item2 && c.CardName == cardSelected[i].Item3
-                        && c.CardRarity == rarity.Key);
+                        c.TypeOfCard == cardSelected[i].TypeOfCard && c.CardName == cardSelected[i].CardName
+                        && c.CardStar == star && c.CardRarity == rarity.Key);
                     if (stockCard != null)
                     {
                         cardSelectingIdList.Add(stockCard.CardId);
+                        cardSelected[i].CardId = stockCard.CardId;
+                        cardSelected[i].Energy = stockCard.Energy;
+                        cardSelected[i].CardStar = stockCard.CardStar;
+                        cardSelected[i].CardRarity = stockCard.CardRarity;
                     }
                 }
+                cardIterationIdx += rarity.Value;
             }
             Console.WriteLine("Choose List Card: " + cardSelected.Count.ToString());
             foreach (var card in cardSelected)
             {
-                Console.WriteLine(card.Item1.ToString() + ", " + card.Item2.ToString() + ", " + card.Item3.ToString() + ", " + card.Item4.ToString());
+                Console.WriteLine(card.CardId.ToString() + ", " + card.TypeOfCard.ToString() + ", " + card.CardName.ToString() + ", " + card.Energy.ToString());
             }
             return cardSelectingIdList;
         }
@@ -309,12 +318,12 @@ public class AiModel: BasePlayer
         var otherResult = new List<string>();
         foreach (var card in cardSelected)
         {
-            if (card.Item2 == cardType)
+            if (card.TypeOfCard == cardType)
             {
-                otherResult.Add(card.Item3);
-                if (idList.Contains(card.Item3))
+                otherResult.Add(card.CardName);
+                if (idList.Contains(card.CardName))
                 {
-                    result.Add(card.Item3);
+                    result.Add(card.CardName);
                 }
             }
         }
@@ -467,7 +476,7 @@ public class AiModel: BasePlayer
                 bool found = false;
                 foreach (var towerName in towerList)
                 {
-                    if (AIMethod.IsBotCardSelectedContain(CardSelected, (CardType.TowerCard, towerName)))
+                    if (AIMethod.IsBotCardSelectedContain(cardSelected, (CardType.TowerCard, towerName)))
                     {
                         basicTowerName = towerName;
                         found = true;
@@ -514,7 +523,7 @@ public class AiModel: BasePlayer
     }
 
     public BotPlayMode PlayMode { get { return playMode; } }
-    public List<(string, CardType, string, int)> CardSelected { get { return cardSelected; } }
+    public List<CardModel> CardSelected { get { return cardSelected; } }
     public BotLogicTile[][] TowerBuildingMap { get { return towerBuildingMap; } }
     public int TowerBuildingMapWidth { get { return towerBuildingMapWidth; } }
     public int TowerBuildingMapHeight { get { return towerBuildingMapHeight; } }
@@ -525,7 +534,6 @@ public class AiModel: BasePlayer
     public float EnergyToSummonMonster { get { return energyToSummonMonster; } set { energyToSummonMonster = value; } }
     public int EnergyGain { get { return energyGain; } set { energyGain = value; } }
     public Vector2 SpellUsingPosition { get { return spellUsingPosition; } set { spellUsingPosition = value; } }
-    public string SpellUsingName { get { return spellUsingName; } set { spellUsingName = value; } }
     public bool HasAutoSummonMonsterCurrently { get { return hasAutoSummonMonsterCurrently; } }
     public Vector2Int? TowerSelectPos { get { return towerSelectPos; } set { towerSelectPos = value; } }
     public FindTowerTypeStrategy FindTowerTypeStrategy { get { return findTowerTypeStrategy; } }

@@ -1,10 +1,8 @@
-﻿using Game_Realtime.Model.InGame;
+﻿using Service.Models;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
-using Game_Realtime.Service.AI.TowerBuildingMapService;
 using Game_Realtime.Service.AI.BehaviorTree.Bot.Spell;
 using Game_Realtime.Model;
 using Game_Realtime.Service.AI.BehaviorTree.Bot.Monster;
-using System.Numerics;
 using Game_Realtime.Service.AI.BehaviorTree.Bot.Tower;
 
 namespace Game_Realtime.Service.AI.BehaviorTree.Bot
@@ -94,11 +92,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
             {
                 if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Toxic")))
                 {
-                    int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Toxic"));
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseBurning(bot, cardEnergy),
-                        new UseBurning(bot, cardEnergy)
+                        new CheckUseBurning(bot),
+                        new UseBurning(bot)
                     }));
                 }
             }
@@ -106,11 +103,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
             {
                 if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Explode")))
                 {
-                    int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Explode"));
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseExplore(bot, cardEnergy, bot.GameSessionModel._mapService._castleLogicPosition[bot.userId].CastToVector2()),
-                        new UseExplore(bot, cardEnergy)
+                        new CheckUseExplore(bot, bot.GameSessionModel._mapService._castleLogicPosition[bot.userId].CastToVector2()),
+                        new UseExplore(bot)
                     }));
                 }
             }
@@ -118,10 +114,9 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
             {
                 if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Freeze")))
                 {
-                    int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Freeze"));
                     spellNodeList.Add(new Sequence(new List<Node>() {
-                        new CheckUseFreeze(bot, cardEnergy),
-                        new UseFreeze(bot, cardEnergy)
+                        new CheckUseFreeze(bot),
+                        new UseFreeze(bot)
                     })); ;
                 }
             }
@@ -129,10 +124,9 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
             {
                 if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Heal")))
                 {
-                    int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Heal"));
                     spellNodeList.Add(new Sequence(new List<Node>() {
-                        new CheckUseHealing(bot, cardEnergy),
-                        new UseHealing(bot, cardEnergy)
+                        new CheckUseHealing(bot),
+                        new UseHealing(bot)
                     })); 
                 }
             }
@@ -140,11 +134,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
             {
                 if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Speed")))
                 {
-                    int cardEnergy = AIMethod.GetEnergy(bot.CardSelected, (CardType.SpellCard, "Speed"));
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseSpeedup(bot, cardEnergy, bot.GameSessionModel._mapService._castleLogicPosition[bot.GameSessionModel.GetRivalPlayer(bot.userId).userId].CastToVector2()),
-                        new UseSpeedup(bot, cardEnergy)
+                        new CheckUseSpeedup(bot, bot.GameSessionModel._mapService._castleLogicPosition[bot.GameSessionModel.GetRivalPlayer(bot.userId).userId].CastToVector2()),
+                        new UseSpeedup(bot)
                     }));
                 }
             }

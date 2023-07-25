@@ -1,4 +1,5 @@
 ﻿using Game_Realtime.Model;
+using Service.Models;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 using System.Numerics;
 
@@ -10,10 +11,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         private int energyRequired;
         private Vector2 enemyBasePosition;
 
-        public CheckUseSpeedup(AiModel bot, int energyRequired, Vector2 enemyBasePosition)
+        public CheckUseSpeedup(AiModel bot, Vector2 enemyBasePosition)
         {
             this.bot = bot;
-            this.energyRequired = energyRequired;
+            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Speed")).Energy;
             this.enemyBasePosition = enemyBasePosition;
         }
 
@@ -47,7 +48,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
                 {
                     bot.SpellUsingPosition += pos / monsterNearBasePosList.Count;
                 }
-                bot.SpellUsingName = "Speed";
                 state = NodeState.SUCCESS;
                 return state;
             }

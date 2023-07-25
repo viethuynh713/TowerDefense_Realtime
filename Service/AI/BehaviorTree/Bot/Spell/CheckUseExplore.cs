@@ -1,5 +1,6 @@
 ﻿using Game_Realtime.Model;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
+using Service.Models;
 using System.Numerics;
 
 namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
@@ -10,10 +11,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         private int energyRequired;
         private Vector2 botBasePosition;
 
-        public CheckUseExplore(AiModel bot, int energyRequired, Vector2 botBasePosition)
+        public CheckUseExplore(AiModel bot, Vector2 botBasePosition)
         {
             this.bot = bot;
-            this.energyRequired = energyRequired;
+            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Explode")).Energy;
             this.botBasePosition = botBasePosition;
         }
 
@@ -47,7 +48,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
                 {
                     bot.SpellUsingPosition += pos / monsterNearBasePosList.Count;
                 }
-                bot.SpellUsingName = "Explode";
                 state = NodeState.SUCCESS;
                 return state;
             }

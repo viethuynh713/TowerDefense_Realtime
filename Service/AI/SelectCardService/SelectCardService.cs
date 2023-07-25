@@ -1,5 +1,6 @@
-﻿using Game_Realtime.Model.InGame;
-using Game_Realtime.Service.AI;
+﻿using Game_Realtime.Service.AI;
+using Service.Models;
+
 namespace Game_Realtime.Service.AI.SelectCardService;
 
 public static class SelectCardService
@@ -94,10 +95,10 @@ public static class SelectCardService
         }
     }
 
-    public static bool IsGreaterThan((string, CardType, string, int) x, (string, CardType, string, int) y, BotPlayMode mode)
+    public static bool IsGreaterThan(CardModel x, CardModel y, BotPlayMode mode)
     {
-        CardPower cardPowerX = new CardPower(x.Item2, x.Item3, mode);
-        CardPower cardPowerY = new CardPower(y.Item2, y.Item3, mode);
+        CardPower cardPowerX = new CardPower(x.TypeOfCard, x.CardName, mode);
+        CardPower cardPowerY = new CardPower(y.TypeOfCard, y.CardName, mode);
         return cardPowerX > cardPowerY;
     }
 }

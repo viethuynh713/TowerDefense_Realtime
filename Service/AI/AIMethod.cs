@@ -1,15 +1,26 @@
 ﻿using Game_Realtime.Model;
-using Game_Realtime.Model.InGame;
+using Service.Models;
 
 namespace Game_Realtime.Service.AI
 {
     public static class AIMethod
     {
-        public static bool IsBotCardSelectedContain(List<(string, CardType, string, int)> cardSelected, (CardType, string) cardModel)
+        public static CardModel GetCardModel(List<CardModel> cardSelected, (CardType, string) sampleCard)
         {
             foreach (var card in cardSelected)
             {
-                if (card.Item2 == cardModel.Item1 && card.Item3 == cardModel.Item2)
+                if (card.TypeOfCard == sampleCard.Item1 && card.CardName == sampleCard.Item2)
+                {
+                    return card;
+                }
+            }
+            return new CardModel();
+        }
+        public static bool IsBotCardSelectedContain(List<CardModel> cardSelected, (CardType, string) sampleCard)
+        {
+            foreach (var card in cardSelected)
+            {
+                if (card.TypeOfCard == sampleCard.Item1 && card.CardName == sampleCard.Item2)
                 {
                     return true;
                 }
@@ -17,50 +28,50 @@ namespace Game_Realtime.Service.AI
             return false;
         }
 
-        public static int GetEnergy(List<(string, CardType, string, int)> cardSelected, (CardType, string) cardModel)
+        public static int GetEnergy(List<CardModel> cardSelected, (CardType, string) sampleCard)
         {
             foreach (var card in cardSelected)
             {
-                if (card.Item2 == cardModel.Item1 && card.Item3 == cardModel.Item2)
+                if (card.TypeOfCard == sampleCard.Item1 && card.CardName == sampleCard.Item2)
                 {
-                    return card.Item4;
+                    return card.Energy;
                 }
             }
             return 0;
         }
 
-        public static int GetEnergy(List<(string, CardType, string, int)> cardSelected, string cardId)
+        public static int GetEnergy(List<CardModel> cardSelected, string cardId)
         {
             foreach (var card in cardSelected)
             {
-                if (card.Item1 == cardId)
+                if (card.CardId == cardId)
                 {
-                    return card.Item4;
+                    return card.Energy;
                 }
             }
             return 0;
         }
 
-        public static int GetMinMonsterEnergy(List<(string, CardType, string, int)> cardSelected)
+        public static int GetMinMonsterEnergy(List<CardModel> cardSelected)
         {
             int result = 999999999;
             foreach (var card in cardSelected)
             {
-                if (card.Item2 == CardType.MonsterCard && card.Item4 < result)
+                if (card.TypeOfCard == CardType.MonsterCard && card.Energy < result)
                 {
-                    result = card.Item4;
+                    result = card.Energy;
                 }
             }
             return result;
         }
 
-        public static string GetCardId(List<(string, CardType, string, int)> cardSelected, (CardType, string) cardModel)
+        public static string GetCardId(List<CardModel> cardSelected, (CardType, string) sample)
         {
             foreach (var card in cardSelected)
             {
-                if (card.Item2 == cardModel.Item1 && card.Item3 == cardModel.Item2)
+                if (card.TypeOfCard == sample.Item1 && card.CardName == sample.Item2)
                 {
-                    return card.Item1;
+                    return card.CardId != null ? card.CardId : "";
                 }
             }
             return "";

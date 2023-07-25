@@ -1,4 +1,5 @@
 ﻿using Game_Realtime.Model;
+using Service.Models;
 using Game_Realtime.Service.AI.BehaviorTree.Structure;
 using System.Numerics;
 
@@ -9,10 +10,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         private AiModel bot;
         private int energyRequired;
 
-        public CheckUseHealing(AiModel bot, int energyRequired)
+        public CheckUseHealing(AiModel bot)
         {
             this.bot = bot;
-            this.energyRequired = energyRequired;
+            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Heal")).Energy;
         }
 
         public override NodeState Evaluate()
@@ -85,7 +86,6 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
             if (nMonsterInCrowded.Item1 >= 5)
             {
                 bot.SpellUsingPosition = crowdestPosition;
-                bot.SpellUsingName = "Heal";
                 state = NodeState.SUCCESS;
                 return state;
             }
