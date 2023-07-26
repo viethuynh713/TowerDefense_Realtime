@@ -20,7 +20,19 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
 
             var json = File.ReadAllText("./CardConfig/MythicEmpire.Cards.json");
             var stockCards = JsonConvert.DeserializeObject<List<CardModel>>(json);
-            if (stockCards == null) Console.WriteLine("Get MythicEmpire.Cards Error!");
+            if (stockCards == null)
+            {
+                Console.WriteLine("Get MythicEmpire.Cards Error!");
+                return;
+            }
+            this.stockCards = new List<CardModel>();
+            foreach (var card in stockCards)
+            {
+                if (card.TypeOfCard == CardType.MonsterCard)
+                {
+                    this.stockCards.Add(card);
+                }
+            }
         }
 
         public override NodeState Evaluate()
@@ -30,23 +42,17 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
             {
                 if ((botBasePosition.X - monster.Value.XLogicPosition) + (botBasePosition.Y - monster.Value.YLogicPosition) < 3)
                 {
-                    foreach (var monsterCard in bot.CardSelected)
+                    CardModel sampleCard = stockCards.FirstOrDefault(c => c.CardId == monster.Value.cardId);
+                    if (sampleCard != null)
                     {
-                        CardModel sampleCard = stockCards.FirstOrDefault(c => c.CardId == monster.Value.monsterId);
-                        if (sampleCard != null)
+                        string cardName = sampleCard.CardName;
+                        var card = AIMethod.GetCardModel(bot.CardSelected, (CardType.MonsterCard, cardName));
+                        if (card != null && bot.EnergyToSummonMonster >= card.Energy)
                         {
-                            string cardName = sampleCard.CardName;
-                            if (monsterCard.TypeOfCard == CardType.MonsterCard && monsterCard.CardName == cardName)
-                            {
-                                CardModel card = AIMethod.GetCardModel(bot.CardSelected, (CardType.MonsterCard, cardName));
-                                if (bot.EnergyToSummonMonster >= card.Energy)
-                                {
-                                    // if bot has a monster card same as monster near castle, use that card
-                                    SummonMonster(card);
-                                    state = NodeState.RUNNING;
-                                    return state;
-                                }
-                            }
+                            // if bot has a monster card same as monster near castle, use that card
+                            SummonMonster(card);
+                            state = NodeState.RUNNING;
+                            return state;
                         }
                     }
                 }

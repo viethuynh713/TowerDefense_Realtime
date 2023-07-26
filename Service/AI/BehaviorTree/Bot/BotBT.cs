@@ -90,7 +90,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
         {
             if (spellName == "Toxic")
             {
-                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Toxic")))
+                if (AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Toxic")) != null)
                 {
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
@@ -101,7 +101,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
             }
             if (spellName == "Explode")
             {
-                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Explode")))
+                if (AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Explode")) != null)
                 {
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
@@ -112,7 +112,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
             }
             if (spellName == "Freeze")
             {
-                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Freeze")))
+                if (AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Freeze")) != null)
                 {
                     spellNodeList.Add(new Sequence(new List<Node>() {
                         new CheckUseFreeze(bot),
@@ -122,7 +122,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
             }
             if (spellName == "Heal")
             {
-                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Heal")))
+                if (AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Heal")) != null)
                 {
                     spellNodeList.Add(new Sequence(new List<Node>() {
                         new CheckUseHealing(bot),
@@ -132,7 +132,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
             }
             if (spellName == "Speed")
             {
-                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.SpellCard, "Speed")))
+                if (AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Speed")) != null)
                 {
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {

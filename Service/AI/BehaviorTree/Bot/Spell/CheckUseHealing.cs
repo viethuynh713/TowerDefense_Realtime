@@ -13,7 +13,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         public CheckUseHealing(AiModel bot)
         {
             this.bot = bot;
-            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Heal")).Energy;
+            energyRequired = 0;
+            var card = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Heal"));
+            if (card != null)
+            {
+                energyRequired = card.Energy;
+            }
         }
 
         public override NodeState Evaluate()

@@ -14,8 +14,13 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         public CheckUseSpeedup(AiModel bot, Vector2 enemyBasePosition)
         {
             this.bot = bot;
-            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Speed")).Energy;
             this.enemyBasePosition = enemyBasePosition;
+            energyRequired = 0;
+            var card = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Speed"));
+            if (card != null)
+            {
+                energyRequired = card.Energy;
+            }
         }
 
         public override NodeState Evaluate()

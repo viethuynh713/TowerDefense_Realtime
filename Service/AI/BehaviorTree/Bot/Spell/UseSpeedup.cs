@@ -11,7 +11,15 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         public UseSpeedup(AiModel bot)
         {
             this.bot = bot;
-            card = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Speed"));
+            var c = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Speed"));
+            if (c != null)
+            {
+                card = c;
+            }
+            else
+            {
+                card = new CardModel();
+            }
         }
 
         public override NodeState Evaluate()

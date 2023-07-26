@@ -58,7 +58,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
                 bot.TowerBuildingMap[bot.TowerSelectPos.Value.y][bot.TowerSelectPos.Value.x].hasTower = true;
             }
             // send request building tower
-            CardModel card = AIMethod.GetCardModel(bot.CardSelected, (CardType.TowerCard, towerName));
+            var c = AIMethod.GetCardModel(bot.CardSelected, (CardType.TowerCard, towerName));
+            CardModel card = new CardModel();
+            if (c != null)
+            {
+                card = c;
+            }
             Console.WriteLine("Bot build tower " + card.CardId + " at (" +
                 bot.TowerSelectPos.Value.x.ToString() + ", " + bot.TowerSelectPos.Value.y.ToString() + ")");
             bot.GameSessionModel.BuildTower(bot.userId, new Model.Data.BuildTowerData()

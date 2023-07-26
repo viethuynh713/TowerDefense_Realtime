@@ -15,7 +15,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         public CheckUseBurning(AiModel bot)
         {
             this.bot = bot;
-            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Toxic")).Energy;
+            energyRequired = 0;
+            var card = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Toxic"));
+            if (card != null)
+            {
+                energyRequired = card.Energy;
+            }
         }
 
         public override NodeState Evaluate()

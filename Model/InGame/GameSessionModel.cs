@@ -230,6 +230,7 @@ namespace Game_Realtime.Model.InGame
             await _timerUpdateEnergy.DisposeAsync();
 
             await _aiActionTimer.DisposeAsync();
+            _aiActionTimer.Dispose();
             
         }
 

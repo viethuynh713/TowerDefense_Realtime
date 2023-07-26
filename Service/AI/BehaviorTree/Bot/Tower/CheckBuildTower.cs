@@ -23,7 +23,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
             }
             // check if enough energy to use
             string towerId = bot.TowerBuildingMap[bot.TowerSelectPos.Value.y][bot.TowerSelectPos.Value.x].towerName;
-            CardModel card = AIMethod.GetCardModel(bot.CardSelected, (CardType.TowerCard, towerId));
+            var c = AIMethod.GetCardModel(bot.CardSelected, (CardType.TowerCard, towerId));
+            CardModel card = new CardModel();
+            if (c != null)
+            {
+                card = c;
+            }
             if (bot.EnergyToBuildTower >= card.Energy)
             {
                 state = NodeState.SUCCESS;

@@ -14,8 +14,13 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         public CheckUseExplore(AiModel bot, Vector2 botBasePosition)
         {
             this.bot = bot;
-            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Explode")).Energy;
             this.botBasePosition = botBasePosition;
+            energyRequired = 0;
+            var card = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Explode"));
+            if (card != null)
+            {
+                energyRequired = card.Energy;
+            }
         }
 
         public override NodeState Evaluate()

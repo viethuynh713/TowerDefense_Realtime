@@ -11,7 +11,15 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         public UseHealing(AiModel bot)
         {
             this.bot = bot;
-            card = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Heal"));
+            var c = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Heal"));
+            if (c != null)
+            {
+                card = c;
+            }
+            else
+            {
+                card = new CardModel();
+            }
         }
 
         public override NodeState Evaluate()

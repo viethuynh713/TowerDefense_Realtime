@@ -10,7 +10,7 @@ builder.Services.AddSingleton<MythicEmpireHub>();
 builder.Services.AddSingleton<IGameService,GameService>();
 builder.Services.AddSingleton<IUserMatchingService,UserMatchingService>();
 builder.Services.AddSingleton<IOnlineService,OnlineService>();
-builder.UseCors(config => config.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+//builder.UseCors(config => config.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -27,9 +27,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                 {
                     if (MathF.Abs(monsterGatePos.x - monster.Value.XLogicPosition) + MathF.Abs(monsterGatePos.y - monster.Value.YLogicPosition) < 3)
                     {
-                        if (checkMonsterCardId == "" || new Random().Next(0, 2) == 0)
+                        if (checkMonsterCardId == ""/* || new Random().Next(0, 2) == 0*/)
                         {
                             checkMonsterCardId = monster.Value.cardId;
+                            break;
                         }
                     }
                 }
@@ -42,8 +43,8 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
             if (mode == 0)
             {
                 // if having card as same as monster to summon, summon it
-                if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.MonsterCard, checkMonsterCardId))) {
-                    CardModel card = AIMethod.GetCardModel(bot.CardSelected, (CardType.MonsterCard, checkMonsterCardId));
+                var card = AIMethod.GetCardModel(bot.CardSelected, (CardType.MonsterCard, checkMonsterCardId));
+                if (card != null) {
                     if (bot.EnergyToSummonMonster >= card.Energy)
                     {
                         SummonMonster(card);
@@ -60,9 +61,10 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                 {
                     foreach (var monsterName in supportMonsterNameList)
                     {
-                        if (AIMethod.IsBotCardSelectedContain(bot.CardSelected, (CardType.MonsterCard, monsterName)))
+                        var card = AIMethod.GetCardModel(bot.CardSelected, (CardType.MonsterCard, monsterName));
+                        if (card != null)
                         {
-                            SummonMonster(AIMethod.GetCardModel(bot.CardSelected, (CardType.MonsterCard, monsterName)));
+                            SummonMonster(card);
                             state = NodeState.RUNNING;
                             return state;
                         }

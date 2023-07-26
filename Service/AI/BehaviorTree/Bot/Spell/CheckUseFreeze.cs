@@ -13,7 +13,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Spell
         public CheckUseFreeze(AiModel bot)
         {
             this.bot = bot;
-            energyRequired = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Freeze")).Energy;
+            energyRequired = 0;
+            var card = AIMethod.GetCardModel(bot.CardSelected, (CardType.SpellCard, "Freeze"));
+            if (card != null)
+            {
+                energyRequired = card.Energy;
+            }
         }
 
         public override NodeState Evaluate()

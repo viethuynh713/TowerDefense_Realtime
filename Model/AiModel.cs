@@ -506,7 +506,7 @@ public class AiModel: BasePlayer
                 bool found = false;
                 foreach (var towerName in towerList)
                 {
-                    if (AIMethod.IsBotCardSelectedContain(cardSelected, (CardType.TowerCard, towerName)))
+                    if (AIMethod.GetCardModel(cardSelected, (CardType.TowerCard, towerName)) != null)
                     {
                         basicTowerName = towerName;
                         found = true;
