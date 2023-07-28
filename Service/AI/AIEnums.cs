@@ -15,9 +15,9 @@
 
     public enum FindTowerPosStrategy
     {
-        WEAK_TO_STRONG,
-        STRONG_TO_WEAK,
         CASTLE_TO_GATE,
-        GATE_TO_CASTLE
+        GATE_TO_CASTLE,
+        //WEAK_TO_STRONG,
+        //STRONG_TO_WEAK
     }
 }
