@@ -34,13 +34,13 @@ public class BasePlayer
 
         }
 
-        public async Task<int> CastleTakeDamage(int damage)
+        public Task<int> CastleTakeDamage(int damage)
         {
             this.castleHp -= damage;
-            return this.castleHp;
+            return Task.FromResult(this.castleHp);
         }
 
-        public async Task<int> AddEnergy(int addedEnergy)
+        public Task<int> AddEnergy(int addedEnergy)
         {
             int oldEnergy = this.energy;
             this.energy += addedEnergy;
@@ -52,10 +52,10 @@ public class BasePlayer
             {
                 ((AiModel)this).BotGainEnergy(this.energy - oldEnergy);
             }
-            return this.energy;
+            return Task.FromResult(this.energy);
         }
 
-        public virtual async Task<MonsterModel?> CreateMonster(CreateMonsterData data)
+        public virtual Task<MonsterModel> CreateMonster(CreateMonsterData data)
         {
             var stats = (data.stats);
             
@@ -73,13 +73,13 @@ public class BasePlayer
             _monsters.Add(monster.monsterId,monster);
             
             // Console.WriteLine($"Monster list : {JsonConvert.SerializeObject(_monsters)}");
-            return monster;
+            return Task.FromResult(monster);
         }
-        public virtual async  Task<TowerModel?> BuildTower(BuildTowerData data)
+        public virtual Task<TowerModel?> BuildTower(BuildTowerData data)
         {
             var stats = data.stats;
             
-            if (stats.Energy > energy) return null;
+            if (stats.Energy > energy) return Task.FromResult<TowerModel?>(null);
             
             var tower = new TowerModel(data.cardId, 
                 data.Xposition, 
@@ -92,13 +92,13 @@ public class BasePlayer
 
             _towers.Add(tower.towerId, tower);
 
-            return tower;
+            return Task.FromResult(tower);
         }
-        public virtual async Task<SpellModel?> PlaceSpell(PlaceSpellData data)
+        public virtual Task<SpellModel?> PlaceSpell(PlaceSpellData data)
         {
             var stats = data.stats;
             
-            if (stats.Energy > energy) return null;
+            if (stats.Energy > energy) return Task.FromResult<SpellModel?>(null);
             
             var spell = new SpellModel(
                 data.cardId, 
@@ -109,23 +109,23 @@ public class BasePlayer
             
             energy -= stats.Energy;
 
-            return spell;
+            return Task.FromResult(spell);
         }
-        public virtual async Task<int?> UpdateMonsterHp(MonsterTakeDamageData data)
+        public virtual Task<int?> UpdateMonsterHp(MonsterTakeDamageData data)
         {
-            if (!_monsters.ContainsKey(data.monsterId)) return null;
-            return _monsters[data.monsterId].UpdateHp(data.damage);
+            if (!_monsters.ContainsKey(data.monsterId)) return Task.FromResult<int?>(null);
+            return Task.FromResult<int?>(_monsters[data.monsterId].UpdateHp(data.damage));
         }
 
-        public virtual async Task<int?> KillMonster(string monsterId)
+        public virtual Task<int?> KillMonster(string monsterId)
         {
-            if (!_monsters.ContainsKey(monsterId)) return null;
+            if (!_monsters.ContainsKey(monsterId)) return Task.FromResult<int?>(null);
 
             var energyGain = _monsters[monsterId].EnergyGainWhenDie;
             
             _monsters.Remove(monsterId);
             
-            return energyGain;
+            return Task.FromResult<int?>(energyGain);
         }
 
         public virtual async Task<TowerModel> SellTower(string towerId)
@@ -140,18 +140,18 @@ public class BasePlayer
 
         }
 
-        public virtual async Task<TowerStats?> UpgradeTower(string towerId, UpgradeType type)
+        public virtual Task<TowerStats?> UpgradeTower(string towerId, UpgradeType type)
         {
 
-            if(_towers[towerId].level[type] > GameConfig.GameConfig.MAX_UPGRADE_LEVEL) return null;
+            if(_towers[towerId].level[type] > GameConfig.GameConfig.MAX_UPGRADE_LEVEL) return Task.FromResult<TowerStats?>(null);
             
             var upgradeEnergy = _towers[towerId].level[type] * GameConfig.GameConfig.ENERGY_UPDATE;
             
-            if (energy < upgradeEnergy) return null;
+            if (energy < upgradeEnergy) return Task.FromResult<TowerStats?>(null);
             
             energy -= upgradeEnergy;
             
-            return _towers[towerId].Upgrade(type);
+            return Task.FromResult(_towers[towerId].Upgrade(type));
         }
 
         public Task UpdateMonsterPosition(UpdateMonsterPositionData data)

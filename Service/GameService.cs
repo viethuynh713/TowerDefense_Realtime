@@ -126,17 +126,13 @@ public class GameService : IGameService
         
         
         var newCastleHp = _gameSessionModels[gameId].CastleTakeDamage(data).Result;
-        if (newCastleHp != null)
+        if (newCastleHp is <= 0)
         {
-            if (newCastleHp.Value <= 0)
-            {
-                await OnEndGame(gameId,data.ownerId);
-            }
-            
+            await OnEndGame(gameId,data.ownerId);
         }
     }
-    
-    public async Task OnEndGame(string gameId,string playerWin)
+
+    private async Task OnEndGame(string gameId,string playerWin)
     {
         Console.WriteLine("End Game");
         await _gameSessionModels [gameId].EndGame();
@@ -162,15 +158,14 @@ public class GameService : IGameService
         if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
 
         await _gameSessionModels[gameId].UpdateMonsterHp(monsterTakeDamageData);
-
-
+        
     }
 
     public async Task BuildTower(string gameId, string senderId, BuildTowerData data)
     {
         if (!_gameSessionModels.ContainsKey(gameId)) return;
         if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
-        var towerModel = await _gameSessionModels[gameId].BuildTower(senderId,data);
+        await _gameSessionModels[gameId].BuildTower(senderId,data);
 
 
     }
@@ -179,28 +174,28 @@ public class GameService : IGameService
         if (!_gameSessionModels.ContainsKey(gameId)) return;
         if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
         
-        var spellModel = await _gameSessionModels[gameId].PlaceSpell(senderId,data);
+        await _gameSessionModels[gameId].PlaceSpell(senderId,data);
         
     }
     public async Task CreateMonster(string gameId, string senderId, CreateMonsterData data)
     {
         if (!_gameSessionModels.ContainsKey(gameId)) return;
         if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
-        var monsterModel = await _gameSessionModels[gameId].CreateMonster(senderId,data);
+        await _gameSessionModels[gameId].CreateMonster(senderId,data);
         
     }
     public async Task UpgradeTower(string gameId, string senderId, UpgradeTowerData data)
     {
         if (!_gameSessionModels.ContainsKey(gameId)) return;
         if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
-        var towerStats = await _gameSessionModels[gameId].UpgradeTower(senderId,data);
+        await _gameSessionModels[gameId].UpgradeTower(senderId,data);
         
     }
     public async Task SellTower(string gameId, string senderId, SellTowerData data)
     {
         if (!_gameSessionModels.ContainsKey(gameId)) return;
         if (!_gameSessionModels[gameId].HasPlayer(senderId)) return;
-        var towerModel = await _gameSessionModels[gameId].SellTower(senderId,data);
+        await _gameSessionModels[gameId].SellTower(senderId,data);
         
     }
     public async Task HandlePlayerDisconnect(string connectionId)

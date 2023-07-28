@@ -57,8 +57,8 @@ public class AiModel: BasePlayer
         playMode = (BotPlayMode)new Random().Next(0, 3);
         towerSelectPos = null;
 
-        realMapWidth = gameSessionModel._mapService.Width;
-        realMapHeight = gameSessionModel._mapService.Height;
+        realMapWidth = gameSessionModel.mapService.Width;
+        realMapHeight = gameSessionModel.mapService.Height;
 
         this.gameSessionModel = gameSessionModel;
 
@@ -67,7 +67,7 @@ public class AiModel: BasePlayer
         {
             await ChooseListCard(((PlayerModel) rivalPlayer).cards);
             await CalculateEnergyRateUsing();
-            await CreateTowerBuildingMap(gameSessionModel._mapService);
+            await CreateTowerBuildingMap(gameSessionModel.mapService);
             await SelectBattleMode();
             behavior = new BotBT(this);
         }
@@ -530,10 +530,10 @@ public class AiModel: BasePlayer
         return Task.CompletedTask;
     }
 
-    public async Task<bool> Battle()
+    public Task Battle()
     {
         behavior.Update();
-        return true;
+        return Task.CompletedTask;
     }
 
     public Task ToggleAutoSummonMonsterCurrently()
