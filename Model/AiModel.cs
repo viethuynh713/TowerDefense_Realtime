@@ -369,7 +369,7 @@ public class AiModel: BasePlayer
         // select find tower type strategy
         findTowerTypeStrategy = (FindTowerTypeStrategy)new Random().Next(0, 2);
         // select find tower position strategy
-        findTowerPosStrategy = (FindTowerPosStrategy)new Random().Next(0, 4);
+        findTowerPosStrategy = (FindTowerPosStrategy)new Random().Next(0, 2);
         Console.WriteLine("FindTowerTypeStrategy: " + findTowerTypeStrategy.ToString());
         Console.WriteLine("FindTowerPosStrategy: " + findTowerPosStrategy.ToString());
         // create tower building order
@@ -377,78 +377,78 @@ public class AiModel: BasePlayer
         // the second is strength (get by index in AIConstant.towerStrength)
         // the third is number of empty adjacent node which is not used to build tower
         towerBuildOrder = new List<Vector2Int>();
-        if (findTowerPosStrategy == FindTowerPosStrategy.WEAK_TO_STRONG || findTowerPosStrategy == FindTowerPosStrategy.STRONG_TO_WEAK)
-        {
-            List<(Vector2Int, int, int)> calcTowerBuildOrder = new List<(Vector2Int, int, int)>();
-            for (int i = 0; i < towerBuildingMapHeight; i++)
-            {
-                for (int j = 0; j < towerBuildingMapWidth; j++)
-                {
-                    var tile = towerBuildingMap[i][j];
-                    if (tile.isBuildTower)
-                    {
-                        // get number of empty adjacent tile which is not used to build tower
-                        int nEmptyAdjacentTile = 0;
-                        for (int x = -1; x <= 1; x++)
-                        {
-                            if (j + x < 0 || j + x >= towerBuildingMapWidth)
-                            {
-                                continue;
-                            }
-                            for (int y = -1; y <= 1; y++)
-                            {
-                                if (i + y >= 0 && i + y < towerBuildingMapHeight)
-                                {
-                                    if (!tile.isBuildTower)
-                                    {
-                                        nEmptyAdjacentTile++;
-                                    }
-                                }
-                            }
-                        }
-                        // get data to compare
-                        (Vector2Int, int, int) newNode = (
-                            new Vector2Int(j, i),
-                            AIConstant.towerStrength.FindIndex(node => node.Contains(towerBuildingMap[i][j].towerName)),
-                            nEmptyAdjacentTile
-                        );
-                        // put new node to suitable position (sort)
-                        bool hasInserted = false;
-                        for (int k = 0; k < calcTowerBuildOrder.Count; k++)
-                        {
-                            bool condition = findTowerPosStrategy == FindTowerPosStrategy.WEAK_TO_STRONG ?
-                                newNode.Item2 < calcTowerBuildOrder[k].Item2 :
-                                newNode.Item2 > calcTowerBuildOrder[k].Item2;
-                            if (condition)
-                            {
-                                calcTowerBuildOrder.Insert(k, newNode);
-                                hasInserted = true;
-                                break;
-                            }
-                            if (newNode.Item2 == calcTowerBuildOrder[k].Item2)
-                            {
-                                if (newNode.Item3 > calcTowerBuildOrder[k].Item3)
-                                {
-                                    calcTowerBuildOrder.Insert(k, newNode);
-                                    hasInserted = true;
-                                    break;
-                                }
-                            }
-                        }
-                        if (!hasInserted)
-                        {
-                            calcTowerBuildOrder.Add(newNode);
-                        }
-                    }
-                }
-            }
-            // copy to tower building order list
-            foreach (var node in calcTowerBuildOrder)
-            {
-                towerBuildOrder.Add(node.Item1);
-            }
-        }
-        else
+        //if (findTowerPosStrategy == FindTowerPosStrategy.WEAK_TO_STRONG || findTowerPosStrategy == FindTowerPosStrategy.STRONG_TO_WEAK)
+        //{
+        //    List<(Vector2Int, int, int)> calcTowerBuildOrder = new List<(Vector2Int, int, int)>();
+        //    for (int i = 0; i < towerBuildingMapHeight; i++)
+        //    {
+        //        for (int j = 0; j < towerBuildingMapWidth; j++)
+        //        {
+        //            var tile = towerBuildingMap[i][j];
+        //            if (tile.isBuildTower)
+        //            {
+        //                // get number of empty adjacent tile which is not used to build tower
+        //                int nEmptyAdjacentTile = 0;
+        //                for (int x = -1; x <= 1; x++)
+        //                {
+        //                    if (j + x < 0 || j + x >= towerBuildingMapWidth)
+        //                    {
+        //                        continue;
+        //                    }
+        //                    for (int y = -1; y <= 1; y++)
+        //                    {
+        //                        if (i + y >= 0 && i + y < towerBuildingMapHeight)
+        //                        {
+        //                            if (!tile.isBuildTower)
+        //                            {
+        //                                nEmptyAdjacentTile++;
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //                // get data to compare
+        //                (Vector2Int, int, int) newNode = (
+        //                    new Vector2Int(j, i),
+        //                    AIConstant.towerStrength.FindIndex(node => node.Contains(towerBuildingMap[i][j].towerName)),
+        //                    nEmptyAdjacentTile
+        //                );
+        //                // put new node to suitable position (sort)
+        //                bool hasInserted = false;
+        //                for (int k = 0; k < calcTowerBuildOrder.Count; k++)
+        //                {
+        //                    bool condition = findTowerPosStrategy == FindTowerPosStrategy.WEAK_TO_STRONG ?
+        //                        newNode.Item2 < calcTowerBuildOrder[k].Item2 :
+        //                        newNode.Item2 > calcTowerBuildOrder[k].Item2;
+        //                    if (condition)
+        //                    {
+        //                        calcTowerBuildOrder.Insert(k, newNode);
+        //                        hasInserted = true;
+        //                        break;
+        //                    }
+        //                    if (newNode.Item2 == calcTowerBuildOrder[k].Item2)
+        //                    {
+        //                        if (newNode.Item3 > calcTowerBuildOrder[k].Item3)
+        //                        {
+        //                            calcTowerBuildOrder.Insert(k, newNode);
+        //                            hasInserted = true;
+        //                            break;
+        //                        }
+        //                    }
+        //                }
+        //                if (!hasInserted)
+        //                {
+        //                    calcTowerBuildOrder.Add(newNode);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    // copy to tower building order list
+        //    foreach (var node in calcTowerBuildOrder)
+        //    {
+        //        towerBuildOrder.Add(node.Item1);
+        //    }
+        //}
+        //else
         {
             // get list of tile which will be used to build tower
             List<Vector2Int> towerBuildingTileList = new List<Vector2Int>();

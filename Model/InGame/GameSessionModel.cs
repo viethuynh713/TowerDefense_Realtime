@@ -260,15 +260,6 @@ namespace Game_Realtime.Model.InGame
             if (!_mapService.IsValidPosition(new Vector2Int(data.Xposition, data.Yposition), playerId)) return null;
 
             var paths = _mapService.FindPathForMonster(playerId, new Vector2Int(data.Xposition, data.Yposition));
-            if (_players[playerId] is PlayerModel)
-            {
-                Console.Write("Path: ");
-                foreach (var tile in paths)
-                {
-                    Console.Write("(" + tile.x + ", " + tile.y + ") -> ");
-                }
-                Console.WriteLine("");
-            }
             if (paths.Count == 0)
             {
                 Console.WriteLine($"No monster path");

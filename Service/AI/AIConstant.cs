@@ -74,7 +74,7 @@ namespace Game_Realtime.Service.AI
 
         public static readonly Dictionary<BotPlayMode, float> EnergyBuildTowerRate = new Dictionary<BotPlayMode, float>()
         {
-            { BotPlayMode.ATTACK, 0.4f },
+            { BotPlayMode.ATTACK, 0.6f },
             { BotPlayMode.DEFEND, 1f },
             { BotPlayMode.HYBRIC, 0.8f }
         };
