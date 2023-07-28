@@ -13,31 +13,27 @@ namespace Game_Realtime.Model.InGame
 {
     public class GameSessionModel : IGameSessionModel
     {
-        private string _gameId;
+        private readonly string _gameId;
 
-        private DateTime _startTime;
+        private readonly DateTime _startTime;
 
-        private ModeGame _modeGame;
+        private readonly ModeGame _modeGame;
         
-        private Timer _aiActionTimer;
-        public ModeGame ModeGame
-        {
-            get => _modeGame;
-        }
-
+        private readonly Timer _aiActionTimer;
+        
         private readonly Dictionary<string, BasePlayer> _players;
 
-        public readonly MapService _mapService;
-        private ValidatePackageService _validatePackageService;
+        public readonly MapService mapService;
+        private readonly ValidatePackageService _validatePackageService;
         
         private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;
 
 
-        private Timer _timerUpdateEnergy;
+        private readonly Timer _timerUpdateEnergy;
 
         private readonly WaveService _waveService;
 
-        private Timer _countWave;
+        private readonly Timer _countWave;
 
         public GameSessionModel(string gameId, PlayerModel playerA, PlayerModel playerB, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
         {
@@ -51,18 +47,19 @@ namespace Game_Realtime.Model.InGame
                 {playerB.userId, playerB}
             };
 
-            _mapService = new MapService(11, 21,playerA.userId,playerB.userId);
+            mapService = new MapService(11, 21,playerA.userId,playerB.userId);
             _waveService = new WaveService();
             _validatePackageService = new ValidatePackageService();
             _countWave = new Timer(UpdateWave, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
             _timerUpdateEnergy = new Timer(UpdateEnergy, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
+            
 
         }
 
         public GameSessionModel(string gameId, PlayerModel player, IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
         {
             _gameId = gameId;
-            _modeGame = ModeGame.Arena;
+            _modeGame = ModeGame.Adventure;
             _hubContext = hubContext;
             _startTime = DateTime.Now;
             var ai = new AiModel();
@@ -72,7 +69,7 @@ namespace Game_Realtime.Model.InGame
                 {ai.userId, ai}
             };
 
-            _mapService = new MapService(11, 21,player.userId,ai.userId);
+            mapService = new MapService(11, 21,player.userId,ai.userId);
             _waveService = new WaveService();
             _validatePackageService = new ValidatePackageService();
             _countWave = new Timer(UpdateWave, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
@@ -94,22 +91,22 @@ namespace Game_Realtime.Model.InGame
                 }
             }
         }
-        public bool isPawnWave = false;
+        private bool _isPawnWave = false;
         private void UpdateWave(object? state)
         {
             var currentWaveTime = _waveService.UpdateWaveTime(1f);
             var currentWave = _waveService.GetCurrentWave();
-            if (isPawnWave)
+            if (_isPawnWave)
             {
                 return;
             }
             if (currentWaveTime <= 0)
             {
-                isPawnWave = true;
-                var gatePosition = _mapService.MonsterGate; 
+                _isPawnWave = true;
+                var gatePosition = mapService.MonsterGate; 
                 foreach (var monster in currentWave.monsterIds)
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     CreateMonsterData data = new CreateMonsterData()
                     {
                         cardId = monster.monsterId,
@@ -145,7 +142,7 @@ namespace Game_Realtime.Model.InGame
                 }
 
                 _waveService.NextWave();
-                isPawnWave = false;
+                _isPawnWave = false;
 
             }
             else
@@ -195,32 +192,32 @@ namespace Game_Realtime.Model.InGame
             if (!_validatePackageService.ValidCastlePackage(data)) return null;
             
             var newCastleHp = await _players[rivalPlayer.userId].CastleTakeDamage(data.HpLose);
-            if (newCastleHp > 0)
-            {
-                // Kill monster
-                var energyGain =  _players[data.ownerId].KillMonster(data.monsterId);
-                await _validatePackageService.KilledMonster(data.monsterId);
-                await _hubContext.Clients.Groups(_gameId).KillMonster(Encoding.UTF8.GetBytes(data.monsterId));
-                if (energyGain.Result != null) await _players[rivalPlayer.userId].AddEnergy(energyGain.Result.Value);
+            
+            if (newCastleHp <= 0) return newCastleHp;
+            
+            // Kill monster
+            var energyGain =  _players[data.ownerId].KillMonster(data.monsterId);
+            await _validatePackageService.KilledMonster(data.monsterId);
+            await _hubContext.Clients.Groups(_gameId).KillMonster(Encoding.UTF8.GetBytes(data.monsterId));
+            if (energyGain.Result != null) await _players[rivalPlayer.userId].AddEnergy(energyGain.Result.Value);
                 
-                //Update Energy
-                if (rivalPlayer is PlayerModel)
-                {
-                    await _hubContext.Clients.Clients(((PlayerModel)rivalPlayer).ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(rivalPlayer.energy.ToString()));
-                }
-                // Update hp for player
-                CastleTakeDamageSender senderData = new CastleTakeDamageSender()
-                {
-                    indexPackage = data.indexPackage + 1,
-                    userId = rivalPlayer.userId,
-                    currentCastleHp = newCastleHp,
-                    maxCastleHp = GameConfig.GameConfig.MAX_CASTLE_HP
-                };
-                var jsonSenderData = JsonConvert.SerializeObject(senderData);
-                await _hubContext.Clients.Groups(_gameId).UpdateCastleHp(Encoding.UTF8.GetBytes(jsonSenderData));
+            //Update Energy
+            if (rivalPlayer is PlayerModel)
+            {
+                await _hubContext.Clients.Clients(((PlayerModel)rivalPlayer).ContextId).UpdateEnergy(Encoding.UTF8.GetBytes(rivalPlayer.energy.ToString()));
             }
-            
-            
+            // Update hp for player
+            CastleTakeDamageSender senderData = new CastleTakeDamageSender()
+            {
+                indexPackage = data.indexPackage + 1,
+                userId = rivalPlayer.userId,
+                currentCastleHp = newCastleHp,
+                maxCastleHp = GameConfig.GameConfig.MAX_CASTLE_HP
+            };
+            var jsonSenderData = JsonConvert.SerializeObject(senderData);
+            await _hubContext.Clients.Groups(_gameId).UpdateCastleHp(Encoding.UTF8.GetBytes(jsonSenderData));
+
+
             return newCastleHp;
         }
 
@@ -228,15 +225,13 @@ namespace Game_Realtime.Model.InGame
         {
             await _countWave.DisposeAsync();
             await _timerUpdateEnergy.DisposeAsync();
-
             await _aiActionTimer.DisposeAsync();
-            _aiActionTimer.Dispose();
             
         }
 
         public async Task<MonsterModel?> CreateMonster(string playerId, CreateMonsterData data)
         {
-            if (!_mapService.IsValidPosition(new Vector2Int(data.Xposition, data.Yposition), playerId)) return null;
+            if (!mapService.IsValidPosition(new Vector2Int(data.Xposition, data.Yposition), playerId)) return null;
             var monsterModel = await (_players[playerId]).CreateMonster(data);
             
             if (monsterModel != null)
@@ -257,18 +252,18 @@ namespace Game_Realtime.Model.InGame
 
         public async Task<TowerModel?> BuildTower(string playerId, BuildTowerData data)
         {
-            if (!_mapService.IsValidPosition(new Vector2Int(data.Xposition, data.Yposition), playerId)) return null;
+            if (!mapService.IsValidPosition(new Vector2Int(data.Xposition, data.Yposition), playerId)) return null;
 
-            var paths = _mapService.FindPathForMonster(playerId, new Vector2Int(data.Xposition, data.Yposition));
-            if (_players[playerId] is PlayerModel)
-            {
-                Console.Write("Path: ");
-                foreach (var tile in paths)
-                {
-                    Console.Write("(" + tile.x + ", " + tile.y + ") -> ");
-                }
-                Console.WriteLine("");
-            }
+            var paths = mapService.FindPathForMonster(playerId, new Vector2Int(data.Xposition, data.Yposition));
+            // if (_players[playerId] is PlayerModel)
+            // {
+            //     Console.Write("Path: ");
+            //     foreach (var tile in paths)
+            //     {
+            //         Console.Write("(" + tile.x + ", " + tile.y + ") -> ");
+            //     }
+            //     Console.WriteLine("");
+            // }
             if (paths.Count == 0)
             {
                 Console.WriteLine($"No monster path");
@@ -278,7 +273,7 @@ namespace Game_Realtime.Model.InGame
             var tower =  await _players[playerId].BuildTower(data);
             if (tower != null)
             {
-                _mapService.BanPosition(data.Xposition, data.Yposition);
+                mapService.BanPosition(data.Xposition, data.Yposition);
             }
             if (tower != null)
             {
@@ -325,7 +320,7 @@ namespace Game_Realtime.Model.InGame
 
         public LogicTile[][] GetMap()
         {
-            return _mapService.LogicMap;
+            return mapService.LogicMap;
         }
 
         public List<string> GetCard(string senderId)
@@ -421,7 +416,7 @@ namespace Game_Realtime.Model.InGame
         {
             var tower = await _players[senderId].SellTower(data.towerId);
             
-            _mapService.ReleasePosition(tower.XLogicPosition,tower.YLogicPosition);
+            mapService.ReleasePosition(tower.XLogicPosition,tower.YLogicPosition);
 
             var jsonData = JsonConvert.SerializeObject(tower);
             await _hubContext.Clients.Groups(_gameId).SellTower(Encoding.UTF8.GetBytes(jsonData));

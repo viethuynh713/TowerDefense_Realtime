@@ -6,7 +6,7 @@ namespace Game_Realtime.Service;
 
 public class UserMatchingService : IUserMatchingService
 {
-    private List<UserMatchingModel> _userMatchingModels;
+    private readonly List<UserMatchingModel> _userMatchingModels;
     private readonly IHubContext<MythicEmpireHub, IMythicEmpireHub> _hubContext;
     private readonly object _userMatchingKey;
     private Timer _countTimer;
@@ -28,12 +28,12 @@ public class UserMatchingService : IUserMatchingService
         }
     }
 
-    public async Task<UserMatchingModel?> FindRivalPlayer(UserMatchingModel playerInfo)
+    public Task<UserMatchingModel?> FindRivalPlayer(UserMatchingModel playerInfo)
     {
-        return _userMatchingModels.Find(x =>
+        return Task.FromResult(_userMatchingModels.Find(x =>
         {
             return x.gameMode == playerInfo.gameMode;
-        });
+        }));
     }
 
     public async Task AddPlayerToWaitingQueue(UserMatchingModel playerInfo)
@@ -46,7 +46,7 @@ public class UserMatchingService : IUserMatchingService
         await _hubContext.Clients.Client(playerInfo.contextId).OnReceiveMatchMakingSuccess(0);
     }
 
-    public async Task CancelWaitingQueue(string contextId)
+    public Task CancelWaitingQueue(string contextId)
     {
         lock (_userMatchingKey)
         {
@@ -63,24 +63,30 @@ public class UserMatchingService : IUserMatchingService
                 // TODO : throw 
             }
         }
+
+        return Task.CompletedTask;
     }
 
-    public async Task RemovePlayerInWaitingQueue(UserMatchingModel model)
+    public Task RemovePlayerInWaitingQueue(UserMatchingModel model)
     {
         lock (_userMatchingKey)
         {
             _userMatchingModels.Remove(model);
         }
-    }public async Task RemovePlayerInWaitingQueue(string contextId)
+
+        return Task.CompletedTask;
+    }public Task RemovePlayerInWaitingQueue(string contextId)
     {
         var model = _userMatchingModels.Find(user => user.contextId == contextId);
-        if (model == null) return;
+        if (model == null) return Task.CompletedTask;
         lock (_userMatchingKey)
         {
             _userMatchingModels.Remove(model);
             Console.WriteLine($"\nRemove player {model.contextId} in waiting queue");
 
         }
+
+        return Task.CompletedTask;
     }
 }
 

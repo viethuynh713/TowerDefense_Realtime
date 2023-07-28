@@ -54,13 +54,13 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                     new Selector(spellNodeList),
                     new Sequence(new List<Node>
                     {
-                        new CheckSpawnMonsterToDefend(bot, bot.GameSessionModel._mapService._castleLogicPosition[bot.userId].CastToVector2()),
-                        new SpawnMonsterToDefend(bot, bot.GameSessionModel._mapService._castleLogicPosition[bot.userId].CastToVector2())
+                        new CheckSpawnMonsterToDefend(bot, bot.GameSessionModel.mapService._castleLogicPosition[bot.userId].CastToVector2()),
+                        new SpawnMonsterToDefend(bot, bot.GameSessionModel.mapService._castleLogicPosition[bot.userId].CastToVector2())
                     }),
                     new Sequence(new List<Node>
                     {
                         new CheckSpawnMonsterToAttack(bot),
-                        new SpawnMonsterToAttack(bot, bot.GameSessionModel._mapService.MonsterGate)
+                        new SpawnMonsterToAttack(bot, bot.GameSessionModel.mapService.MonsterGate)
                     }),
                     new Sequence(new List<Node>
                     {
@@ -105,7 +105,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                 {
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseExplore(bot, bot.GameSessionModel._mapService._castleLogicPosition[bot.userId].CastToVector2()),
+                        new CheckUseExplore(bot, bot.GameSessionModel.mapService._castleLogicPosition[bot.userId].CastToVector2()),
                         new UseExplore(bot)
                     }));
                 }
@@ -136,7 +136,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot
                 {
                     spellNodeList.Add(new Sequence(new List<Node>()
                     {
-                        new CheckUseSpeedup(bot, bot.GameSessionModel._mapService._castleLogicPosition[bot.GameSessionModel.GetRivalPlayer(bot.userId).userId].CastToVector2()),
+                        new CheckUseSpeedup(bot, bot.GameSessionModel.mapService._castleLogicPosition[bot.GameSessionModel.GetRivalPlayer(bot.userId).userId].CastToVector2()),
                         new UseSpeedup(bot)
                     }));
                 }

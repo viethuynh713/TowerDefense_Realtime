@@ -84,7 +84,9 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                 Yposition = (int)botBasePosition.Y,
                 stats = new Model.Data.MonsterStats
                 {
-                    Energy = card.Energy
+                    Energy = card.Energy,
+                    Hp = 300,
+                    EnergyGainWhenDie = 10,
                 }
             });
             // cost energy
