@@ -9,11 +9,42 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
     {
         private AiModel bot;
         private Vector2Int monsterGatePos;
+        private List<Vector2Int> spawnMonsterPosList;
 
         public SpawnMonsterToAttack(AiModel bot, Vector2Int monsterGatePos)
         {
             this.bot = bot;
             this.monsterGatePos = monsterGatePos;
+
+            var nullVector = new Vector2Int(-999, -999);
+            spawnMonsterPosList = new List<Vector2Int>() { nullVector, nullVector };
+            for (int i = bot.TowerBuildingMapHeight / 2; i >= 1; i--)
+            {
+                if (spawnMonsterPosList[0] == nullVector && !bot.TowerBuildingMap[i][bot.TowerBuildingMapHeight / 2 + i].isBuildTower)
+                {
+                    spawnMonsterPosList[0] = new Vector2Int(monsterGatePos.x + 1, monsterGatePos.y + i);
+                }
+                if (spawnMonsterPosList[1] == nullVector && !bot.TowerBuildingMap[i][bot.TowerBuildingMapHeight / 2 - i].isBuildTower)
+                {
+                    spawnMonsterPosList[1] = new Vector2Int(monsterGatePos.x + 1, monsterGatePos.y - i);
+                }
+                if (spawnMonsterPosList[0] != nullVector && spawnMonsterPosList[1] != nullVector)
+                {
+                    break;
+                }
+            }
+            if (spawnMonsterPosList[1] == nullVector)
+            {
+                spawnMonsterPosList.RemoveAt(1);
+            }
+            if (spawnMonsterPosList[0] == nullVector)
+            {
+                spawnMonsterPosList.RemoveAt(0);
+            }
+            if (spawnMonsterPosList.Count == 0)
+            {
+                spawnMonsterPosList.Add(new Vector2Int(monsterGatePos.x + 1, monsterGatePos.y));
+            }
         }
 
         public override NodeState Evaluate()
@@ -94,11 +125,12 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
             int nMonster = (int)bot.EnergyToSummonMonster / card.Energy;
             for (int i = 0; i < nMonster; i++)
             {
+                var pos = spawnMonsterPosList[new Random().Next(0, spawnMonsterPosList.Count)];
                 await bot.GameSessionModel.CreateMonster(bot.userId, new Model.Data.CreateMonsterData()
                 {
                     cardId = card.CardId,
-                    Xposition = monsterGatePos.x + 1,
-                    Yposition = monsterGatePos.y,
+                    Xposition = pos.x,
+                    Yposition = pos.y,
                     stats = new Model.Data.MonsterStats
                     {
                         Energy = card.Energy,

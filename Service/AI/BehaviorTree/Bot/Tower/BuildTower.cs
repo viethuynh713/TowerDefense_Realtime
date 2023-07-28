@@ -23,11 +23,13 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
                 // if find tower building type is PROGRESS and the tower will be build on a basic tower, sell basic tower before
                 if (tile.isInProgress)
                 {
+                    Console.WriteLine("Prepare to sell tower");
                     string sellTowerId = "";
                     foreach (var tower in bot._towers)
                     {
-                        if (tower.Value.XLogicPosition == bot.TowerSelectPos.Value.x && tower.Value.YLogicPosition == bot.TowerSelectPos.Value.y)
+                        if (tower.Value.XLogicPosition == bot.TowerSelectPos.Value.y && tower.Value.YLogicPosition == bot.TowerSelectPos.Value.x)
                         {
+                            Console.WriteLine("Sell tower");
                             sellTowerId = tower.Key;
                             break;
                         }
