@@ -1,6 +1,6 @@
 {
   "0": {
-    "maxTimeWaiting": 15.0,
+    "maxTimeWaiting": 20,
     "monsterIds": [
       {
         "monsterId": "7d3c9358-8aee-44f0-9946-8ef1284cdc4f",
@@ -10,216 +10,216 @@
     ]
   },
   "1": {
-    "maxTimeWaiting": 15.0,
+    "maxTimeWaiting": 20,
     "monsterIds": [
       {
         "monsterId": "b369018a-f0e5-4a9a-bb16-f3d21aeda63a",
-        "hp": 200,
+        "hp": 120,
         "energyGainWhenDie": 5
       },
       {
         "monsterId": "3091d268-6fde-43d1-88c6-c029834afb1d",
-        "hp": 150,
+        "hp": 120,
         "energyGainWhenDie": 4
       }
     ]
   },
   "2": {
-    "maxTimeWaiting": 15.0,
+    "maxTimeWaiting": 20,
     "monsterIds": [
       {
         "monsterId": "02947c90-83f1-436a-a570-5aae6a8fefe1",
-        "hp": 400,
+        "hp": 220,
         "energyGainWhenDie": 6
       },
       {
         "monsterId": "7d3c9358-8aee-44f0-9946-8ef1284cdc4f",
-        "hp": 190,
+        "hp": 170,
         "energyGainWhenDie": 4
       },
       {
         "monsterId": "fe497dd4-311a-4eb5-afab-017f5649fed7",
-        "hp": 240,
+        "hp": 160,
         "energyGainWhenDie": 5
       },
       {
         "monsterId": "6874eb13-f774-4d6b-bfd4-0bb3a7029400",
-        "hp": 300,
+        "hp": 130,
         "energyGainWhenDie": 4
       }
     ]
   },
   "3": {
-    "maxTimeWaiting": 15.0,
+    "maxTimeWaiting": 20,
     "monsterIds": [
       {
         "monsterId": "0b849bfb-d550-4804-8f96-77cac6768268",
-        "hp": 350,
+        "hp": 190,
         "energyGainWhenDie": 5
       },
       {
         "monsterId": "91444b08-5ba9-48e2-be34-94c2518d79d3",
-        "hp": 400,
+        "hp": 240,
         "energyGainWhenDie": 5
       },
       {
         "monsterId": "4c00261a-bd3a-4f20-acec-7aac1a8eec1f",
-        "hp": 600,
+        "hp": 260,
         "energyGainWhenDie": 6
       },
       {
         "monsterId": "460e4f53-ca63-43cb-a7dd-38404411b36b",
-        "hp": 330,
+        "hp": 250,
         "energyGainWhenDie": 4
       }
     ]
   },
   "4": {
-    "maxTimeWaiting": 15.0,
+    "maxTimeWaiting": 20,
     "monsterIds": [
       {
         "monsterId": "a7bf7b15-ee0e-4159-aadb-df98ad6c3ab6",
-        "hp": 550,
+        "hp": 270,
         "energyGainWhenDie": 5
       },
       {
         "monsterId": "0396fc2c-f0b6-4f19-9859-eef8c0ae4fa7",
-        "hp": 500,
+        "hp": 280,
         "energyGainWhenDie": 4
       },
       {
         "monsterId": "af742fb1-772a-43b6-84b7-bbc99bab3ace",
-        "hp": 600,
+        "hp": 300,
         "energyGainWhenDie": 5
       },
       {
         "monsterId": "5af6d5c9-6251-49c5-bae5-07f4c86692dc",
-        "hp": 570,
+        "hp": 290,
         "energyGainWhenDie": 5
       }
     ]
   },
   "5": {
-    "maxTimeWaiting": 15.0,
+    "maxTimeWaiting": 20,
     "monsterIds": [
       {
         "monsterId": "e3942ac4-5822-490f-95b4-2eb995ecc2b8",
-        "hp": 1000,
+        "hp": 370,
         "energyGainWhenDie": 6
       },
       {
         "monsterId": "93ab466b-139e-4772-ac85-4ab7e5b1e255",
-        "hp": 680,
+        "hp": 320,
         "energyGainWhenDie": 4
       },
       {
         "monsterId": "20f5c5f0-f859-4356-bf72-b873ec7766e6",
-        "hp": 750,
+        "hp": 350,
         "energyGainWhenDie": 5
       },
       {
         "monsterId": "e46a4ac7-5e3c-467a-894f-745041c9797d",
-        "hp": 720,
+        "hp": 330,
         "energyGainWhenDie": 5
       }
     ]
   },
   "6": {
-    "maxTimeWaiting": 15.0,
+    "maxTimeWaiting": 20,
     "monsterIds": [
       {
         "monsterId": "3ddbc527-be7f-4e67-881d-128ed80e6543",
-        "hp": 800,
+        "hp": 395,
         "energyGainWhenDie": 4
       },
       {
         "monsterId": "f642b29a-4c9c-43e3-8e30-0ed571805913",
-        "hp": 820,
+        "hp": 400,
         "energyGainWhenDie": 5
       },
       {
         "monsterId": "e3942ac4-5822-490f-95b4-2eb995ecc2b8",
-        "hp": 1100,
+        "hp": 450,
         "energyGainWhenDie": 6
       },
       {
         "monsterId": "014b77ce-c0a6-4df2-8533-d4b8a48a8eb5",
-        "hp": 820,
+        "hp": 440,
         "energyGainWhenDie": 5
       }
     ]
   },
   "7": {
-    "maxTimeWaiting": 15.0,
+    "maxTimeWaiting": 20,
     "monsterIds": [
       {
         "monsterId": "6afbb2d6-6929-42e6-a4b1-c22f136612e6",
-        "hp": 850,
+        "hp": 450,
         "energyGainWhenDie": 4
       },
       {
         "monsterId": "348dbba2-2648-4d54-9a75-7c4fe231c3cc",
-        "hp": 870,
+        "hp": 430,
         "energyGainWhenDie": 5
       },
       {
         "monsterId": "f2c211fa-eab8-44d2-b6ac-102261c32f3a",
-        "hp": 1200,
+        "hp": 500,
         "energyGainWhenDie": 6
       },
       {
         "monsterId": "37da6ce1-0c3a-4c11-8f11-f02de5237f16",
-        "hp": 900,
+        "hp": 440,
         "energyGainWhenDie": 5
       }
     ]
   },
   "8": {
-    "maxTimeWaiting": 15.0,
+    "maxTimeWaiting": 20,
     "monsterIds": [
       {
         "monsterId": "97f97be4-86d3-4411-b6b7-6329b3521170",
-        "hp": 900,
+        "hp": 340,
         "energyGainWhenDie": 4
       },
       {
         "monsterId": "ce2678f7-c5c2-4cd7-b5d0-9d7deafc9fed",
-        "hp": 930,
+        "hp": 400,
         "energyGainWhenDie": 5
       },
       {
         "monsterId": "44977bd4-460b-402a-acfe-4346108360db",
-        "hp": 970,
+        "hp": 520,
         "energyGainWhenDie": 5
       },
       {
         "monsterId": "46a5cc6a-80ed-46e5-88a9-03afadc9fa73",
-        "hp": 1300,
+        "hp": 550,
         "energyGainWhenDie": 6
       }
     ]
   },
   "9": {
-    "maxTimeWaiting": 15.0,
+    "maxTimeWaiting": 20,
     "monsterIds": [
       {
         "monsterId": "d3c0a553-cbd7-4de5-901b-38298bb1cd20",
-        "hp": 1500,
+        "hp": 610,
         "energyGainWhenDie": 6
       },
       {
         "monsterId": "8891d706-07e8-4094-b233-e28c234b7c5b",
-        "hp": 1000,
+        "hp": 600,
         "energyGainWhenDie": 4
       },
       {
         "monsterId": "677298ec-b4b1-4bfd-bd2c-da8afe391f4b",
-        "hp": 1100,
+        "hp": 540,
         "energyGainWhenDie": 5
       },
       {
         "monsterId": "4d3816eb-98db-4525-99a1-9d98573fb52e",
-        "hp": 1040,
+        "hp": 575,
         "energyGainWhenDie": 5
       }
     ]
