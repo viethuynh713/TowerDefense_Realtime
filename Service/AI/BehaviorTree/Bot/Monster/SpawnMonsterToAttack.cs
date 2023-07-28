@@ -102,7 +102,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
                     stats = new Model.Data.MonsterStats
                     {
                         Energy = card.Energy,
-                        Hp = 300,
+                        Hp = 800,
                         EnergyGainWhenDie = 10,
                     }
                 });
