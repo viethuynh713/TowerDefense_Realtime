@@ -373,12 +373,12 @@ public class AiModel: BasePlayer
         Console.WriteLine("FindTowerTypeStrategy: " + findTowerTypeStrategy.ToString());
         Console.WriteLine("FindTowerPosStrategy: " + findTowerPosStrategy.ToString());
         // create tower building order
-        // the first is position
-        // the second is strength (get by index in AIConstant.towerStrength)
-        // the third is number of empty adjacent node which is not used to build tower
         towerBuildOrder = new List<Vector2Int>();
         //if (findTowerPosStrategy == FindTowerPosStrategy.WEAK_TO_STRONG || findTowerPosStrategy == FindTowerPosStrategy.STRONG_TO_WEAK)
         //{
+            // the first is position
+            // the second is strength (get by index in AIConstant.towerStrength)
+            // the third is number of empty adjacent node which is not used to build tower
         //    List<(Vector2Int, int, int)> calcTowerBuildOrder = new List<(Vector2Int, int, int)>();
         //    for (int i = 0; i < towerBuildingMapHeight; i++)
         //    {
