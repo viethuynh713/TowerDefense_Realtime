@@ -18,7 +18,7 @@ public class Wave
         this.currentTime = maxTimeWaiting * 0.8f;
         foreach (var monster in monsterIds)
         {
-            monster.hp = (int)(1.1*monster.hp);
+            monster.hp = (int)(1.2*monster.hp);
             monster.energyGainWhenDie = (int)(monster.energyGainWhenDie * 0.8);
         }
         
