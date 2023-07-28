@@ -11,52 +11,52 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Monster
     {
         private AiModel bot;
         private Vector2 botBasePosition;
-        private List<CardModel> stockCards;
+        //private List<CardModel> stockCards;
 
         public SpawnMonsterToDefend(AiModel bot, Vector2 botBasePosition)
         {
             this.bot = bot;
             this.botBasePosition = botBasePosition;
 
-            var json = File.ReadAllText("./CardConfig/MythicEmpire.Cards.json");
-            var stockCards = JsonConvert.DeserializeObject<List<CardModel>>(json);
-            if (stockCards == null)
-            {
-                Console.WriteLine("Get MythicEmpire.Cards Error!");
-                return;
-            }
-            this.stockCards = new List<CardModel>();
-            foreach (var card in stockCards)
-            {
-                if (card.TypeOfCard == CardType.MonsterCard)
-                {
-                    this.stockCards.Add(card);
-                }
-            }
+            //var json = File.ReadAllText("./CardConfig/MythicEmpire.Cards.json");
+            //var stockCards = JsonConvert.DeserializeObject<List<CardModel>>(json);
+            //if (stockCards == null)
+            //{
+            //    Console.WriteLine("Get MythicEmpire.Cards Error!");
+            //    return;
+            //}
+            //this.stockCards = new List<CardModel>();
+            //foreach (var card in stockCards)
+            //{
+            //    if (card.TypeOfCard == CardType.MonsterCard)
+            //    {
+            //        this.stockCards.Add(card);
+            //    }
+            //}
         }
 
         public override NodeState Evaluate()
         {
             // get monster near castle
-            foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
-            {
-                if ((botBasePosition.X - monster.Value.XLogicPosition) + (botBasePosition.Y - monster.Value.YLogicPosition) < 3)
-                {
-                    CardModel sampleCard = stockCards.FirstOrDefault(c => c.CardId == monster.Value.cardId);
-                    if (sampleCard != null)
-                    {
-                        string cardName = sampleCard.CardName;
-                        var card = AIMethod.GetCardModel(bot.CardSelected, (CardType.MonsterCard, cardName));
-                        if (card != null && bot.EnergyToSummonMonster >= card.Energy)
-                        {
-                            // if bot has a monster card same as monster near castle, use that card
-                            SummonMonster(card);
-                            state = NodeState.RUNNING;
-                            return state;
-                        }
-                    }
-                }
-            }
+            //foreach (var monster in bot.GameSessionModel.GetRivalPlayer(bot.userId)._monsters)
+            //{
+            //    if ((botBasePosition.X - monster.Value.XLogicPosition) + (botBasePosition.Y - monster.Value.YLogicPosition) < 3)
+            //    {
+            //        CardModel sampleCard = stockCards.FirstOrDefault(c => c.CardId == monster.Value.cardId);
+            //        if (sampleCard != null)
+            //        {
+            //            string cardName = sampleCard.CardName;
+            //            var card = AIMethod.GetCardModel(bot.CardSelected, (CardType.MonsterCard, cardName));
+            //            if (card != null && bot.EnergyToSummonMonster >= card.Energy)
+            //            {
+            //                // if bot has a monster card same as monster near castle, use that card
+            //                SummonMonster(card);
+            //                state = NodeState.RUNNING;
+            //                return state;
+            //            }
+            //        }
+            //    }
+            //}
             // otherwise, use a random monster card
             var monsterCardList = bot.CardSelected.Where(monsterCard => monsterCard.TypeOfCard == CardType.MonsterCard).ToList();
             if (monsterCardList.Count > 0)
