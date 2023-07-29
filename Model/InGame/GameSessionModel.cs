@@ -180,7 +180,7 @@ namespace Game_Realtime.Model.InGame
         public Task<int> GetTotalTime()
         {
             TimeSpan timeSpan = DateTime.Now - _startTime;
-            return Task.FromResult(timeSpan.Seconds);
+            return Task.FromResult((int)timeSpan.TotalSeconds);
             
         }
         public  async Task<int?> CastleTakeDamage(CastleTakeDamageData data)
@@ -221,12 +221,44 @@ namespace Game_Realtime.Model.InGame
             return newCastleHp;
         }
 
-        public async Task EndGame()
+        public async Task EndGame(string playerWin)
         {
             await _countWave.DisposeAsync();
             await _timerUpdateEnergy.DisposeAsync();
             await _aiActionTimer.DisposeAsync();
+
+            await SaveGameData(playerWin);
+
+        }
+
+        private async Task SaveGameData(string playerWin)
+        {
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://port7dedj9.execute-api.ap-southeast-1.amazonaws.com/api/UserControl/create-gamesession");
+            List<BasePlayer> list = new List<BasePlayer>();
             
+            foreach (var player in _players)
+            {
+                list.Add(player.Value);
+            }
+
+            var gameData = new GameSessionModelData()
+            {
+                gameId = _gameId,
+                mode = _modeGame,
+                startTime = _startTime,
+                finishTime = DateTime.Now,
+                totalTime = GetTotalTime().Result,
+                playerA = list[0].userId,
+                playerB = list[1].userId,
+                playerWin = playerWin,
+                listCardPlayerA = list[0].GetMyListCard(),
+                listCardPlayerB = list[0].GetMyListCard(),
+            };
+            var content = new StringContent(JsonConvert.SerializeObject(gameData), null, "application/json");
+            request.Content = content;
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
         }
 
         public async Task<MonsterModel?> CreateMonster(string playerId, CreateMonsterData data)
@@ -499,6 +531,6 @@ namespace Game_Realtime.Model.InGame
         Task<int> GetTotalTime();
         ModeGame GetMode();
         bool HasPlayer(string dataOwnerId);
-        Task EndGame();
+        Task EndGame(string playerWin);
     }
 }

@@ -41,6 +41,15 @@ public class AiModel: BasePlayer
     private List<Vector2Int> longestPath;
 
     private GameSessionModel gameSessionModel;
+    public override List<string> GetMyListCard()
+    {
+        var listCard = new List<string>();
+        foreach (var card in cardSelected)
+        {
+            listCard.Add(card.CardId);
+        }
+        return listCard;
+    }
 
     public AiModel() : base()
     {
