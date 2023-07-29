@@ -54,8 +54,7 @@ public class AiModel: BasePlayer
 
         spellUsingPosition = new Vector2();
 
-        playMode = BotPlayMode.ATTACK;
-        //playMode = (BotPlayMode)new Random().Next(0, 3);
+        playMode = (BotPlayMode)new Random().Next(0, 3);
         towerSelectPos = null;
 
         realMapWidth = gameSessionModel.mapService.Width;
@@ -368,8 +367,7 @@ public class AiModel: BasePlayer
     private Task SelectBattleMode()
     {
         // select find tower type strategy
-        findTowerTypeStrategy = FindTowerTypeStrategy.PROGRESS;
-        //findTowerTypeStrategy = (FindTowerTypeStrategy)new Random().Next(0, 2);
+        findTowerTypeStrategy = (FindTowerTypeStrategy)new Random().Next(0, 2);
         // select find tower position strategy
         findTowerPosStrategy = (FindTowerPosStrategy)new Random().Next(0, 2);
         Console.WriteLine("FindTowerTypeStrategy: " + findTowerTypeStrategy.ToString());

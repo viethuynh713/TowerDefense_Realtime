@@ -27,7 +27,7 @@ namespace Game_Realtime.Service.AI.BehaviorTree.Bot.Tower
                     string sellTowerId = "";
                     foreach (var tower in bot._towers)
                     {
-                        if (tower.Value.XLogicPosition == bot.TowerSelectPos.Value.y && tower.Value.YLogicPosition == bot.TowerSelectPos.Value.x)
+                        if (tower.Value.XLogicPosition == bot.TowerSelectPos.Value.x && tower.Value.YLogicPosition == bot.TowerSelectPos.Value.y)
                         {
                             Console.WriteLine("Sell tower");
                             sellTowerId = tower.Key;
