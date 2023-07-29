@@ -253,7 +253,7 @@ namespace Game_Realtime.Model.InGame
                 playerB = list[1].userId,
                 playerWin = playerWin,
                 listCardPlayerA = list[0].GetMyListCard(),
-                listCardPlayerB = list[0].GetMyListCard(),
+                listCardPlayerB = list[1].GetMyListCard(),
             };
             var content = new StringContent(JsonConvert.SerializeObject(gameData), null, "application/json");
             request.Content = content;
