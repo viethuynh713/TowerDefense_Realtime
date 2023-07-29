@@ -140,6 +140,7 @@ public class GameService : IGameService
         {
             gameId = gameId,
             playerWin = playerWin,
+            mode = _gameSessionModels[gameId].GetMode(),
             totalTime = _gameSessionModels[gameId].GetTotalTime().Result
         };
         var jsonData = JsonConvert.SerializeObject(endGameDataSender);
