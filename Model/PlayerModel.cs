@@ -14,7 +14,11 @@ namespace Game_Realtime.Model
             ContextId = contextId;
 
         }
-        
+
+        public override List<string> GetMyListCard()
+        {
+            return cards;
+        }
     }
     
     

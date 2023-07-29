@@ -135,7 +135,7 @@ public class GameService : IGameService
     private async Task OnEndGame(string gameId,string playerWin)
     {
         Console.WriteLine("End Game");
-        await _gameSessionModels [gameId].EndGame();
+        await _gameSessionModels [gameId].EndGame(playerWin);
         var endGameDataSender = new EndGameDataSender()
         {
             gameId = gameId,

@@ -160,4 +160,9 @@ public class BasePlayer
                 _monsters[data.monsterId].UpdatePosition(data.Xposition, data.YPosition);
             return Task.CompletedTask;
         }
+
+        public virtual List<string> GetMyListCard()
+        {
+            return new List<string>();
+        }
     }
