@@ -19,7 +19,7 @@ namespace Game_Realtime.Model.InGame
 
         private readonly ModeGame _modeGame;
         
-        private readonly Timer _aiActionTimer;
+        private readonly Timer? _aiActionTimer;
         
         private readonly Dictionary<string, BasePlayer> _players;
 
@@ -52,7 +52,7 @@ namespace Game_Realtime.Model.InGame
             _validatePackageService = new ValidatePackageService();
             _countWave = new Timer(UpdateWave, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
             _timerUpdateEnergy = new Timer(UpdateEnergy, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
-            
+            _aiActionTimer = null;
 
         }
 
@@ -225,7 +225,10 @@ namespace Game_Realtime.Model.InGame
         {
             await _countWave.DisposeAsync();
             await _timerUpdateEnergy.DisposeAsync();
-            await _aiActionTimer.DisposeAsync();
+            if (_aiActionTimer is not null)
+            {
+                await _aiActionTimer.DisposeAsync();
+            }
 
             await SaveGameData(playerWin);
 
