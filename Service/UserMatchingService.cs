@@ -12,8 +12,8 @@ public class UserMatchingService : IUserMatchingService
     private Timer _countTimer;
     public UserMatchingService(IHubContext<MythicEmpireHub, IMythicEmpireHub> hubContext)
     {
-        _countTimer = new Timer(UpdateTime, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         _userMatchingModels = new List<UserMatchingModel>();
+        _countTimer = new Timer(UpdateTime, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         _userMatchingKey = new object();
         _hubContext = hubContext;
     }
