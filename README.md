@@ -1,27 +1,33 @@
-# Mythic Empire Realtime
+# Mythic Empire - Realtime Server
 
-## Mô Tả
-Mythic Empire Realtime là một dự án sử dụng SignalR của Microsoft để xây dựng một hệ thống phản hồi thời gian thực cho trò chơi. Dự án này nhằm mục đích tạo ra một môi trường trực tuyến động, có khả năng tạo map tự động và xử lý các tín hiệu từ client một cách nhanh chóng, từ đó phản hồi lại cho người chơi một cách nhanh nhất.
+## Description
+Mythic Empire - Realtime Server is a project that utilizes SignalR, a library of ASP.NET developed by Microsoft, to build a real-time feedback system. The project aims to establish real-time connections among players in the game [Mythic Empire](https://github.com/viethuynh713/TowerDefense-Unity), enhancing the authentic experience when two players battle each other.
 
-## Công Nghệ Sử Dụng
-- SignalR của Microsoft
+## Technologies Used
+- SignalR
 
-## Chức Năng
-- Tạo map tự động: Hệ thống tự động tạo ra các map chơi mỗi khi một phiên chơi mới được bắt đầu.
-- Xử Lý Tín Hiệu từ Client: Nhận và xử lý các tín hiệu từ client, bao gồm di chuyển, hành động và các tương tác khác.
-- Phản Hồi Thời Gian Thực: Sử dụng SignalR để phản hồi lại cho người chơi trong thời gian thực, giúp cải thiện trải nghiệm chơi game.
-- Xử Lý Các Gói Tin: Hệ thống xử lý các gói tin gửi từ client và server để đảm bảo truyền thông dữ liệu hiệu quả.
-- Hệ Thống AI: Hệ thống AI được tích hợp để đưa ra quyết định lựa chọn cho các bot trong trò chơi.
+## Main Features
+- Create queues and find suitable opponents for players.
+- Create and manage matches between players.
+- Automatic map generation: The system automatically generates random maps that meet the criteria every time a new game session starts.
+- Bi-directional data exchange with players in the game.
+- Signal processing and reply mechanism for player actions.
+- Real-time Response: Use SignalR to provide real-time reply to players, enhancing the gaming experience.
+- Packet Handling: The system processes packets sent from the client and server to ensure efficient data transmission.
+- AI System: Integration of an AI system utilizing behavior trees to make decisions for bots in the Adventure mode of the game, including:
+    - Card selection decisions for gameplay.
+    - Tactical strategy choices for bots.
+    - Utilization of cards in various game scenarios.
 
-## Cài Đặt và Chạy
-1. Clone repository này.
-2. Mở solution bằng Visual Studio.
-3. Cài đặt các dependencies cần thiết.
-4. Chạy dự án để bắt đầu hệ thống Realtime.
 
-## Đóng Góp
-Chúng tôi rất hoan nghênh mọi đóng góp từ cộng đồng. Hãy tạo một Pull Request để đóng góp vào dự án này.
+## Installation and Running
+1. Clone this repository.
+2. Open the solution in Visual Studio.
+3. Install necessary dependencies.
+4. Build and run the project.
 
-## Tác Giả
-Liên Hệ: viethuynh713@gmail.com
+## Contribution
+We welcome contributions from the community. Please create a Pull Request to contribute to this project.
 
+## Author
+- Contact: viethuynh713@gmail.com
