@@ -4,8 +4,8 @@
 Mythic Empire - Realtime Server is a project that utilizes SignalR, a library of ASP.NET developed by Microsoft, to build a real-time feedback system. The project aims to establish real-time connections among players in the game [Mythic Empire](https://github.com/viethuynh713/TowerDefense-Unity), enhancing the authentic experience when two players battle each other.
 
 ## Technologies Used
-- SignalR
-- ASP.NET 
+- [SignalR](https://dotnet.microsoft.com/en-us/apps/aspnet/signalr)
+- [ASP.NET core](https://dotnet.microsoft.com/en-us/apps/aspnet)
 
 ## Main Features
 - Create queues and find suitable opponents for players.
