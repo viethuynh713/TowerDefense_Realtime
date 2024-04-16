@@ -5,6 +5,7 @@ Mythic Empire - Realtime Server is a project that utilizes SignalR, a library of
 
 ## Technologies Used
 - SignalR
+- ASP.NET 
 
 ## Main Features
 - Create queues and find suitable opponents for players.
